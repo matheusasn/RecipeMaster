@@ -1,0 +1,172 @@
+<div class="jumbotron jumbotron-fluid titulo">
+    <div class="container text-center">
+			<h1>{{ 'PLANO_PAGE.TXT_TITLE1' | translate }} <span class="negritoTexto">{{ 'PLANO_PAGE.TXT_TITLE2' | translate }}</span> <span class="negritoTexto">{{ 'PLANO_PAGE.TXT_TITLE3' | translate}}</span></h1>
+			<h1>{{ 'PLANO_PAGE.TXT_TITLE4' | translate}} <span class="negritoTexto"> {{ 'PLANO_PAGE.TXT_TITLE5' | translate}}</span> {{ 'PLANO_PAGE.TXT_TITLE6' | translate }}</h1>
+    </div>
+</div>
+
+<div class="cp-content-fluid">
+    <div *ngIf="screenWidth > 768">
+        <div class="d-flex justify-content-center align-items-center mb-4">
+					<p class="txt1 mb-0">{{ 'PLANO_PAGE.TXT_BODY1' | translate }}</p>
+				</div>
+    </div>
+
+    <div *ngIf="screenWidth > 768">
+        <p class="txt2" [innerHTML]="'PLANO_PAGE.TXT_BODY2' | translate"></p>
+    </div>
+
+    <div class="row" *ngIf="loading">
+        <div class="col col-12 mt-5 col-plan">
+            <mat-spinner diameter="20"></mat-spinner>
+        </div>
+    </div>
+
+    <div class="container" *ngIf="plans">
+
+			<swiper [config]="config" *ngIf="screenWidth < 768">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<m-plan-card
+								[user]="user"
+								[image]="'assets/app/media/img/plano-assinatura/img1.png'"
+								[title]="'PLANO_PAGE.TXT_CARD_TITLE2' | translate"
+								[plan]="plans.basic"
+								[isPaypal]="isPaypal"
+								[perfil]="PerfilEnum.USER_BASIC"
+								[buttonLabel]="'PLANO_PAGE.BTN_TXT1'"
+								[description]="'PLANO_PAGE.TXT_BODY4' | translate">
+						</m-plan-card>
+					</div>
+					<div class="swiper-slide custom-margin">
+						<m-plan-card
+							[user]="user"
+							[image]="'assets/app/media/img/plano-assinatura/img2.png'"
+							[isBigger]="true"
+							[title]="'PLANO_PAGE.TXT_CARD_TITLE5' | translate"
+							[plan]="plans.pro"
+							[isPaypal]="isPaypal"
+							[perfil]="PerfilEnum.USER_PRO"
+							[buttonLabel]="'PLANO_PAGE.BTN_TXT2'"
+							[description]="'PLANO_PAGE.TXT_BODY5' | translate"
+							[imagePrice]="'./assets/plans_12_90.svg'">
+						</m-plan-card>
+					</div>
+					<div class="swiper-slide">
+						<m-plan-card
+								[user]="user"
+								[image]="'assets/app/media/img/plano-assinatura/img3.png'"
+								[isBigger]="true"
+								[title]="'PLANO_PAGE.TXT_CARD_TITLE6' | translate"
+								[plan]="plans.pro_nutri"
+								[isPaypal]="isPaypal"
+								[perfil]="PerfilEnum.USER_PRO_NUTRI"
+								[buttonLabel]="'PLANO_PAGE.BTN_TXT3'"
+								[highlight]="true"
+								[description]="'PLANO_PAGE.TXT_BODY6' | translate"
+								[imagePrice]="'./assets/plans_24_90.svg'">
+						</m-plan-card>
+					</div>
+				</div>
+				<!-- Add Pagination -->
+				<!-- Add Arrows -->
+				<!-- <div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div> -->
+					<div class="swiper-pagination"></div>
+			</swiper>
+
+        <div *ngIf="screenWidth >= 768" class="row">
+            <div class="col-12 col-md-4 mt-5 col-plan">
+                <m-plan-card
+										[user]="user"
+                    [image]="'assets/app/media/img/plano-assinatura/img1.png'"
+                    [title]="'PLANO_PAGE.TXT_CARD_TITLE2' | translate"
+                    [plan]="plans.basic"
+                    [isPaypal]="isPaypal"
+                    [perfil]="PerfilEnum.USER_BASIC"
+                    [buttonLabel]="'PLANO_PAGE.BTN_TXT1'"
+                    [description]="'PLANO_PAGE.TXT_BODY4' | translate">
+                </m-plan-card>
+            </div>
+            <div class="col-12 col-md-4 mt-5 col-plan">
+                <m-plan-card
+										[user]="user"
+                    [image]="'assets/app/media/img/plano-assinatura/img2.png'"
+										[isBigger]="true"
+                    [title]="'PLANO_PAGE.TXT_CARD_TITLE5' | translate"
+                    [plan]="plans.pro"
+                    [isPaypal]="isPaypal"
+                    [perfil]="PerfilEnum.USER_PRO"
+                    [buttonLabel]="'PLANO_PAGE.BTN_TXT2'"
+                    [description]="'PLANO_PAGE.TXT_BODY5' | translate"
+                    [imagePrice]="'./assets/plans_12_90.svg'">
+                </m-plan-card>
+            </div>
+            <div class="col-12 col-md-4 mt-5 col-plan">
+                <m-plan-card
+										[user]="user"
+                    [image]="'assets/app/media/img/plano-assinatura/img3.png'"
+										[isBigger]="true"
+                    [title]="'PLANO_PAGE.TXT_CARD_TITLE6' | translate"
+                    [plan]="plans.pro_nutri"
+                    [isPaypal]="isPaypal"
+                    [perfil]="PerfilEnum.USER_PRO_NUTRI"
+                    [buttonLabel]="'PLANO_PAGE.BTN_TXT3'"
+                    [highlight]="true"
+                    [description]="'PLANO_PAGE.TXT_BODY6' | translate"
+                    [imagePrice]="'./assets/plans_24_90.svg'">
+                </m-plan-card>
+            </div>
+        </div>
+		<div class="row m--margin-top-25" *ngIf="canShowPix && screenWidth > 1024">
+			<div class="col-12 col-lg-6 col-xl-6 col-plan">
+				<other-payments-card [routerLink]="['/plans/pix']" title="{{'PLANO_PAGE.PIX' | translate}}" [imageSrc]="'assets/payment/logo_pix.png'"></other-payments-card>
+			</div>
+			<div class="col-12 col-lg-6 col-xl-6 col-plan">
+				<other-payments-card [routerLink]="['/payments']" title="{{'PLANO_PAGE.OTHERS_FORMS' | translate}}" [imageSrc]="'assets/payment/logo_payments.png'"></other-payments-card>
+			</div>
+		</div>
+    </div>
+
+	<div class="container">
+		<div [ngClass]="screenWidth > 768 ? 'm--margin-top-60' : 'm--margin-top-10'">
+			<div class="d-flex justify-content-center align-items-center mb-4">
+				<p class="txt3 mb-0">{{ 'PLANO_PAGE.WHY' | translate }}</p>
+			</div>
+		</div>
+
+		<div class="m--margin-top-25">
+			<p class="txt2" [innerHTML]="'PLANO_PAGE.TXT_BODY3' | translate"></p>
+		</div>
+
+		<div class="row">
+			<div class="col-12 col-lg-6 col-xl-4 mt-5 col-plan">
+				<plan-feat-card></plan-feat-card>
+			</div>
+
+			<div class="col-12 col-lg-6 col-xl-4 mt-5 col-plan">
+				<plan-feat-card1></plan-feat-card1>
+			</div>
+
+			<div class="col-12 col-lg-6 col-xl-4 mt-5 col-plan">
+				<plan-feat-card2></plan-feat-card2>
+			</div>
+		</div>
+
+    <div *ngIf="screenWidth <= 768" class="m--margin-top-55">
+			<p class="txt1">{{ 'PLANO_PAGE.TXT_BODY1' | translate }}</p>
+		</div>
+
+    <div *ngIf="screenWidth <= 768">
+			<p class="txt2" [innerHTML]="'PLANO_PAGE.TXT_BODY2' | translate"></p>
+		</div>
+
+		<div class="row" *ngIf="!isMobile">
+			<div class="col-12 col-lg-12 col-xl-12 mt-5 col-plan">
+				<countdown-discount [minutesToAdd]="25"></countdown-discount>
+			</div>
+		</div>
+
+	</div>
+
+</div>

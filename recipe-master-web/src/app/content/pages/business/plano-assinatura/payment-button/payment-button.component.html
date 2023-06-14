@@ -1,0 +1,31 @@
+<div class="mt-2">
+    <ng-container *ngIf="isPaypal && !isCurrentPlan && !showUpgradeButton">
+        <div #paypal></div>
+    </ng-container>
+    <ng-container *ngIf="!isPaypal && !((isAndroid || isIOS) && isCurrentPlan)">
+        <button id="btnPaypal" class="w-100" [ngClass]="customClass" *ngIf="!hideButton" (click)="doPagseguroCheckout()">
+            <ng-container *ngIf="!spinner.active">
+							<ng-container *ngIf="!isCurrentPlan && !showUpgradeButton && !hideButton">{{ label | translate }}</ng-container>
+							<ng-container *ngIf="isCurrentPlan">{{ 'PLANO_PAGE.RENEW_CURRENT_PLAN' | translate }}</ng-container>
+							<ng-container *ngIf="showUpgradeButton">{{ 'PLANO_PAGE.DO_UPGRADE' | translate }}</ng-container>
+							<ng-container *ngIf="isIOS">{{ mobilePaymentCurrency }}{{ plan.values.annually }} / {{ 'PLANO_PAGE.YEAR' | translate }}</ng-container>
+						</ng-container>
+						<mat-spinner class="spinner" style="margin: 0 auto" [diameter]="spinner.spinnerSize" [color]="spinner.spinnerColor" [mode]="spinner.mode" [value]="spinner.value" *ngIf="spinner.active"></mat-spinner>
+        </button>
+    </ng-container>
+		<!-- <ng-container *ngIf="isCurrentPlan">
+			<div class="current-plan-container">
+				<span>Plano Atual</span>
+			</div>
+		</ng-container> -->
+		<!-- <ng-container *ngIf="showUpgradeButton && !hideButton">
+			<ng-container *ngIf="isPaypal">
+        <div #paypal></div>
+   		</ng-container>
+			<ng-container *ngIf="!isPaypal">
+					<button id="btnPaypal" class="w-100" [ngClass]="customClass" (click)="doPagseguroCheckout()">
+							Fazer Upgrade
+					</button>
+			</ng-container>
+		</ng-container> -->
+</div>

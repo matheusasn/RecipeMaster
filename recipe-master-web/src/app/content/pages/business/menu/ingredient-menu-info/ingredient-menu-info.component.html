@@ -1,0 +1,77 @@
+<cp-dialog-default (close)="cancel()">
+	<!-- Header -->
+	<span title>{{recipeIngredient.ingredient.name}}</span>
+
+	<!-- Body -->
+	<div body>
+		<form *ngIf="formGroup" class="m-form m-form--fit m-form--label-align-right" name="form" [formGroup]="formGroup" novalidate>
+
+			<!-- Quantidade de uso -->
+			<h5 class="text-center pt-2 mt-3 mb-3">{{ 'INGREDIENT.INGREDIENT_TXT3' | translate}}</h5>
+			<div class="row m-0">
+				<div class="col-6 pr-0">
+					<div class="form-group m-form__group">
+						<input inputmode="numeric" pattern="[0-9]*" maxlength="10" class="form-control m-input cp-input" name="amount" formControlName="amount" placeholder="0,00" type="number">
+					</div>
+				</div>
+
+				<div class="col-6 pl-0">
+					<m-unit-select *ngIf="recipeIngredient && recipeIngredient.ingredient && units"
+						[ingredient]="recipeIngredient?.ingredient" [options]="{showLabel: false}"
+						[form]="formGroup" [units]="units | unitFilter:recipeIngredient?.ingredient"
+					></m-unit-select>
+				</div>
+			</div>
+
+			<!-- Preço de custo -->
+			<h5 class="text-center pt-2 mt-5 mb-3">{{ 'MENUS.INPUT.COST_PRICE' | translate}}</h5>
+			<div class="row m-0" [ngClass]="recipeIngredient.ingredient.recipeCopiedId && 'disable-block'">
+				<div class="col-12" formGroupName="purchasePrice">
+					<div class="cp-input d-flex flex-row justify-content-between align-items-center p-3 container-item">
+						<div class="box"><div class="currency-sign font-weight-normal">R$</div></div>
+						<div class="box" style="min-width: 0"><input style="min-width: 0" class="reset-form" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' }" maxlength="10" name="price" formControlName="price" placeholder="0,00" type="text"></div>
+						<div class="box"><span class="label-info" (click)="openDialogUnit()">
+							{{formGroup.value.purchasePrice.unityQuantity}} {{ formGroup.value.purchasePrice?.unit?.abbreviation }}
+						</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="d-flex justify-content-center mt-3">
+				<span class="label-info" (click)="openDialogHistory()">Histórico de preços</span>
+			</div>
+
+			<!-- Preço de venda -->
+			<h5 class="text-center pt-2 mt-5 mb-3">{{ 'MENUS.INPUT.SELL_UNIT_VALUE' | translate}}</h5>
+			<div class="row m-0">
+				<div class="col-12">
+					<div class="cp-input d-flex flex-row justify-content-between align-items-center p-3 container-item">
+						<div class="box"><div class="currency-sign font-weight-normal">R$</div></div>
+						<div class="box" style="min-width: 0"><input inputmode="numeric" pattern="[0-9]*" style="min-width: 0" class="reset-form" currencyMask [options]="{ align: 'center' }" maxlength="10" name="price" formControlName="saleValue" placeholder="0,00" type="text"></div>
+						<div class="box"></div>
+					</div>
+				</div>
+			</div>
+			<div class="d-flex justify-content-center mt-3 mb-5">
+				<!-- <span class="label-info" (click)="openDialogHistory()">Histórico de preços</span> -->
+			</div>
+
+		</form>
+	</div>
+
+	<!-- Footer -->
+	<div footer>
+		<div class="row">
+			<div class="col-12 col-sm-12 col-md-12 text-center btn-footer">
+				<button type="button" class="btn alterStyle ml-3 btn-delete"
+						[swal]="{ type: 'question', title: titleAlert, showCancelButton: true, confirmButtonColor: '#f4516c', cancelButtonColor: '#d2d2d2' }"
+						(confirm)="removeRecipeIngredient()"
+						(cancel)="doDismiss($event)">
+					<i id="iconTrash" class="la la-trash"></i>
+				</button>
+
+				<button type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1" name="btnBack" (click)="cancel()" translate>{{ 'INPUTS.BACK' }}</button>
+				<button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom btn-new-css-color" (click)="save()" translate>{{ 'INPUTS.SAVE' }}</button>
+			</div>
+		</div>
+	</div>
+</cp-dialog-default>

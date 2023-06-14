@@ -1,0 +1,91 @@
+
+<form *ngIf="form" class="m-form m-form--label-align-right" name="form" [formGroup]="form" novalidate>
+  <div formGroupName="geral">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+
+          <div class="row">
+              <div class="col-12">
+                  <div class="form-group m-form__group">
+					  <m-photo-upload id="uploadRecipe"
+						  (photoChange)="onPhotoChange($event)"
+						  [checkLimit]="true"
+						  [recipe]="recipe"
+						  [photoUrl]="photoUrl"
+						  [icon]="'assets/app/no-recipe.png'"
+					  ></m-photo-upload>
+                  </div>
+              </div>
+              <div class="col-12">
+                  <div class="form-group m-form__group">
+                      <label class="col-form-label" translate>{{ 'RECIPE.INPUT.DESCRIPTION' | translate }}</label>
+                      <textarea class="form-control cp-input" rows="3" formControlName="description" placeholder="{{'RECIPE.INPUT.DESCRIPTION' | translate }}"></textarea>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+      <div class="col-sm-12 col-md-6">
+          <div class="row">
+              <div class="col-sm-12">
+                  <div class="form-group m-form__group">
+                      <label class="col-form-label" translate>{{ 'RECIPE.INPUT.NAME' | translate | translate }}</label>
+                      <input class="form-control m-input cp-input" autocomplete="off" name="name" formControlName="name" placeholder="{{'RECIPE.INPUT.NAME' | translate }}" type="text">
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-12 col-md-6">
+                  <m-r-category-select *ngIf="categories" [form]="form.controls.geral" [categories]="categories"></m-r-category-select>
+              </div>
+              <div class="col-sm-12 col-md-6">
+                  <div class="form-group m-form__group">
+                      <label class="col-form-label" translate>{{ 'RECIPE.INPUT.PREPARATION_TIME' | translate }}</label>
+                      <input type="text" class="form-control m-input cp-input" name="preparationTime" formControlName="preparationTime"
+                          placeholder="{{'RECIPE.INPUT.PREPARATION_TIME' | translate }}">
+                  </div>
+              </div>
+          </div>
+
+          <!-- NOVOS CAMPOS-->
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <h4 class="m-0 p-0 mt-3">Rendimento</h4>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <h4 class="m-0 p-0 mt-3">Peso</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group m-form__group">
+                  <label class="col-form-label" translate>{{ 'RECIPE.INPUT.PORTIONS' | translate }}</label>
+                  <input class="form-control m-input cp-input" autocomplete="off" name="portions" formControlName="portions" placeholder="{{'RECIPE.INPUT.PORTIONS' | translate }}" type="text">
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group m-form__group">
+                  <label class="col-form-label" translate>{{ 'RECIPE.INPUT.TOTAL_WEIGHT' | translate }}</label>
+                  <input class="form-control m-input cp-input" autocomplete="off" name="totalWeight" formControlName="totalWeight" placeholder="{{'RECIPE.INPUT.TOTAL_WEIGHT' | translate }}" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group m-form__group">
+                  <label class="col-form-label" translate>{{ 'RECIPE.INPUT.PORTION_NAME' | translate }}</label>
+                  <input class="form-control m-input cp-input" autocomplete="off" name="portionName" formControlName="portionName" placeholder="{{'RECIPE.INPUT.PORTION_NAME' | translate }}" type="text">
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group m-form__group">
+                  <label class="col-form-label" translate>{{ 'RECIPE.INPUT.PORTION_WEIGHT' | translate }}</label>
+                  <input class="form-control m-input cp-input" autocomplete="off" name="portionWeight" formControlName="portionWeight" placeholder="{{'RECIPE.INPUT.PORTION_WEIGHT' | translate }}" type="text">
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</form>

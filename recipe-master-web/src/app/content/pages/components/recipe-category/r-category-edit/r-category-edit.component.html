@@ -1,0 +1,43 @@
+<div class="my-4 text-center">
+	<div class="row justify-content-center align-items-center">
+		<div class="col-auto px-0">
+			<h3>{{ 'RECIPE.INPUT.CATEGORY' | translate }}</h3>
+		</div>
+		<div class="col-auto px-0">
+			<button mat-icon-button (click)="openCategorieTutorialDialog()">
+				<mat-icon style="margin-top: -2px;">info</mat-icon>
+			</button>
+		</div>
+	</div>
+	<hr>
+</div>
+
+<form name="form" *ngIf="form" [formGroup]="form" novalidate class="m-form m-form--fit m-form--label-align-right">
+
+	<div class="row cp-form-row p-2">
+		<div class="col-4">
+			<div class="form-group m-form__group">
+				<label class="col-form-label">{{ 'INPUTS.NAME' | translate }}<span class="text-danger">*</span> </label>
+			</div>
+		</div>
+		<div class="col-8">
+			<div class="input-group cp-input">
+				<input type="text" class="form-control" name="name" formControlName="name">
+			</div>
+		</div>
+	</div>
+
+	<div class="m-portlet__foot m-portlet__foot--fit">
+		<div class="m-form__actions">
+			<div class="row">
+				<div class="col-12 text-center">
+					<button type="button" class="btn btn-link m-btn mr-1" name="btnCancel" (click)="doCancel()" translate>{{
+						'INPUTS.BACK' | translate }}</button>
+					<button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom" name="btnCreate"
+						(click)="doSubmit()" translate>{{ 'INPUTS.SAVE' | translate }}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</form>

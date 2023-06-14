@@ -1,0 +1,18 @@
+<div class="countdown">
+	<div class="time">00:{{ minutesToDday | number:'2.0' }}:{{  secondsToDday | number:'2.0'}}</div>
+</div>
+
+<div class="content" [ngClass]="lang">
+	<h2>{{'PLANO_PAGE.DISCOUNT.TITLE' | translate}}</h2>
+
+	<p>
+		<strong>{{'PLANO_PAGE.DISCOUNT.SUB_TITLE' | translate}}</strong> <br>
+		{{'PLANO_PAGE.DISCOUNT.CONTENT' | translate}}
+	</p>
+
+	<button [disabled]="this.timeDifference <= 0" [routerLink]="['/plans/discount']" *ngIf="showButton">{{'PLANO_PAGE.DISCOUNT.BUTTON' | translate}}</button>
+</div>
+
+<div class="image">
+	<img src="assets/payment/image_countdown.png">
+</div>

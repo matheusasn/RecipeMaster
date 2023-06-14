@@ -1,0 +1,15 @@
+.label-ingredient-form-container {
+	@media (max-width: 575px) {
+		width: 349px;
+	}
+	width: 412px;
+	position: relative;
+	display: block;
+}
+
+.link {
+	color: #FA4E6D !important;
+	cursor: pointer;
+	display: block;
+	font-weight: 420;
+}

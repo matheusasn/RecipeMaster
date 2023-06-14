@@ -1,0 +1,18 @@
+.cp-pointer {
+    cursor: pointer;
+		@media (max-width: 575px) {
+			padding: 0 !important;
+		}
+		i:first-child {
+			@media (max-width: 575px) {
+				margin-right: 10px;
+			}
+		}
+}
+
+.custom-text-align {
+	text-align: right;
+	@media (max-width: 575px) {
+		text-align: unset;
+	}
+}

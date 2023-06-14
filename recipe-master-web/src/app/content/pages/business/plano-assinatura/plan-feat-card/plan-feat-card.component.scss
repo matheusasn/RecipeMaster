@@ -1,0 +1,27 @@
+:host {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	font-family: "Poppins", "Roboto", Arial, sans-serif;
+
+	img {
+		width: 75px;
+		margin-bottom: 5px;
+		object-fit: cover;
+	}
+
+	h3 {
+		font-weight: bold;
+		font-size: 14px;
+		line-height: 21px;
+		text-align: center;
+	}
+
+	p {
+		font-size: 11px;
+		line-height: 16px;
+		text-align: center;
+		padding: 0 8px;
+	}
+}

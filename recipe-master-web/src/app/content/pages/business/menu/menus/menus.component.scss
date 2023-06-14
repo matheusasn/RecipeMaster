@@ -1,0 +1,118 @@
+.custom-padding {
+	@media only screen and (max-width: 768px) {
+		padding: 0 5px;
+	}
+}
+
+.title-infor {
+	display: flex;
+	align-items: center;
+
+	.infor {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+
+.list-item {
+	background: #fff;
+	margin: 4px;
+	border-radius: 10px;
+	font-weight: bold;
+}
+
+.list-icon-right {
+	position: absolute;
+	right: 0;
+}
+
+.nameTela {
+	margin-top: 1%;
+}
+
+#msgAjuda {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 19px;
+	text-align: center;
+	border-color: black;
+	padding-top: 0%;
+	left: 48%;
+}
+
+.btn-add-menu{
+	width: 220px;
+	padding: 5px 26px !important;
+	margin-top: 6px;
+}
+
+h2.title-menu {
+	height: 48px;
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+	font-size: 30px;
+	font-family: Poppins, sans-serif;
+	// height: 48px;
+	// align-items: center;
+	// white-space: nowrap;
+	// font-size: 30px;
+	// font-family: Poppins, sans-serif;
+	// margin: 0px !important;
+	position: relative;
+}
+
+.btn-color {
+	background: linear-gradient(125.5deg, #FB8A65 7.9%, #FA4E6D 71%), #FA345F !important;
+	box-shadow: 0px 4px 4px #E4E5E7 !important;
+	border-radius: 6px !important;
+}
+
+.btn-color:hover {
+	background: #FB8A65 !important;
+}
+
+@media only screen and (max-width: 767px) {
+	.center-mobile {
+		justify-content: center;
+	}
+	#msgAjuda {
+		left: 60% !important;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.btn-add-menu{
+		width: 100%;
+	}
+
+	h2.title-menu {
+		font-size: 20px;
+		margin: 0;
+		padding: 0;
+		font-family: Poppins, sans-serif;
+	}
+
+	#msgAjuda {
+		left: 32%;
+	}
+}
+
+#link {
+	cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+	.wrapper-search {
+		margin-top: 10px;
+		margin-bottom: -8px;
+	}
+}
+
+// @media only screen and (max-width: 370px) {
+// 	#msgAjuda {
+// 		display: none;
+// 	}
+// }

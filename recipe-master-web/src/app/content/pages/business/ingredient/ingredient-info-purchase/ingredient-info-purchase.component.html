@@ -1,0 +1,127 @@
+<cp-dialog-default (close)="cancel()">
+
+	<!-- Header -->
+	<span title> {{ item.ingredient.name }} </span>
+	<label label id="estiloCat" [ngStyle]="getColorIngredientCategory(null, item)">
+		{{item.ingredient.ingredientCategory != null ? item.ingredient.ingredientCategory.name : 'Não definido'}}
+	</label>
+
+	<!-- Body -->
+	<div body>
+		<form class="m-form m-form--fit m-form--label-align-right" [formGroup]="formGroupIngredientPurchase" novalidate>
+			<div class="m-form m-form--fit m-form--label-align-right">
+
+				<!--Quantidade de compra-->
+				<div class="row labelCenterInput">
+					<div class="col-12 col-sm-12 col-md-12">
+						<label class="col-form-label">Quantidade de compra</label>
+					</div>
+				</div>
+				<div class="row marginCustomizada">
+					<div class="col-6 removePaddingRight">
+						<div class="form-group m-form__group">
+							<input maxlength="10"
+								   class="form-control m-input cp-input input-new-css"
+								   name="qCompra"
+								   placeholder="0,00"
+								   min="0"
+								   type="number"
+								   formControlName="qCompra">
+						</div>
+					</div>
+					<div class="col-6 removePaddingLeft">
+						<div class="form-group m-form__group">
+							<m-unit-select
+								[options]="{canUpdate: true, canCreate: true, inputName: 'medida1', showLabel: false, type: 'PURCHASE_LIST'}"
+								[ingredient]="this.item.ingredient" *ngIf="units && formGroupIngredientPurchase"
+								[form]="formGroupIngredientPurchase" [units]="units"></m-unit-select>
+						</div>
+					</div>
+
+				</div>
+
+				<!--Preco de compra-->
+				<div class="row labelCenterInput marginTop">
+					<div class="col-12 col-sm-12 col-md-12">
+						<label class="col-form-label">{{'INGREDIENT.INGREDIENT_TXT4' | translate}}</label>
+					</div>
+				</div>
+				<div class="row marginCustomizada">
+					<div class="col-12 col-sm-12 col-md-12">
+						<div class="form-group m-form__group">
+							<input currencyMask
+								   [options]="{ prefix: cifrao, thousands: '.', decimal: ',', align: 'center' }"
+								   maxlength="10"
+								   class="form-control m-input cp-input input-new-css"
+								   name="preco"
+								   placeholder="{{cifrao + '0,00'}}"
+								   type="text"
+								   formControlName="preco">
+						</div>
+					</div>
+				</div>
+				<div class="row marginCustomizada" style="margin-top: 1%;">
+					<div class="col-6 removePaddingRight">
+						<div class="form-group m-form__group">
+							<input maxlength="10"
+								   class="form-control m-input cp-input input-new-css"
+								   name="quantidade"
+								   placeholder="0,00"
+								   min="0"
+								   type="number"
+								   formControlName="quantidade">
+						</div>
+					</div>
+					<div class="col-6 removePaddingLeft">
+						<div class="form-group m-form__group">
+							<select [compareWith]="compareSelect"
+									class="form-control cp-input input-new-css"
+									[ngClass]="formGroupIngredientPurchase.errors?.uncompatibleUnit?'text-danger':''"
+									name="unit"
+									formControlName="unit">
+								<option value="null" [disabled]="true" translate>{{'INPUTS.OPTION_DEFAULT' | translate}}</option>
+								<option *ngFor="let unit of units" [ngValue]="unit">{{ unit.name | translate }}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<!--Grafico-->
+				<div class="row">
+					<div class="col-sm-12">
+						<m-line-chart [priceHistory]="priceHistory"
+									  [ingredient]="ingredient"
+									  [category]="ingredient?.ingredientCategory"
+									  [opacity]="lineChartOpacity"></m-line-chart>
+					</div>
+				</div>
+
+			</div>
+		</form>
+	</div>
+
+	<!-- Footer -->
+	<div footer>
+		<div class="row marginTop">
+			<div class="col-12 col-sm-12 col-md-12 text-center">
+
+				<button type="button"
+						class="btn pull-left alterStyle"
+						[swal]="{ type: 'question', title: titleModal, showCancelButton: true, confirmButtonColor: '#f4516c', cancelButtonColor: '#d2d2d2' }"
+						(confirm)="removeRecipeIngredient()"
+						(cancel)="doDismiss($event)">
+					<i id="iconTrash" class="la la-trash"></i>
+				</button>
+
+				<button type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1" name="btnBack"
+						(click)="cancel()" translate>{{ 'INPUTS.BACK' | translate }}</button>
+				<button type="button"
+						class="btn btn-accent m-btn m-btn--air m-btn--custom btn-new-css-color"
+						(click)="save()"
+						translate>
+					Ok
+				</button>
+			</div>
+		</div>
+	</div>
+</cp-dialog-default>

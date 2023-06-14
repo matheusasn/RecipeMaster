@@ -1,0 +1,90 @@
+.graph-container {
+	margin-top: 20px;
+	background-color: #F7F7F7;
+	width: 251px;
+	border-radius: 7px;
+	header {
+		padding: 10px;
+		div {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			.graph-container-title {
+				display: flex;
+				align-items: center;
+				font-size: 14px;
+				font-weight: bold;
+				gap: 4px;
+				> span {
+					font-size: 9px;
+					font-weight: normal;
+				}
+			}
+			.graph-container-subtitle {
+				font-size: 12px;
+			}
+		}
+	}
+}
+
+.financial-sales-percents-wrapper {
+	position: relative;
+	background-color: #FFFF;
+	display: flex;
+	align-items: center;
+	min-height: 197px;
+	border: 2px solid #F7F7F7;
+	border-radius: 7px;
+	.sales-price-item-wrapper {
+		display: flex;
+		margin-left: 10px;
+		margin-top: 6px;
+		.legend-color {
+			width: 4px;
+			height: 27px;
+			background-color: red;
+			border-radius: 19%;
+			margin-right: 6px;
+			margin-top: 2px;
+			&.profit {
+				background-color: #34BFA3;
+			}
+			&.cmv {
+				background-color: #FD6485;
+			}
+			&.variable-cost {
+				background-color: #FF9E7E;
+			}
+			&.fixed-cost {
+				background-color: #4B5262;
+			}
+		}
+		.sales-price-item {
+			display: flex;
+			flex-direction: column;
+			padding-top: 3px;
+			span {
+				font-weight: 600;
+				&:first-child {
+					text-transform: uppercase;
+					font-size: 8px;
+					color: #96999F;
+				}
+				&:nth-child(2) {
+					font-size: 9px;
+					color: #000000;
+				}
+			}
+			.positive {
+				color: #34BFA3 !important;
+				font-size: 10px;
+				font-weight: bold;
+			}
+			.negative {
+				color: #FD305C !important;
+				font-size: 10px;
+				font-weight: bold;
+			}
+		}
+	}
+}

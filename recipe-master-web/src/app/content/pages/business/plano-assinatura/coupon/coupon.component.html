@@ -1,0 +1,168 @@
+<div class="jumbotron jumbotron-fluid titulo">
+  <div class="container text-center">
+      <h1>{{ 'PLANO_PAGE.TXT_TITLE1' | translate }} <span class="negritoTexto">{{ 'PLANO_PAGE.TXT_TITLE2' | translate }}</span> <span class="negritoTexto">{{ 'PLANO_PAGE.TXT_TITLE3' | translate}}</span></h1>
+      <h1>{{ 'PLANO_PAGE.TXT_TITLE4' | translate}} <span class="negritoTexto"> {{ 'PLANO_PAGE.TXT_TITLE5' | translate}}</span> {{ 'PLANO_PAGE.TXT_TITLE6' | translate }}</h1>
+  </div>
+</div>
+<div class="cp-content-fluid">
+
+  <div>
+      <p id="txt1">{{ 'PLANO_PAGE.TXT_BODY1' | translate }}</p>
+  </div>
+
+  <div>
+      <p id="txt2">
+          {{ 'PLANO_PAGE.TXT_BODY2' | translate}} <span class="negritoTexto">{{ 'PLANO_PAGE.TXT_BODY3' | translate }}</span><span class="negritoTexto">{{ 'PLANO_PAGE.TXT_BODY4' | translate }}</span> {{ 'PLANO_PAGE.TXT_BODY5' | translate }} <span class="negritoTexto">{{ 'PLANO_PAGE.TXT_BODY6' | translate }}</span> {{ 'PLANO_PAGE.TXT_BODY7' | translate }}
+      </p>
+  </div>
+
+  <div class="row" *ngIf="loading">
+      <div class="col col-12 mt-5 col-plan">
+          <mat-spinner diameter="20"></mat-spinner>
+      </div>
+  </div>
+
+  <div class="container" *ngIf="plans">
+    <div class="row">
+
+      <!-- PLANO PRO NUTRI -->
+      <div class="col-12 col-lg-6 col-xl-3 mt-5 col-plan">
+          <div class="card">
+          <div class="card-header corHeaderNutri">
+              <div class="row dadosTitulo">
+              <div class="titulo2 col-12">
+                  <div class="bar bar-light"></div>
+                  <p class="tituloCenterPosition">{{ 'PLANO_PAGE.TXT_CARD_TITLE6' | translate }}</p>
+              </div>
+              </div>
+          </div>
+      
+          <div class="card-body">
+
+              <div class="row h-100 plan-content">
+                  <div class="col col-12 cp-options d-flex align-content-start flex-wrap">
+                      
+                      <img class="img1 pt-3 pb-3" src="../../../../../assets/app/media/img/plano-assinatura/img3.png" alt="Imagem">
+
+                      <div class="plan-option">
+                          <img class="check-img" src="./assets/plans_icon-check.svg">             
+                          <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD12' | translate"></span>
+                      </div>
+                      <div class="plan-option">
+                          <img class="check-img" src="./assets/plans_icon-check.svg">          
+                          <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD13' | translate"></span>
+                      </div>
+                      <div class="plan-option">
+                          <img class="check-img" src="./assets/plans_icon-check.svg">  
+                          <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD14' | translate"></span>
+                      </div>
+                      <div class="plan-option">
+                          <img class="check-img" src="./assets/plans_icon-check.svg">  
+                          <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD15' | translate"></span>
+                      </div>
+                      <div class="plan-option">
+                          <img class="check-img" src="./assets/plans_icon-check.svg">  
+                          <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD16' | translate"></span>
+                      </div>
+                      
+                  </div>
+                  <div class="col col-12 d-flex align-content-end flex-wrap text-center call2act">
+
+                      <span class="pag-anual">{{ 'PLANO_PAGE.TXT_PAGAMENTO1' | translate }} {{plans?.pro_nutri_promocional?.values?.annually | currency:plans?.pro_nutri_promocional?.currency}}</span>
+                      <span class="pag-parcelado">{{ 'PLANO_PAGE.TXT_PAGAMENTO3' | translate }} 12x* ({{ 'PLANO_PAGE.TXT_PAGAMENTO4' | translate }} PagSeguro) <span class="boxInfoMes">2 {{ 'PLANO_PAGE.TXT_PAGAMENTO2' | translate }}</span></span>
+
+                      <!-- <button class="btn2 w-100" (click)="checkoutProNutri()">
+                          {{ 'PLANO_PAGE.BTN_TXT3' | translate }}
+                      </button> -->
+
+                      <div class="w-100 text-center mt-4" *ngIf="loading">
+                          <mat-spinner diameter="20"></mat-spinner>
+                      </div>
+
+                      <!-- <m-payment-button></m-payment-button> -->
+                      <m-payment-button *ngIf="!loading" [isPaypal]="isPaypal" customClass="btn2" label="Assinar com desconto" coupon="true" [perfil]="PerfilEnum.USER_PRO_NUTRI"></m-payment-button>
+
+                  </div>
+              </div>
+
+              <div class="circulo">
+                      <div class="r1">
+                          {{ 'PLANO_PAGE.TXT_CARD_TITLE7' | translate }}
+                      </div>
+                      <div class="r2">
+                          {{plans?.pro_nutri_promocional?.values?.monthly | currency:plans?.pro_nutri_promocional?.currency}}
+                      </div>
+                      <div>
+                          /{{ 'PLANO_PAGE.TXT_CARD_TITLE4' | translate }}
+                      </div>
+              </div>
+
+          </div>
+      </div>
+    </div>
+    <!-- PLANO PRO NUTRI END -->
+
+    <div class="col-12 col-lg-6 col-xl-5 mt-5 col-plan">
+      <div class="card card-coupon">
+        <div class="card-body text-center">
+          <p class="txt1">Você tem um cupom<br />de R$50 de desconto!</p>
+          <p>Assine o <b>Plano PRO+NUTRI</b> com R$50,00 de desconto.<br />
+          De {{plans?.pro_nutri?.values?.annually | currency:plans?.pro_nutri?.currency}} por {{plans?.pro_nutri_promocional?.values?.annually | currency:plans?.pro_nutri_promocional?.currency}}</p>
+
+          <m-payment-button *ngIf="!loading" [isPaypal]="isPaypal" customClass="btn2" label="Assinar com desconto" coupon="true" [perfil]="PerfilEnum.USER_PRO_NUTRI"></m-payment-button>
+
+          <p>Esse link expira em {{plans?.pro_nutri_promocional?.expirationAt | date:'dd/MM/yyyy'}}</p>
+
+        </div>
+      </div>
+
+      <div class="container mt-5 plan-options">
+
+        <div class="plan-option">
+          <img class="check-img" src="./assets/plans_icon-check.svg">             
+          <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD12' | translate"></span>
+      </div>
+      <div class="plan-option">
+          <img class="check-img" src="./assets/plans_icon-check.svg">          
+          <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD13' | translate"></span>
+      </div>
+      <div class="plan-option">
+          <img class="check-img" src="./assets/plans_icon-check.svg">  
+          <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD14' | translate"></span>
+      </div>
+      <div class="plan-option">
+          <img class="check-img" src="./assets/plans_icon-check.svg">  
+          <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD15' | translate"></span>
+      </div>
+      <div class="plan-option">
+          <img class="check-img" src="./assets/plans_icon-check.svg">  
+          <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD16' | translate"></span>
+      </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col col-12 mt-5 mb-5 text-center">
+        <!-- <img class="formas-pagamento-img" src="assets/pagseguro-formas-pagamento.png"> -->
+        <div class="card-pagamentos" *ngIf="!isPaypal">
+            <!-- Pagseguro -->
+            <img src="//assets.pagseguro.com.br/ps-integration-assets/banners/pagamento/todos_animado_550_50.gif" alt="Logotipos de meios de pagamento do PagSeguro" title="Este site aceita pagamentos com as principais bandeiras e bancos, saldo em conta PagSeguro e boleto.">
+        </div>
+        <div class="card-pagamentos paypal" *ngIf="isPaypal">
+            <!-- PayPal Logo -->
+            <img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" border="0" alt="PayPal Acceptance Mark">
+        </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!loading && !isPaypal">
+      <div class="col col-12 mt-2 text-center font16px">
+          <a routerLink="/payments">Precisando de outros meios de pagamento? Acesse aqui!</a>
+      </div>
+  </div>
+  
+</div>

@@ -1,0 +1,42 @@
+<cp-loading></cp-loading>
+<div class="cp-content" style="overflow-x: hidden">
+	<div class="row nameTela custom-padding">
+		<div class="col-6 col-sm-6 col-md-6">
+			<div class="title-infor">
+				<h2 class="title-menu">
+					{{ 'MENU.MENU' | translate }}
+				</h2>
+			</div>
+
+		</div>
+
+		<div class="col-12 col-sm-12 col-md-6 text-right">
+			<button class="btn btn-accent m-btn m-btn--air m-btn--custom btn-color btn-add-menu" mat-button
+				(click)="doCreate()" translate>
+				Novo cardápio
+			</button>
+		</div>
+	</div>
+
+	<div style="margin: 15px 0" *ngIf="first">
+	</div>
+
+	<!-- BUSCADOR de ingredientes (tipo AUTOCOMPLETE) -->
+	<div class="row my-3 custom-padding" *ngIf="!first">
+		<div class="col-sm-12 wrapper-search">
+			<m-cp-ingredient-search (onChange)="onChangeSearch($event)" [responseType]="'menu'" [behavior]="'search'"
+				(onSearch)="onSearch($event)" placeholder="{{ 'MENUS.PESQUISA_MENU' | translate }}"></m-cp-ingredient-search>
+		</div>
+	</div>
+
+	<div class="row center-mobile custom-padding" *ngIf="menus?.length > 0">
+		<cp-custom-card #dragCustom (selectItem)="edit(+$event)" (updatedList)="updateDragPositions($event)"
+			(newItem)="doCreate()" [options]="options" [recipes]="false" [disabledCustom]="searchTerm && searchTerm !== ''"
+			[items]="fullMenus" [first]="first" [ready]="ready" [menusAux]="menus"
+			(fetchMenus)="fetchMenus()"></cp-custom-card>
+	</div>
+
+	<div class="alert alert-info" *ngIf="!menus?.length" translate>
+		{{ 'MENUS.NO_RESULTS'}}
+	</div>
+</div>

@@ -1,0 +1,21 @@
+<div *ngIf="!ingredient.createdOnFinancial" class="container-itens noselect">
+	<div class="font-medium custom-w" style="text-overflow: ellipsis;overflow: hidden">
+		<div *ngIf="isDraggingEnabled;else other_content" style="display: flex;margin-top: 6px;">
+			<mat-icon style="margin-right: 7px; color: #9999a5" class="mobile-icon">menu</mat-icon>
+			{{ ingredient?.ingredient?.name || ingredient?.name }}
+		</div>
+		<ng-template #other_content>
+			{{ ingredient?.ingredient?.name || ingredient?.name }}
+		</ng-template>
+	</div>
+
+	<div class="item-amount"><small class="text-muted full-right-mobile">{{ getUnitLabelBasedOnRecipeYield(getUnitLabel(ingredient))}}</small></div>
+
+	<div class="right-container">
+		<div class="m-right"><small class="text-muted">{{getAmountBasedOnRecipeYield(calcIngredientPrice(ingredient)) | currency: prefix}}</small></div>
+		<mat-icon matListIcon class="list-icon-right" [inline]="true">
+			keyboard_arrow_right
+		</mat-icon>
+	</div>
+
+</div>

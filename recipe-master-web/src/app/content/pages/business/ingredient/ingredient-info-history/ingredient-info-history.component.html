@@ -1,0 +1,44 @@
+<cp-dialog-default (close)="cancel()">
+
+	<!-- Header -->
+	<span title>{{ 'INGREDIENT.INGREDIENT_TXT12' | translate }}</span>
+
+	<!-- Body -->
+	<div body>
+		<div class="container-spinner" *ngIf="loading">
+			<mat-spinner style="left: calc(50% - 10px)" diameter="20"></mat-spinner>
+		</div>
+		<form class="m-form m-form--fit m-form--label-align-right">
+			<div class="row m-0">
+				<div class="col-12 pr-0">
+					<m-line-chart *ngIf="priceHistory"
+					  [priceHistory]="priceHistory"
+					  [ingredient]="ingredient"
+					  [category]="ingredient?.ingredientCategory"
+					  [opacity]="lineChartOpacity"
+					></m-line-chart>
+				</div>
+			</div>
+
+			<div class="container-history">
+				<div class="row m-0 mt-2">
+					<div class="col-12">
+						<m-cp-ingredient-hostory-item *ngFor="let history of priceHistoryReverse"
+							  [price]="history.price | currency"
+							  [amount]="history.unityQuantity"
+							  [unitAbbreviation]="ingredient?.unit?.abbreviation"
+							  [date]="history.inclusion | date:'dd/MMM'"
+						></m-cp-ingredient-hostory-item>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Footer -->
+	<div footer class="text-center">
+		<button (click)="cancel()" type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1" style="width: 180px" translate>
+			{{ 'INPUTS.BACK' | translate }}
+		</button>
+	</div>
+</cp-dialog-default>

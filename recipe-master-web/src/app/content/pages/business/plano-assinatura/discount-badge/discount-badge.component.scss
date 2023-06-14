@@ -1,0 +1,55 @@
+.badge-50 {
+    width: 100%;
+    max-width: 406px;
+    background: linear-gradient(125.5deg, rgba(251, 138, 101, 0.26) 8%, rgba(250, 78, 109, 0.26) 70%), rgba(250, 52, 95, 0.05);
+    border-radius: 11px;
+    border: 1px solid #FD305C;
+    box-sizing: border-box;
+    font-family: Poppins;
+    font-style: normal;
+    min-width: 300px;
+    margin: 0 auto;
+
+    .title {
+        
+        font-weight: bold;
+        font-size: 26px;
+        line-height: 39px;
+        /* identical to box height */
+
+        text-align: center;
+
+        /* Red1 */
+
+        color: #FD305C;
+    }
+
+    .subtitle {
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 15px;
+        /* identical to box height */
+
+        text-align: center;
+
+        /* Red1 */
+
+        color: #FD305C;
+    }
+}
+
+.badge-50-round {
+    background-image: linear-gradient(to bottom, #FB8B5B, #F24159);
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+    width: 156px;
+    height: 156px;
+    box-shadow: 0px 0px 18px -7px #444;
+    text-align: center;
+    z-index: 999999;
+    padding: 14px;
+    font-size: 2rem;
+    top: -56px;
+    left: -11%;
+}

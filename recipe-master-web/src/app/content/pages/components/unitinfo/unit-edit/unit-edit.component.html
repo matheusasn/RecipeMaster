@@ -1,0 +1,54 @@
+<div class="my-4 text-center">
+    <h3 class="mb-3">{{'INPUTS.CUSTOM_MEASURE' | translate}}</h3>
+    <h5 *ngIf="ingredient">{{ingredient.name}}</h5>
+    <hr>
+</div>
+
+<form name="form" *ngIf="form" [formGroup]="form" novalidate class="m-form m-form--fit m-form--label-align-right">
+
+    <div class="row cp-form-row p-2">
+        <div class="col-4">
+          <div class="form-group m-form__group">
+            <label class="col-form-label">{{'INPUTS.NAME' | translate}}<span class="text-danger">*</span> </label>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="input-group cp-input">
+            <input type="text" class="form-control" name="name" formControlName="name">
+          </div>
+        </div>
+    </div>
+
+    <div class="row cp-form-row p-2" *ngIf="!unitType || unitType !== 'OTHER_COSTS'">
+
+        <div class="col-4">
+          <div class="form-group m-form__group">
+            <label class="col-form-label">{{'INPUTS.QUANTITY' | translate}}<span class="text-danger">*</span></label>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="input-group cp-input">
+            <input inputmode="numeric" pattern="[0-9]*" type="text" class="form-control custom-w" name="amount" formControlName="amount">
+          </div>
+        </div>
+        <div class="col-5">
+            <select class="form-control cp-input" name="unit" formControlName="unitId">
+                <option value="null" [disabled]="true" translate>{{'INPUTS.OPTION_DEFAULT'}}</option>
+                <option *ngFor="let unit of units" [ngValue]="unit.id">{{ unit.name | translate }}</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="m-portlet__foot m-portlet__foot--fit">
+        <div class="m-form__actions">
+        <div class="row">
+            <div class="col-12 text-center">
+                <button type="button" class="btn btn-link m-btn mr-1" name="btnCancel" (click)="doCancel()" translate>{{'INPUTS.BACK' | translate}}</button>
+                <button type="button" [disabled]="loading" class="btn btn-accent m-btn m-btn--air m-btn--custom" name="btnCreate" (click)="doSubmit()" translate>{{'INPUTS.SAVE' | translate}}</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</form>

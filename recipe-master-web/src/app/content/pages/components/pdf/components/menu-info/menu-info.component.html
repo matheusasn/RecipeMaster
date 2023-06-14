@@ -1,0 +1,28 @@
+<div class="" #mainContainer>
+
+	<table class="w-100">
+		<td class="w-50 background-like-stripped pt-2 pb-4 pl-4 rounded-left">
+			<span class="title">{{menu?.name}}</span>
+			<div class="info mt-2">
+				<span>{{ 'RECIPE.INPUT.UNITQUANTITY' | translate }}</span>
+				<span>{{menu?.unityQuantity || '&nbsp;'}} {{menu?.unit?.name}}</span>
+			</div>
+			<div class="info mt-3">
+				<span>{{ 'RECIPE.INPUT.DESCRIPTION' | translate }}</span>
+				<span>{{menu?.description || '&nbsp;'}}</span>
+			</div>
+		</td>
+		<td class="w-25 vertical-align-top background-like-stripped rounded-right">
+			<div class="info">
+				<span>{{ 'INPUTS.DATE' | translate }}</span>
+				<span>{{menu?.inclusion | date: 'dd/MM/yyyy'}}</span>
+			</div>
+		</td>
+		<td class="w-25 vertical-align-top logo-area" *ngIf="!showPhoto || !backgroundImage">
+		</td>
+		<td class="w-25 img">
+			<img *ngIf="showPhoto && backgroundImage" [src]="backgroundImage" >
+		</td>
+	</table>
+
+</div>

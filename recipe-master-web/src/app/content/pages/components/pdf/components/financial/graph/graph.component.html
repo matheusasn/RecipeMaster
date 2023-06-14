@@ -1,0 +1,91 @@
+<div class="graph-container">
+	<header>
+		<div>
+			<span *ngIf="typeOfCost === 'TOTAL'" class="graph-container-title">
+				Custo total <span>({{(recipe?.ingredientsYield || recipe?.unityQuantity) || '&nbsp;'}} {{ recipe?.unityQuantity && recipe?.unit?.abbreviation }})</span>
+			</span>
+			<span *ngIf="typeOfCost === 'UNIT'" class="graph-container-title">
+				Custo Unitário
+			</span>
+			<span class="graph-container-title">{{ getTotalCost() | currency: cifrao }}</span>
+		</div>
+
+		<div>
+			<span class="graph-container-subtitle">Preço de venda</span>
+			<span class="graph-container-subtitle">{{ getSaleValue() | currency: cifrao }}</span>
+		</div>
+
+	</header>
+
+	<div class="financial-sales-percents-wrapper">
+		<div>
+			<div class="sales-price-item-wrapper">
+				<div class="legend-color profit"></div>
+				<div class="sales-price-item">
+					<span>Lucro</span>
+					<ng-container>
+						<span>
+							{{calcProfit() | currency:cifrao}}
+							&nbsp;
+							<span
+								[ngClass]="getPercentageBasedOnSalePrice(calcProfit()) > 0 ? 'positive' : 'negative'"
+							>
+								{{getPercentageBasedOnSalePrice(calcProfit()) | number:'1.0-0'}}%
+							</span>
+						</span>
+					</ng-container>
+				</div>
+			</div>
+			<div class="sales-price-item-wrapper">
+				<div class="legend-color cmv"></div>
+				<div class="sales-price-item">
+					<span >CMV</span>
+					<span>
+						{{ getCMV() | currency: cifrao }}
+						&nbsp;
+						<span
+							[ngClass]="getPercentageBasedOnSalePrice(getCMV()) < 50 ? 'positive' : 'negative'"
+						>
+							{{ getPercentageBasedOnSalePrice(getCMV()) | number:'1.0-0' }}%
+						</span>
+					</span>
+				</div>
+			</div>
+			<div class="sales-price-item-wrapper">
+				<div class="legend-color variable-cost"></div>
+				<div class="sales-price-item">
+					<span>Custos Var.</span>
+					<span>
+						{{ getTotalOtherCosts() | currency: cifrao }}
+						&nbsp;
+						<span
+							[ngClass]="getPercentageBasedOnSalePrice(getTotalOtherCosts()) < 50 ? 'positive' : 'negative'"
+						>
+							{{ getPercentageBasedOnSalePrice(getTotalOtherCosts()) | number:'1.0-0' }}%
+						</span>
+					</span>
+				</div>
+			</div>
+			<div class="sales-price-item-wrapper">
+				<div class="legend-color fixed-cost"></div>
+				<div class="sales-price-item">
+					<span>Custos fixo</span>
+					<span>
+						{{ getFixedCostsBasedOnSalePrice() | currency: cifrao }}
+						&nbsp;
+						<span
+							[ngClass]="getFixedCostsPercentage() < 50 ? 'positive' : 'negative'"
+						>
+							{{ getFixedCostsPercentage() | number:'1.0-0' }}%
+						</span>
+					</span>
+				</div>
+			</div>
+			</div>
+			<m-doughnut-chart-recipe [titleGrafs]="'RECIPE.CHAR_TXT7'" [identifier]="'pdf'" *ngIf="financialAnalysisChartData && financialAnalysisChartData.labels" [data]="financialAnalysisChartData.data" [labels]="financialAnalysisChartData.labels"></m-doughnut-chart-recipe>
+			<div *ngIf="!financialAnalysisChartData.labels" style="width: 193px;"></div>
+		<div>
+		</div>
+	</div>
+</div>
+

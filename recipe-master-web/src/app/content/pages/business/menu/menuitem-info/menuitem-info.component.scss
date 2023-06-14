@@ -1,0 +1,114 @@
+.excluirStyle {
+    color: #f4516c !important;
+    background-color: #ffffff !important;
+    border-color: #f4516c !important;
+}
+
+.excluirStyle:hover {
+    background-color: #f4516c !important;
+    color: #ffffff !important;
+}
+
+.reset-form {
+	border: 0;
+	outline: 0;
+}
+
+.percent-box {
+	border: 2px solid #DADADA;
+	background-color: #F8F8F8;
+	border-radius: 0.5rem;
+	padding: 25px;
+	> div {
+		max-width: 300px;
+		> span {
+			color: #939393;
+		}
+	}
+}
+
+.label-info {
+	height: 25px;
+	min-width: 50px;
+	padding: 0 12px;
+	display: flex;
+	align-items: center;
+	border: 1px solid #AEB1B8;
+	border-radius: 15px;
+	color: #4B5262;
+	font-size: 9px;
+	line-height: 8px;
+	justify-content: center;
+	background-color: #F8F8F8;
+
+	cursor: pointer;
+	user-select: none;
+}
+
+.currency-sign {
+	margin-right: auto;
+}
+
+.container-item {
+	display: flex;
+}
+.container-item .box {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+}
+.container-item .box:first-child > span { margin-right: auto; }
+.container-item .box:last-child  > span { margin-left: auto;  }
+
+.btn-footer {
+	button {
+		height: 37px;
+		border-radius: 8px !important;
+
+		i {
+			line-height: 16px !important;
+			vertical-align: baseline !important;
+		}
+	}
+
+	#btnPdf {
+		background-color: #ffffff;
+		border-color: #f4516c;
+		color: #f4516c;
+		margin-right: 2%;
+	}
+
+	#btnPdf:hover {
+		background-color: #f4516c !important;
+		color: #ffffff !important;
+		box-shadow: none !important;
+	}
+
+	.alterStyle {
+		background: #FFFFFF;
+		box-shadow: 0px 1px 5px 1px rgba(219, 218, 242, 0.45) !important;
+		border-radius: 5px !important;
+		border: 0;
+		color: #f4516c;
+		cursor: pointer;
+	}
+
+	.alterStyle:hover {
+		background-color: #f4516c !important;
+		color: #ffffff !important;
+		box-shadow: none !important;
+		border: 0 !important;
+	}
+
+	.alterStyle.btn-delete {
+		position: absolute;
+		left: 18px;
+	}
+
+	@media only screen and (max-width: 768px) {
+		padding: 0 !important;
+		button {
+			padding: 10px 10px !important;
+		}
+	}
+}

@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col col-12">
+    <div [ngClass]="dropContainer">
+      <ngx-file-drop [multiple]="false" [dropZoneClassName]="dropZoneClassName" dropZoneLabel="Arraste sua imagem aqui" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" >
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+          <div *ngIf="!photo && !photoUrl" (click)="canUpload?openFileSelector():doAssinatura()" class="img-box">
+		  	<img style="min-width: 70px; min-height: 70px;" *ngIf="icon; else showText" [src]="icon">
+			  <ng-template #showText>
+				<div>{{ 'RECIPE.IMG_TXT1' | translate }}<br>{{ 'RECIPE.IMG_TXT2' | translate }}<br>{{ 'RECIPE.IMG_TXT3' | translate }}</div>
+			  </ng-template>
+          </div>
+          <img class="img-resized" [ngClass]="customClass" *ngIf="!photo && photoUrl" (click)="canUpload?openFileSelector():doAssinatura()" [src]="photoUrl" (error)="handleImgError($event)">
+          <img class="img-resized" [ngClass]="customClass" *ngIf="photo" (click)="canUpload?openFileSelector():doAssinatura()" [src]="photo" (error)="handleImgError()">
+        </ng-template>
+      </ngx-file-drop>
+    </div>
+  </div>
+</div>

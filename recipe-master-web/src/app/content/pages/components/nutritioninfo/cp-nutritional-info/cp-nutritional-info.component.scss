@@ -1,0 +1,448 @@
+h3 {
+	color: #121419 !important;
+}
+
+.m-portlet {
+	border-radius: 9px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 3px;
+}
+
+.labelStyle {
+	font-weight: bold;
+}
+
+.centerStyle {
+	text-align: center;
+}
+
+.pStyle {
+	font-family: "Roboto", Arial, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    margin-left: 4px;
+
+    &.ingredients {
+        font-weight: normal;
+    }
+}
+
+.cp-input {
+
+    input {
+        background: #fafafa !important;
+        border: none;
+    }
+
+    input:focus {
+        border: none !important;
+    }
+
+    .input-group-text {
+        background: #fafafa !important;
+        border: none;
+    }
+
+}
+
+.container-main{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.container-left{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    width: 40%;
+
+    .texts{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 15px;
+        color: #000000;
+    }
+
+    .container-text{
+        display: flex !important;
+        flex-direction: row !important;
+    }
+}
+
+.align-btn{
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.container-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    position: absolute;
+    width: 50%;
+    left: 50%;
+		top: 29px;
+}
+
+.div-img{
+    width: 350px !important;
+}
+
+.div-text-right{
+
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	padding: 5px;
+	width: 415px;
+	height: 28px;
+	background: rgba(204, 239, 232, 0.05);
+	border: 2px solid #34BFA3;
+	box-sizing: border-box;
+	border-radius: 15px;
+
+    p{
+        width: auto !important;
+        height: auto !important;
+        margin: 0px;
+        padding: 0px;
+        box-sizing: unset !important;
+    }
+}
+
+.text-right{
+	width: 347.79px;
+	height: 15px;
+	font-family: Poppins;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 11px;
+	line-height: 15px;
+	color: #34BFA3;
+	text-align: center !important;
+}
+
+.btn-show-plans {
+	width: 232px;
+	height: 43px;
+	border-radius: 7px;
+	margin-top: 4px;
+}
+
+.more{
+    width: 101px;
+    height: 28px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 9px;
+    line-height: 13px;
+    color: #000000;
+}
+
+.cifrao{
+    margin-top: 2% !important;
+    width: 12px;
+    height: 14px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 9px;
+    line-height: 13px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.35);
+}
+
+.img-nutrition{
+    width: 333px !important;
+    height: 238px !important;
+    justify-self: flex-end !important;
+}
+
+.price{
+    width: 27px;
+    height: 32px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 21px;
+    line-height: 31px;
+    text-align: center;
+    color: #000000;
+}
+
+.price-centes{
+    margin-top: 1.5% !important;
+    width: 19px;
+    height: 18px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    color: #000000;
+}
+
+.div-a-month{
+    position: absolute;
+    padding: 0% !important;
+    margin-left: 18%;
+    margin-top: -3%;
+}
+
+.a-month{
+    width: 25px;
+    height: 9px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 6px;
+    line-height: 9px;
+    text-align: center;
+    color: #000000;
+}
+
+.subtitle-nutri{
+    margin-bottom: 20px;
+    margin-left: 0px !important;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 19px;
+    line-height: 19px;
+    color: #000;
+		margin-right: -18px;
+}
+
+.point{
+	width: 20px !important;
+	height: 20px !important;
+	margin-top: -4px !important;
+	margin-right: 5px !important;
+}
+
+@font-face {
+	font-family: "Roboto";
+	src: url("Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Roboto";
+	font-weight: bold;
+	src: url("Roboto-Bold.ttf") format("truetype");
+}
+
+.pdf {
+
+    table {
+        margin: 2px auto;
+        max-width: 350px;
+        font-family: "Roboto", Arial, sans-serif;
+        font-size: 10px;
+        font-weight: bold;
+
+    }
+
+    @media (max-width: 575px) {
+        table {
+            margin: 2px;
+            margin-top: 12px;
+        }
+    }
+
+}
+
+.no-perm-container {
+		min-height: 325px;
+
+		position: relative;
+
+    img {
+        width: 100%;
+    }
+
+    .cp-btn-sign {
+        border-radius: 12px;
+    }
+
+    .cp-btn-back {
+		display: inline-block;
+		margin-right: 4px;
+		position: relative;
+		top: 4px;
+		padding: 1px 2.2rem;
+    }
+
+}
+
+.m-form__section {
+    cursor: pointer;
+}
+
+.girar {
+    transform: rotate(180deg);
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+
+.desgirar {
+    transform: rotate(0deg);
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+#msgAjuda {
+	width: 20px;
+	height: 20px;
+}
+
+.others-alergenics {
+	margin-top: 5px;
+  a {
+		color: #FA4E6D;
+		cursor: pointer;
+		display: block;
+		font-size: 12px;
+		font-weight: 420;
+
+		&:hover {
+			color: #FB8A65;
+		}
+	}
+	:nth-child(2) {
+		margin-top: 5px;
+	}
+}
+
+.new-ingredientes-to-label {
+	color: #FA4E6D !important;
+	cursor: pointer;
+	display: block;
+	font-size: 12px;
+	font-weight: 420;
+	margin-bottom: 5px;
+	display: flex;
+	&:hover {
+		color: #FB8A65 !important;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+    .dadosInfoNutri {
+        margin-bottom: 12%;
+    }
+    #tabelaInfoNutricao {
+        margin-top: 5%;
+    }
+    .img-nutrition{
+        width: 238px !important;
+        height: 170px !important;
+    }
+    .container-right{
+        position: relative !important;
+        width: 100% !important;
+        margin-bottom: 5% !important;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        left: 0;
+    }
+    .container-left{
+        width: 100% !important;
+				> div {
+					width: 100%;
+				}
+    }
+    .subtitle-nutri{
+        margin-left: 0px !important;
+        margin-bottom: 0px !important;
+    }
+    .title-no-break{
+        white-space: nowrap !important;
+    }
+    .div-text-right{
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 5px !important;
+        width: auto !important;
+        height: auto !important;
+				margin: 0 auto 30px;
+    }
+    .div-img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100% !important;
+    }
+    .div-a-month{
+        position: absolute;
+        padding: 0% !important;
+        margin-left: 38%;
+        margin-top: -7%;
+    }
+    .text-right{
+        white-space: normal !important;
+    }
+    #msgAjuda{
+        right: 5%;
+    }
+}
+
+.btn-rotulo {
+	background-color: #fff !important;
+
+	border: 1px solid #FA4E6D;
+	color: #FA4E6D;
+	background-color: #fff !important;
+
+	&:hover {
+		border: 1px solid #FB8A65;
+		color: #FB8A65;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+    // #btnGerarRotulo {
+    //     margin-top: 387px;
+    //     position: absolute;
+    //     z-index: 1;
+    // }
+    #btnClickGerarRotulo2 {
+			margin-left: -9%;
+			width: 95vw !important;
+			padding: 15px 26px;
+			border-radius: 6px;
+    }
+}
+
+@media only screen and (max-width: 411px) {
+    // #btnClickGerarRotulo {
+    //     margin-left: 55%;
+    //     margin-right: 55%;
+    // }
+}
+
+@media only screen and (max-width: 320px) {
+    // #btnClickGerarRotulo {
+    //     margin-left: 50%;
+    //     margin-right: 50%;
+    //     margin-top: 4%;
+    // }
+    .dadosInfoNutri {
+        margin-bottom: 14%;
+    }
+}

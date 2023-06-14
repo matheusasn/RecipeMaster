@@ -1,0 +1,45 @@
+<cp-dialog-default (close)="close()" height="300px">
+
+	<!-- Header -->
+	<span title>{{ 'INGREDIENT.INGREDIENT_TXT16' | translate }}</span>
+
+	<!-- Body -->
+	<div body>
+		<form *ngIf="formGroup" class="m-form m-form--fit m-form--label-align-right" name="form" [formGroup]="formGroup" novalidate>
+			<div class="row m-0">
+				<div class="col-6 pr-0">
+					<div class="form-group m-form__group">
+						<label class="col-form-label" translate>{{ 'INPUTS.AMOUNT' | translate }}</label>
+						<input inputmode="numeric" pattern="[0-9]*" maxlength="10" class="form-control m-input cp-input" name="unityQuantity" formControlName="unityQuantity" type="number">
+					</div>
+				</div>
+
+				<div class="col-6 pl-0">
+					<div class="form-group m-form__group">
+						<m-unit-select
+							class="update-unit"
+							[options]="{
+								basic: unitBasic,
+								canUpdate: unitCanUpdate,
+								canCreate: unitCanCreate,
+								type: unitType,
+								isModalSpecificCost: isModalSpecificCost,
+								selectTabOnModalSpecificCost: selectTabOnModalSpecificCost
+							}"
+							[form]="formGroup"
+							[ingredient]="recipeIngredient?.ingredient"
+							[units]="units | unitFilter:recipeIngredient?.ingredient">
+						</m-unit-select>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Footer -->
+	<div footer class="text-center">
+		<button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom btn-new-css-color" style="width: 180px" translate (click)="save()">
+			{{ 'INPUTS.SAVE'  | translate}}
+		</button>
+	</div>
+</cp-dialog-default>

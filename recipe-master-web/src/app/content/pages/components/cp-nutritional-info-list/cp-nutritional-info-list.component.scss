@@ -1,0 +1,47 @@
+:host {
+	.container-list {
+		margin-top: 28px;
+	}
+	.content-list {
+		margin-top: 15px;
+		display: grid;
+		grid-template-columns: repeat(6, 82px);
+		column-gap: 4px;
+		row-gap: 8px;
+		justify-content: space-between;
+
+		// transition: max-height linear .1s;
+		max-height: 88px;
+		overflow: hidden;
+
+		@media (max-width: 590px) {
+			grid-template-columns: repeat(5, 82px);
+		}
+
+		@media (max-width: 480px) {
+			grid-template-columns: repeat(4, 74px);
+			column-gap: 0px;
+		}
+
+		@media (max-width: 374px) {
+			grid-template-columns: repeat(3, 77px);
+		}
+
+		&.open {
+			// transition: max-height linear .2s;
+			max-height: 280px;
+		}
+	}
+
+	button {
+		margin: 16px auto;
+		display: block;
+		border: 0;
+		background: #FFFFFF;
+		cursor: pointer;
+
+		&.open img {
+			transform: rotate(180deg);
+		}
+	}
+}

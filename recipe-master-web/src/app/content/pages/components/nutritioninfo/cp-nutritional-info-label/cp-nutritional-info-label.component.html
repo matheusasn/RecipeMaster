@@ -1,0 +1,1911 @@
+<kendo-pdf-export #pdf paperSize="A4" forcePageBreak=".page-break" keepTogether=".prevent-split" margin="0.9cm" class="pdf" [ngClass]="previewClass" landscape="true">
+
+		<ng-container *ngIf="lang === 'en' && layout === 'vertical-edit'">
+			<div class="usda-nutri-container row m-0">
+				<div class="col col-12">
+					<span class="title">Nutrition Facts</span>
+				</div>
+				<div class="col col-12" style="margin-top: -8px">
+					<span class="subtitle">{{ recipe.label.servingsPerContainers }} servings per container</span>
+				</div>
+				<div class="col col-12" style="margin-top: -3px">
+					<span class="serving-size">Serving size {{ recipe.label.measure }} ({{ recipe.label.portion }}g)</span>
+				</div>
+				<div class="col col-12">
+					<div class="large-divisor"></div>
+				</div>
+				<div class="col col-12">
+					<span class="amount-per-serving">
+						Amount Per Serving
+					</span>
+				</div>
+				<div class="col col-2 mt-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.kcal" >
+				</div>
+				<div class="calories-container col col-10">
+					<span class="label">Calories</span>
+					<span class="number">
+							{{recipe | nutritionalinfo:'kcal':'amount':weight:portion }}
+					</span>
+				</div>
+				<div class="col col-12">
+					<div class="medium-divisor"></div>
+				</div>
+				<div class="col col-12">
+					<div class="line daily-value">
+						<span>% Daily Value*</span>
+					</div>
+				</div>
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.totalFat" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span><strong>Total Fat</strong> {{recipe | nutritionalinfo:'totalFat':'amount':weight:portion }}g</span>
+						<span><strong>{{recipe | nutritionalinfo:'totalFat':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.saturatedFat" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line one-tab">
+						<span>
+							Satured Fat {{recipe | nutritionalinfo:'saturatedFat':'amount':weight:portion }}g
+						</span>
+						<span>
+							<strong>
+								{{recipe | nutritionalinfo:'saturatedFat':'percent':weight:portion }}
+							</strong>
+						</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.transFat" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line one-tab">
+						<span><span style="font-style: italic;">Trans</span> Fat {{recipe | nutritionalinfo:'transFat':'amount':weight:portion }}g</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.cholesterol" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span><strong>Cholesterol</strong> {{recipe | nutritionalinfo:'cholesterol':'amount':weight:portion }}mg</span>
+						<span><strong>{{recipe | nutritionalinfo:'cholesterol':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.sodium" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span><strong>Sodium</strong> {{recipe | nutritionalinfo:'sodium':'amount':weight:portion }}mg</span>
+						<span><strong>{{recipe | nutritionalinfo:'sodium':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.carbohydrates" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span><strong>Total Carbohydrate</strong> {{recipe | nutritionalinfo:'carbohydrates':'amount':weight:portion }}g</span>
+						<span><strong>{{recipe | nutritionalinfo:'carbohydrates':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.fibers" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line one-tab">
+						<span>Dietary Fiber {{recipe | nutritionalinfo:'fibers':'amount':weight:portion }}g</span>
+						<span><strong>{{recipe | nutritionalinfo:'fibers':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.totalSugars">
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line one-tab">
+						<span>Total Sugars {{recipe | nutritionalinfo:'totalSugars':'amount':weight:portion }}g</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.addedSugars">
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line two-tabs">
+						<ng-container *ngIf="haveAdditionalSugar">
+							<span>Includes {{recipe | nutritionalinfo:'totalSugars':'amount':weight:portion }}g Added Sugars</span>
+							<span><strong>{{recipe | nutritionalinfo:'totalSugars':'percent':weight:portion }}</strong></span>
+						</ng-container>
+						<ng-container *ngIf="!haveAdditionalSugar">
+							<span>Includes 0g Added Sugars</span>
+							<span><strong>0%</strong></span>
+						</ng-container>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.protein">
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title" style="border: none">
+						<span><strong>Protein</strong> {{recipe | nutritionalinfo:'protein':'amount':weight:portion }}g</span>
+					</div>
+				</div>
+				<div class="col col-12 mb-1">
+					<div class="large-divisor"></div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.vitaminD" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Vitamin D {{recipe | nutritionalinfo:'vitaminD':'amount':weight:portion }}mcg</span>
+						<span>{{recipe | nutritionalinfo:'vitaminD':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.calcium" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Calcium {{recipe | nutritionalinfo:'calcium':'amount':weight:portion }}mg</span>
+						<span>{{recipe | nutritionalinfo:'calcium':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.iron" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Iron {{recipe | nutritionalinfo:'iron':'amount':weight:portion }}mg</span>
+						<span>{{recipe | nutritionalinfo:'iron':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.potassium" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Potassium {{recipe | nutritionalinfo:'potassium':'amount':weight:portion }}mg</span>
+						<span>{{recipe | nutritionalinfo:'potassium':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<!-- Micronutrientes -->
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.monounsatured" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Monounsatured {{recipe | nutritionalinfo:'monounsatured':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'monounsatured':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.polyunsatured" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Polyunsatured {{recipe | nutritionalinfo:'polyunsatured':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'polyunsatured':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.magnesium" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Magnesium {{recipe | nutritionalinfo:'magnesium':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'magnesium':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.manganese" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Manganese {{recipe | nutritionalinfo:'manganese':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'manganese':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.phosphorus" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Phosphorus {{recipe | nutritionalinfo:'phosphorus':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'phosphorus':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.copper" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Copper {{recipe | nutritionalinfo:'copper':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'copper':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.zinc" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Zinc {{recipe | nutritionalinfo:'zinc':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'zinc':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.retinol" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Vitamin A (Retinol) {{recipe | nutritionalinfo:'retinol':'amount':weight:portion }}mcg</span>
+						<span>{{recipe | nutritionalinfo:'retinol':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.vitaminARAE" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Vitamin A (RAE) {{recipe | nutritionalinfo:'vitaminARAE':'amount':weight:portion }}mcg</span>
+						<span>{{recipe | nutritionalinfo:'vitaminARAE':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.thiamine" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Thiamine {{recipe | nutritionalinfo:'thiamine':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'thiamine':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.riboflavin" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Riboflavin {{recipe | nutritionalinfo:'riboflavin':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'riboflavin':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.pyridoxine" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Pyridoxine {{recipe | nutritionalinfo:'pyridoxine':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'pyridoxine':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.niacin" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Niacin {{recipe | nutritionalinfo:'niacin':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'niacin':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.vitaminB6" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Vitamin B6 {{recipe | nutritionalinfo:'vitaminB6':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'vitaminB6':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.vitaminB12" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Vitamin B12 {{recipe | nutritionalinfo:'vitaminB12':'amount':weight:portion }}mcg</span>
+						<span>{{recipe | nutritionalinfo:'vitaminB12':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.vitaminC" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Vitamin C {{recipe | nutritionalinfo:'vitaminC':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'vitaminC':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-1 mr-1">
+					<input type="checkbox" [(ngModel)]="recipe.label.lipids" >
+				</div>
+				<div class="pl-0 custom-width">
+					<div class="line line-title">
+						<span>Lipids {{recipe | nutritionalinfo:'lipids':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'lipids':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12 mt-2">
+					<p class="footer-text">
+						* The % Daily Value (DV) tells you how much a nutrient in
+						a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.
+					</p>
+				</div>
+			</div>
+		</ng-container>
+
+		<ng-container *ngIf="lang === 'en' && layout === 'horizontal'">
+			<div class="usda-nutri-container-smaller row">
+				<div class="col col-12 mt-2">
+					<span class="title">Nutrition Facts</span>
+				</div>
+				<div class="col col-12" style="margin-top: -8px">
+					<span class="subtitle">{{ recipe.label.servingsPerContainers }} servings per container</span>
+				</div>
+				<div class="col col-12" style="margin-top: -3px">
+					<span class="serving-size">Serving size {{ recipe.label.measure }} ({{ recipe.label.portion }}g)</span>
+				</div>
+				<div class="col col-12">
+					<div class="large-divisor"></div>
+				</div>
+				<div class="col col-12">
+					<span class="amount-per-serving">
+						Amount Per Serving
+					</span>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.kcal">
+					<div class="calories-container">
+						<span class="label">Calories</span>
+						<span class="number">
+								{{recipe | nutritionalinfo:'kcal':'amount':weight:portion }}
+						</span>
+					</div>
+				</div>
+				<div class="col col-12">
+					<div class="medium-divisor"></div>
+				</div>
+				<div class="col col-12">
+					<div class="line daily-value">
+						<span>% Daily Value*</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.totalFat">
+					<div class="line line-title">
+						<span><strong>Total Fat</strong> {{recipe | nutritionalinfo:'totalFat':'amount':weight:portion }}g</span>
+						<span><strong>{{recipe | nutritionalinfo:'totalFat':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.saturatedFat">
+					<div class="line one-tab">
+						<span>
+							Satured Fat {{recipe | nutritionalinfo:'saturatedFat':'amount':weight:portion }}g
+						</span>
+						<span>
+							<strong>
+								{{recipe | nutritionalinfo:'saturatedFat':'percent':weight:portion }}
+							</strong>
+						</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.transFat">
+					<div class="line one-tab">
+						<span><span style="font-style: italic;">Trans</span> Fat {{recipe | nutritionalinfo:'transFat':'amount':weight:portion }}g</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.cholesterol">
+					<div class="line line-title">
+						<span><strong>Cholesterol</strong> {{recipe | nutritionalinfo:'cholesterol':'amount':weight:portion }}mg</span>
+						<span><strong>{{recipe | nutritionalinfo:'cholesterol':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.sodium">
+					<div class="line line-title">
+						<span><strong>Sodium</strong> {{recipe | nutritionalinfo:'sodium':'amount':weight:portion }}mg</span>
+						<span><strong>{{recipe | nutritionalinfo:'sodium':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.carbohydrates">
+					<div class="line line-title">
+						<span><strong>Total Carbohydrate</strong> {{recipe | nutritionalinfo:'carbohydrates':'amount':weight:portion }}g</span>
+						<span><strong>{{recipe | nutritionalinfo:'carbohydrates':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.fibers">
+					<div class="line one-tab">
+						<span>Dietary Fiber {{recipe | nutritionalinfo:'fibers':'amount':weight:portion }}g</span>
+						<span><strong>{{recipe | nutritionalinfo:'fibers':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.totalSugars">
+					<div class="line one-tab">
+						<span>Total Sugars {{recipe | nutritionalinfo:'totalSugars':'amount':weight:portion }}g</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.addedSugars">
+					<div class="line two-tabs">
+						<ng-container *ngIf="haveAdditionalSugar">
+							<span>Includes {{recipe | nutritionalinfo:'totalSugars':'amount':weight:portion }}g Added Sugars</span>
+							<span><strong>{{recipe | nutritionalinfo:'totalSugars':'percent':weight:portion }}</strong></span>
+						</ng-container>
+						<ng-container *ngIf="!haveAdditionalSugar">
+							<span>Includes 0g Added Sugars</span>
+							<span><strong>0%</strong></span>
+						</ng-container>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.protein">
+					<div class="line line-title">
+						<span><strong>Protein</strong> {{recipe | nutritionalinfo:'protein':'amount':weight:portion }}g</span>
+					</div>
+				</div>
+				<div class="col col-12">
+					<div class="large-divisor"></div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.vitaminD">
+					<div class="line line-title">
+						<span>Vitamin D {{recipe | nutritionalinfo:'vitaminD':'amount':weight:portion }}mcg</span>
+						<span>{{recipe | nutritionalinfo:'vitaminD':'percent':weight:portion }}</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.calcium">
+					<div class="line line-title">
+						<span>Calcium {{recipe | nutritionalinfo:'calcium':'amount':weight:portion }}mg</span>
+						<span>{{recipe | nutritionalinfo:'calcium':'percent':weight:portion }}</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.iron">
+					<div class="line line-title">
+						<span>Iron {{recipe | nutritionalinfo:'iron':'amount':weight:portion }}mg</span>
+						<span>{{recipe | nutritionalinfo:'iron':'percent':weight:portion }}</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.potassium">
+					<div class="line line-title">
+						<span>Potassium {{recipe | nutritionalinfo:'potassium':'amount':weight:portion }}mg</span>
+						<span>{{recipe | nutritionalinfo:'potassium':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<!-- Micronutrientes -->
+
+				<div class="col col-12" *ngIf="recipe.label.monounsatured">
+					<div class="line line-title">
+						<span>Monounsatured {{recipe | nutritionalinfo:'monounsatured':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'monounsatured':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.polyunsatured">
+					<div class="line line-title">
+						<span>Polyunsatured {{recipe | nutritionalinfo:'polyunsatured':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'polyunsatured':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.magnesium">
+					<div class="line line-title">
+						<span>Magnesium {{recipe | nutritionalinfo:'magnesium':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'magnesium':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.manganese">
+					<div class="line line-title">
+						<span>Manganese {{recipe | nutritionalinfo:'manganese':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'manganese':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.phosphorus">
+					<div class="line line-title">
+						<span>Phosphorus {{recipe | nutritionalinfo:'phosphorus':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'phosphorus':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.copper">
+					<div class="line line-title">
+						<span>Copper {{recipe | nutritionalinfo:'copper':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'copper':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.zinc">
+					<div class="line line-title">
+						<span>Zinc {{recipe | nutritionalinfo:'zinc':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'zinc':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.retinol">
+					<div class="line line-title">
+						<span>Vitamin A (Retinol) {{recipe | nutritionalinfo:'retinol':'amount':weight:portion }}mcg</span>
+						<span>{{recipe | nutritionalinfo:'retinol':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.vitaminARAE">
+					<div class="line line-title">
+						<span>Vitamin A (RAE) {{recipe | nutritionalinfo:'vitaminARAE':'amount':weight:portion }}mcg</span>
+						<span>{{recipe | nutritionalinfo:'vitaminARAE':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.thiamine">
+					<div class="line line-title">
+						<span>Thiamine {{recipe | nutritionalinfo:'thiamine':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'thiamine':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.riboflavin">
+					<div class="line line-title">
+						<span>Riboflavin {{recipe | nutritionalinfo:'riboflavin':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'riboflavin':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.pyridoxine">
+					<div class="line line-title">
+						<span>Pyridoxine {{recipe | nutritionalinfo:'pyridoxine':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'pyridoxine':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.niacin">
+					<div class="line line-title">
+						<span>Niacin {{recipe | nutritionalinfo:'niacin':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'niacin':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.vitaminB6">
+					<div class="line line-title">
+						<span>Vitamin B6 {{recipe | nutritionalinfo:'vitaminB6':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'vitaminB6':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.vitaminB12">
+					<div class="line line-title">
+						<span>Vitamin B12 {{recipe | nutritionalinfo:'vitaminB12':'amount':weight:portion }}mcg</span>
+						<span>{{recipe | nutritionalinfo:'vitaminB12':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.vitaminC">
+					<div class="line line-title">
+						<span>Vitamin C {{recipe | nutritionalinfo:'vitaminC':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'vitaminC':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.lipids">
+					<div class="line line-title">
+						<span>Lipids {{recipe | nutritionalinfo:'lipids':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'lipids':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12 mt-2">
+					<p class="footer-text">
+						* The % Daily Value (DV) tells you how much a nutrient in
+						a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.
+					</p>
+				</div>
+			</div>
+		</ng-container>
+
+		<ng-container *ngIf="lang === 'en' && layout === 'vertical'">
+			<div class="usda-nutri-container row">
+				<div class="col col-12">
+					<span class="title">Nutrition Facts</span>
+				</div>
+				<div class="col col-12" style="margin-top: -8px">
+					<span class="subtitle">{{ recipe.label.servingsPerContainers }} servings per container</span>
+				</div>
+				<div class="col col-12" style="margin-top: -3px">
+					<span class="serving-size">Serving size {{ recipe.label.measure }} ({{ recipe.label.portion }}g)</span>
+				</div>
+				<div class="col col-12">
+					<div class="large-divisor"></div>
+				</div>
+				<div class="col col-12">
+					<span class="amount-per-serving">
+						Amount Per Serving
+					</span>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.kcal">
+					<div class="calories-container">
+						<span class="label">Calories</span>
+						<span class="number">
+								{{recipe | nutritionalinfo:'kcal':'amount':weight:portion }}
+						</span>
+					</div>
+				</div>
+				<div class="col col-12">
+					<div class="medium-divisor"></div>
+				</div>
+				<div class="col col-12">
+					<div class="line daily-value">
+						<span>% Daily Value*</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.totalFat">
+					<div class="line line-title">
+						<span><strong>Total Fat</strong> {{recipe | nutritionalinfo:'totalFat':'amount':weight:portion }}g</span>
+						<span><strong>{{recipe | nutritionalinfo:'totalFat':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.saturatedFat">
+					<div class="line one-tab">
+						<span>
+							Satured Fat {{recipe | nutritionalinfo:'saturatedFat':'amount':weight:portion }}g
+						</span>
+						<span>
+							<strong>
+								{{recipe | nutritionalinfo:'saturatedFat':'percent':weight:portion }}
+							</strong>
+						</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.transFat">
+					<div class="line one-tab">
+						<span><span style="font-style: italic;">Trans</span> Fat {{recipe | nutritionalinfo:'transFat':'amount':weight:portion }}g</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.cholesterol">
+					<div class="line line-title">
+						<span><strong>Cholesterol</strong> {{recipe | nutritionalinfo:'cholesterol':'amount':weight:portion }}mg</span>
+						<span><strong>{{recipe | nutritionalinfo:'cholesterol':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.sodium">
+					<div class="line line-title">
+						<span><strong>Sodium</strong> {{recipe | nutritionalinfo:'sodium':'amount':weight:portion }}mg</span>
+						<span><strong>{{recipe | nutritionalinfo:'sodium':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.carbohydrates">
+					<div class="line line-title">
+						<span><strong>Total Carbohydrate</strong> {{recipe | nutritionalinfo:'carbohydrates':'amount':weight:portion }}g</span>
+						<span><strong>{{recipe | nutritionalinfo:'carbohydrates':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.fibers">
+					<div class="line one-tab">
+						<span>Dietary Fiber {{recipe | nutritionalinfo:'fibers':'amount':weight:portion }}g</span>
+						<span><strong>{{recipe | nutritionalinfo:'fibers':'percent':weight:portion }}</strong></span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.totalSugars">
+					<div class="line one-tab">
+						<span>Total Sugars {{recipe | nutritionalinfo:'totalSugars':'amount':weight:portion }}g</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.addedSugars">
+					<div class="line two-tabs">
+						<ng-container *ngIf="haveAdditionalSugar">
+							<span>Includes {{recipe | nutritionalinfo:'totalSugars':'amount':weight:portion }}g Added Sugars</span>
+							<span><strong>{{recipe | nutritionalinfo:'totalSugars':'percent':weight:portion }}</strong></span>
+						</ng-container>
+						<ng-container *ngIf="!haveAdditionalSugar">
+							<span>Includes 0g Added Sugars</span>
+							<span><strong>0%</strong></span>
+						</ng-container>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.protein">
+					<div class="line line-title">
+						<span><strong>Protein</strong> {{recipe | nutritionalinfo:'protein':'amount':weight:portion }}g</span>
+					</div>
+				</div>
+				<div class="col col-12">
+					<div class="large-divisor"></div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.vitaminD">
+					<div class="line line-title">
+						<span>Vitamin D {{recipe | nutritionalinfo:'vitaminD':'amount':weight:portion }}mcg</span>
+						<span>{{recipe | nutritionalinfo:'vitaminD':'percent':weight:portion }}</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.calcium">
+					<div class="line line-title">
+						<span>Calcium {{recipe | nutritionalinfo:'calcium':'amount':weight:portion }}mg</span>
+						<span>{{recipe | nutritionalinfo:'calcium':'percent':weight:portion }}</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.iron">
+					<div class="line line-title">
+						<span>Iron {{recipe | nutritionalinfo:'iron':'amount':weight:portion }}mg</span>
+						<span>{{recipe | nutritionalinfo:'iron':'percent':weight:portion }}</span>
+					</div>
+				</div>
+				<div class="col col-12" *ngIf="recipe.label.potassium">
+					<div class="line line-title">
+						<span>Potassium {{recipe | nutritionalinfo:'potassium':'amount':weight:portion }}mg</span>
+						<span>{{recipe | nutritionalinfo:'potassium':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<!-- Micronutrientes -->
+
+				<div class="col col-12" *ngIf="recipe.label.monounsatured">
+					<div class="line line-title">
+						<span>Monounsatured {{recipe | nutritionalinfo:'monounsatured':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'monounsatured':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.polyunsatured">
+					<div class="line line-title">
+						<span>Polyunsatured {{recipe | nutritionalinfo:'polyunsatured':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'polyunsatured':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.magnesium">
+					<div class="line line-title">
+						<span>Magnesium {{recipe | nutritionalinfo:'magnesium':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'magnesium':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.manganese">
+					<div class="line line-title">
+						<span>Manganese {{recipe | nutritionalinfo:'manganese':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'manganese':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.phosphorus">
+					<div class="line line-title">
+						<span>Phosphorus {{recipe | nutritionalinfo:'phosphorus':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'phosphorus':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.copper">
+					<div class="line line-title">
+						<span>Copper {{recipe | nutritionalinfo:'copper':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'copper':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.zinc">
+					<div class="line line-title">
+						<span>Zinc {{recipe | nutritionalinfo:'zinc':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'zinc':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.retinol">
+					<div class="line line-title">
+						<span>Vitamin A (Retinol) {{recipe | nutritionalinfo:'retinol':'amount':weight:portion }}mcg</span>
+						<span>{{recipe | nutritionalinfo:'retinol':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.vitaminARAE">
+					<div class="line line-title">
+						<span>Vitamin A (RAE) {{recipe | nutritionalinfo:'vitaminARAE':'amount':weight:portion }}mcg</span>
+						<span>{{recipe | nutritionalinfo:'vitaminARAE':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.thiamine">
+					<div class="line line-title">
+						<span>Thiamine {{recipe | nutritionalinfo:'thiamine':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'thiamine':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.riboflavin">
+					<div class="line line-title">
+						<span>Riboflavin {{recipe | nutritionalinfo:'riboflavin':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'riboflavin':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.pyridoxine">
+					<div class="line line-title">
+						<span>Pyridoxine {{recipe | nutritionalinfo:'pyridoxine':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'pyridoxine':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.niacin">
+					<div class="line line-title">
+						<span>Niacin {{recipe | nutritionalinfo:'niacin':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'niacin':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.vitaminB6">
+					<div class="line line-title">
+						<span>Vitamin B6 {{recipe | nutritionalinfo:'vitaminB6':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'vitaminB6':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.vitaminB12">
+					<div class="line line-title">
+						<span>Vitamin B12 {{recipe | nutritionalinfo:'vitaminB12':'amount':weight:portion }}mcg</span>
+						<span>{{recipe | nutritionalinfo:'vitaminB12':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.vitaminC">
+					<div class="line line-title">
+						<span>Vitamin C {{recipe | nutritionalinfo:'vitaminC':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'vitaminC':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12" *ngIf="recipe.label.lipids">
+					<div class="line line-title">
+						<span>Lipids {{recipe | nutritionalinfo:'lipids':'amount':weight:portion }}g</span>
+						<span>{{recipe | nutritionalinfo:'lipids':'percent':weight:portion }}</span>
+					</div>
+				</div>
+
+				<div class="col col-12 mt-2">
+					<p class="footer-text">
+						* The % Daily Value (DV) tells you how much a nutrient in
+						a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.
+					</p>
+				</div>
+			</div>
+		</ng-container>
+
+		<ng-container *ngIf="lang !== 'en'">
+			<div class="prevent-split">
+				<table class="info-nutri-horizontal" *ngIf="layout == 'horizontal'">
+					<tr>
+							<td class="p-2 pl-3">
+									<span class="mr-2 title" *ngIf="recipe.geral && recipe.geral.name">{{recipe.geral.name}}</span>
+									<span class="text-nowrap">{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L2' | translate : {porcao:portion?portion:(weight?weight:100), medida: measure?"("+measure+")" : '(' + ('RECIPE.TABS.INFORMACOES_NUTRICIONAIS.LABEL2' | translate) + ')' } }}</span>
+							</td>
+					</tr>
+					<tr>
+							<td class="p-0">
+									<table class="w-100 info-data">
+											<tr class="striped">
+													<td class="py-1 pl-3" colspan="2">{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L3' | translate }}</td>
+													<td class="py-1 pr-3 text-right">%VD (*)</td>
+
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+													<td>&nbsp;</td>
+
+											</tr>
+											<tr [class.striped]="odd" *ngFor="let label of horizontalLabelData; let odd = odd" [ngClass]="{'increase-lh': isAndroid}">
+												<ng-container *ngFor="let item of label">
+													<td class="py-1 pl-3" translate>{{ item.description }}</td>
+													<td class="py-1 text-center">{{recipe | nutritionalinfo:item.label:'amount':weight:portion }}{{ item.unity }}</td>
+													<td class="py-1 pr-3 text-right">{{recipe | nutritionalinfo:item.label:'percent':weight:portion }}</td>
+
+													<ng-container *ngIf="label.length === 1">
+														<td>&nbsp;</td>
+														<td>&nbsp;</td>
+														<td>&nbsp;</td>
+													</ng-container>
+												</ng-container>
+											</tr>
+									</table>
+							</td>
+					</tr>
+					<tr>
+							<td class="py-2 px-3">
+									{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L11' | translate }}<br>
+									{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L12' | translate }}
+							</td>
+					</tr>
+			</table>
+			<table
+			*ngIf="layout == 'horizontal'"
+			[ngClass]="{'tableStyle no-border ml-3 text-left with-radius info-nutri': layout == 'vertical-old', 'table-sub mx-2 my-1': layout != 'vertical-old', 'mx-3': layout === 'horizontal'}"
+				>
+					<tr id="ingredients" *ngIf="showIngredients">
+							<td>
+									<span>{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.LOBS' | translate }} </span>
+									<span class=" ingredients" *ngIf="ordered.length > 0"> <span *ngFor="let o of ordered; let last = last">{{last ? o.name : o.name + ', '}}</span> </span>
+							</td>
+					</tr>
+					<tr *ngIf="recipe && recipe.label && recipe.label.allergens.length > 0">
+						<td>
+							<span class="text-uppercase" [ngClass]="{'smaller-font': lang === 'en' && layout === 'horizontal'}">
+								{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.ALLERGIC' | translate }}
+								{{ getAllergensText().replaceAll(',', ', ') }}
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p class="text-uppercase" [ngClass]="{'smaller-font': lang === 'en' && layout === 'horizontal'}">{{((gluten == true? 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L13' : 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L14') | translate) + ', ' + ((lactose == true? 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L15' : 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L16') | translate)}}</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="row info-nutri-vertical" *ngIf="layout == 'vertical'">
+					<div class="col col-12">
+							<span class="recipe-name">{{recipe.geral ? recipe.geral.name : ''}}</span>
+					</div>
+					<div class="col col-12 striped-color">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L2' | translate : {porcao:portion?portion:(weight?weight:100), medida: measure?"("+measure+")" : '(' + ('RECIPE.TABS.INFORMACOES_NUTRICIONAIS.LABEL2' | translate) + ')'  } }}
+					</div>
+					<div class="col col-9 br-1 ">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L3' | translate }}
+					</div>
+					<div class="col col-3 bl-0">
+							%VD (*)
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.kcal">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L4' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.kcal">
+							{{recipe | nutritionalinfo:'kcal':'amount':weight:portion }}kcal
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.kcal">
+							{{recipe | nutritionalinfo:'kcal':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.carbohydrates">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L5' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.carbohydrates">
+							{{recipe | nutritionalinfo:'carbohydrates':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.carbohydrates">
+							{{recipe | nutritionalinfo:'carbohydrates':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.protein">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L6' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.protein">
+							{{recipe | nutritionalinfo:'protein':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.protein">
+							{{recipe | nutritionalinfo:'protein':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.totalFat">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L7' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.totalFat">
+							{{recipe | nutritionalinfo:'totalFat':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.totalFat">
+							{{recipe | nutritionalinfo:'totalFat':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.saturatedFat">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.SATURED_FAT' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.saturatedFat">
+							{{recipe | nutritionalinfo:'saturatedFat':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.saturatedFat">
+							{{recipe | nutritionalinfo:'saturatedFat':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.transFat">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L8' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.transFat">
+							{{recipe | nutritionalinfo:'transFat':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.transFat">
+							{{recipe | nutritionalinfo:'transFat':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.fibers">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L9' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.fibers">
+							{{recipe | nutritionalinfo:'fibers':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.fibers">
+							{{recipe | nutritionalinfo:'fibers':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.sodium">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L10' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.sodium">
+							{{recipe | nutritionalinfo:'sodium':'amount':weight:portion }}mg
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.sodium">
+							{{recipe | nutritionalinfo:'sodium':'percent':weight:portion }}
+					</div>
+
+					<!-- nova parte-->
+
+					<div class="col col-12 text-left"
+						*ngIf="recipe.label.monounsatured || recipe.label.polyunsatured || recipe.label.cholesterol">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.FATS' | translate }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.monounsatured">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.MONOUNSATURED' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.monounsatured">
+							{{recipe | nutritionalinfo:'monounsatured':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.monounsatured">
+							{{recipe | nutritionalinfo:'monounsatured':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.polyunsatured">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.POLYUNSATURED' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.polyunsatured">
+							{{recipe | nutritionalinfo:'polyunsatured':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.polyunsatured">
+							{{recipe | nutritionalinfo:'polyunsatured':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.cholesterol">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.CHOLESTEROL' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.cholesterol">
+							{{recipe | nutritionalinfo:'cholesterol':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.cholesterol">
+							{{recipe | nutritionalinfo:'cholesterol':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-12 text-left"
+						*ngIf="recipe.label.calcium || recipe.label.magnesium || recipe.label.manganese || recipe.label.phosphorus
+						|| recipe.label.iron || recipe.label.potassium || recipe.label.copper || recipe.label.zinc">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.MINERALS' | translate }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.calcium">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.CALCIUM' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.calcium">
+							{{recipe | nutritionalinfo:'calcium':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.calcium">
+							{{recipe | nutritionalinfo:'calcium':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.magnesium">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.MAGNESIUM' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.magnesium">
+							{{recipe | nutritionalinfo:'magnesium':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.magnesium">
+							{{recipe | nutritionalinfo:'magnesium':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.manganese">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.MANGANESE' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.manganese">
+							{{recipe | nutritionalinfo:'manganese':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.manganese">
+							{{recipe | nutritionalinfo:'manganese':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.phosphorus">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.PHOSPHORUS' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.phosphorus">
+							{{recipe | nutritionalinfo:'phosphorus':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.phosphorus">
+							{{recipe | nutritionalinfo:'phosphorus':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.iron">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.IRON' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.iron">
+							{{recipe | nutritionalinfo:'iron':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.iron">
+							{{recipe | nutritionalinfo:'iron':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.potassium">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.POTASSIUM' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.potassium">
+							{{recipe | nutritionalinfo:'potassium':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.potassium">
+							{{recipe | nutritionalinfo:'potassium':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.copper">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.COPPER' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.copper">
+							{{recipe | nutritionalinfo:'copper':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.copper">
+							{{recipe | nutritionalinfo:'copper':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.zinc">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.ZINC' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.zinc">
+							{{recipe | nutritionalinfo:'zinc':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.zinc">
+							{{recipe | nutritionalinfo:'zinc':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-12 text-left"
+						*ngIf="recipe.label.retinol || recipe.label.vitaminARAE || recipe.label.vitaminD || recipe.label.thiamine
+						|| recipe.label.riboflavin || recipe.label.pyridoxine || recipe.label.niacin || recipe.label.vitaminB6
+						|| recipe.label.vitaminB12 || recipe.label.vitaminC">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.VITAMINS' | translate }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.retinol">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.A_VITAMIN_RETINOL' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.retinol">
+							{{recipe | nutritionalinfo:'retinol':'amount':weight:portion }}mcg
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.retinol">
+							{{recipe | nutritionalinfo:'retinol':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.vitaminARAE">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.A_VITAMIN_RAE' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.vitaminARAE">
+							{{recipe | nutritionalinfo:'vitaminARAE':'amount':weight:portion }}mcg
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.vitaminARAE">
+							{{recipe | nutritionalinfo:'vitaminARAE':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.vitaminD">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.D_VITAMIN' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.vitaminD">
+							{{recipe | nutritionalinfo:'vitaminD':'amount':weight:portion }}mcg
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.vitaminD">
+							{{recipe | nutritionalinfo:'vitaminD':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.thiamine">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.THIAMINE' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.thiamine">
+							{{recipe | nutritionalinfo:'thiamine':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.thiamine">
+							{{recipe | nutritionalinfo:'thiamine':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.riboflavin">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.RIBOFLAVINE' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.riboflavin">
+							{{recipe | nutritionalinfo:'riboflavine':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.riboflavin">
+							{{recipe | nutritionalinfo:'riboflavine':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.pyridoxine">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.PYRIDOXINE' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.pyridoxine">
+							{{recipe | nutritionalinfo:'pyridoxine':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.pyridoxine">
+							{{recipe | nutritionalinfo:'pyridoxine':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.niacin">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.NIACIN' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.niacin">
+							{{recipe | nutritionalinfo:'niacin':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.niacin">
+							{{recipe | nutritionalinfo:'niacin':'percent':weight:portion }}
+					</div>
+
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.vitaminB6">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.B6_VITAMIN' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.vitaminB6">
+							{{recipe | nutritionalinfo:'vitaminB6':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.vitaminB6">
+							{{recipe | nutritionalinfo:'vitaminB6':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.vitaminB12">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.B12_VITAMIN' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.vitaminB12">
+							{{recipe | nutritionalinfo:'vitaminB12':'amount':weight:portion }}mcg
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.vitaminB12">
+							{{recipe | nutritionalinfo:'vitaminB12':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left" *ngIf="recipe.label.vitaminC">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.C_VITAMIN' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0" *ngIf="recipe.label.vitaminC">
+							{{recipe | nutritionalinfo:'vitaminC':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0" *ngIf="recipe.label.vitaminC">
+							{{recipe | nutritionalinfo:'vitaminC':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-12 text-left" *ngIf="recipe.label.lipids">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.OTHERS' | translate }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left" *ngIf="recipe.label.lipids">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.LIPIDS' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color" *ngIf="recipe.label.lipids">
+							{{recipe | nutritionalinfo:'lipids':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color" *ngIf="recipe.label.lipids">
+							{{recipe | nutritionalinfo:'lipids':'percent':weight:portion }}
+					</div>
+
+					<!-- fim nova parte -->
+
+					<div class="col col-12 info-sub">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L11' | translate }}<br>
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L12' | translate }}
+					</div>
+			</div>
+
+			<div class="row info-nutri-vertical edit" *ngIf="layout == 'vertical-edit'">
+				<div class="col col12">
+					<div class="text-right">
+						<button (click)="close()">
+							<mat-icon>close</mat-icon>
+						</button>
+					</div>
+				</div>
+				<div class="col col-12">
+						<span class="recipe-name">{{recipe.geral ? recipe.geral.name : ''}}</span>
+				</div>
+				<div class="col col-12 striped-color">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L2' | translate : {porcao:portion?portion:(weight?weight:100), medida: measure?"("+measure+")" : '(' + ('RECIPE.TABS.INFORMACOES_NUTRICIONAIS.LABEL2' | translate) + ')'  } }}
+				</div>
+				<div class="col col-9 br-1 ">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L3' | translate }}
+				</div>
+				<div class="col col-3 bl-0">
+						%VD (*)
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.kcal" >
+				</div>
+
+				<div class="col col-5 br-1 bl-0 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L4' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'kcal':'amount':weight:portion }}kcal
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'kcal':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.carbohydrates" >
+				</div>
+
+				<div class="col col-5 br-1 bl-0 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L5' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'carbohydrates':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'carbohydrates':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.protein" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L6' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'protein':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'protein':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.totalFat" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L7' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'totalFat':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'totalFat':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.saturatedFat" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left striped-color">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.SATURED_FAT' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'saturatedFat':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'saturatedFat':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.transFat" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L8' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'transFat':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'transFat':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.fibers" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left striped-color">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L9' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'fibers':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'fibers':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.sodium" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L10' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'sodium':'amount':weight:portion }}mg
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'sodium':'percent':weight:portion }}
+				</div>
+
+				<!-- nova parte -->
+
+				<div class="col col-12 text-left">
+					{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.FATS' | translate }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.monounsatured" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.MONOUNSATURED' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'monounsatured':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'monounsatured':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.polyunsatured" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.POLYUNSATURED' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'polyunsatured':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'polyunsatured':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.cholesterol" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.CHOLESTEROL' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'cholesterol':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'cholesterol':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-12 text-left">
+					{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.MINERALS' | translate }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.calcium" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.CALCIUM' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'calcium':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'calcium':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.magnesium" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.MAGNESIUM' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'magnesium':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'magnesium':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.manganese" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.MANGANESE' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'manganese':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'manganese':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.phosphorus" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.PHOSPHORUS' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'phosphorus':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'phosphorus':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.iron" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.IRON' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'iron':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'iron':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.potassium" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.POTASSIUM' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'potassium':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'potassium':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.copper" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.COPPER' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'copper':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'copper':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.zinc" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.ZINC' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'zinc':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'zinc':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-12 text-left">
+					{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.VITAMINS' | translate }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.retinol" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.A_VITAMIN_RETINOL' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'retinol':'amount':weight:portion }}mcg
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'retinol':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.vitaminARAE" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.A_VITAMIN_RAE' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'vitaminARAE':'amount':weight:portion }}mcg
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'vitaminARAE':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.vitaminD" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.D_VITAMIN' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'vitaminD':'amount':weight:portion }}mcg
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'vitaminD':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.thiamine" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.THIAMINE' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'thiamine':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'thiamine':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.riboflavin" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.RIBOFLAVINE' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'riboflavine':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'riboflavine':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.pyridoxine" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.PYRIDOXINE' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'pyridoxine':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'pyridoxine':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.niacin" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.NIACIN' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'niacin':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'niacin':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.vitaminB6" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.B6_VITAMIN' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'vitaminB6':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'vitaminB6':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.vitaminB12" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.B12_VITAMIN' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'vitaminB12':'amount':weight:portion }}mcg
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'vitaminB12':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-1 br-0">
+					<input type="checkbox" [(ngModel)]="recipe.label.vitaminC" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.C_VITAMIN' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0">
+						{{recipe | nutritionalinfo:'vitaminC':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0">
+						{{recipe | nutritionalinfo:'vitaminC':'percent':weight:portion }}
+				</div>
+
+				<div class="col col-12 text-left">
+					{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.OTHERS' | translate }}
+				</div>
+
+				<div class="col col-1 br-0 striped-color">
+					<input type="checkbox" [(ngModel)]="recipe.label.lipids" >
+				</div>
+
+				<div class="col col-5 bl-0 br-1 striped-color pl-3 text-left">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.LIPIDS' | translate }}
+				</div>
+				<div class="col col-3 br-1 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'lipids':'amount':weight:portion }}g
+				</div>
+				<div class="col col-3 bl-0 striped-color">
+						{{recipe | nutritionalinfo:'lipids':'percent':weight:portion }}
+				</div>
+
+				<!-- fim nova parte-->
+
+				<div class="col col-12 info-sub">
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L11' | translate }}<br>
+						{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L12' | translate }}
+				</div>
+		</div>
+
+			<div class="row info-nutri" *ngIf="layout == 'vertical-old'">
+					<div class="col col-12">
+							<span class="recipe-name">{{recipe.geral ? recipe.geral.name : ''}}</span>
+					</div>
+					<!-- <div class="col col-12 bt-0 striped-color">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L1' | translate }}
+					</div> -->
+					<div class="col col-12 striped-color">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L2' | translate : {porcao:portion?portion:(weight?weight:100), medida: measure?"("+measure+")":"(medida caseira)" } }}
+					</div>
+					<div class="col col-9 br-1 ">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L3' | translate }}
+					</div>
+					<div class="col col-3 bl-0">
+							%VD (*)
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L4' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color">
+							{{recipe | nutritionalinfo:'kcal':'amount':weight:portion }}kcal
+					</div>
+					<div class="col col-3 bl-0 striped-color">
+							{{recipe | nutritionalinfo:'kcal':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L5' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0">
+							{{recipe | nutritionalinfo:'carbohydrates':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0">
+							{{recipe | nutritionalinfo:'carbohydrates':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L6' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color">
+							{{recipe | nutritionalinfo:'protein':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color">
+							{{recipe | nutritionalinfo:'protein':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L7' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0">
+							{{recipe | nutritionalinfo:'totalFat':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0">
+							{{recipe | nutritionalinfo:'totalFat':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.SATURED_FAT' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0">
+							{{recipe | nutritionalinfo:'saturatedFat':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0">
+							{{recipe | nutritionalinfo:'saturatedFat':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L8' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color">
+							{{recipe | nutritionalinfo:'transFat':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0 striped-color">
+							{{recipe | nutritionalinfo:'transFat':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 pl-3 text-left">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L9' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0">
+							{{recipe | nutritionalinfo:'fibers':'amount':weight:portion }}g
+					</div>
+					<div class="col col-3 bl-0">
+							{{recipe | nutritionalinfo:'fibers':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-6 br-1 striped-color pl-3 text-left">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L10' | translate }}
+					</div>
+					<div class="col col-3 br-1 bl-0 striped-color">
+							{{recipe | nutritionalinfo:'sodium':'amount':weight:portion }}mg
+					</div>
+					<div class="col col-3 bl-0 striped-color">
+							{{recipe | nutritionalinfo:'sodium':'percent':weight:portion }}
+					</div>
+
+					<div class="col col-12 info-sub">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L11' | translate }}<br>
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L12' | translate }}
+					</div>
+			</div>
+
+		</ng-container>
+		<table
+			class="prevent-split"
+			*ngIf="layout !== 'vertical-edit' && layout !== 'horizontal'"
+			[ngClass]="{'tableStyle no-border ml-3 text-left with-radius info-nutri': layout == 'vertical-old', 'table-sub mx-2 my-2': layout != 'vertical-old', 'mx-3': layout === 'horizontal'}"
+		>
+				<tr id="ingredients" *ngIf="showIngredients">
+						<td>
+								<span>{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.LOBS' | translate }} </span>
+								<span class=" ingredients" *ngIf="ordered.length > 0"> <span *ngFor="let o of ordered; let last = last">{{last ? o.name : o.name + ', '}}</span> </span>
+						</td>
+				</tr>
+				<tr *ngIf="recipe && recipe.label && recipe.label.allergens.length > 0">
+					<td>
+						<span class="text-uppercase" [ngClass]="{'smaller-font': lang === 'en' && layout === 'horizontal'}">
+							{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.ALLERGIC' | translate }}
+							{{ getAllergensText().replaceAll(',', ', ') }}
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="text-uppercase" [ngClass]="{'smaller-font': lang === 'en' && layout === 'horizontal'}">{{((gluten == true? 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L13' : 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L14') | translate) + ', ' + ((lactose == true? 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L15' : 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TABLE.L16') | translate)}}</p>
+					</td>
+				</tr>
+		</table>
+
+
+</kendo-pdf-export>

@@ -1,0 +1,31 @@
+<div id="mat-tab-container">
+	<mat-tab-group disableRipple="true" class="m--margin-top-15" (selectedTabChange)="onSelectedTabChange($event)">
+		<mat-tab label="TACO" *ngIf="lang === 'pt'">
+
+		</mat-tab>
+		<mat-tab label="IBGE" *ngIf="lang === 'pt'">
+
+		</mat-tab>
+		<mat-tab label="USDA">
+
+		</mat-tab>
+	</mat-tab-group>
+</div>
+
+<form [formGroup]="form">
+  <div class="form-group m-form__group">
+    <select class="form-control cp-input" formControlName="nutritionInfo" (change)="onChange()">
+      <option [ngValue]="null" translate>{{'INPUTS.OPTION_DEFAULT' | translate}}</option>
+
+      <option *ngFor="let i of nutritionalInfos"
+        [ngValue]="i">
+        {{ lang === 'es' ? i.esDescription : lang === 'en' ? i.enDescription : i.description }} {{i.preparationDescription?" " + (i.preparationDescription | nutritionalInfoUtil):""}}{{i.origin=="USER"?" (personalizado)":"" }}
+      </option>
+
+      <option value="-1">{{'INPUTS.NEW_NUTRI_INFO' | translate}}</option>
+      <option value="-2">{{'INPUTS.EDIT_NUTRI_INFO' | translate}}</option>
+    </select>
+  </div>
+</form>
+
+<m-cp-nutritional-info-list [nutritionalInfo]="this.form.value.nutritionInfo"></m-cp-nutritional-info-list>

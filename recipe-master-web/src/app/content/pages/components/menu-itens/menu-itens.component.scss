@@ -1,0 +1,27 @@
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	font-family: "Roboto", Arial, sans-serif;
+}
+
+li {
+	margin-bottom: 2px;
+}
+
+.ingredients {
+    width: 100%;
+    font-size: 8px;
+}
+
+.ingredients tr {
+	background-color: #EEEEEE;
+}
+
+.ingredients td {
+    padding: 6px;
+}
+
+.grey {
+	color: #555555;
+}

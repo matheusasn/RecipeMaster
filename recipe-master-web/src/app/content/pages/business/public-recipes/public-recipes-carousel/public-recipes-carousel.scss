@@ -1,0 +1,270 @@
+.custom-padding {
+	@media only screen and (max-width: 768px) {
+		padding: 0 5px;
+	}
+}
+
+.carousel-container {
+	h2 {
+		@media only screen and (max-width: 768px) {
+			font-size: 21px;
+		}
+		font-weight: 600;
+    margin: 0;
+    padding: 0 !important;
+	}
+	position: relative;
+	margin-bottom: 45px;
+}
+
+.carousel-scrollable-container {
+	padding: 20px 7px;
+	display: flex;
+	gap: 16px;
+	overflow-x: scroll;
+	-ms-overflow-style: none;  /* Internet Explorer 10+ */
+	scrollbar-width: none;  /* Firefox */
+
+	&::-webkit-scrollbar {
+		display: none !important;
+	}
+}
+// CP INTERN DRAG AND DROP CSS
+
+.tag-container {
+	display: flex;
+	justify-content: center;
+}
+
+.tag {
+	background-color: #E4E5E7;
+	border-radius: 11.5px;
+	padding: 5px 14px;
+
+	span {
+		color: #5D5D5D;
+		font-weight: 500;
+		font-size: 10px;
+	}
+}
+
+.mat-checkbox-inner-container-no-side-margin {
+	background: white;
+}
+
+.mat-checkbox-ripple .mat-ripple-element,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #34BFA3 !important;
+}
+
+.top-right-checkbox {
+	position: absolute;
+	right: 22px;
+	top: 5px;
+}
+
+.card {
+	min-width: 227px;
+	max-width: 227px;
+	width: 227px;
+	height: 253px;
+	height: 225px;
+	display: inline-block;
+	padding: 0.75em 0.6em;
+	font-size: 80%;
+	font-weight: 500;
+	line-height: 1;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: 0.75rem;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	bottom: 0;
+	margin-top: 5px;
+	box-shadow:  0 5px 10px 2px rgba(5, 76, 105,0.08) !important;
+	z-index: 2;
+	border: none;
+
+	margin: 10px 0;
+
+	&:not(:first-child) {
+		margin-left: 15px;
+	}
+}
+
+.card:hover {
+	background-color: rgba(237, 237, 237, 0.56);
+	cursor: pointer;
+}
+
+.cropped-image-recipe {
+	width: 147px;
+	height: 147px;
+	margin-top: -8px;
+	margin-left: -7px;
+	border-top-left-radius: 10px;
+	color: #F8F8F8;
+}
+
+.h-138px {
+	height: 138px;
+}
+
+.img-recipe {
+	top: 0;
+	left: 0;
+	width: 226px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.area-foto {
+	text-align: -webkit-center;
+}
+
+
+@media only screen and (max-width: 767px) {
+	.custom-margin {
+		margin: 0 15px !important;
+	}
+
+	.tag {
+		span {
+			font-size: 8px;
+		}
+	}
+
+	.menu-icon {
+		font-size: 12px;
+	}
+
+	.percent-menu-footer {
+		font-size: 10px;
+	}
+
+	.button-custom {
+		width: 23px;
+		height: 23px;
+	}
+
+	.custom-hr {
+		bottom: 74px;
+	}
+
+	.info-menu-footer {
+		font-size: 12px;
+		font-weight: 400;
+	}
+
+	.menu-info {
+		margin-left: 10px;
+	}
+
+	.title {
+		h5 {
+			font-size: 12px;
+    	font-weight: 500;
+		}
+	}
+
+	.icon-default {
+		top: calc(50% - 47px) !important;
+		width: 70px;
+		left: 3px;
+	}
+
+	.cropped-image-menu {
+		width: 124px !important;
+		height: 98px !important;
+	}
+
+	.big-margin {
+		left: 262% !important;
+	}
+
+	.strong-margin {
+		left: 266% !important;
+	}
+
+	.card-menu{
+		width: 100% !important;
+		min-width: 354px !important;
+		.btn-add-item {
+			display: none !important;
+		}
+	}
+}
+
+.card {
+	width: 375px !important;
+	height: 225px;
+	display: inline-block;
+	padding: 0.75em 0.6em;
+	font-size: 80%;
+	font-weight: 500;
+	line-height: 1;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: 0.75rem;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	bottom: 0;
+	margin-top: 5px;
+	box-shadow:  0 5px 10px 2px rgba(5, 76, 105,0.08) !important;
+	z-index: 2;
+	border: none;
+}
+
+.box {
+	height: auto;
+}
+
+.arrow-left {
+	position: absolute;
+	cursor: pointer;
+	visibility: hidden;
+	opacity: 0;
+	left: -25px;
+	bottom: 0;
+	top: 160px;
+	transition: visibility 0.5s ease, opacity 0.5s ease;
+
+	.more-icon {
+		box-shadow: 0px 1px 6px rgba(182, 199, 204, 0.4);
+		background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    color: #5D5D5D;
+	}
+	&.visible {
+		visibility: visible;
+		opacity: 1;
+	}
+}
+
+.arrow-right {
+	position: absolute;
+	cursor: pointer;
+	visibility: hidden;
+	opacity: 0;
+	bottom: 0;
+	right: -25px;
+	top: 160px;
+	transition: visibility 0.5s ease, opacity 0.5s ease;
+
+	.more-icon {
+		box-shadow: 0px 1px 6px rgba(182, 199, 204, 0.4);
+		background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    color: #5D5D5D;
+	}
+	&.visible {
+		visibility: visible;
+		opacity: 1;
+	}
+}

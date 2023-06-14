@@ -1,0 +1,4 @@
+export enum CARD_TYPE {
+	RECEITA,
+	CARDAPIO
+}

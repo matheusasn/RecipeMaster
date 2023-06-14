@@ -1,0 +1,39 @@
+<div class="pb-3 text-center"> 
+    <div class="row">
+        <div class="col-12 p-1 col-md-2">
+            <img *ngIf="message?.photoUrl" [src]="message.photoUrl" onerror="if (this.src != './assets/message/carinha.png') this.src = './assets/message/carinha.png';" class="message-img" />
+        </div>
+        <div class="p-1" [ngClass]="message && message.photoUrl?'col-12 col-md-8':'col-12'">
+
+            <!-- TELA INICIAL -->
+            <ng-container *ngIf="!showPesquisa">
+                <h2 class="message-title">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_1_TITULO' | translate }}</h2>
+                <p class="message-subtitle pt-3">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_1_BODY1' | translate }}</p>
+                <p>{{ 'RECIPE.MODAL_USER_NOTA.MODAL_1_BODY2' | translate }}</p>
+                <p>{{ 'RECIPE.MODAL_USER_NOTA.MODAL_1_BODY3' | translate }}</p>
+
+                <!-- BUTTONS -->
+                <div class="row">
+                    <div class="col-6 col-lg-3 offset-lg-3">
+                        <button class="btn btn-outline-dark btn-block" (click)="doCancel(label1)">
+                            {{label1}}
+                        </button>
+                    </div>
+                    <div class="col-6 col-lg-3" *ngIf="label2">
+                        <button class="btn btn-outline-dark btn-block" (click)="doPesquisa()">
+                            {{label2}}
+                        </button>
+                    </div>
+                </div>
+                <!-- BUTTONS END-->
+
+            </ng-container>
+            <!-- TELA INICIAL END -->
+
+            <!-- TELA PESQUISA SWIPER -->
+            <m-message-nps-swiper *ngIf="showPesquisa" (onSubmit)="doSubmit($event)"></m-message-nps-swiper>
+            <!-- TELA PESQUISA SWIPER END -->
+
+        </div>
+    </div>
+</div>

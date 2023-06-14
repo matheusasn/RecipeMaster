@@ -1,0 +1,57 @@
+<div class="col-12 carousel-container">
+	<h2>{{ carousel.caregoryName }} ({{ carousel.recipes.length }})</h2>
+	<div
+		(click)="onButtonLeftClick()"
+		class="arrow-left desktop visible"
+		*ngIf="!reachedLeftBound"
+	>
+		<mat-icon class="more-icon">keyboard_arrow_left</mat-icon>
+	</div>
+	<cp-custom-drag-scroll
+		#customDragScroll
+		class="carousel-scrollable-container"
+		(reachesLeftBound)="onReachesLeftBound($event)"
+		(reachesRightBound)="onReachesRightBound($event)"
+		(dragStart)="handleDragStart()"
+		(dragEnd)="handleDragEnd()"
+	>
+		<div cp-custom-drag-scroll-item *ngFor="let item of carousel.recipes; let recipeIndex=index" class="box card noselect" (click)="handleRecipeClick(item)">
+			<div class="row" title="{{ item.name }}">
+				<div class="col-12">
+					<div class="area-foto">
+						<mat-checkbox class="top-right-checkbox" (click)="$event.stopPropagation()" [(ngModel)]="item.checked"> </mat-checkbox>
+						<img *ngIf="item.photoUrl" [src]="item.photoUrl" (error)="handleImgError($event, item)" class="cropped-image-recipe img-recipe" draggable="false"/><br/><br/>
+						<div *ngIf="!item.photoUrl" class="h-138px cropped-image-recipe img-recipe">
+							<img class="icon-default" [src]="'assets/app/no-recipe.png'" draggable="false">
+						</div>
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="row">
+						<div class="col-12 text-left title-recipe text-center">
+							<h5>{{item?.name && item.name.length < 20 ? item.name : this.item.name.slice(0, 20) + '..'}}</h5>
+						</div>
+						<div class="col-12 mt-3 mb-2 tag-container" >
+							<div class="tag">
+								<span *ngIf="item.recipeCategory">{{ item.recipeCategory.name < 33 ? item.recipeCategory.name : item.recipeCategory.name.slice(0,33) + '..' }} </span>
+								<span *ngIf="!item.recipeCategory">{{ 'INGREDIENT.CATEGORIA.TXT21' | translate }}</span>
+							</div>
+						</div>
+						<div class="col-12 align align-bottom mb-2 mt-2 text-center">
+							<i class="fa fa-users mr-2 lightgrey" aria-hidden="true"></i>
+							<span class="lightgrey">{{item && item.unityQuantity ? item.unityQuantity : 0}} {{item.unitAbbreviation ? item.unitAbbreviation : ''}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</cp-custom-drag-scroll>
+	<div
+		(click)="onButtonRightClick()"
+		class="arrow-right desktop visible"
+		*ngIf="!reachedRightBound"
+	>
+		<mat-icon class="more-icon">keyboard_arrow_right</mat-icon>
+	</div>
+</div>

@@ -1,0 +1,21 @@
+<div class="label-ingredient-form-container row" [formGroup]="form">
+	<div class="col-12">
+		<div class="form-group m-form__group">
+			<label
+				class="col-form-label"
+				translate
+			>
+			Digite a nova senha do usuário
+		</label>
+			<input
+				class="form-control m-input cp-input"
+				name="name"
+				type="text"
+				formControlName="password"
+			>
+		</div>
+	</div>
+	<div class="col-12 text-center">
+		<button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom" name="btnSave" (click)="save()">Salvar</button>
+	</div>
+</div>

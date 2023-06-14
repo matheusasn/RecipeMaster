@@ -1,0 +1,13 @@
+<div class="container-steps">
+
+  <h4 class="mb-3 title">{{'RECIPE.TABS.PREPARATION.METHOD_OF_PREPARATION' | translate}}</h4>
+
+  <table class="table table-striped">
+    <tbody>
+      <tr *ngFor="let s of recipe?.steps; let i = index">
+        <td class="w-100"><span class="px-2 description"><span class="subtitle">{{i+1}}.</span> {{s.description}}</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

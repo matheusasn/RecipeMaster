@@ -1,0 +1,172 @@
+<div class="hidden-preview" *ngIf="recipeReportOptions?.recipe">
+	<kendo-pdf-export #pdf paperSize="A4" forcePageBreak=".page-break" margin="1.5cm" class="pdf" landscape="true">
+		<table class="recipe">
+			<tbody>
+				<tr>
+
+					<!-- RECIPE GERAL -->
+					<ng-container *ngIf="recipeReportOptions.getDisplay().general">
+						<td class="td-main td-geral" [style.width.%]="getColumnSize(1)">
+							<img
+								[src]="photoUrl"
+								style="max-width: 100%; align-content: center"
+							>
+							<h2 style="font-weight: bold;">{{recipeReportOptions?.recipe?.name}}</h2>
+							<h3>{{recipeReportOptions?.recipe?.recipeCategory?.name}}</h3>
+							<br/>
+							<table class="recipe-inside global">
+								<tr>
+									<td class="text-center"><strong>Rendimento</strong></td>
+									<td class="text-center"><strong>Tempo de Preparo</strong></td>
+								</tr>
+								<tr>
+									<td class="text-center">
+										{{recipeReportOptions.recipe?.unityQuantity}} {{recipeReportOptions.recipe?.unit?.abbreviation}}.
+									</td>
+									<td class="text-center">
+										{{recipeReportOptions.recipe?.preparationTime}}
+									</td>
+								</tr>
+							</table>
+							<br/>
+							<h3>{{recipeReportOptions.recipe?.description}}</h3>
+						</td>
+					</ng-container>
+					<!-- RECIPE GERAL END -->
+
+					<!-- RECIPE INGREDIENTS -->
+					<ng-container *ngIf="recipeReportOptions.getDisplay().ingredients">
+						<td class="td-main td-ingredients" [style.width.%]="getColumnSize(1)">
+
+							<h3 *ngIf="type == 0" style="font-weight: bold;">Ingredientes</h3>
+							<h3 *ngIf="type == 1">Itens</h3>
+
+							<ul>
+								<li *ngFor="let ingredient of recipeReportOptions.recipe?.ingredients">
+									<table class="ingredients">
+										<tr>
+											<td class="text-left"
+												style="width: 50%; font-weight: bold;">{{ingredient.ingredient?.name}}</td>
+											<td class="text-right"
+												style="width: 25%; font-weight: bold;">{{ingredient?.amount}}{{ingredient.unit?.abbreviation}}</td>
+											<td class="text-right" style="width: 25%">
+												<span class="grey">
+												{{calcIngredientPrice(ingredient) | currency:cifrao}}
+												</span>
+											</td>
+										</tr>
+									</table>
+								</li>
+							</ul>
+						</td>
+					</ng-container>
+					<!-- RECIPE INGREDIENTS END -->
+
+					<!-- MENU ITENS (Outros Custos) -->
+					<ng-container *ngIf="recipeReportOptions.getDisplay().menuItens">
+						<td class="td-main td-steps" [style.width.%]="getColumnSize(1)">
+							
+							<h3 class="">Outros Custos</h3>
+
+							<cp-menu-itens [menu]="recipeReportOptions.recipe"></cp-menu-itens>
+
+						</td>
+					</ng-container>
+					<!-- MENU ITENS (Outros Custos) END -->
+								
+					<!-- RECIPE STEPS -->
+					<ng-container *ngIf="recipeReportOptions.getDisplay().steps">
+						<td class="td-main td-steps" [style.width.%]="getColumnSize(1)">
+							
+							<h3 class="" style="font-weight: bold;">Preparo</h3>
+
+							<table class="steps">
+								<tr *ngFor="let step of recipeReportOptions.recipe.steps; let i= index">
+									<td style="font-weight: bold">{{i+1}}. </td>
+									<td>{{step.description}}</td>
+								</tr>
+							</table>
+						</td>
+					</ng-container>
+					<!-- RECIPE STEPS END -->
+
+					<!-- FINANCIAL OR NUTRITION -->
+					<ng-container *ngIf="recipeReportOptions.getDisplay().financial || recipeReportOptions.getDisplay().nutrition">
+						<td class="td-main td-financeiro" [style.width.%]="getColumnSize(1)">
+
+							<!-- FINANCIAL -->
+							<h2 class="" *ngIf="recipeReportOptions.getDisplay().financial" style="font-weight: bold;">Financeiro</h2>
+							
+							<table class="financial" *ngIf="recipeReportOptions.getDisplay().financial">
+								<tr>
+									<td class="text-center border-right">
+										<span class="label">Custo Total</span>
+										<span class="value">{{getTotalIngredients(recipeReportOptions.recipe.ingredients) | currency:cifrao}}</span>
+									</td>
+									<td class="text-center">
+										<span class="label">Custo Unitário</span>
+										<span class="value">{{getTotalIngredients(recipeReportOptions.recipe.ingredients) / recipeReportOptions.recipe?.unityQuantity  | currency:cifrao}}</span>
+									</td>
+								</tr>
+								<tr>
+									<td class="text-center border-right m-0 p-1">
+										<span class="label">Venda Total</span>
+										<span class="value">{{(recipeReportOptions.recipe?.financial?.totalCostValue || 0) | currency:cifrao}}</span>
+									</td>
+									<td class="text-center m-0 p-1">
+										<span class="label">Venda Unitário</span>
+										<span class="value">{{(recipeReportOptions.recipe?.financial?.costUnitValue || 0) | currency:cifrao}}</span>
+									</td>
+								</tr>
+								<tr>
+									<td class="text-center border-right green m-0 p-0">{{(recipeReportOptions.recipe?.financial?.totalCostPerc || 0).toFixed(2) }} %
+									</td>
+									<td class="text-center green m-0 p-0">{{(recipeReportOptions.recipe?.financial?.costUnitPerc || 0).toFixed(2) }} %
+									</td>
+								</tr>
+							</table>
+							<!-- FINANCIAL END -->
+
+							<!-- INFORMAÇÕES NUTRICIONAIS -->
+							<ng-container *ngIf="recipeReportOptions.getDisplay().nutrition">
+								<h3 class="">Informação Nutricional</h3>
+								<cp-nutritional-info-label [recipe]="recipeReportOptions?.recipe" 
+									[portion]="recipeReportOptions?.recipe?.label?.portion" 
+									[weight]="recipeReportOptions?.recipe?.label?.weight" 
+									[measure]="recipeReportOptions?.recipe?.label?.measure" 
+									[lactose]="recipeReportOptions?.recipe?.label?.lactose" 
+									[gluten]="recipeReportOptions?.recipe?.label?.gluten"
+									layout="vertical-old">
+								</cp-nutritional-info-label>
+							</ng-container>
+							<!-- INFORMAÇÕES NUTRICIONAIS END -->
+
+							<!-- GRÁFICO FINANCIAL -->
+							<ng-container *ngIf="recipeReportOptions.getDisplay().financial && !recipeReportOptions.getDisplay().nutrition">
+								<div class="width-100-perc text-center">
+									<br />
+									<canvas id="canvas" width="280" height="280"></canvas>
+									<br />
+								</div>
+								<table class="legend">
+									<tr *ngFor="let line of tableGraph">
+										<td *ngFor="let item of line">
+											<p class="text-left">
+												<span [style.background-color]="item.color">&nbsp;&nbsp;&nbsp;</span>
+												{{item.percent || 0}}% - {{item.category}}
+											</p>
+										</td>
+									</tr>
+								</table>
+							</ng-container>
+							<!-- GRÁFICO FINANCIAL END -->
+
+						</td>
+					</ng-container>
+					<!-- FINANCIAL OR NUTRITION END -->
+
+				</tr>
+			</tbody>
+		</table>
+	</kendo-pdf-export>
+</div>

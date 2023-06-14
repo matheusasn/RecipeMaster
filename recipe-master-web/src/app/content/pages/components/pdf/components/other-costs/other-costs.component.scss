@@ -1,0 +1,109 @@
+.all-gray {
+	background-color: #F8F8F8;
+}
+
+.container-other-costs {
+
+    * {
+        font-family: "Poppins", "Roboto", Arial, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 15px;
+    }
+
+    .title {
+        font-family: "Poppins", "Roboto", Arial, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 19px;
+    }
+
+    .subtitle {
+        font-family: "Poppins", "Roboto", Arial, sans-serif;
+        font-style: normal;
+        // font-weight: 500;
+        font-size: 10px;
+        line-height: 15px;
+        display: block;
+				width: 135px;
+    }
+
+		.subtitle-menu {
+			font-weight: 500;
+		}
+
+    .color-secondary {
+        color: #4B5262;
+    }
+
+    td {
+        padding: 8px !important;
+        border:none !important;
+    }
+
+		.recipe-variable-costs-item {
+			display: grid;
+			grid-template-columns: 2fr 1fr 1fr;
+			padding: 4px;
+		}
+
+		.recipe-fixed-costs-item {
+			display: flex;
+			justify-content: space-between;
+			padding: 4px;
+		}
+
+		.fix-grid {
+			grid-template-columns: 2fr 1fr !important;
+		}
+
+		.recipe-other-costs-item.odd {
+			background-color: #F8F8F8;
+		}
+
+    .recipe-other-costs-item:nth-of-type(odd) {
+        background-color:  #F8F8F8 !important;
+    }
+
+		.table-striped tbody tr:nth-of-type(odd) {
+			background-color: #F8F8F8 !important;
+		}
+		.menu-other-costs-table {
+
+			border-collapse: separate;
+			border-spacing: 0 0;
+
+			td {
+				border: solid 1px #000;
+				border-style: solid none;
+			}
+			td:first-child {
+				border-left-style: solid;
+				border-top-left-radius: 5px;
+				border-bottom-left-radius: 5px;
+			}
+			td:last-child {
+				border-right-style: solid;
+				border-bottom-right-radius: 5px;
+				border-top-right-radius: 5px;
+			}
+
+			margin-top: 5px;
+			th {
+				&:first-child {
+					font-size: 13px;
+					font-weight: bold;
+				}
+				&:not(:first-child) {
+					font-size: 9px;
+					font-weight: 500;
+				}
+			}
+			.table-text {
+				color: #5c5c5c;
+			}
+		}
+
+}

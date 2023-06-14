@@ -1,0 +1,59 @@
+<div class="cp-content cp-content-costs">
+	<div class="row">
+		<div class="m-portlet__body w-full">
+			 <div class="cp-content-costs__header">
+					<button (click)="gotoBack()">
+					<i class="fas fa-chevron-left"></i>
+					</button>
+					<div>
+						 <div class="div-center">
+								<h3 class="cp-content-costs__header-title" translate>
+									CUSTOS VARIÁVEIS
+								</h3>
+						 </div>
+					</div>
+					<div>
+						 <button (click)="$event.stopPropagation();openEditModal()" mat-icon-button>
+							 <i class="fas fa-plus"></i>
+						 </button>
+					</div>
+			 </div>
+			 <!-- ./cp-content-costs__header -->
+			 <div class="cp-content-costs__body">
+					<div class="row">
+						 <div [formGroup]="formGroup" class="col-sm-12 costs-container">
+							 <input type="checkbox" #selectAllFixedSpecificCostsCheckbox (change)="selectAllVariableCostsCheckBoxesChange()" style="margin-left: 17px;">
+							 <div
+								 formArrayName="variableCosts" *ngFor="let item of formGroup.controls['variableCosts']['controls']; let i = index"
+								 class="alterned-row-colors custom-padding"
+							 >
+								 <div [formGroupName]="i">
+									 <div class="costs-row">
+										 <div class="checkbox-w-text-wrapper" style="margin-left: -10px">
+											 <input type="checkbox" name="" formControlName="active">
+											 <span style="cursor: pointer; width:102px" (click)="openModaVaribleCosts(i)">{{ item.value.name }}</span>
+										 </div>
+										 <span class="text-center">{{ getUnitLabel(item.value) }}</span>
+										 <span class="text-right">{{ calcVariableCostPrice(item.value) | currency: cifrao }}</span>
+									 </div>
+									 <button id="variablecost{{i}}" mat-button style="visibility: hidden;width: 1px;position: absolute;pointer-events: none;" [matMenuTriggerFor]="menu"></button>
+									 <mat-menu #menu="matMenu" >
+										 <button mat-menu-item (click)="openEditModal(item)">
+											 <mat-icon>edit</mat-icon>
+											 <span>{{ 'RECIPE.EDIT_CATEGORY' | translate }}</span>
+										 </button>
+										 <button mat-menu-item (click)="delete(item.value.id, 'VARIABLE_COSTS')">
+											 <mat-icon>delete</mat-icon>
+											 <span>{{ 'RECIPE.DELETE_CATEGORY' | translate }}</span>
+										 </button>
+									 </mat-menu>
+								 </div>
+							 </div>
+							<span class="total">Total: {{ getTotalVariableCosts() | currency: cifrao }}</span>
+						 </div>
+					</div>
+			 </div>
+		</div>
+	</div>
+</div>
+

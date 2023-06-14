@@ -1,0 +1,72 @@
+<cp-dialog-default (close)="cancel()">
+	<!-- Header -->
+	<span title>{{item.name}}</span>
+
+	<!-- Body -->
+	<div body>
+		<form *ngIf="formGroup" class="m-form m-form--fit m-form--label-align-right" name="form" [formGroup]="formGroup" novalidate>
+
+			<!-- Quantidade -->
+			<h5 class="text-center pt-2 mt-3 mb-3">{{ 'INPUTS.AMOUNT' | translate}}</h5>
+			<div class="row m-0">
+				<div class="col-6 pr-0">
+					<div class="form-group m-form__group">
+						<input maxlength="10" class="form-control m-input cp-input" name="unityQuantityUsed" formControlName="unityQuantityUsed" placeholder="0,00" type="number">
+					</div>
+				</div>
+
+				<div class="col-6 pl-0">
+					<m-unit-select *ngIf="units"
+								   [options]="{basic: true, canUpdate: false, canCreate: false, inputName: 'unitUsed', showLabel: false, type: 'OTHER_COSTS'}"
+								   [form]="formGroup"
+								   [units]="units"
+					></m-unit-select>
+				</div>
+			</div>
+
+			<!-- Preço -->
+			<h5 *ngIf="!isPercentSelected" class="text-center pt-2 mt-5 mb-3">{{ 'INPUTS.PRICE' | translate}}</h5>
+			<div *ngIf="!isPercentSelected" class="row m-0">
+				<div class="col-12">
+					<div class="cp-input d-flex flex-row justify-content-between align-items-center p-3 container-item">
+						<div class="box"><div class="currency-sign font-weight-normal">{{cifrao}}</div></div>
+						<div class="box" style="min-width: 0">
+							<input style="min-width: 0" class="reset-form" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center' }" maxlength="10" name="price" formControlName="price" placeholder="{{cifrao + '0,00'}}" type="text">
+						</div>
+						<div class="box"><span class="label-info" (click)="openDialogUnit()">
+							{{formGroup.value.unityQuantity}} {{ formGroup.value.unit.abbreviation }}
+						</span></div>
+					</div>
+				</div>
+			</div>
+
+			<div *ngIf="isPercentSelected" class="row m-0 col-12 mt-5">
+				<div class="percent-box col-12">
+						<div>
+							<span [innerHTML]="'RECIPE.PERCENT_ALERT' | translate">
+							</span>
+						</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+
+	<!-- Footer -->
+	<div footer>
+		<div class="row">
+			<div class="col-12 col-sm-12 col-md-12 text-center btn-footer">
+				<button type="button" class="btn alterStyle mr-3 btn-delete"
+						[swal]="{ type: 'question', title: titleModal, showCancelButton: true, confirmButtonColor: '#f4516c', cancelButtonColor: '#d2d2d2' }"
+						(confirm)="removeItemMenu()"
+						(cancel)="doDismiss($event)">
+					<i id="iconTrash" class="la la-trash"></i>
+				</button>
+
+				<button type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1" name="btnBack" (click)="cancel()" translate>{{ ( 'INPUTS.BACK' | translate ) }}</button>
+				<button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom btn-new-css-color" (click)="save()" translate>{{ ( 'INPUTS.SAVE' | translate )}}</button>
+			</div>
+		</div>
+	</div>
+
+</cp-dialog-default>

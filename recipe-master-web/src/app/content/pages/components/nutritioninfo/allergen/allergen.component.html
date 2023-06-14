@@ -1,0 +1,64 @@
+<div class="allergen-container" [formGroup]="formGroup">
+	<div class="m-portlet__body">
+		<div class="mt-2 p-2">
+			<h3 (click)="containsCollapsed = !containsCollapsed">
+				{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.ALLERGEN.CONTAINS' | translate }}
+				<i class="la la-angle-down ml-3" [ngClass]="containsCollapsed ? 'andle-up': 'angle-down'"></i>
+			</h3>
+			<div [ngbCollapse]="containsCollapsed">
+					<div class="row mt-3">
+						<div class="col-12">
+								<div class="grid">
+									<ng-container formArrayName="containsAllergensArray" *ngFor="let allergen of containsAllergensFormArray.controls; let i = index" >
+											<mat-checkbox name="i" [formControlName]="i">
+												{{ getName(allergens[i]) }}
+												<ng-container *ngIf="allergens[i].description">
+													<ng-template #containsPopover>
+														{{ getDescription(allergens[i]) }}
+													</ng-template>
+													<i (click)="$event.stopPropagation()" class="fa fa-info-circle popover-icon"
+															[ngbPopover]="containsPopover"
+															placement="right"
+															triggers="mouseenter:mouseleave"
+															[autoClose]="true">
+													</i>
+												</ng-container>
+											</mat-checkbox>
+									</ng-container>
+								</div>
+						</div>
+					</div>
+				</div>
+		</div>
+		<div class="mt-2 p-2">
+			<h3 (click)="mayContainCollapsed = !mayContainCollapsed">
+				{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.ALLERGEN.MAY_CONTAIN' | translate }}
+				<i class="la la-angle-down ml-3" [ngClass]="mayContainCollapsed ? 'andle-up': 'angle-down'"></i>
+			</h3>
+			<div [ngbCollapse]="mayContainCollapsed">
+					<div class="row mt-3">
+						<div class="col-12">
+								<div class="grid">
+									<ng-container formArrayName="mayContainAllergensArray" *ngFor="let allergen of mayContainAllergensFormArray.controls; let i = index" >
+											<mat-checkbox [formControlName]="i">
+												{{ getName(allergens[i]) }}
+												<ng-container *ngIf="allergens[i].description">
+													<ng-template #mayContainPopover>
+														{{ getDescription(allergens[i]) }}
+													</ng-template>
+													<i (click)="$event.stopPropagation()" class="fa fa-info-circle popover-icon"
+															[ngbPopover]="mayContainPopover"
+															placement="right"
+															triggers="mouseenter:mouseleave"
+															[autoClose]="true">
+													</i>
+												</ng-container>
+											</mat-checkbox>
+									</ng-container>
+								</div>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>

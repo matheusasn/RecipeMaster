@@ -1,0 +1,45 @@
+<div *ngIf="screenWidth < 768" (scroll)="handleDragStart(true)" class="tags-container">
+	<div class="tag noselect" (click)="defaultSelected()" [ngClass]="{'selected': catEscolhido == -1}">
+		{{ 'RECIPE.ALL' | translate }}&nbsp;<span class="quantity">{{ recipeListSize !== 0 ? '(' + recipeListSize + ')' : '' }}</span>
+	</div>
+	<div *ngFor="let category of categories" [ngClass]="{'selected': catEscolhido == category.id}" class="tag noselect" style="position: relative;" (touchstart)="touchstart(category.id)" (touchend)="touchend(category.id)" (mouseleave)="mouseup(category.id)">
+		{{ category.name }}&nbsp;<span class="quantity">{{ category.quantityUsed > 0 ? '('+category.quantityUsed+')' : '' }}</span>
+		<button id="menu{{category.id}}" mat-button style="visibility: hidden;width: 1px;position: absolute;pointer-events: none;" [matMenuTriggerFor]="menu"></button>
+		<mat-menu #menu="matMenu" >
+			<button mat-menu-item (click)="openCreateCategory(category)">
+				<mat-icon>edit</mat-icon>
+				<span>{{ 'RECIPE.EDIT_CATEGORY' | translate }}</span>
+			</button>
+			<button mat-menu-item (click)="deleteCategory(category)" [disabled]="!category.userId">
+				<mat-icon>delete</mat-icon>
+				<span>{{ 'RECIPE.DELETE_CATEGORY' | translate }}</span>
+			</button>
+		</mat-menu>
+	</div>
+	<div class="tag" (click)="openCreateCategory()">
+		+ {{ 'RECIPE.CREATE_CATEGORY' | translate }}
+	</div>
+</div>
+​
+<drag-scroll #nav *ngIf="screenWidth >= 768" [snap-disabled]="true" [scroll-x-wheel-enabled]="true" (dragStart)="handleDragStart()" (dragEnd)="handleDragEnd()" [scrollbar-hidden]="screenWidth >= 768" class="tags-container">
+	<div drag-scroll-item class="tag noselect" (click)="defaultSelected()" [ngClass]="{'selected': catEscolhido == -1}">
+		{{ 'RECIPE.ALL' | translate }}&nbsp;<span class="quantity">{{ recipeListSize !== 0 ? '(' + recipeListSize + ')' : '' }}</span>
+	</div>
+	<div drag-scroll-item *ngFor="let category of categories" [ngClass]="{'selected': catEscolhido == category.id}" class="tag noselect" style="position: relative;" (touchstart)="touchstart(category.id)" (mousedown)="mousedown(category.id)" (mouseup)="mouseup(category.id)" (touchend)="touchend(category.id)" (mouseleave)="mouseup(category.id)">
+		{{ category.name }}&nbsp;<span class="quantity">{{ category.quantityUsed > 0 ? '('+category.quantityUsed+')' : '' }}</span>
+		<button id="menu{{category.id}}" mat-button style="visibility: hidden;width: 1px;position: absolute;pointer-events: none;" [matMenuTriggerFor]="menu"></button>
+		<mat-menu #menu="matMenu" >
+			<button mat-menu-item (click)="openCreateCategory(category)">
+				<mat-icon>edit</mat-icon>
+				<span>{{ 'RECIPE.EDIT_CATEGORY' | translate }}</span>
+			</button>
+			<button mat-menu-item (click)="deleteCategory(category)" [disabled]="!category.userId">
+				<mat-icon>delete</mat-icon>
+				<span>{{ 'RECIPE.DELETE_CATEGORY' | translate }}</span>
+			</button>
+		</mat-menu>
+	</div>
+	<div *ngIf="canCreate" drag-scroll-item class="tag" (click)="openCreateCategory()" style="margin-right: 500px;">
+		+ {{ 'RECIPE.CREATE_CATEGORY' | translate }}
+	</div>
+</drag-scroll>

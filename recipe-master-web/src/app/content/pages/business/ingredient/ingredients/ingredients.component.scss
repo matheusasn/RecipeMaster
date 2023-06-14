@@ -1,0 +1,168 @@
+.custom-padding {
+	margin-top: 5px;
+	@media only screen and (max-width: 768px) {
+		padding: 8px 4px;
+		margin-top: 0;
+	}
+}
+
+.title-infor {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.ingredients-title {
+	@media only screen and (max-width: 768px) {
+		margin: 0 !important;
+		font-size: 20px;
+		margin: 7px 0 !important;
+	}
+}
+
+.ordenation-container {
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	padding: 5px 16px;
+	margin-bottom: 10px;
+
+	@media (max-width: 768px) {
+		padding: 0 16px;
+		margin-top: 20px;
+		margin-bottom: 3px;
+	}
+
+	a {
+		@media (max-width: 768px) {
+			font-size: 10px;
+		}
+		color: #828282;
+		position: absolute;
+		font-size: 13px;
+		font-weight: bold;
+		display: flex;
+		justify-content: center;
+		cursor: pointer;
+	}
+
+	.qtd-order {
+		right: 45%;
+	}
+
+	.value-order {
+		right: 35px;
+	}
+
+	.variation-order {
+		right: 5px;
+	}
+
+}
+
+
+.used-ingredients-list-item {
+	@media only screen and (max-width: 768px) {
+		&:first-child {
+			margin-top: 13px;
+		}
+	}
+}
+
+.list-item {
+	background: #fff;
+	margin: 4px;
+	border-radius: 10px;
+	font-weight: bold;
+
+	@media only screen and (max-width: 768px) {
+		font-size: 12px;
+	}
+}
+
+.item-title {
+	@media only screen and (max-width: 390px) {
+		width: 80px;
+	}
+
+	@media (min-width: 390px) and (max-width: 500px) {
+		width: 100px;
+	}
+}
+
+.list-icon-right {
+	position: absolute;
+	right: 0;
+}
+
+.example-stretched-tabs {
+	border: none;
+	box-shadow: none;
+}
+
+.quantity-recipe {
+	font-size: 10px;
+	color: #828282;
+	right: 48%;
+	position: absolute;
+}
+
+.value-recipe {
+	color: #000000;
+	position: absolute;
+	right: 35px;
+}
+
+.variation-recipe {
+	font-size: 11px;
+	color: #FD305C;
+	position: absolute;
+	right: 35px;
+}
+
+::ng-deep {
+	mat-tab-group {
+		mat-tab-header {
+			border: 0 !important;
+		}
+	}
+}
+
+.mobile-input-size {
+	@media only screen and (max-width: 390px) {
+		width: 32%;
+	}
+	width: 24%;
+}
+
+.btn-color {
+	background: linear-gradient(125.5deg, #FB8A65 7.9%, #FA4E6D 71%), #FA345F !important;
+	box-shadow: 0px 4px 4px #E4E5E7 !important;
+	border-radius: 6px !important;
+}
+
+.btn-color:hover {
+	background: #FB8A65 !important;
+}
+
+.btn-update-pricing {
+	@media only screen and (max-width: 390px) {
+		padding: .75rem .6rem;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.big-button {
+		width: 100%;
+		padding: 15px 26px;
+		margin-top: 6px;
+		border-radius: 6px !important;
+		margin-left: 0 !important;
+	}
+	.buttons-mobile {
+		margin-top: 5px;
+	}
+	.mobile-tabs {
+		margin-top: 5px;
+	}
+}

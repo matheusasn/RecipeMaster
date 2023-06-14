@@ -1,0 +1,83 @@
+<cp-loading></cp-loading>
+<div class="cp-content cp-content-ingredient" *ngIf="ingredient" style="padding: 0 !important;">
+    <div class="row">
+        <div class="col">
+            <div class="m-portlet m-portlet--full-height m-portlet--tabs" style="margin: 0; padding-bottom: 16px; height: 100%">
+                <div class="m-portlet__body">
+
+					<div class="cp-content-ingredient__header">
+						<button (click)="gotoBack()">
+							<i class="fas fa-chevron-left"></i>
+						</button>
+
+						<div>
+							<div class="div-center">
+								<h3 class="cp-content-ingredient__header-title" translate>{{ ingredient.name }}</h3>
+							</div>
+							<m-cp-ingredient-label [category]="ingredient?.ingredientCategory"></m-cp-ingredient-label>
+						</div>
+
+						<div>
+							<button (click)="$event.stopPropagation()" mat-icon-button [matMenuTriggerFor]="menu">
+								<i class="fas fa-ellipsis-v"></i>
+							</button>
+							<mat-menu #menu="matMenu">
+								<button mat-menu-item (click)="gotoEditIngredient()">
+									<mat-icon>edit</mat-icon>
+									<span>{{ 'INGREDIENT.INGREDIENT_TXT15' | translate }}</span>
+								</button>
+								<button mat-menu-item (click)="delete()">
+									<mat-icon>delete</mat-icon>
+									<span>{{ 'RECIPE.DELETE_CATEGORY' | translate }}</span>
+								</button>
+							</mat-menu>
+						</div>
+					</div> <!-- ./cp-content-ingredient__header -->
+
+					<div class="cp-content-ingredient__body">
+						<div class="row">
+							<div class="col-sm-12">
+								<m-cp-ingredient-current-price
+									*ngIf="ingredient && ingredient.id"
+									[id]="ingredient?.id"
+									[price]="(ingredient?.purchasePrice?.price || 0) | currency:cifrao"
+									[name]="ingredient?.name"
+									[label]="ingredient?.ingredientCategory?.name"
+									[historyIngredient]="priceHistory"
+									[units]="units"
+									[ingredient]="ingredient"
+									(onChange)="onChangePriceHistory($event)"
+								></m-cp-ingredient-current-price>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-12">
+								<m-line-chart *ngIf="priceHistory"
+								  [priceHistory]="priceHistory"
+								  [ingredient]="ingredient"
+								  [category]="ingredient?.ingredientCategory"
+								  [opacity]="lineChartOpacity"
+								></m-line-chart>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-12">
+
+								<div class="m--margin-top-40">
+									<h6 class="text-center cp-h6-padding">{{ 'INGREDIENT.INGREDIENT_TXT10' | translate }}</h6>
+
+									<m-nutritioninfo [ingredient]="ingredient"></m-nutritioninfo>
+
+								</div> <!-- ./m--margin-top-40 -->
+
+							</div> <!-- ./col-sm-12 -->
+						</div> <!-- ./row -->
+
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

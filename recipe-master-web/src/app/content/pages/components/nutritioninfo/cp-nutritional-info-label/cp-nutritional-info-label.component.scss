@@ -1,0 +1,445 @@
+
+
+.smaller-font {
+	font-size: 6px;
+}
+
+.pdf {
+
+	.increase-lh {
+		line-height: 2.2;
+	}
+
+	.usda-nutri-container-smaller {
+		font-family: "Poppins", "Roboto", Arial, sans-serif;
+		border: 2px solid black;
+		color: black;
+		max-width: 178px;
+		margin-bottom: 10px;
+		margin-left: 1px;
+		.title {
+			font-size: 15px;
+			font-weight: bold;
+		}
+		.subtitle {
+			font-size: 9px;
+		}
+		.serving-size {
+			font-size: 9px;
+    	font-weight: bold;
+		}
+		.amount-per-serving {
+			font-size: 8px;
+			font-weight: bold;
+		}
+		.large-divisor {
+			height: 3px;
+			background-color: black;
+		}
+		.medium-divisor {
+			height: 4px;
+			background-color: black;
+		}
+		.calories-container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: -5px;
+			margin-bottom: -4px;
+			.label {
+				font-size: 10px;
+				font-weight: bold;
+			}
+			.number {
+				font-weight: bold;
+				font-size: 12px;
+			}
+		}
+		.line {
+			padding: 1px 0;
+			border-bottom: 1px solid black;
+			font-size: 6px;
+			font-weight: 500;
+		}
+		.daily-value {
+			display: flex;
+			justify-content: flex-end;
+			> span {
+				font-weight: bold;
+				font-size: 8px;
+			}
+		}
+		.line-title {
+			display: flex;
+			justify-content: space-between;
+		}
+		.one-tab {
+			display: flex;
+			justify-content: space-between;
+			padding-left: 14px;
+		}
+		.two-tabs {
+			display: flex;
+			justify-content: space-between;
+			padding-left: 34px;
+		}
+		.footer-text {
+			font-size: 6px;
+			line-height: 9px;
+		}
+		.custom-width {
+			width: 84%;
+		}
+	}
+
+	.usda-nutri-container {
+		font-family: "Poppins", "Roboto", Arial, sans-serif;
+		border: 2px solid black;
+		color: black;
+		max-width: 264px;
+		margin-bottom: 10px;
+		margin-left: 1px;
+		.title {
+			font-size: 30px;
+			font-weight: bold;
+		}
+		.subtitle {
+			font-size: 12px;
+		}
+		.serving-size {
+			font-size: 13px;
+    	font-weight: bold;
+		}
+		.amount-per-serving {
+			font-size: 9px;
+			font-weight: bold;
+		}
+		.large-divisor {
+			height: 8px;
+			background-color: black;
+		}
+		.medium-divisor {
+			height: 4px;
+			background-color: black;
+		}
+		.calories-container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: -7px;
+			margin-bottom: -4px;
+			.label {
+				font-size: 20px;
+				font-weight: bold;
+			}
+			.number {
+				font-weight: bold;
+				font-size: 25px;
+			}
+		}
+		.line {
+			padding: 2px 0;
+			border-bottom: 1px solid black;
+			font-size: 10px;
+			font-weight: 500;
+		}
+		.daily-value {
+			display: flex;
+			justify-content: flex-end;
+			> span {
+				font-weight: bold;
+				font-size: 10px;
+			}
+		}
+		.line-title {
+			display: flex;
+			justify-content: space-between;
+		}
+		.one-tab {
+			display: flex;
+			justify-content: space-between;
+			padding-left: 14px;
+		}
+		.two-tabs {
+			display: flex;
+			justify-content: space-between;
+			padding-left: 34px;
+		}
+		.footer-text {
+			font-size: 9px;
+			line-height: 10px;
+		}
+		.custom-width {
+			width: 84%;
+		}
+	}
+
+		max-height: 80vh;
+
+    @media (max-width: 575px) {
+        table {
+            margin: 2px;
+            margin-top: 12px;
+        }
+    }
+
+    .table-sub {
+        font-family: "Poppins", "Roboto", Arial, sans-serif;
+        font-size: 8px;
+
+        width: 100%;
+        max-width: 400px;
+        min-width: 250px;
+
+        .ingredients {
+            font-weight: normal;
+        }
+
+    }
+
+    .info-nutri-horizontal {
+        font-family: "Poppins", "Roboto", Arial, sans-serif;
+        width: 100%;
+        max-width: 400px;
+        min-width: 234px;
+        border: 2px solid #f8f8f8;
+        border-radius: 12px;
+
+        font-style: normal;
+        font-weight: normal;
+        font-size: 5px;
+        line-height: 7px;
+
+        .title {
+            font-family: "Poppins", "Roboto", Arial, sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 8px;
+            line-height: 12px;
+        }
+
+        table.info-data tr.striped {
+            background-color: #f8f8f8;
+        }
+
+    }
+
+    .info-nutri-vertical {
+
+        font-family: "Poppins", "Roboto", Arial, sans-serif;
+        width: 100%;
+        max-width: 400px;
+        min-width: 250px;
+        font-size: 7px;
+        text-align: center;
+        font-weight: 500;
+        margin: 4px;
+
+        .striped-color {
+            background-color: #f8f8f8;
+        }
+
+        .recipe-name {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .col {
+            padding: 3px;
+            border: 2px solid #e4e5e7;
+            border-bottom: none;
+            border-top: none;
+        }
+
+        .col:first-child {
+            border-radius: 12px 12px 0 0;
+            border-bottom: 1px solid #e4e5e7 !important;
+            border-top: 2px solid #e4e5e7;
+        }
+
+        .col:last-child {
+            border-radius: 0 0 12px 12px;
+            border-bottom: 2px solid #e4e5e7;
+        }
+
+        .br-1 {
+            border-right: 1px solid #e4e5e7;
+        }
+
+        .bl-0 {
+            border-left: none;
+        }
+
+        .br-0 {
+            border-right: none;
+        }
+
+        .bb-0 {
+            border-bottom: none;
+        }
+
+        .bt-0 {
+            border-top: none;
+        }
+
+        .info-sub {
+            font-weight: normal;
+            font-size: 7px !important;
+        }
+
+    }
+
+
+    h3 {
+        color: #121419 !important;
+    }
+
+    .m-portlet {
+        border-radius: 9px;
+    }
+
+    .labelStyle {
+        font-weight: bold;
+    }
+
+    .centerStyle {
+        text-align: center;
+    }
+
+    .pStyle {
+        font-family: "Poppins", "Roboto", Arial, sans-serif;
+        font-size: 7px;
+        font-weight: bold;
+        margin-left: 0px;
+
+        &.ingredients {
+            font-weight: normal;
+        }
+    }
+
+    .cp-input {
+
+        input {
+            background: #fafafa !important;
+            border: none;
+        }
+
+        input:focus {
+            border: none !important;
+        }
+
+        .input-group-text {
+            background: #fafafa !important;
+            border: none;
+        }
+
+    }
+
+    .with-radius {
+        border-radius: 23px;
+
+        td:last-child {
+            border-radius: 23px;
+        }
+    }
+
+    .info-nutri {
+
+        font-family: "Poppins", "Roboto", Arial, sans-serif;
+        min-width: 150px;
+        max-width: 280px;
+        font-size: 7px;
+        text-align: center;
+        font-weight: bold;
+        margin: 4px;
+
+        .striped-color {
+            background-color: #f8f8f8;
+        }
+
+        .recipe-name {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .col {
+            padding: 3px;
+            border: 2px solid #e4e5e7;
+            border-bottom: none;
+            border-top: none;
+
+        }
+
+        .col:first-child {
+            border-radius: 12px 12px 0 0;
+            border-bottom: 1px solid #e4e5e7 !important;
+            border-top: 2px solid #e4e5e7;
+        }
+
+        .col:last-child {
+            border-radius: 0 0 12px 12px;
+            border-bottom: 2px solid #e4e5e7;
+        }
+
+        .br-1 {
+            border-right: 1px solid #e4e5e7;
+        }
+
+        .bl-0 {
+            border-left: none;
+        }
+
+        .br-0 {
+            border-right: none;
+        }
+
+        .bb-0 {
+            border-bottom: none;
+        }
+
+        .bt-0 {
+            border-top: none;
+        }
+
+        .info-sub {
+            font-weight: normal;
+            font-size: 7px !important;
+        }
+
+    }
+
+    &.preview {
+
+        .pStyle, .tableStyle {
+            font-size: 10px !important;
+        }
+
+        .table-sub {
+            width: 240px !important;
+        }
+
+        .info-nutri,
+        .info-nutri-vertical {
+            width: 240px !important;
+            font-size: 10px !important;
+
+            .info-sub {
+                font-size: 9px !important;
+            }
+
+        }
+				.edit {
+					@media (max-width: 575px) {
+						width: 316px !important;
+					}
+					width: 340px !important;
+					button {
+						border: 0;
+						background: #ffffff;
+						cursor: pointer;
+					}
+				}
+
+    }
+
+}

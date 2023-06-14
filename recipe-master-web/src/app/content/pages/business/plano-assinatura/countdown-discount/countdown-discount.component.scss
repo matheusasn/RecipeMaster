@@ -1,0 +1,122 @@
+:host {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 112px 0;
+	background: #FFFFFF;
+	box-shadow: 1px 2px 9px 4px rgba(204, 204, 204, 0.25);
+	border-radius: 13px;
+
+	&.hidden {
+		display: none;
+	}
+
+	.countdown {
+		.time {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: #F7F7F7;
+			border: 1px solid #ECECEC;
+			box-sizing: border-box;
+			border-radius: 50%;
+			width: 116px;
+			height: 116px;
+
+			font-family: "Poppins", "Roboto", Arial, sans-serif;
+			font-weight: bold;
+			font-size: 19px;
+			line-height: 28px;
+			text-align: center;
+			color: #000000;
+			margin: 0 48px;
+		}
+	}
+
+	.content {
+
+		&.es {
+			h2 {
+				font-size: 17px;
+			}
+		}
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		h2 {
+			font-family: "Poppins", "Roboto", Arial, sans-serif;
+			font-weight: bold;
+			font-size: 21px;
+			line-height: 31px;
+			text-align: center;
+			color: #000000;
+			margin-bottom: 8px;
+		}
+
+		p {
+			font-family: "Poppins", "Roboto", Arial, sans-serif;
+			font-weight: 300;
+			font-size: 11px;
+			line-height: 16px;
+			text-align: center;
+			color: #000000;
+			margin-bottom: 8px;
+
+			strong {
+				font-weight: bold;
+				font-size: 13px;
+				line-height: 19px;
+			}
+		}
+
+		button {
+			width: 100%;
+			max-width: 260px;
+			height: 48px;
+			background-image: linear-gradient(to right, #FB8B5B, #F24159);
+			border-radius: 9px;
+			font-size: 13px;
+			margin: 8px auto;
+			color: #FFFFFF;
+			cursor: pointer;
+			box-shadow: 0 5px 5px 1px #eee!important;
+			border: 0;
+
+			&:hover {
+				background-image: linear-gradient(to right, #F24159, #FB8B5B);
+			}
+
+			&:disabled {
+				background-color: gray;
+				background-image: none;
+				cursor: default;
+			}
+		}
+	}
+
+
+	.image {
+		height: inherit;
+
+		img {
+			margin: 0 32px;
+			height: 100%;
+		}
+
+		@media (max-width: 425px) {
+			display: none;
+		}
+	}
+
+	@media (max-width: 425px) {
+		flex-direction: column;
+		height: auto !important;
+		padding: 20px;
+		margin-bottom: 32px;
+
+		.content {
+			margin-top: 32px;
+		}
+	}
+}

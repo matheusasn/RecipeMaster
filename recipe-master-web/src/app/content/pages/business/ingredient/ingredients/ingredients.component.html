@@ -1,0 +1,134 @@
+<cp-loading></cp-loading>
+<div class="cp-content" style="overflow-x: hidden">
+	<div class="row custom-padding">
+		<div class="col">
+			<div id="nameTela" class="row nameTela">
+				<div class="col-6 col-sm-6 col-md-6">
+					<div class="row align-items-center">
+						<div class="col-auto">
+							<div class="title-infor">
+								<h2 class="ingredients-title">
+									{{ 'INGREDIENT.INGREDIENT' | translate }}
+								</h2>
+							</div>
+						</div>
+						<!-- <div class="col-auto px-0">
+
+						</div> -->
+					</div>
+				</div>
+				<div class="col-12 col-sm-12 col-md-6 text-right buttons-mobile">
+					<button *ngIf="showUpdatePricingButton"
+						class="btn m-btn m-btn--air m-btn--custom btn-update-pricing big-button btn-color"
+						[ngClass]="!isUpdatingPricing && 'btn-accent'" mat-button (click)="toggleUpdatePricing()" translate>
+						{{ 'INPUTS.UPDATE_PRICES' | translate}}
+					</button>
+					<button *ngIf="!showUpdatePricingButton"
+						class="btn btn-accent m-btn m-btn--air m-btn--custom ml-2 big-button btn-color" mat-button (click)="doNew()"
+						translate>
+						{{ 'INPUTS.CREATE_NEW' | translate}}
+					</button>
+				</div>
+			</div>
+
+			<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4 mobile-tabs"
+				(selectedTabChange)="tabChanged($event)" [(selectedIndex)]="selectedTab">
+
+				<mat-tab label="{{ 'INGREDIENT.TABS.TXT_TAB1' | translate }}" style="margin-bottom: 100px">
+					<!-- BUSCADOR de ingredientes (tipo AUTOCOMPLETE) -->
+					<m-cp-ingredient-search [copied]="false" (onChange)="onChangeSearch($event)" [responseType]="'ingredient'"
+						[behavior]="'search'" (onSearch)="onSearch($event)"
+						placeholder="{{'INGREDIENT.SEARCH.PLACEHOLDER' | translate}}"></m-cp-ingredient-search>
+
+					<div class="m-section" *ngIf="ingredients?.length">
+						<mat-nav-list>
+							<a class="list-item" preventDoubleClick (throttledClick)="edit(ingredient.id)" [throttleTime]="2000"
+								mat-list-item *ngFor="let ingredient of ingredients">
+
+								<span class="item-title">{{ingredient.name}}</span>
+								<mat-icon matListIcon class="list-icon-right" [inline]="true">
+									keyboard_arrow_right
+								</mat-icon>
+							</a>
+						</mat-nav-list>
+						<div class="m-section__content">
+							<ngb-pagination [(collectionSize)]="pagination.totalPages * pagination.itensPerPage"
+								[pageSize]="pagination.itensPerPage" [(page)]="pagination.currentPage" [maxSize]="5"
+								[boundaryLinks]="true" (pageChange)="fetchIngredients(searchTerm)"></ngb-pagination>
+						</div>
+					</div>
+
+					<div class="alert alert-info" *ngIf="!ingredients?.length" translate>
+						{{ 'INGREDIENT.NO_RESULTS'}}
+					</div>
+
+				</mat-tab>
+
+				<mat-tab label="{{ 'INGREDIENT.TABS.TXT_TAB2' | translate }} ({{ countUsedIngredients }})">
+					<!-- BUSCADOR de ingredientes (tipo AUTOCOMPLETE) -->
+					<section>
+						<div style="display: flex;">
+							<m-cp-ingredient-search style="width: 100%;" [copied]="true" (onSearchIconClicked)="generatePdf()"
+							(onChange)="onChangeSearch($event)" (onChange)="onChangeUsedSearch($event)"
+							[responseType]="'copied-ingredient'" [behavior]="'search'" (onSearch)="onSearchUsed($event)"
+							placeholder="{{'INGREDIENT.SEARCH.PLACEHOLDER' | translate}}"></m-cp-ingredient-search>
+						</div>
+					</section>
+
+					<div class="m-section" *ngIf="usedIngredients?.length">
+						<div class="ordenation-container">
+							<a (click)="orderUsedIngredients('name')">
+								{{ 'INGREDIENT.ORDENATION.NAME' | translate }}
+								<mat-icon *ngIf="sortField !== 'name'">keyboard_arrow_down</mat-icon>
+								<mat-icon *ngIf="sortField === 'name' && sortType === 'DESC'">keyboard_arrow_down</mat-icon>
+								<mat-icon *ngIf="sortField === 'name' && sortType === 'ASC'">keyboard_arrow_up</mat-icon>
+							</a>
+							<a class="qtd-order" (click)="orderUsedIngredients('recipes')">
+								{{ 'INGREDIENT.ORDENATION.RECIPES' | translate }}
+								<mat-icon *ngIf="sortField !== 'recipes'">keyboard_arrow_down</mat-icon>
+								<mat-icon *ngIf="sortField === 'recipes' && sortType === 'DESC'">keyboard_arrow_down</mat-icon>
+								<mat-icon *ngIf="sortField === 'recipes' && sortType === 'ASC'">keyboard_arrow_up</mat-icon>
+							</a>
+							<a class="value-order" (click)="orderUsedIngredients('pp.price')">
+								{{ 'INGREDIENT.ORDENATION.PRICE' | translate }}
+								<mat-icon *ngIf="sortField !== 'pp.price'">keyboard_arrow_down</mat-icon>
+								<mat-icon *ngIf="sortField === 'pp.price' && sortType === 'DESC'">keyboard_arrow_down</mat-icon>
+								<mat-icon *ngIf="sortField === 'pp.price' && sortType === 'ASC'">keyboard_arrow_up</mat-icon>
+							</a>
+						</div>
+						<mat-nav-list>
+							<a (click)="!isUpdatingPricing && edit(ingredient.id)" class="list-item used-ingredients-list-item"
+								mat-list-item *ngFor="let ingredient of usedIngredients; let i = index">
+								<span (click)="isUpdatingPricing && edit(ingredient.id)" class="item-title">{{ingredient.name}}</span>
+								<span (click)="isUpdatingPricing && edit(ingredient.id)"
+									class="quantity-recipe">{{getIngredientRecipes(ingredient)}} receitas</span>
+								<input tabindex="{{i}}" [appTab]="i" (keydown.enter)="onEnter($event)" currencyMask
+									[options]="{prefix: cifrao}" maxlength="10"
+									class="form-control m-input cp-input value-recipe mobile-input-size" placeholder="0,00" type="text"
+									[(ngModel)]="pricingModels[i]" (blur)="updatePricing(i)" *ngIf="isUpdatingPricing">
+								<span class="value-recipe" *ngIf="!isUpdatingPricing">{{getIngredientPrice(ingredient) |
+									currency:cifrao}}</span>
+								<mat-icon (click)="isUpdatingPricing && edit(ingredient.id)" matListIcon class="list-icon-right"
+									[inline]="true">
+									keyboard_arrow_right
+								</mat-icon>
+							</a>
+						</mat-nav-list>
+						<div class="m-section__content">
+							<ngb-pagination [(collectionSize)]="paginationUsed.totalPages * paginationUsed.itensPerPage"
+								[pageSize]="paginationUsed.itensPerPage" [(page)]="paginationUsed.currentPage" [maxSize]="5"
+								[boundaryLinks]="true" (pageChange)="fetchUsedIngredients(searchTerm)"></ngb-pagination>
+						</div>
+					</div>
+
+					<div class="alert alert-info" *ngIf="!ingredients?.length" translate>
+						{{ 'INGREDIENT.NO_RESULTS'}}
+					</div>
+				</mat-tab>
+
+			</mat-tab-group>
+		</div>
+		<pdf-ingredients-used #pdf [linguagem]="linguagem" [sortField]="sortField" [sortType]="sortType" [cifrao]="cifrao">
+		</pdf-ingredients-used>
+	</div>
+</div>

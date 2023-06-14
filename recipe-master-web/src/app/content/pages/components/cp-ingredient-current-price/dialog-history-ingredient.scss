@@ -1,0 +1,34 @@
+.cp-dialog {
+	display: flex;
+	flex-direction: column;
+	margin: 0 10px;
+	height: 500px;
+}
+
+.cp-dialog .cp-dialog__header {
+	height: 72px;
+	border-bottom: 1px solid #E4E5E7;
+	display: flex;
+	align-items: center;
+
+	h4 {
+		flex: 1;
+		margin-left: 44px;
+	}
+
+	button {
+		border: 0;
+		background: #ffffff;
+		cursor: pointer;
+	}
+}
+
+.cp-dialog .cp-dialog__body {
+	flex: 1;
+	margin: 16px 0;
+	overflow: auto;
+}
+
+.cp-dialog .cp-dialog__footer {
+	margin-bottom: 8px;
+}

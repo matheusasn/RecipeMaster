@@ -1,0 +1,16 @@
+<!-- <form [formGroup]="form" class="m-form m-form--fit m-form--label-align-right" (ngSubmit)="doSubmit()"> -->
+  <swiper #usefulSwiper [config]="config">
+    <div class="swiper-wrapper">
+
+      <div class="swiper-slide text-center" *ngFor="let m of wizard">
+
+          <m-message-button *ngIf="m && m.type == MessageType.BUTTONS" [message]="m" (onSubmit)="doSubmit($event)"></m-message-button>
+          <m-message-input *ngIf="m && m.type == MessageType.INPUT" [message]="m" (onSubmit)="doSubmit($event)"></m-message-input>
+          <m-message-nps-ranking *ngIf="m && m.type == MessageType.NPS_RANKING" [message]="m" (onSubmit)="doSubmit($event)"></m-message-nps-ranking>
+
+      </div>
+
+    </div>
+    <div class="swiper-pagination"></div>
+  </swiper>
+<!-- </form> -->

@@ -1,0 +1,39 @@
+<cp-dialog-default (close)="close()" height="300px">
+
+	<!-- Header -->
+	<span title>{{ 'INGREDIENT.INGREDIENT_TXT9' | translate }}</span>
+
+	<!-- Body -->
+	<div body>
+		<form *ngIf="formGroup"  class="m-form m-form--fit m-form--label-align-right" name="form" [formGroup]="formGroup" novalidate>
+			<div class="row" style="margin-top: 28px;">
+				<div class="col-6">
+					<div class="form-group m-form__group text-center">
+						<label class="col-form-label" translate>
+							{{ 'INPUTS.GROSSWEIGHT' | translate }}
+						</label>
+						<input currencyMask maxlength="10" [options]="{ prefix: '', suffix: '' }"  class="form-control m-input cp-input" name="grossWeight" formControlName="grossWeight" placeholder="0,00" type="text">
+						<div class="mt-3" style="font-size:12px;">
+							<span *ngIf="minGrossWeight && maxGrossWeight" style="color:gray">({{ minGrossWeight }} - {{ maxGrossWeight }})</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-6 pl-0">
+					<div class="form-group m-form__group text-center">
+						<label class="col-form-label" translate>{{ 'INPUTS.NETWEIGHT' | translate }}</label>
+						<input currencyMask maxlength="10" [options]="{ prefix: '', suffix: '' }"  class="form-control m-input cp-input" name="netWeight" formControlName="netWeight" placeholder="0,00" type="text">
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+
+	<!-- Footer -->
+	<div footer class="text-center">
+		<button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom btn-new-css-color" style="width: 180px" translate (click)="save()">
+			{{ 'INPUTS.SAVE' | translate }}
+		</button>
+	</div>
+</cp-dialog-default>

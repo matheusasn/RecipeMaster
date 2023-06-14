@@ -1,0 +1,27 @@
+<div *ngIf="identifier === 'recipe'" class="canvas-container">
+	<canvas baseChart
+		style="margin-left: 10px;"
+		[options]="options"
+		[data]="data"
+		[labels]="labels"
+		[chartType]="doughnutChartType"
+		[colors]="colors"
+		(chartHover)="chartHovered($event)"
+		(chartClick)="chartClicked($event)"
+	></canvas>
+</div>
+<!-- <div class="flex-container">
+</div> -->
+<div *ngIf="identifier === 'pdf'" class="canvas-pdf-container">
+	<canvas baseChart
+		[options]="options"
+		[data]="data"
+		[labels]="labels"
+		[chartType]="doughnutChartType"
+		[colors]="colors"
+		(chartHover)="chartHovered($event)"
+		(chartClick)="chartClicked($event)"
+	></canvas>
+</div>
+<!-- <div class="flex-container">
+</div> -->

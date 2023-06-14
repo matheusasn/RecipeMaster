@@ -1,0 +1,21 @@
+<div class="notification-modal" *ngIf="notifications && notifications.length > 0">
+  
+  <h3 class="text-center p-3">{{ 'RECIPE.SHARED_TXT16' | translate }}</h3>
+  <hr>
+  
+  <div class="p-3">
+    <p *ngFor="let n of notifications">{{n.message}}</p>
+  </div>
+
+  <div class="m-portlet__foot m-portlet__foot--fit">
+    <div class="m-form__actions">
+      <div class="row">
+        <div class="col-12 text-center">
+          <hr>
+          <button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom" name="btnBack" (click)="cancel()">{{ 'RECIPE.SHARED_TXT5' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

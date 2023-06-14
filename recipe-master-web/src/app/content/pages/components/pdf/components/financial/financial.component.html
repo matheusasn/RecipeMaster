@@ -1,0 +1,56 @@
+<div *ngIf="recipe?.type === 'recipe'" class="graph-container prevent-split" style="position:relative">
+	<m-graph [recipe]="recipe" [cifrao]="cifrao" [typeOfCost]="'TOTAL'"></m-graph>
+	<m-graph [recipe]="recipe" [cifrao]="cifrao" [typeOfCost]="'UNIT'"></m-graph>
+</div>
+
+<div *ngIf="menu" class="container-financial-menu">
+  <table class="table">
+		<thead>
+		</thead>
+    <tbody>
+			<tr class="w-100">
+				<ng-container *ngIf="showFinancial">
+					<td class="w-50">{{('RECIPE.TABS.FINANCIAL.TOTAL_COAST' | translate)}} {{getTotalCost() | currency:cifrao}}</td>
+					<td class="w-50">{{('RECIPE.TABS.FINANCIAL.UNIT_COAST' | translate)}} {{getUnitCost() | currency:cifrao}}</td>
+				</ng-container>
+				<ng-container *ngIf="!showFinancial && menu">
+					<td class="w-50">{{ 'MENUS.PDF.TOTAL_SELL' | translate }}: {{ menu.financial.totalCostValue | currency:cifrao }}</td>
+					<td class="w-50">{{ 'MENUS.PDF.TOTAL_UNIT' | translate }}: {{ menu.financial.costUnitValue | currency:cifrao }}</td>
+				</ng-container>
+				<td></td>
+			</tr>
+			<tr *ngIf="showFinancial && menu">
+				<td class="w-50">
+					<div style="display:flex; font-size: 9px;">
+						<div>
+							{{ 'MENUS.PDF.SELL' | translate }} <br /> {{ menu.financial.totalCostValue | currency:cifrao }}
+						</div>
+						<div style="margin-left: 20px">
+							{{ 'MENUS.PDF.PROFIT' | translate }} <br /> {{ calcProfit() | currency:cifrao }}
+						</div>
+						<div style="margin-left: 20px">
+							{{ 'MENUS.PDF.MARGIN' | translate }} <br /> {{ calcMargemDeLucro() | number:'1.0-0'}}%
+						</div>
+					</div>
+
+				</td>
+				<td class="w-50">
+					<div style="display:flex; font-size: 9px;">
+						<div>
+							{{ 'MENUS.PDF.SELL' | translate }} <br /> {{ menu.financial.costUnitValue | currency:cifrao }}
+						</div>
+						<div style="margin-left: 20px">
+							{{ 'MENUS.PDF.PROFIT' | translate }} <br /> {{ calcUnitProfit() | currency:cifrao }}
+						</div>
+						<div style="margin-left: 20px">
+							{{ 'MENUS.PDF.MARGIN' | translate }} <br /> {{ calcMargemDeLucro('unitario') | number:'1.0-0' }}%
+						</div>
+					</div>
+				</td>
+			</tr>
+    </tbody>
+  </table>
+
+	<small *ngIf="menu" class="pull-right color-secondary">www.recipemaster.app</small>
+
+</div>

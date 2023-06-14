@@ -1,0 +1,65 @@
+.message-button-container {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+
+.btn{
+    white-space: normal !important;
+		width: 120px;
+}
+
+.align-btn-right{
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+}
+
+.align-btn-left{
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+}
+
+.alignBox{
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.message{
+    white-space: normal !important;
+}
+
+.container{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.container-content{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.container-btn{
+    justify-content: center !important;
+    align-items: center !important;
+    display: flex !important;
+    width: auto !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+.container-img{
+    margin: auto !important;
+}
+
+.container-text{
+    margin: 0 !important;
+}
+
+.space{
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+

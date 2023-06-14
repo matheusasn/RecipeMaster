@@ -1,0 +1,77 @@
+<div *ngIf="!mobile" class="drag-drop-container row m-0" style="margin-top:29px!important" cdkDropListGroup
+	(scrolled)="onScroll()" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="250">
+	<div cdkDropList class="m-0" [cdkDropListEnterPredicate]="enter" (cdkDropListDropped)="drop()" #placeholder></div>
+	<div cdkDropList class="m-0" *ngFor="let item of itemsOriginalPaged; let i = index;"
+		[cdkDropListEnterPredicate]="enter" (cdkDropListDropped)="drop()" [ngClass]="recipes ? 'col-md-4' : 'col-md-6'">
+		<div cdkDrag [cdkDragDisabled]="disabledCustom || mobile || isTemplateRecipesScreenActive" class="box card"
+			[ngClass]="recipes ? 'card-recipe' : 'card-menu'">
+			<cp-intern-drag-drop [options]="options" [first]="first" [item]="item" [recipe]="recipes"
+				[isTemplateRecipesScreenActive]="isTemplateRecipesScreenActive"
+				(see)="first ? newItem.emit(true) : showItem(item.id)" (delete)="deleteRecipe(item.id)" (copy)="copy(item)"
+				(gerarPdfEmiiter)="gerarPdf($event)">
+			</cp-intern-drag-drop>
+			<div class="btn-add-item" *ngIf="btnAddIsActive" (click)="newItem.emit(true)">
+				<i class="fa fa-plus"></i>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="mobile" class="drag-drop-container row m-0" (scrolled)="onScroll()" infiniteScroll
+	[infiniteScrollDistance]="1" [infiniteScrollThrottle]="250">
+	<!-- mobile -->
+	<div class="m-0" #otherPlaceholder></div>
+	<div class="m-0" style="width:100%" *ngFor="let item of itemsOriginalPaged; let i = index;"
+		[ngClass]="recipes ? 'recipes-cards-container' : 'cards-container custom-margin'">
+		<div class="box card" [ngClass]="recipes ? 'card-recipe-mobile' : 'card-menu'">
+			<cp-intern-drag-drop [cdkDragDisabled]="isTemplateRecipesScreenActive" [options]="options" [first]="first"
+				[item]="item" [recipe]="recipes" [isTemplateRecipesScreenActive]="isTemplateRecipesScreenActive"
+				(see)="first ? newItem.emit(true) : showItem(item.id)" (delete)="deleteRecipe(item.id)" (copy)="copy(item)"
+				(gerarPdfEmiiter)="gerarPdf($event)">
+			</cp-intern-drag-drop>
+		</div>
+	</div>
+</div>
+
+<recipemaster-pdf [chartData]="chartData" [recipe]="selectedItem" #pdfReceita></recipemaster-pdf>
+<recipemaster-pdf-menu [menu]="selectedItem" [menuRecipes]="menuRecipes" #pdfCardapio></recipemaster-pdf-menu>
+
+<recipe-report [ReportOptions]="reportOptions" [type]="options.type" #pdfOld></recipe-report>
+
+<p-dialog header="{{ getGenerateLabel() | translate }}" [(visible)]="showDialog" [modal]="false" [responsive]="true"
+	[style]="{width: '400px', minWidth: '200px'}" [minY]="70" [maximizable]="false" [baseZIndex]="11002" id="dialog1">
+	<div class="row hidden">
+		<div class="col-10">
+			<p-checkbox name="group1" binary="true" [(ngModel)]="selectedRecipe.general"
+				label="{{ 'RECIPE.CHECK_O1' | translate }}" inputId="general"></p-checkbox>
+		</div>
+		<div class="col-10">
+			<p-checkbox name="group1" binary="true" [(ngModel)]="selectedRecipe.ingredients"
+				label="{{ 'RECIPE.CHECK_O2' | translate }}" inputId="ingredients"></p-checkbox>
+		</div>
+		<div class="col-10" *ngIf="options.type == 0">
+			<p-checkbox name="group1" binary="true" [(ngModel)]="selectedRecipe.steps"
+				label="{{ 'RECIPE.CHECK_O3' | translate }}" inputId="steps"></p-checkbox>
+		</div>
+		<div class="col-10" *ngIf="options.type == 1">
+			<p-checkbox name="group1" binary="true" [(ngModel)]="selectedRecipe.menuItens"
+				label="{{ 'RECIPE.CHECK_O6' | translate }}" inputId="menuItens"></p-checkbox>
+		</div>
+		<div class="col-10">
+			<p-checkbox name="group1" binary="true" [(ngModel)]="selectedRecipe.financial"
+				label="{{ 'RECIPE.CHECK_O4' | translate }}" inputId="financial"></p-checkbox>
+		</div>
+		<div class="col-10" *ngIf="options.type == 0">
+			<p-checkbox [disabled]="!nutritionalInfoPermission" name="group1" binary="true"
+				[(ngModel)]="selectedRecipe.nutrition" label="{{ 'RECIPE.CHECK_O5' | translate }}"
+				inputId="nutrition"></p-checkbox>
+			<a *ngIf="!nutritionalInfoPermission" class="cp-ver-planos" [routerLink]="['/plans']">Ver Planos</a>
+		</div>
+	</div>
+	<p-footer>
+		<button class="gerarStyle" type="button" pButton icon="pi pi-check" (click)="confirmPdf()"
+			label="{{ 'RECIPE.INPUT.GERAR' | translate }}"></button>
+		<button type="button" pButton icon="pi pi-close" (click)="showDialog = false"
+			label="{{ 'RECIPE.INPUT.CANCELAR' | translate }}" class="ui-button-secondary"></button>
+	</p-footer>
+</p-dialog>

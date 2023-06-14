@@ -1,0 +1,294 @@
+@font-face {
+	font-family: "Roboto";
+	src: url("Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Roboto";
+	font-weight: bold;
+	src: url("Roboto-Bold.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Roboto";
+	font-weight: 900;
+	src: url("Roboto-Black.ttf") format("truetype");
+}
+
+.hidden-preview {
+	position: absolute;
+	top: 0;
+	left: -3000px;
+}
+
+.pdf .round-title {
+	background-image: linear-gradient(to right, #f78843, #fa4442);
+	width: 99.9%;
+	height: 23px;
+}
+
+.pdf .recipe {
+	border-collapse: separate;
+	border-spacing: 0;
+	width: 100% !important;
+	height: 495px;
+
+    border-radius: 23px;
+	background-color: #FFF;
+
+	.td-ingredients, .td-financeiro, .td-steps {
+		padding: 0 4px !important;
+	}
+
+}
+
+.pdf .chart {
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+}
+
+.pdf .recipe tbody {
+	background-color: #FFFFFF;
+	color: #000000;
+}
+
+.pdf .grey {
+	color: #555555;
+}
+
+.pdf h1, .pdf h2, .pdf h3, .pdf p {
+	font-family: "Roboto", Arial, sans-serif;
+	font-size: 16px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	font-weight: normal;
+}
+
+.pdf h2 {
+	font-size: 12px;
+}
+
+.pdf h3 {
+	font-size: 10px;
+	// color: #777;
+}
+
+.pdf p {
+	font-size: 9px;
+	color: #777;
+}
+
+.pdf .text-left {
+	text-align: left;
+}
+
+.pdf .text-right {
+	text-align: right;
+}
+
+.pdf .text-center {
+	text-align: center;
+}
+
+.pdf .width-100-perc {
+	width: 100% !important;
+}
+
+.pdf .recipe tr td {
+	border-top: 1px solid #bbb;
+	border-right: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
+	padding: 0px;
+	vertical-align: baseline;
+}
+
+.pdf .recipe tr td:first-child {
+	border-left: 1px solid #bbb;
+}
+
+.pdf .recipe tr td:last-child {
+	border-top-right-radius: 23px;
+	border-bottom-right-radius: 23px;
+}
+
+.pdf .recipe tr .td-main {
+	min-height: 480px;
+	vertical-align: top;
+	text-align: center;
+}
+
+.pdf .recipe tr .td-main img {
+	max-width: 100%;
+	border-top-left-radius: 23px;
+}
+
+.pdf .recipe tr td:first-child {
+	// border-left: 1px solid #bbb;
+	border-top-left-radius: 23px;
+}
+
+.pdf .recipe tr:last-child td:first-child {
+	border-bottom-left-radius: 23px;
+}
+
+.pdf .recipe tr:last-child td:last-child {
+	border-bottom-right-radius: 23px;
+}
+
+.pdf .recipe-inside, .pdf .legend, .pdf .ingredients, .pdf .financial {
+	font-family: "Roboto", Arial, sans-serif;
+	width: 100%;
+	font-size: 8px;
+
+	.label {
+		font-size: 9px;
+		display: block;
+	}
+
+	.value {
+		font-size: 14px;
+	}
+}
+
+.pdf .recipe-inside tr td, .pdf .legend tr td, .pdf .ingredients tr td, .pdf .financial tr td {
+	border: 0 none;
+	padding: 10px;
+	border-radius: 0 !important;
+}
+
+.pdf .global tr td {
+	padding: 1px;
+}
+
+.pdf .global strong {
+	font-size: 9px;
+}
+
+.pdf .ingredients, .pdf .financial {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.pdf .ingredients tr td {
+	padding: 6px;
+}
+
+.pdf .ingredients tr {
+	background-color: #EEEEEE;
+}
+
+.pdf .legend tr td, .pdf .legend p {
+	padding: 0;
+	margin: 0;
+	font-size: 6px;
+}
+
+.pdf .legend p {
+	margin-left: 5px;
+}
+
+.pdf .legend tr td, .pdf .financial tr td {
+	width: 50%;
+	font-size: 8px;
+}
+
+.pdf .ingredients td {
+	border-right: none;
+	border-left: none;
+}
+
+.pdf .td-main ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	font-family: "Roboto", Arial, sans-serif;
+}
+
+.pdf .td-main .steps {
+	font-family: "Roboto", Arial, sans-serif;
+	font-size: 8px;
+	text-align: left;
+	border: none !important;
+	padding: 0;
+	margin: 0;
+}
+
+.pdf .td-main .steps td {
+	border: none !important;
+	padding: 0;
+	padding-right: 2px;
+	padding-bottom: 2px;
+	margin: 1px;
+}
+
+
+.pdf .recipe-inside tr:last-child td:first-child,
+.pdf .recipe-inside tr:first-child td:first-child,
+.pdf .legend tr:last-child td:first-child,
+.pdf .legend tr td:first-child,
+.pdf .legend tr:first-child td:first-child,
+.pdf .ingredients tr:last-child td:first-child,
+.pdf .ingredients tr td:first-child,
+.pdf .ingredients tr:first-child td:first-child,
+.pdf .financial tr:last-child td:first-child,
+.pdf .financial tr td:first-child,
+.pdf .financial tr:first-child td:first-child {
+	border-left: 0 none;
+}
+
+// .pdf .financial tr td:first-child {
+// 	border-right: 1px solid #bbb;
+// }
+
+.pdf .ingredients tr:last-child td:first-child,
+.pdf .ingredients tr td:first-child,
+.pdf .ingredients tr td:last-child,
+.pdf .ingredients tr:first-child td:first-child,
+.pdf .ingredients tr:last-child td:last-child,
+.pdf .ingredients tr td,
+.pdf .financial tr:last-child td:first-child,
+.pdf .financial tr td:first-child,
+.pdf .financial tr td:last-child,
+.pdf .financial tr:first-child td:first-child,
+.pdf .financial tr:last-child td:last-child,
+.pdf .financial tr td {
+	border-bottom-right-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+}
+
+// .pdf .ingredients tr.border_bottom td {
+// 	border-bottom: 1pt solid black;
+// }
+
+.pdf .financial tr td {
+	font-family: "Roboto", Arial, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.pdf .financial .green {
+	color: #00aa00;
+}
+
+li {
+	margin-bottom: 2px;
+}
+
+.border-right {
+	border-right: 1px solid #BBBBBB;
+}
+
+canvas {
+	height: 100px;
+    width: 100px;
+	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+}
+
+table tbody tr td p {
+	font-size: 9px;
+}

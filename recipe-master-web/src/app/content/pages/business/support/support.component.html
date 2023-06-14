@@ -1,0 +1,193 @@
+<cp-loading></cp-loading>
+<div class="cp-content">
+    <div class="row m-2">
+        <div class="col">
+            <div class="card">
+
+                <m-tutorial-iframe *ngIf="urlTutorial" [url]="urlTutorial" (onClose)="doCloseTutorial($event)"></m-tutorial-iframe>
+
+                <mat-tab-group *ngIf="!urlTutorial" mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+
+                    <!-- ABA DE TUTORIAIS -->
+                    <!-- <mat-tab label="{{ 'SUPPORT_PAGE.TAB3' | translate }}">
+
+                        <div class="row text-center p-3">
+                            <div class="col-12 col-sm-6 col-xl-4 mb-4" *ngFor="let item of tutorialItens">
+                                <m-tutorial-card [item]="item" mode="onclick" (onClick)="openTutorial($event)"></m-tutorial-card>
+                            </div>
+                        </div>
+
+                    </mat-tab> -->
+                    <!-- ABA DE TUTORIAIS END -->
+
+                    <!--Página do suporte-->
+                    <mat-tab label="{{ 'MENU.SUPPORT' | translate }}">
+                        <!--Conteúdo da página de suporte-->
+                        <div class="col col-10 offset-1">
+                            <div class="m-portlet__body">
+
+                            <!-- FORM CONTATO -->
+                            <ng-container *ngIf="!supportSent">
+                                <form *ngIf="formGroup" class="m-form m-form--fit m-form--label-align-right" name="form" [formGroup]="formGroup" novalidate>
+                                <div class="m-portlet__body">
+                                    <div class="row">
+                                    <div class="col-sm-12">
+                                        <!-- <div class="form-group m-form__group"> -->
+                                        <div class="d-flex align-items-center mb-4">
+																					<h4 class="p-0 ml-0">{{ 'SUPPORT_PAGE.SUPPORT_TXT1' | translate }}</h4>
+																				</div>
+                                        <p>{{ 'SUPPORT_PAGE.SUPPORT_TXT2' | translate }}</p>
+                                        <p>{{ 'SUPPORT_PAGE.SUPPORT_TXT3' | translate }}</p>
+                                        <!-- </div> -->
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group m-form__group">
+                                            <div class="form-group m-form__group">
+                                            <label class="col-form-label">{{ 'SUPPORT_PAGE.SUPPORT_TXT4' | translate }} </label>
+                                            <select class="form-control cp-input" name="assunto" formControlName="assunto">
+                                                <option selected [disabled]="true" translate>{{'INPUTS.OPTION_DEFAULT'}}</option>
+                                                <option *ngFor="let assunto of assuntos" [ngValue]="assunto">{{ assunto | translate }}</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group m-form__group">
+                                        <label class="col-form-label">{{ 'SUPPORT_PAGE.SUPPORT_TXT5' | translate }}</label>
+                                        <textarea class="form-control m-input cp-input" name="mensagem" formControlName="mensagem" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group m-form__group">
+                                        <p class="mt-2 mb-0 pb-0">{{ 'SUPPORT_PAGE.SUPPORT_TXT6' | translate }}</p>
+                                        <label class="col-form-label mt-0 pt-0">{{ 'SUPPORT_PAGE.SUPPORT_TXT7' | translate }}</label>
+                                        <input class="form-control" type="file" (change)="onFileChange($event)">
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="m-portlet__foot m-portlet__foot--fit">
+                                    <div class="m-form__actions">
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                        <button type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1" name="btnBack" (click)="cancel()" translate>{{ 'INPUTS.BACK' }}</button>
+                                        <button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom" name="btnSave" (click)="send()" translate>{{ 'INPUTS.SEND' }}</button>&nbsp;&nbsp;
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                </form>
+                            </ng-container>
+                            <!-- FIM FORM CONTATO -->
+
+                            <!-- EMAIL ENVIADO -->
+                            <ng-container *ngIf="supportSent">
+                                <form class="m-form m-form--fit m-form--label-align-right" name="form">
+                                <div class="m-portlet__body">
+                                    <div class="row text-center">
+                                    <div class="col-12">
+
+                                        <div class="m-4" *ngIf="!error" >
+                                        <h1 class="m-4">{{ 'SUPPORT_PAGE.SUPPORT_TXT8' | translate}}</h1>
+                                        {{ 'SUPPORT_PAGE.SUPPORT_TXT9' | translate}}
+                                        </div>
+                                        <div class="m-4" *ngIf="error" >
+                                        <h1 class="m-4">{{ 'SUPPORT_PAGE.SUPPORT_TXT10' | translate}}</h1>
+                                        {{ 'SUPPORT_PAGE.SUPPORT_TXT11' | translate}}
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="m-portlet__foot m-portlet__foot--fit">
+                                    <div class="m-form__actions">
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                        <button type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1" name="btnBack" (click)="sendAgain()" translate>{{ 'INPUTS.BACK' }}</button>
+                                        <!-- <button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom" name="btnSave" (click)="sendAgain()">Enviar Outro</button>&nbsp;&nbsp; -->
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                </form>
+                            </ng-container>
+                            <!-- FIM EMAIL ENVIADO -->
+
+                            </div>
+                        </div>
+                    </mat-tab>
+
+                    <!--Página do FAQ-->
+                    <mat-tab label="{{ 'SUPPORT_PAGE.TAB2' | translate }}">
+
+
+											<div class="col col-10 offset-1">
+													<form id="componentSearch" class="m-form" name="searchForm" autocomplete='off' [formGroup]="searchForm" novalidate>
+
+														<div class="form-group">
+
+															<div class="input-group">
+																	<div class="input-group-prepend">
+																		<div class="input-group-text"><i class="fa fa-search"></i> </div>
+																	</div>
+
+																	<input autocomplete="off" type="text" class="form-control" name="searchTerm" formControlName="searchTerm" placeholder="{{ 'SUPPORT_PAGE.INPUT_SEARCH_PLACHOLDER' | translate }}">
+
+																</div>
+
+														</div>
+
+													</form>
+                            <!--Item 1-->
+														<ng-container *ngFor="let question of questions; let i = index">
+															<div class="row">
+															<div class="col-sm-12">
+																	<div  (click)="toggleCollapse(i); girar(i)"
+																			[attr.aria-expanded]="!isCollapsed"
+																			aria-controls="collapseExample"
+																			class="pointer">
+																	<div class="card-body">
+																			<svg id="{{i}}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+																			<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																					<polygon points="0 0 24 0 24 24 0 24"></polygon>
+																					<path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#F24159" fill-rule="nonzero"></path>
+																					<path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#F05368" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
+																			</g>
+																			</svg>
+																			<span class="title">
+																				{{ getQuestionTitle(question) }}
+																			</span>
+																	</div>
+																	</div>
+															</div>
+															</div>
+															<div class="row">
+															<div class="col-sm-12">
+																	<div id="collapseExample" [ngbCollapse]="isCollapsed[i]">
+																	<div class="card-body" [innerHTML]="getQuestionAnswer(question)">
+																	</div>
+																	</div>
+															</div>
+															</div>
+														</ng-container>
+                            <!--Item 1-->
+                        </div>
+                    </mat-tab>
+
+                </mat-tab-group>
+
+							</div>
+							<div class="text-center mt-2">
+								<a href="javascript:;" (click)="showTerms()" translate> {{ 'AUTH.INPUT.TERMS_AND_CONDITIONS' }}</a>
+								{{ 'PLANO_PAGE.TXT_TITLE4' | translate }}
+								<a href="javascript:;" (click)="showPrivacyPolicy()"> {{ 'AUTH.INPUT.PRIVACY_POLICY' | translate }}</a>
+							</div>
+        </div>
+    </div>
+</div>

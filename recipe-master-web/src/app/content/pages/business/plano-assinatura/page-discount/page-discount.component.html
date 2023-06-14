@@ -1,0 +1,104 @@
+<div class="jumbotron jumbotron-fluid titulo">
+	<div class="container text-center">
+		<h1>{{ 'PLANO_PAGE.TXT_TITLE1' | translate }} <span class="negritoTexto">{{ 'PLANO_PAGE.TXT_TITLE2' | translate }}</span> <span class="negritoTexto">{{ 'PLANO_PAGE.TXT_TITLE3' | translate}}</span></h1>
+		<h1>{{ 'PLANO_PAGE.TXT_TITLE4' | translate}} <span class="negritoTexto"> {{ 'PLANO_PAGE.TXT_TITLE5' | translate}}</span> {{ 'PLANO_PAGE.TXT_TITLE6' | translate }}</h1>
+	</div>
+</div>
+
+<div class="cp-content-fluid">
+	<div class="container" *ngIf="plans">
+		<div class="row">
+			<div class="col-12 col-lg-12 col-xl-12 col-plan">
+				<countdown-discount [minutesToAdd]="25" [showButton]="false"></countdown-discount>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12 col-lg-6 col-xl-4 mt-4 col-plan">
+				<m-plan-card
+					[user]="user"
+					[image]="'assets/app/media/img/plano-assinatura/img1.png'"
+					[title]="'PLANO_PAGE.TXT_CARD_TITLE2' | translate"
+					[plan]="plans.basic"
+					[discountPlan]="plans.basic_40off"
+					[isPaypal]="isPaypal"
+					[perfil]="PerfilEnum.USER_BASIC"
+					[buttonLabel]="'PLANO_PAGE.BTN_TXT1'"
+					[description]="'E muito mais praticidade, por apenas...'"
+					[hasDiscount]="true"
+					[isPix]="false"
+					[imagePrice]="'./assets/plans_6_90.svg'">
+				</m-plan-card>
+			</div>
+			<div class="col-12 col-lg-6 col-xl-4 mt-4 col-plan">
+				<m-plan-card
+					[user]="user"
+					[image]="'assets/app/media/img/plano-assinatura/img2.png'"
+					[isBigger]="true"
+					[title]="'PLANO_PAGE.TXT_CARD_TITLE5' | translate"
+					[plan]="plans.pro"
+					[discountPlan]="plans.pro_40off"
+					[isPaypal]="isPaypal"
+					[perfil]="PerfilEnum.USER_PRO"
+					[buttonLabel]="'PLANO_PAGE.BTN_TXT2'"
+					[description]="'Mais organização para o seu negócio por apenas...'"
+					[hasDiscount]="true"
+					[isPix]="false"
+					[imagePrice]="'./assets/plans_12_90.svg'">
+				</m-plan-card>
+			</div>
+			<div class="col-12 col-lg-6 col-xl-4 mt-4 col-plan">
+				<m-plan-card
+					[user]="user"
+					[image]="'assets/app/media/img/plano-assinatura/img3.png'"
+					[isBigger]="true"
+					[plan]="plans.pro_nutri"
+					[discountPlan]="plans.pro_nutri_40off"
+					[title]="'PLANO_PAGE.TXT_CARD_TITLE6' | translate"
+					[isPaypal]="isPaypal"
+					[perfil]="PerfilEnum.USER_PRO_NUTRI"
+					[buttonLabel]="'PLANO_PAGE.BTN_TXT3'"
+					[highlight]="true"
+					[description]="'Mais conhecimento e valor agregado por...'"
+					[hasDiscount]="true"
+					[isPix]="false"
+					[imagePrice]="'./assets/plans_24_90.svg'">
+				</m-plan-card>
+			</div>
+		</div>
+		<div class="row m--margin-top-25">
+			<div class="col-12 col-lg-6 col-xl-6 col-plan">
+				<other-payments-card [routerLink]="['/plans/pix']" [queryParams]="{discount: true}" title="Pague utilizando o Pix" [imageSrc]="'assets/payment/logo_pix.png'"></other-payments-card>
+			</div>
+			<div class="col-12 col-lg-6 col-xl-6 col-plan">
+				<other-payments-card [routerLink]="['/payments']" [queryParams]="{discount: true}" title="Veja outras formas de pagamento" [imageSrc]="'assets/payment/logo_payments.png'"></other-payments-card>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="m--margin-top-60">
+			<p class="txt3">{{ 'Por que assinar o recipemaster?' | translate }}</p>
+		</div>
+
+		<div class="m--margin-top-25">
+			<p class="txt2" [innerHTML]="'PLANO_PAGE.TXT_BODY3' | translate"></p>
+		</div>
+
+		<div class="row">
+			<div class="col-12 col-lg-6 col-xl-4 mt-5 col-plan">
+				<plan-feat-card></plan-feat-card>
+			</div>
+
+			<div class="col-12 col-lg-6 col-xl-4 mt-5 col-plan">
+				<plan-feat-card></plan-feat-card>
+			</div>
+
+			<div class="col-12 col-lg-6 col-xl-4 mt-5 col-plan">
+				<plan-feat-card></plan-feat-card>
+			</div>
+		</div>
+
+	</div>
+
+</div>

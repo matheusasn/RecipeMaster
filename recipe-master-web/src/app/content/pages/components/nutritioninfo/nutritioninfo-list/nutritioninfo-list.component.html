@@ -1,0 +1,30 @@
+<div class="container text-center" *ngIf="items && items.length == 0">
+  <p>{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.MSG_NOT_FOUND' | translate}}</p>
+</div>
+
+<ng-container *ngFor="let item of items | customNutritionalinfo">
+
+  <div class="row mt-4 mb-4">
+    <div class="col-9 pl-5">
+      {{item.description}}
+    </div>
+    <div class="col-3 custom-text-align">
+      <a class="pr-4 cp-pointer" *ngIf="item.origin == NutritionInfoOrigin.RECIPE" (click)="doSwal(item)"><i class="la la-edit"></i></a>
+      <a class="pr-4 cp-pointer" *ngIf="item.origin != NutritionInfoOrigin.RECIPE" (click)="doEditar(item)"><i class="la la-edit"></i></a>
+      <a class="pr-4 cp-pointer" (click)="doExcluir(item)"><i class="la la-trash text-danger"></i></a>
+    </div>
+  </div>
+
+  <hr class="ml-2">
+
+</ng-container>
+
+<div class="m-portlet__foot m-portlet__foot--fit mb-3">
+  <div class="m-form__actions">
+    <div class="row">
+      <div class="col-12 text-center">
+        <button type="button" class="btn btn-link m-btn mr-1" name="btnCancel" (click)="doClose()">{{'INPUTS.BACK' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

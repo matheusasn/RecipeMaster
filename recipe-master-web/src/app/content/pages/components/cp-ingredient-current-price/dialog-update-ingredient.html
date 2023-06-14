@@ -1,0 +1,43 @@
+<cp-dialog-default (close)="cancel()">
+
+	<!-- Header -->
+	<span title>{{ 'INGREDIENT.INGREDIENT_TXT14' | translate }}</span>
+
+	<!-- Body -->
+	<div body>
+		<form class="m-form m-form--fit m-form--label-align-right" name="form" [formGroup]="formGroup" novalidate *ngIf="formGroup">
+			<div class="m--margin-top-10">
+				<div class="row">
+					<div class="col-12">
+						<div class="form-group m-form__group">
+							<label class="col-form-label" translate>{{ 'INPUTS.PRICE' }}</label>
+							<input inputmode="numeric" pattern="[0-9]*" maxlength="10" currencyMask [options]="{ prefix: prefix, thousands: '.', decimal: ',', align: 'center' }" name="price" formControlName="price" placeholder="{{prefix + '0,00'}}"  type="text" class="form-control m-input cp-input" >
+						</div>
+					</div>
+				</div>
+
+				<div class="row m--margin-top-10">
+					<div class="col-6">
+						<div class="form-group m-form__group">
+							<label class="col-form-label" translate>{{ 'INPUTS.AMOUNT' }}</label>
+							<input inputmode="numeric" pattern="[0-9]*" maxlength="10" class="form-control m-input cp-input" name="unityQuantity" formControlName="unityQuantity" placeholder="0,00" type="number">
+						</div>
+					</div>
+
+					<div class="col-6">
+						<div class="form-group m-form__group">
+							<m-unit-select class="update-unit" [options]="{basic: true, canUpdate: true, canCreate: true}" [ingredient]="ingredient" [form]="formGroup" [units]="units | unitFilter:ingredient"></m-unit-select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Footer -->
+	<div footer class="text-center">
+		<button id="btnSave" type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom"
+				name="btnSave" (click)="save()" translate>{{ 'INPUTS.SAVE' }}</button>
+	</div>
+
+</cp-dialog-default>

@@ -1,0 +1,77 @@
+<cp-loading></cp-loading>
+
+<div class="cp-content">
+  <div class="row m-2">
+    <div class="col">
+
+      <!--Titulo da tela-->
+      <div class="row nameTela">
+        <div class="col-12 col-sm-6 col-ms-6">
+            <h2>
+              {{ 'LISTA_COMPRAS.TITLE' | translate }}
+                <!-- <ng-template #popContent>
+                    {{ 'RECIPE.MSG_AJUDA' | translate }}
+                    <span id="link" (click)="saibaMais()">
+                        {{ 'SUPPORT_PAGE.FAQ_TXT_GERAL' | translate }}
+                    </span>
+                </ng-template>
+                <i 	class="far fa-question-circle" 
+                    id="msgAjuda" 
+                    [ngbPopover]="popContent" 
+                    placement="bottom"
+                    triggers="mouseenter"
+                    [autoClose]="true">
+                </i> -->
+            </h2>
+        </div>
+        <div class="col-12 col-sm-6 col-ms-6 text-right">
+          <button class="btn btn-accent m-btn m-btn--air m-btn--custom" 
+                  mat-button (click)="doCreate()" 
+                  translate>
+              {{ 'LISTA_COMPRAS.BTN_CADASTRAR' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <!--Barra de pesquisa-->
+      <!--<div class="row mb-3">
+        <div class="col-sm-12 col-md-12">
+          <m-cp-ingredient-search (onChange)="onChangeSearch($event)" 
+                                  [responseType]="'listaCompraGeralUser'" 
+                                  [behavior]="'search'" 
+                                  (onSearch)="onSearch($event)" 
+                                  placeholder="{{'LISTA_COMPRAS.BARRA_PESQUISA' | translate}}">
+          </m-cp-ingredient-search>
+        </div>
+      </div>-->
+      
+      <!--Listagem dos dados-->
+      <div class="m-section" *ngIf="listaDeCompras?.length > 0">
+        <div class="row">
+          <div *ngFor="let l of listaDeCompras" class="col-sm-6">
+            <div  class="card" 
+                  (click)="edit(l.id)" 
+                  ngbTooltip="{{'LISTA_COMPRAS.TOOLTIP_MSG' | translate}}">
+              <div class="card-body">
+                <div class="row" id="lineCard1">
+                  <p class="card-text col-6 col-sm-6 col-md-6" id="dataInfo">{{l.dataCadastro | date: 'dd/MM/yyyy'}}</p>
+                  <p class="card-text col-6 col-sm-6 col-md-6" id="valorMarcado">{{l.precoMarcado?.toFixed(2) | currency:cifrao}}</p>
+                </div>
+                <div class="row">
+                  <p class="card-text col-6 col-sm-6 col-md-6" id="quantIngredient">{{l.quantIngredient}} itens / {{l.quantIngredientMarked}} marcados</p>
+                  <p class="card-text col-6 col-sm-6 col-md-6" id="valor">{{l.preco?.toFixed(2) | currency:cifrao}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Msg de informação-->
+      <div class="alert alert-info" *ngIf="listaDeCompras.length == 0" translate>
+        {{ 'RECIPE.NO_RESULTS'}}
+      </div>
+
+    </div>
+  </div>
+</div>

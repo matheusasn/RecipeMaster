@@ -1,0 +1,66 @@
+.btnStyle {
+    width: 70%;
+}
+
+.spaceBtns {
+    margin-top: 2%;
+}
+
+@media only screen and (min-width: 900px) {
+    .btnPostionLeft {
+        float: left;
+    }
+
+    .btnPositionRight {
+        float: right;
+    }
+}
+
+@media only screen and (max-width: 574px) {
+    .btnStyle {
+        width: 70%;
+        margin-left: 14%;
+        margin-right: 14%;
+    }
+
+		.margin-t {
+			margin-top: 7px;
+		}
+}
+
+@media only screen and (max-width: 768px) {
+	.margin-t {
+		margin-top: 7px;
+	}
+}
+
+.mobile-logout {
+	display: none;
+	@media only screen and (max-width: 1024px) {
+		display: block;
+		button {
+			color: red;
+		}
+	}
+}
+
+.plan-info {
+    font-weight: 500;
+    color: #01A96C;
+    font-family: sans-serif;
+    margin: 12px 0 8px 0;
+}
+
+.m-portlet .m-portlet__body-separator {
+    margin: 4px -2.2rem;
+}
+
+.btns {
+	margin-top: 20px;
+	button {
+		border-radius: 6px!important;
+    height: 49px;
+    padding: 10px!important;
+    font-weight: 500;
+	}
+}

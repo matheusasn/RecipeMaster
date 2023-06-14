@@ -1,0 +1,33 @@
+// Container
+.flex-container {
+	display: flex;
+	flex-direction: row;
+}
+// Container Chart
+.canvas-container {
+	position: relative;
+	height: 180px;
+	width: 180px;
+	margin-left: 10px;
+
+	@media only screen and (max-width: 768px) {
+		height: auto;
+		min-height: 200px;
+		max-width: 300px;
+		margin-top: 25px;
+	}
+}
+
+.canvas-pdf-container {
+	position: relative;
+	height: 140px;
+	width: 140px;
+	margin-left: 10px;
+
+	@media only screen and (max-width: 768px) {
+		height: auto;
+		min-height: 200px;
+		max-width: 300px;
+		margin-top: 25px;
+	}
+}

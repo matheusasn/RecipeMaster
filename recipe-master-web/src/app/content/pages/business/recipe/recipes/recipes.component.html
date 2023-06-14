@@ -1,0 +1,391 @@
+<div class="cp-content" [ngStyle]="{'overflow': !fullRecipes || fullRecipes.length == 0 ? '' : 'none' }">
+	<!--<button class="btn btn-lg btn-outline-primary" (click)="open()">REALIZAR PESQUISA</button>-->
+	<!-- <div class="row">
+		<div class="col"> -->
+	<div class="row nameTela custom-padding mr-0">
+		<div class="col-12 col-md-6" style="padding-right:0">
+			<div class="page-title-wrapper">
+				<div class="title-infor">
+					<h2 class="title-recipe"> {{ 'RECIPE.PAGE_TITLE' | translate }} </h2>
+				</div>
+				<div>
+					<div style="cursor:pointer;" (click)="$event.stopPropagation()" mat-icon-button [matMenuTriggerFor]="item">
+						<i class="fas fa-ellipsis-v report-icon"></i>
+					</div>
+					<mat-menu #item="matMenu">
+						<button mat-menu-item (click)="exportReport()">
+							<span>{{ 'RECIPE.EXPORT_LIST' | translate }}</span>
+						</button>
+						<button mat-menu-item (click)="toggleRecipeVisualizationOrder()">
+							<span *ngIf="recipeFilterOrder === 'POSITION'">{{ 'RECIPE.ALPHABETICAL_ORDER' | translate }}</span>
+							<span *ngIf="recipeFilterOrder !== 'POSITION'">{{ 'RECIPE.LAST_UPDATED' | translate }}</span>
+						</button>
+					</mat-menu>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-sm-12 col-md-6 text-right">
+			<button class="btn btn-accent m-btn m-btn--air m-btn--custom btn-color btn-add-recipe" mat-button
+				(click)="doCreate()" translate>
+				<span *ngIf="!creatingRecipe">{{ 'INPUTS.NEW_RECIPE' | translate }}</span>
+				<mat-spinner class="spinner" style="margin: 0 auto" [diameter]="spinner.spinnerSize"
+					[color]="spinner.spinnerColor" [mode]="spinner.mode" [value]="spinner.value"
+					*ngIf="creatingRecipe"></mat-spinner>
+			</button>
+		</div>
+	</div>
+
+	<!-- <ng-adsense
+                [display]="'inline-block'"
+                [width]="320"
+                [height]="108"
+            ></ng-adsense> -->
+
+	<div class="row my-3 custom-padding mr-0" style="margin-left: 0;">
+		<div class="col-sm-12 col-md-12 wrapper-search">
+			<!-- BUSCADOR de ingredientes (tipo AUTOCOMPLETE) -->
+			<m-cp-ingredient-search id="searchRecipe" (onChangeViewType)="changeViewType($event)"
+				(onChange)="onChangeSearch($event)" [activeViewType]="viewType" [responseType]="'recipe'" [behavior]="'search'"
+				placeholder="{{ 'RECIPE.RECIPE_PESQUISA' | translate }}"></m-cp-ingredient-search>
+		</div>
+	</div>
+
+	<div class="row">
+		<div [ngClass]="{'col-9': viewType === 'LIST', 'col-12': viewType === 'CARDS'}">
+			<div class="container-col-9">
+				<m-recipes-categories-tags [user]="user" [categories]="categories"
+					[recipeListSize]="showInfo ? 0 : totalRecipes" [canCreate]="true"
+					(choosedCategory)="handleCatEscolhida($event)" (getCategoria)="handleGetCategoria()"
+					(listUpdated)="categoriesUpdated($event)"></m-recipes-categories-tags>
+			</div>
+		</div>
+		<div class="col-3 d-flex" *ngIf="viewType === 'LIST'">
+			<mat-radio-group aria-labelledby="radio-group-label" class="radio-group-option" [(ngModel)]="optionSeason"
+				*ngFor="let season of seasons" [value]="season">
+				<mat-radio-button class="example-radio-button" [value]="season">
+					<span>{{season}}</span>
+				</mat-radio-button>
+			</mat-radio-group>
+		</div>
+	</div>
+
+	<div class="loading-style" *ngIf="loading">
+		<mat-progress-spinner class="example-margin" [color]="'warn'" [mode]="'indeterminate'" [value]="50">
+		</mat-progress-spinner>
+	</div>
+
+	<div class="container-table-recipes" *ngIf="!loading">
+
+		<div class="m--margin-top-30-mobile custom-padding"
+			*ngIf="viewType === 'CARDS' && recipesData?.length > 0">
+			<cp-custom-card [selectedCategory]="catEscolhido" [recipesAux]="recipesData"
+				[disabledCustom]="searchTerm && searchTerm !== ''" [recipes]="true" [items]="recipesData"
+				[isTemplateRecipesScreenActive]="isTemplateRecipesScreenActive" #dragCustom (selectItem)="edit($event)"
+				(newItem)="doCreate()" [first]="first" [ready]="ready" (fetchRecipes)="fetchRecipes()"
+				(updatedList)="updateDragPositions($event)" (fetchCategories)="fetchCategories()">
+			</cp-custom-card>
+		</div>
+
+		<div class="m-section" *ngIf="viewType === 'LIST' && recipesData?.length">
+			<!-- <div class="ordenation-container">
+				<a (click)="orderUsedIngredients('name')">
+					{{ 'ORDENATION_REVENUES.NAME' | translate }}
+					<mat-icon *ngIf="sortField !== 'name'">keyboard_arrow_down</mat-icon>
+					<mat-icon *ngIf="sortField === 'name' && sortDirection === 'DESC'">keyboard_arrow_down</mat-icon>
+					<mat-icon *ngIf="sortField === 'name' && sortDirection === 'ASC'">keyboard_arrow_up</mat-icon>
+				</a>
+				<a class="qtd-order"
+					(click)="orderUsedIngredients(optionSeason === 'Total' ? 'totalCostValue' : 'costUnitValue')">
+					{{ 'ORDENATION_REVENUES.SALE' | translate }}
+					<mat-icon
+						*ngIf="(sortField !== 'totalCostValue' && sortField !== 'costUnitValue')">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalCostValue' || sortField === 'costUnitValue') && sortDirection === 'DESC'">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalCostValue' || sortField === 'costUnitValue') && sortDirection === 'ASC'">keyboard_arrow_up</mat-icon>
+				</a>
+				<a class="value-order"
+					(click)="orderUsedIngredients(optionSeason === 'Total' ? 'totalCtValue' : 'unitCtValue')">
+					{{ 'ORDENATION_REVENUES.COST' | translate }}
+					<mat-icon *ngIf="(sortField !== 'totalCtValue' && sortField !== 'unitCtValue')">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalCtValue' || sortField === 'unitCtValue') && sortDirection === 'DESC'">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalCtValue' || sortField === 'unitCtValue') && sortDirection === 'ASC'">keyboard_arrow_up</mat-icon>
+				</a>
+				<a class="profit_order"
+					(click)="orderUsedIngredients(optionSeason === 'Total' ? 'totalProfitValue' : 'unitProfitValue')">
+					{{ 'ORDENATION_REVENUES.PROFIT' | translate }}
+					<mat-icon
+						*ngIf="sortField !== 'totalProfitValue' && sortField !==  'unitProfitValue'">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalProfitValue' || sortField === 'unitProfitValue') && sortDirection === 'DESC'">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalProfitValue' || sortField === 'unitProfitValue') && sortDirection === 'ASC'">keyboard_arrow_up</mat-icon>
+				</a>
+				<a class="margin-order"
+					(click)="orderUsedIngredients(optionSeason === 'Total' ? 'totalCostPercentageOfNetProfit' : 'unitCostPercentageOfNetProfit')">
+					{{ 'ORDENATION_REVENUES.MARGIN' | translate }}
+					<mat-icon
+						*ngIf="sortField !== 'totalCostPercentageOfNetProfit' && sortField !== 'unitCostPercentageOfNetProfit'">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalCostPercentageOfNetProfit' || sortField === 'unitCostPercentageOfNetProfit') && sortDirection === 'DESC'">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalCostPercentageOfNetProfit' || sortField === 'unitCostPercentageOfNetProfit') && sortDirection === 'ASC'">keyboard_arrow_up</mat-icon>
+				</a>
+			</div> -->
+
+			<div class="ordenation-container row">
+				<a (click)="orderUsedIngredients('name')" class="col text-left ordenation-container-title">
+					{{ 'ORDENATION_REVENUES.NAME' | translate }}
+					<mat-icon *ngIf="sortField !== 'name'">keyboard_arrow_down</mat-icon>
+					<mat-icon *ngIf="sortField === 'name' && sortDirection === 'DESC'">keyboard_arrow_down</mat-icon>
+					<mat-icon *ngIf="sortField === 'name' && sortDirection === 'ASC'">keyboard_arrow_up</mat-icon>
+				</a>
+				<a class="qtd-order col-auto text-right ordenation-container-data"
+					(click)="orderUsedIngredients(optionSeason === 'Total' ? 'totalCostValue' : 'costUnitValue')">
+					{{ 'ORDENATION_REVENUES.SALE' | translate }}
+					<mat-icon
+						*ngIf="(sortField !== 'totalCostValue' && sortField !== 'costUnitValue')">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalCostValue' || sortField === 'costUnitValue') && sortDirection === 'DESC'">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalCostValue' || sortField === 'costUnitValue') && sortDirection === 'ASC'">keyboard_arrow_up</mat-icon>
+				</a>
+				<a class="value-order col-auto text-right ordenation-container-data"
+					(click)="orderUsedIngredients(optionSeason === 'Total' ? 'totalCtValue' : 'unitCtValue')">
+					{{ 'ORDENATION_REVENUES.COST' | translate }}
+					<mat-icon *ngIf="(sortField !== 'totalCtValue' && sortField !== 'unitCtValue')">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalCtValue' || sortField === 'unitCtValue') && sortDirection === 'DESC'">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalCtValue' || sortField === 'unitCtValue') && sortDirection === 'ASC'">keyboard_arrow_up</mat-icon>
+				</a>
+				<a class="profit_order col-auto text-right ordenation-container-data"
+					(click)="orderUsedIngredients(optionSeason === 'Total' ? 'totalProfitValue' : 'unitProfitValue')">
+					{{ 'ORDENATION_REVENUES.PROFIT' | translate }}
+					<mat-icon
+						*ngIf="sortField !== 'totalProfitValue' && sortField !==  'unitProfitValue'">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalProfitValue' || sortField === 'unitProfitValue') && sortDirection === 'DESC'">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalProfitValue' || sortField === 'unitProfitValue') && sortDirection === 'ASC'">keyboard_arrow_up</mat-icon>
+				</a>
+				<a class="margin-order col-auto text-right ordenation-container-data"
+					(click)="orderUsedIngredients(optionSeason === 'Total' ? 'totalCostPercentageOfNetProfit' : 'unitCostPercentageOfNetProfit')">
+					{{ 'ORDENATION_REVENUES.MARGIN' | translate }}
+					<mat-icon
+						*ngIf="sortField !== 'totalCostPercentageOfNetProfit' && sortField !== 'unitCostPercentageOfNetProfit'">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalCostPercentageOfNetProfit' || sortField === 'unitCostPercentageOfNetProfit') && sortDirection === 'DESC'">keyboard_arrow_down</mat-icon>
+					<mat-icon
+						*ngIf="(sortField === 'totalCostPercentageOfNetProfit' || sortField === 'unitCostPercentageOfNetProfit') && sortDirection === 'ASC'">keyboard_arrow_up</mat-icon>
+				</a>
+			</div>
+
+			<mat-nav-list>
+				<!-- <a class="list-item used-ingredients-list-item mb-3" mat-list-item style="height: 85px;"
+					*ngFor="let item of recipesData" (click)="redirectRouter(item?.id)">
+
+					<div class="row d-flex">
+						<div class="col-12">
+							<span class="item-title">{{item.name}}</span>
+						</div>
+						<div class="col-8">
+							<mat-chip-list>
+								<mat-chip class="chip-list">
+									<span *ngIf="item.unityQuantity > 1">{{item.unityQuantity}} {{item.unitAbbreviation}}</span>
+									<span *ngIf="item.unityQuantity <= 1">1 Porção</span>
+								</mat-chip>
+								<mat-chip class="chip-list" *ngIf="item.recipeWeight">
+									<span>{{item.recipeWeight}}{{item?.recipeWeightUnit?.abbreviation}}</span>
+								</mat-chip>
+							</mat-chip-list>
+						</div>
+					</div>
+					<div class="value-sale">
+						<mat-chip class="chip-list">
+							<span *ngIf="optionSeason === 'Total'">{{(item.financial.totalCostValue !== null ?
+								(item.financial.totalCostValue) : '00.00') | currency: cifrao}}</span>
+							<span *ngIf="optionSeason === 'Unitário'">{{(item.financial.costUnitValue !== null ?
+								(item.financial.costUnitValue) : '00.00') | currency: cifrao}}</span>
+						</mat-chip>
+					</div>
+					<div class="cost-position">
+						<div class="row d-flex">
+							<div class="col-12">
+								<span class="item-title" *ngIf="optionSeason === 'Total'">{{(item.financial.totalCtValue !== null ?
+									(item.financial.totalCtValue) : '00.00') | currency: cifrao}}</span>
+								<span class="item-title" *ngIf="optionSeason === 'Unitário'">{{(item.financial.unitCtValue !== null ?
+									(item.financial.unitCtValue) : '00.00') | currency: cifrao}}</span>
+							</div>
+							<div class="col-12">
+								<mat-chip class="chip-list">
+									<span *ngIf="optionSeason === 'Total'">{{(item.financial.totalCmvValue !== null ?
+										(item.financial.totalCmvValue) : '00.00') | currency: cifrao}}</span>
+									<span *ngIf="optionSeason === 'Unitário'">{{(item.financial.unitCmvValue !== null ?
+										(item.financial.unitCmvValue) : '00.00') | currency: cifrao}}</span>
+								</mat-chip>
+							</div>
+						</div>
+					</div>
+
+					<div class="profit-position">
+						<div class="row d-flex">
+							<div class="col-12">
+								<span class="item-title" *ngIf="optionSeason === 'Total'">{{(item.financial.totalProfitValue !== null ?
+									(item.financial.totalProfitValue) : '00.00') | currency: cifrao}}</span>
+								<span class="item-title" *ngIf="optionSeason === 'Unitário'">{{(item.financial.unitProfitValue !== null
+									? (item.financial.unitProfitValue) : '00.00') | currency: cifrao}}</span>
+							</div>
+							<div class="col-12">
+								<mat-chip class="chip-list">
+									<span *ngIf="optionSeason === 'Total'">{{(item.financial.totalProfitOverCmvValue !== null ?
+										(item.financial.totalProfitOverCmvValue) : '00.00') | currency: cifrao}}</span>
+									<span *ngIf="optionSeason === 'Unitário'">{{(item.financial.unitProfitOverCmvValue !== null ?
+										(item.financial.unitProfitOverCmvValue) : '00.00') | currency: cifrao}}</span>
+								</mat-chip>
+							</div>
+						</div>
+					</div>
+
+					<div class="value-recipe">
+						<div class="row d-flex">
+							<div class="col-12">
+								<span class="item-title porcent-item"
+									*ngIf="optionSeason === 'Total'">{{item.totalCostPercentageOfNetProfit !== null ?
+									((item.totalCostPercentageOfNetProfit * 100) | number: '1.0') : 0 }}%</span>
+								<span class="item-title porcent-item"
+									*ngIf="optionSeason === 'Unitário'">{{item.unitCostPercentageOfNetProfit !== null ?
+									((item.unitCostPercentageOfNetProfit * 100) | number: '1.0') : 0 }}%</span>
+							</div>
+							<div class="col-12">
+								<mat-chip class="chip-list">
+									<span *ngIf="optionSeason === 'Total'">Markup {{item.financial.totalCostPerc !== null ?
+										(item.financial.totalCostPerc | number: '1.2-2') : '0'}}</span>
+									<span *ngIf="optionSeason === 'Unitário'">Markup {{item.financial.costUnitPerc !== null ?
+										(item.financial.costUnitPerc | number: '1.2-2') : '0'}}</span>
+								</mat-chip>
+							</div>
+						</div>
+					</div>
+					<mat-icon matListIcon class="list-icon-right" [inline]="true">keyboard_arrow_right</mat-icon>
+				</a> -->
+				<a class="list-item used-ingredients-list-item mb-3 row" mat-list-item style="height: 90px;"
+					*ngFor="let item of recipesData" (click)="redirectRouter(item?.id)">
+
+					<div class="col list-item-name">
+						<div class="row justify-content-start list-item-name-container">
+							<div class="col-12 px-0">
+								<span class="item-title-elipsed item-title" [title]="item.name">{{item.name}}</span>
+							</div>
+							<div class="col-12 px-0">
+								<mat-chip-list>
+									<mat-chip class="chip-list">
+										<span *ngIf="item.unityQuantity > 1">{{item.unityQuantity}} {{item.unitAbbreviation}}</span>
+										<span *ngIf="item.unityQuantity <= 1">1 Porção</span>
+									</mat-chip>
+									<mat-chip class="chip-list" *ngIf="item.recipeWeight">
+										<span>{{item.recipeWeight}}{{item?.recipeWeightUnit?.abbreviation}}</span>
+									</mat-chip>
+								</mat-chip-list>
+							</div>
+						</div>
+					</div>
+					<div class="value-sale col-auto text-right list-item-data">
+						<mat-chip class="chip-list">
+							<span *ngIf="optionSeason === 'Total'">{{(item.financial.totalCostValue !== null ?
+								(item.financial.totalCostValue) : '00.00') | currency: cifrao}}</span>
+							<span *ngIf="optionSeason === 'Unitário'">{{(item.financial.costUnitValue !== null ?
+								(item.financial.costUnitValue) : '00.00') | currency: cifrao}}</span>
+						</mat-chip>
+					</div>
+					<div class="cost-position col-auto text-right list-item-data">
+						<div class="row d-flex">
+							<div class="col-12">
+								<span class="item-title" *ngIf="optionSeason === 'Total'">{{(item.financial.totalCtValue !== null ?
+									(item.financial.totalCtValue) : '00.00') | currency: cifrao}}</span>
+								<span class="item-title" *ngIf="optionSeason === 'Unitário'">{{(item.financial.unitCtValue !== null ?
+									(item.financial.unitCtValue) : '00.00') | currency: cifrao}}</span>
+							</div>
+							<div class="col-12">
+								<mat-chip class="chip-list">
+									<span *ngIf="optionSeason === 'Total'">{{(item.financial.totalCmvValue !== null ?
+										(item.financial.totalCmvValue) : '00.00') | currency: cifrao}}</span>
+									<span *ngIf="optionSeason === 'Unitário'">{{(item.financial.unitCmvValue !== null ?
+										(item.financial.unitCmvValue) : '00.00') | currency: cifrao}}</span>
+								</mat-chip>
+							</div>
+						</div>
+					</div>
+
+					<div class="profit-position col-auto text-right list-item-data">
+						<div class="row d-flex">
+							<div class="col-12">
+								<span class="item-title" *ngIf="optionSeason === 'Total'">{{(item.financial.totalProfitValue !== null ?
+									(item.financial.totalProfitValue) : '00.00') | currency: cifrao}}</span>
+								<span class="item-title" *ngIf="optionSeason === 'Unitário'">{{(item.financial.unitProfitValue !== null
+									? (item.financial.unitProfitValue) : '00.00') | currency: cifrao}}</span>
+							</div>
+							<div class="col-12">
+								<mat-chip class="chip-list">
+									<span *ngIf="optionSeason === 'Total'">{{(item.financial.totalProfitOverCmvValue !== null ?
+										(item.financial.totalProfitOverCmvValue) : '00.00') | currency: cifrao}}</span>
+									<span *ngIf="optionSeason === 'Unitário'">{{(item.financial.unitProfitOverCmvValue !== null ?
+										(item.financial.unitProfitOverCmvValue) : '00.00') | currency: cifrao}}</span>
+								</mat-chip>
+							</div>
+						</div>
+					</div>
+
+					<div class="value-recipe col-auto text-right list-item-data">
+						<div class="row d-flex">
+							<div class="col-12">
+								<span class="item-title porcent-item"
+									*ngIf="optionSeason === 'Total'">{{item.totalCostPercentageOfNetProfit !== null ?
+									((item.totalCostPercentageOfNetProfit * 100) | number: '1.0') : 0 }}%</span>
+								<span class="item-title porcent-item"
+									*ngIf="optionSeason === 'Unitário'">{{item.unitCostPercentageOfNetProfit !== null ?
+									((item.unitCostPercentageOfNetProfit * 100) | number: '1.0') : 0 }}%</span>
+							</div>
+							<div class="col-12">
+								<mat-chip class="chip-list">
+									<span *ngIf="optionSeason === 'Total'">Markup {{item.financial.totalCostPerc !== null ?
+										(item.financial.totalCostPerc | number: '1.2-2') : '0'}}</span>
+									<span *ngIf="optionSeason === 'Unitário'">Markup {{item.financial.costUnitPerc !== null ?
+										(item.financial.costUnitPerc | number: '1.2-2') : '0'}}</span>
+								</mat-chip>
+							</div>
+						</div>
+					</div>
+					<mat-icon matListIcon class="list-icon-right" [inline]="true">keyboard_arrow_right</mat-icon>
+				</a>
+			</mat-nav-list>
+		</div>
+		<div class="m-section__content pt-3">
+			<ngb-pagination [(collectionSize)]="pagination.totalPages * pagination.itensPerPage"
+				[pageSize]="pagination.itensPerPage" [(page)]="pagination.currentPage" [maxSize]="5" [boundaryLinks]="true"
+				(pageChange)="fetchUsedIngredients(searchTerm)"></ngb-pagination>
+		</div>
+	</div>
+
+	<div class="alert alert-info" *ngIf="!recipesData?.length" translate>
+		{{ 'INGREDIENT.NO_RESULTS_RECIPE'}}
+	</div>
+
+	<!--Informações sem receitas-->
+	<div *ngIf="showInfo && !searchTerm && recipes?.length" id="textApresentation">
+		<p><b>{{ 'RECIPE.MSG_RECIPE_NO_INGREDIENT.M1' | translate }}</b> {{ 'RECIPE.MSG_RECIPE_NO_INGREDIENT.M2' | translate
+			}}</p>
+		<p><b>{{ 'RECIPE.MSG_RECIPE_NO_INGREDIENT.M3' | translate }}</b> {{ 'RECIPE.MSG_RECIPE_NO_INGREDIENT.M4' | translate
+			}}</p>
+		<p>{{ 'RECIPE.MSG_RECIPE_NO_INGREDIENT.M5' | translate }} <b>{{ 'RECIPE.MSG_RECIPE_NO_INGREDIENT.M6' | translate
+				}}</b> {{ 'RECIPE.MSG_RECIPE_NO_INGREDIENT.M7' | translate }}</p>
+		<p>{{ 'RECIPE.MSG_RECIPE_NO_INGREDIENT.M8' | translate }}</p>
+	</div>
+	<div *ngIf="showInfo && !searchTerm && recipes?.length" id="divImgApresentation">
+		<img id="imgApresentation" src="../../../../../../assets/app/media/img/recipe/telaReceita.png">
+	</div>
+	<!-- </div>
+	</div> -->
+</div>

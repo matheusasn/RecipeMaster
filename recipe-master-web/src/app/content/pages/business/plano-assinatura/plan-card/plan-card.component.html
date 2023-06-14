@@ -1,0 +1,187 @@
+<div [className]="(user && user.plan && user.plan.perfil === perfil) ? 'card selected' : 'card'">
+    <div class="card-header corBranco">
+        <div class="titulo1"> {{ title }} </div>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row h-100 plan-content">
+            <div class="col col-12 cp-options d-flex align-content-start flex-wrap">
+
+                <img class="img1" [src]="image" alt="Imagem" [class.bigger-image]="isBigger">
+
+                <!-- GRATIS -->
+                <ng-container *ngIf="perfil == PerfilEnum.USER">
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD1' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD3' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD4' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img cross" src="./assets/plans_icon-cross.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD5' | translate"></span>
+                    </div>
+                </ng-container>
+                <!-- GRATIS END -->
+
+                <!-- BASIC -->
+                <ng-container *ngIf="perfil == PerfilEnum.USER_BASIC">
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD1' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD3' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD2' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD4' | translate"></span>
+                    </div>
+                </ng-container>
+                <!-- BASIC END -->
+
+                <!-- PRO -->
+                <ng-container *ngIf="perfil == PerfilEnum.USER_PRO">
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD7' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD9' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD8' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD10' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD11' | translate"></span>
+                    </div>
+                </ng-container>
+                <!-- PRO END -->
+
+                <!-- USER_PRO_NUTRI -->
+                <ng-container *ngIf="perfil == PerfilEnum.USER_PRO_NUTRI">
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD12' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD13' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD14' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD15' | translate"></span>
+                    </div>
+                    <div class="plan-option">
+                        <img class="check-img" src="./assets/plans_icon-check-round.svg">
+                        <span [innerHTML]="'PLANO_PAGE.TXT_INFO_CARD16' | translate"></span>
+                    </div>
+                </ng-container>
+                <!-- USER_PRO_NUTRI END -->
+
+            </div>
+            <div class="col col-12 d-flex align-content-end flex-wrap text-right call2act" *ngIf="perfil != PerfilEnum.USER && !isIOS">
+                <div class="card-description-price">
+                    <div class="text-left">
+                        {{description}}
+                    </div>
+                    <div class="right-img">
+                        <!-- <img [class.has-discount]="hasDiscount" src="./assets/{{plan.image}}"/> -->
+												<div class="card-price-discount">
+													<div class="price">
+														<span [class.has-discount]="hasDiscount" class="figure">
+															<ng-container *ngIf="!isMobile">
+																{{ plan.currency === 'BRL' ? 'R$' : '$' }}
+															</ng-container>
+															<ng-container *ngIf="isMobile">
+																{{ mobilePaymentCurrency }}
+															</ng-container>
+														</span>
+														<span [class.has-discount]="hasDiscount" class="value">{{ getAmount(plan.values.monthly) }}<small>,{{ getCents(plan.values.monthly) }}</small></span>
+														<div [class.has-discount]="hasDiscount" class="desc">{{ plan.currency === 'BRL' ? 'por mês' : 'per month' }}</div>
+													</div>
+												</div>
+                    </div>
+                </div>
+
+							<span class="annual-price" *ngIf="user && !user.plan">{{ 'PLANO_PAGE.DISCOUNT_TEXT' | translate }}: <span class="price-weight">
+								<ng-container *ngIf="!isMobile">
+									{{ plan.currency === 'BRL' ? 'R$' : '$' }}
+								</ng-container>
+								<ng-container *ngIf="isMobile">
+									{{ mobilePaymentCurrency }}
+								</ng-container>
+								{{ plan.values.annually.toLocaleString('pt-br', { minimumFractionDigits: 2 }) }}
+							</span></span>
+							<span class="annual-price" *ngIf="user && user.plan && user.plan.perfil !== perfil && showDifferenceMessage">
+								<ng-container *ngIf="!isAndroid && !isIOS">
+									{{ 'PLANO_PAGE.DIFFERENCE' | translate }}
+								</ng-container>
+								<ng-container *ngIf="isAndroid || isIOS">
+									{{ 'PLANO_PAGE.DIFFERENCE_2' | translate }}
+								</ng-container>
+								<span class="price-weight" *ngIf="!isAndroid && !isIOS">{{ plan.currency === 'BRL' ? 'R$' : '$' }}{{ plan.values.annually.toLocaleString('pt-br', { minimumFractionDigits: 2 }) }}</span></span>
+							<div class="current-plan-container" *ngIf="user && user.plan && user.plan.perfil === perfil">
+								<span>{{ 'PLANO_PAGE.CURRENT_PLAN' | translate }}</span>
+								<span class="expiration">{{ 'PLANO_PAGE.PLAN_EXPIRATION' | translate }} {{ user.plan.expiration | date: 'dd/MM/yyyy' }}</span>
+							</div>
+
+							<div class="card-price-discount" *ngIf="hasDiscount">
+								<div class="discount">40% OFF</div>
+								<div class="price">
+									<span class="figure">{{ discountPlan.currency === 'BRL' ? 'R$' : '$' }}</span>
+									<span class="value">{{ getAmount(discountPlan.values.monthly) }}<small>,{{ getCents(discountPlan.values.monthly) }}</small></span>
+									<div class="desc">{{ discountPlan.currency === 'BRL' ? 'por mês' : 'per month' }}</div>
+								</div>
+							</div>
+                <m-payment-button *ngIf="!loading && user" [user]="user" [plan]="plan" [discountPlan]="discountPlan" [customClass]="highlight?'btn2':'btn'" [isPaypal]="isPaypal" [label]="buttonLabel" [perfil]="perfil"></m-payment-button>
+								<span class="annual-price smaller" *ngIf="user && user.plan && user.plan.perfil === perfil && !isAndroid && !isIOS">{{ 'PLANO_PAGE.DISCOUNT_TEXT_RENEW' | translate }} <b>40%OFF</b>: {{ 'PLANO_PAGE.UNTIL' | translate }} {{ addOneYear(user.plan.expiration) | date: 'dd/MM/yyyy' }}</span>
+            </div>
+
+						<div class="col col-12 call2act" *ngIf="perfil != PerfilEnum.USER && isIOS">
+							<div class="card-description-without-price">
+								{{ 'PLANO_PAGE.TXT_BODY4' | translate }}
+							</div>
+							<m-payment-button *ngIf="!loading && user" [user]="user" [plan]="plan" [perfil]="perfil" [mobilePaymentCurrency]="mobilePaymentCurrency"></m-payment-button>
+							<div class="ios-anual-price text-center">
+								<!-- (12 months at <strong>{{ mobilePaymentCurrency }}{{ plan.values.monthly }}</strong>/mo. Save 20%) -->
+								{{ 'PLANO_PAGE.ANUALLY_DESCRIPTION_LEFT' | translate }} <strong>{{ mobilePaymentCurrency }}{{ plan.values.monthly }}</strong>{{ 'PLANO_PAGE.ANUALLY_DESCRIPTION_RIGHT' | translate }}
+							</div>
+					</div>
+
+			<!-- PIX -->
+			<div class="payment-pix" *ngIf="isPix">
+				<p *ngIf="!hasDiscount">Pagamento anual de <b>{{ plan.values.annually | currency: 'R$ ' }}</b></p>
+				<p *ngIf="hasDiscount">Pagamento anual de <b>{{ discountPlan.values.annually | currency: 'R$ ' }}</b></p>
+				<div class="cta-promo">ganhe 2 meses grátis!</div>
+				<img *ngIf="!hasDiscount" src="{{ pixQrCodeImage }}" style="width: 130px;">
+				<img *ngIf="hasDiscount" src="{{ pixQrCodeDiscountImage }}" style="width: 130px;">
+				<div class="instructions">Aponte a camera do seu celular</div>
+			</div>
+        </div>
+
+    </div>
+</div>

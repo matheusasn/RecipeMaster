@@ -1,0 +1,41 @@
+:host {
+	display: block;
+	width: 100%;
+	text-align: center;
+	margin-top: 16px;
+
+	.label {
+		display: inline-block;
+		background: linear-gradient(180deg, rgba(17, 153, 142, 0.6) 2.27%, rgba(56, 239, 125, 0.6) 97.73%);
+		border-radius: 19.5px;
+		color: #FFFFFF;
+		border: #FFFFFF;
+		padding: 5px 30px;
+
+		font-family: Poppins, sans-serif;
+		font-weight: 500;
+		font-size: 12px;
+		user-select: none;
+
+		&.label-100 { /* aves */ background: linear-gradient(90deg, #ee9ca7 0%, #FFDDE1 100%); }
+		&.label-101 { /* bebidas */ background: linear-gradient(90deg, #00B4DB 0%, #0083B0 100%); }
+		&.label-102 { /* carnes */ background: linear-gradient(90deg, #ED213A 0%, #93291E 100%); }
+		&.label-103 { /* doces */ background: linear-gradient(90deg, #A73737 0%, #7A2828 100%); }
+		&.label-104 { /* embutidos */ background: linear-gradient(90deg, #BF1010 0%, #570606 100%); }
+		&.label-105 { /* frutas */ background: linear-gradient(90deg, #9400D3 0%, #4B0082 100%);}
+		&.label-106 { /* graos e cereias */ background: linear-gradient(90deg, #B79891 0%, #94716B 100%); }
+		&.label-107 { /* hortalicas */ background: linear-gradient(90deg, #003D4D 0%, #0FA780 100%); }
+		&.label-108 { /* laticinios e ovos */ background: linear-gradient(90deg, #8E9EAB 0%, #EEF2F3 100%); }
+		&.label-109 { /* massas e paes */ background: linear-gradient(90deg, #F2994A 0%, #F2C94C 100%, #F2C94C 100%); }
+		&.label-110 { /* molhos */ background: linear-gradient(90deg, #F2709C 0%, #FF9472 100%); }
+		&.label-111 { /* oleaginosas e sementes */ background: linear-gradient(90deg, #603813 0%, #B29F94 100%); }
+		&.label-112 { /* oleos */ background: linear-gradient(90deg, #FFE000 0%, #799F0C 100%); }
+		&.label-113 { /* peixes */ background: linear-gradient(90deg, #091E3A 0%, #2F80ED 50%, #2D9EE0 100%); }
+		&.label-114 { /* queijos */ background: linear-gradient(90deg, #E65C00 0%, #F9D423 100%); }
+		&.label-115 { /* temperos */ background: linear-gradient(90deg, #0C7357 0%, #5B2803 100%); }
+		&.label-116 { /* farinha */ background: linear-gradient(90deg, #EACDA3 0%, #D6AE7B 100%); }
+		&.label-117 { /* legumes */ background: linear-gradient(180deg, #11998E 2.27%, #38EF7D 97.73%); }
+		&.label-none { /* laticinios e ovos */ background: linear-gradient(90deg, #8E9EAB 0%, #EEF2F3 100%); }
+
+	}
+}

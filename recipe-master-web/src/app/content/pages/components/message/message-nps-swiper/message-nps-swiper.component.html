@@ -1,0 +1,114 @@
+<form [formGroup]="form" class="m-form m-form--fit m-form--label-align-right" (ngSubmit)="doSubmit()">
+    <swiper #usefulSwiper [config]="config">
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide text-center">
+
+                <h2 class="message-title">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_2_TITULO' | translate }}</h2>
+                <p class="message-subtitle p-3">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_2_BODY1' | translate }}</p>
+
+                <div class="row">
+                    <div class="col-6 col-lg-3 offset-lg-3">
+                        <button type="button" (click)="doUtil(0)" class="btn btn-outline-dark btn-block">
+                            {{ ('RECIPE.MODAL_USER_NOTA.MODAL_2_BTNNAO' | translate) }}
+                        </button>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <button type="button" (click)="doUtil(1)" class="btn btn-outline-dark btn-block">
+                            {{ ('RECIPE.MODAL_USER_NOTA.MODAL_2_BTNSIM' | translate) }}
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-slide text-center">
+
+                <h2 class="message-title">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_3_TITULO' | translate }}</h2>
+                <p class="message-subtitle p-3">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_3_BODY1' | translate }}</p>
+
+                <div class="row">
+                    <div class="col-12 col-lg-8 offset-lg-2">
+                        <div class="align form-group m-form__group">
+                            <textarea class="form-control cp-input" formControlName="dificuldade" placeholder="{{'RECIPE.MODAL_USER_NOTA.PLACEHOLDER_1' | translate}}"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-8 offset-2 text-center">
+                        <button type="button" (click)="doDificuldade()" class="btn btn-outline-dark mt-3">
+                            {{'RECIPE.MODAL_USER_NOTA.MODAL_GERAL_BTN_PROXIMO' | translate}}
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-slide text-center">
+
+                <h2 class="message-title">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_4_TITULO' | translate }}</h2>
+                <p class="message-subtitle p-3">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_4_BODY1' | translate }}</p>
+
+                <div class="row">
+                    <div class="col-12 col-lg-8 offset-lg-2">
+                        <div class="align form-group m-form__group">
+                            <textarea formControlName="melhoria" class="form-control cp-input" placeholder="{{'RECIPE.MODAL_USER_NOTA.PLACEHOLDER_2' | translate}}"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-8 offset-2 text-center">
+                        <button type="button" (click)="doMelhoria()" class="btn btn-outline-dark mt-3">
+                            {{'RECIPE.MODAL_USER_NOTA.MODAL_GERAL_BTN_PROXIMO' | translate}}
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-slide text-center">
+
+                <h2 class="message-title">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_5_TITULO' | translate }}</h2>
+                <!-- <p class="message-subtitle p-3">...</p> -->
+
+                <div class="row mt-5">
+                    <div class="col-12 col-lg-8 offset-lg-2 text-center">
+
+                        <div class="table-nps">
+                            <div class="col" (click)="doRecomendar(0)"><span>0</span></div>
+                            <div class="col" (click)="doRecomendar(1)"><span>1</span></div>
+                            <div class="col" (click)="doRecomendar(2)"><span>2</span></div>
+                            <div class="col" (click)="doRecomendar(3)"><span>3</span></div>
+                            <div class="col" (click)="doRecomendar(4)"><span>4</span></div>
+                            <div class="col" (click)="doRecomendar(5)"><span>5</span></div>
+                            <div class="col" (click)="doRecomendar(6)"><span>6</span></div>
+                            <div class="col" (click)="doRecomendar(7)"><span>7</span></div>
+                            <div class="col" (click)="doRecomendar(8)"><span>8</span></div>
+                            <div class="col" (click)="doRecomendar(9)"><span>9</span></div>
+                            <div class="col" (click)="doRecomendar(10)"><span>10</span></div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-slide text-center">
+
+                <h2 class="message-title">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_6_P1_TITULO' | translate }}</h2>
+                <p class="message-subtitle pt-3">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_6_P1_BODY1' | translate }}</p>
+                <p class="small">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_6_P1_BODY2' | translate }}</p>
+                <p class="small">{{ 'RECIPE.MODAL_USER_NOTA.MODAL_6_P1_BODU3' | translate }}</p>
+                <p class="small" [innerHtml]="npsLabel"></p>
+
+                <div class="row">
+                    <div class="col-12 col-lg-8 offset-lg-2">
+                        <div class="align form-group m-form__group">
+                            <textarea formControlName="infoMelhoria" placeholder="{{'RECIPE.MODAL_USER_NOTA.PLACEHOLDER_2' | translate}}" class="form-control cp-input"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-8 offset-2">
+                        <button type="submit" class="btn btn-accent m-btn m-btn--air m-btn--custom mt-3">
+                            {{ 'RECIPE.MODAL_USER_NOTA.MODAL_GERAL_BTN_ENVIAR' | translate }}
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="swiper-pagination"></div>
+    </swiper>
+</form>

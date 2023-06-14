@@ -1,0 +1,8 @@
+.profile-pic {
+    border-radius: 20px; 
+    height: 41px; 
+
+    @media only screen and (max-width: 1032px) {
+        height: 31px; 
+    }
+}

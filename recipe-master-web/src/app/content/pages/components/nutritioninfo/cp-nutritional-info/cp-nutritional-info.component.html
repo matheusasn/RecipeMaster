@@ -1,0 +1,193 @@
+<div class="m-portlet">
+    <div class="m-portlet__body">
+
+        <div class="m-form__section" (click)="toogleCollapse()">
+            <i class="la la-angle-down pull-right mr-3 mt-1" [ngClass]="isCollapsed?'desgirar':'girar'"></i>
+            <div class="d-flex align-items-center">
+							<h3 class="title-no-break">{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TITLE' | translate }}
+
+
+								<!-- <ng-template #popContent>
+										{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.MSG_AJUDA' | translate }}
+										<a class="d-sm-none" target="_blank" href="./assets/pdf/7_tutorial_info_nutri.m.pdf">{{ 'SUPPORT_PAGE.FAQ_TXT_GERAL' | translate }}</a>
+										<a class="d-none d-sm-inline" target="_blank" href="./assets/pdf/7_tutorial_info_nutri.pdf">{{ 'SUPPORT_PAGE.FAQ_TXT_GERAL' | translate }}</a>
+								</ng-template>
+								<i (click)="$event.stopPropagation()" class="far fa-question-circle"
+										id="msgAjuda"
+										[ngbPopover]="popContent"
+										placement="bottom"
+										triggers="mouseenter click"
+										[autoClose]="true">
+								</i> -->
+							</h3>
+						</div>
+        </div>
+
+        <div class="px-4" [ngbCollapse]="isCollapsed">
+
+            <div class="no-perm-container" *ngIf="!hasPermission">
+
+                <div>
+                    <h2 class="subtitle-nutri" [innerHTML]="'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TXT_SUB_TITLE' | translate"></h2>
+                </div>
+
+                <span class="container-right">
+                    <div class="div-img">
+                        <img class="img-nutrition" src="./assets/nutritioninfo/planoinfo_nutri_2.png">
+                    </div>
+
+										<div class="div-text-right">
+												<p class="text-right" [innerHTML]="'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TXT8' | translate"></p>
+										</div>
+
+                </span>
+
+                <span class="container-left">
+
+                    <div class="container-text"><img class="point" src="./assets/plans_icon-check-round.svg"><p class="texts" [innerHTML]="'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TXT1' | translate"></p></div>
+                    <div class="container-text"><img class="point" src="./assets/plans_icon-check-round.svg"><p class="texts" [innerHTML]="'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TXT2' | translate"></p></div>
+                    <div class="container-text"><img class="point" src="./assets/plans_icon-check-round.svg"><p class="texts" [innerHTML]="'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TXT3' | translate"></p></div>
+                    <div class="container-text"><img class="point" src="./assets/plans_icon-check-round.svg"><p class="texts" [innerHTML]="'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TXT9' | translate"></p></div>
+                    <div class="container-text"><img class="point" src="./assets/plans_icon-check-round.svg"><p class="texts" [innerHTML]="'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TXT4' | translate"></p></div>
+                    <div class="container-text"><img class="point" src="./assets/plans_icon-check-round.svg"><p class="texts" [innerHTML]="'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TXT5' | translate"></p></div>
+
+                    <!-- <div>
+                        <span style="display: flex;">
+                            <p class="more" [innerHTML]="'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TXT6' | translate"></p>
+                            <p class="cifrao">R$</p>
+                            <p class="price">24</p>
+                            <p class="price-centes">,90</p>
+                        </span>
+                        <div class="div-a-month">
+                            <p class="a-month" [innerHTML]="'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TXT7' | translate"></p>
+                        </div>
+                    </div> -->
+
+                    <div>
+                        <div>
+                            <div class="col-12 col-sm-12">
+                                <p *ngIf="!loading && isPaypal">{{'PLANO_PAGE.BTN_TXT3' | translate}}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="col-12 text-center align-btn" id="divPlano">
+                                <!-- <m-payment-button *ngIf="!loading" customClass="btn2 btn-custom" [isPaypal]="isPaypal" label="PLANO_PAGE.BTN_TXT3" [perfil]="PerfilEnum.USER_PRO_NUTRI"></m-payment-button> -->
+																<button type="button" class="btn btn-accent btn-show-plans" (click)="doPlanPage()">{{'PLANO_PAGE.TXT_NUTRI_INFO' | translate}}</button>
+                            </div>
+                        </div>
+
+                        <!-- <div>
+                            <div class="col-12 text-center">
+                                <button id="viewPlan" type="button" mat-button (click)="doPlanPage()" [disabled]="loading">{{'PLANO_PAGE.TXT_NUTRI_INFO' | translate}}</button>
+                            </div>
+                        </div> -->
+                    </div>
+                </span>
+
+            </div>
+
+            <ng-container *ngIf="recipe && hasPermission">
+                <form *ngIf="formGroup" name="form" [formGroup]="formGroup" novalidate class="m-form m-form--fit m-form--label-align-right pl-2 pr-2">
+                    <div class="row" formGroupName="label">
+                        <div class="col-sm-12 col-md-6 pt-3">
+                            <div class="informacoesNutricionais-form-group"> <!--formGroupName="informacoesNutricionais" -->
+                                <div class="row">
+                                    <div class="col-10 col-md-8">
+                                    <div class="form-group m-form__group">
+                                        <label class="col-form-label" translate>{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.LABEL3' | translate }}</label>
+                                        <div class="input-group cp-input">
+                                        <input inputmode="numeric" pattern="[0-9]*" type="text" class="form-control" name="weight" formControlName="weight" (keyup)="automaticSave()">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.LABEL4' | translate}}</span>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-10 col-md-8">
+                                    <div class="form-group m-form__group">
+                                        <label class="col-form-label" translate>{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.LABEL1' | translate }}</label>
+                                        <div class="input-group cp-input">
+                                        <input inputmode="numeric" pattern="[0-9]*" type="text" class="form-control" name="portion" formControlName="portion" (keyup)="automaticSave()">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.LABEL4' | translate}}</span>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-10 col-md-8">
+                                    <div class="form-group m-form__group">
+                                        <label class="col-form-label" translate>{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.LABEL2' | translate }}</label>
+                                        <input class="form-control m-input cp-input" (keyup)="automaticSave()" name="measure" formControlName="measure" placeholder="{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.PLACE_INPUT2' | translate }}" type="text"> <!--formControlName="medida" -->
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="lang !== 'pt'">
+																	<div class="col-10 col-md-8">
+																	<div class="form-group m-form__group">
+																			<label class="col-form-label" translate>{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.LABEL6' | translate }}</label>
+																			<input class="form-control m-input cp-input text-center" (keyup)="automaticSave()" name="measure" formControlName="servingsPerContainers" type="number"> <!--formControlName="medida" -->
+																	</div>
+																	</div>
+															</div>
+                                <div class="row mt-3">
+																	<div class="col-10 col-md-8">
+																	<mat-checkbox name="gluten" (change)="automaticSave()" formControlName="gluten">{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.CHECK1' | translate }} <!--formControlName="informacoesNutricionais"-->
+																	</mat-checkbox>
+																	</div>
+															</div>
+															<div class="row">
+																	<div class="col-10 col-md-8">
+																	<mat-checkbox name="lactose" (change)="automaticSave()" formControlName="lactose">{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.CHECK2' | translate }} <!-- formControlName="informacoesNutricionais"-->
+																	</mat-checkbox>
+																	</div>
+															</div>
+															<div class="row">
+																<div class="col-12 col-md-12 others-alergenics">
+																	<a (click)="openAllergens()">+  {{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.ALLERGEN.LINK' | translate }}</a>
+																</div>
+															</div>
+                                <div class="row d-none d-sm-block">
+                                    <div id="btnGerarRotulo"  class="col-10 col-md-8 py-3">
+                                        <button id="btnClickGerarRotulo" type="button" class="btn m-btn m-btn--air m-btn--custom w-100 mt-4 btn-rotulo" name="btnGerarRotulo" (click)="gerarRotulo()">{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.BTN_TXT' | translate }}</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="tabelaInfoNutricao" class="col-sm-12 col-md-6 dadosInfoNutri">
+                            <div class="row">
+                                <div class="col-12">
+                                    <!-- RÓTULO INFORMAÇÕES NUTRICIONAIS -->
+                                    <cp-nutritional-info-label *ngIf="recipe" [formGroup]="formGroup" [recipe]="recipe" [recipes]="recipes" [portion]="formGroup.value.label.portion" [weight]="formGroup.value.label.weight" [measure]="formGroup.value.label.measure" [lactose]="formGroup.value.label.lactose" [gluten]="formGroup.value.label.gluten" #pdf [previewClass]="'preview'"></cp-nutritional-info-label>
+                                    <!-- RÓTULO INFORMAÇÕES NUTRICIONAIS END -->
+                                </div>
+																<div class="col-12" (click)="openRecipeLabel()">
+																	<a class="new-ingredientes-to-label">
+																		<mat-icon style="font-size: 16px !important">control_point</mat-icon>
+																		{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.LABEL5' | translate }}
+																	</a>
+																</div>
+																<div class="col-12" (click)="openLabelIngredientForm()">
+																	<a class="new-ingredientes-to-label">
+																		<mat-icon style="font-size: 16px !important">control_point</mat-icon>
+																		 {{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.ADD_MORE_INGREDIENTS_TO_LABEL' | translate }}
+																	</a>
+																</div>
+                            </div>
+                            <div class="row d-block d-sm-none">
+                                <div id="btnGerarRotulo2"  class="col-12 py-3">
+                                    <button id="btnClickGerarRotulo2" type="button" class="btn m-btn m-btn--air w-100 btn-rotulo" name="btnGerarRotulo2" (click)="gerarRotulo()">{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.BTN_TXT' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </ng-container>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="mc-container">
+
+    <div class="my-4 text-center">
+      <h3 class="mb-3">{{'INPUTS.CUSTOM_MEASURE' | translate}}</h3>
+      <h5 *ngIf="ingredient">{{ingredient.name}}</h5>
+      <hr>
+    </div>
+
+    <div class="container text-center" *ngIf="!userUnits || userUnits.length == 0">
+        <p>{{'ALERTS.TXT1' | translate}}</p>
+    </div>
+
+    <ng-container *ngFor="let item of userUnits">
+
+        <div class="row mt-4 mb-4">
+        <div class="col-9 pl-5" translate>
+            {{item.name}} {{item.userId? '' : ''}}
+        </div>
+        <div class="col-3 text-right">
+            <a *ngIf="item.userId" class="pr-4 cp-pointer" (click)="doExcluir(item)"><i class="la la-trash text-danger"></i></a>
+            <a class="pr-4 cp-pointer" (click)="doEditar(item)"><i class="la la-edit"></i></a>
+        </div>
+        </div>
+
+        <hr class="ml-2">
+
+    </ng-container>
+
+    <div class="m-portlet__foot m-portlet__foot--fit mb-3">
+        <div class="m-form__actions">
+        <div class="row">
+            <div class="col-12 text-center">
+            <button type="button" class="btn btn-link m-btn mr-1" name="btnCancel" (click)="doClose()">{{'INPUTS.BACK' | translate}}</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,115 @@
+<!-- BEGIN: Left Aside -->
+
+<!-- <div mMenuAsideOffcanvas id="m_aside_left" class="m-grid__item m-aside-left" [ngClass]="asideLeftClasses"> -->
+<!-- BEGIN: Aside Menu -->
+<div mMenuAside (click)="closeMenu()" (mouseenter)="mouseEnter($event)" (mouseleave)="mouseLeave($event)" id="m_ver_menu" class="m-aside-menu" m-menu-vertical="1" [ngClass]="classInitService.onClassesUpdated$ | async | mGetObject:'aside_menu' | mJoin" [attr.m-menu-dropdown]="menuAsideService.isDropdown" [attr.m-menu-dropdown-timeout]="menuAsideService.dropdownTimeout" [attr.m-menu-scrollable]="menuAsideService.isScrollable">
+
+	<div class="user-info-container" (click)="goToProfile()">
+		<img [src]="_currentUser?.photoUrl || avatar"  alt="" />
+		<div class="right">
+			<span class="name">{{ _currentUser?.name }}</span>
+			<span class="email">{{ _currentUser?.email }}</span>
+		</div>
+	</div>
+
+	<ul class="m-menu__nav" [ngClass]="classInitService.onClassesUpdated$ | async | mGetObject:'aside_menu_nav' | mJoin">
+		<ng-container [ngTemplateOutlet]="mMenuListing"></ng-container>
+	</ul>
+</div>
+<!-- END: Aside Menu -->
+<!-- </div> -->
+
+<ng-template #mMenuListing>
+	<ng-container *ngFor="let child of menuAsideService.menuList$ | async">
+		<m-menu-section *ngIf="child.section" [item]="child"></m-menu-section>
+		<ng-container *ngIf="child.title && isEnabled(child)" [ngTemplateOutlet]="mMenuItem" [ngTemplateOutletContext]="{ item: child, parentItem: item }"></ng-container>
+	</ng-container>
+</ng-template>
+
+<ng-template #mMenuItem let-item="item" let-parentItem="parentItem">
+	<li class="m-menu__item" [ngClass]="{ 'm-menu__item--submenu': item.submenu, 'm-menu__item--active' : !item.submenu && isMenuItemIsActive(item), 'm-menu__item--open' : item.submenu && isMenuItemIsActive(item) }" aria-haspopup="true">
+
+		<!-- if menu item hasn't submenu -->
+		<a *ngIf="!item.submenu  && !item.pay" [routerLink]="item.page" class="m-menu__link m-menu__toggle" [matTooltip]="item.tooltip" matTooltipPosition="left">
+			<ng-container [ngTemplateOutlet]="mMenuItemText" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>
+		</a>
+
+		<a *ngIf="!item.submenu && item.pay" (click)="checkPayment(item)" class="m-menu__link m-menu__toggle" [matTooltip]="item.tooltip" matTooltipPosition="left">
+			<ng-container [ngTemplateOutlet]="mMenuItemText" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>
+		</a>
+		<!-- if menu item has sumnenu child  -->
+		<a href="javascript:;" *ngIf="item.submenu" class="m-menu__link m-menu__toggle">
+			<ng-container [ngTemplateOutlet]="mMenuItemText" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>
+		</a>
+
+		<!-- if menu item has submenu child then recursively call new menu item component -->
+		<div *ngIf="item.submenu" class="m-menu__submenu">
+			<span class="m-menu__arrow"></span>
+			<ul class="m-menu__subnav">
+				<ng-container *ngFor="let child of item.submenu">
+					<ng-container [ngTemplateOutlet]="mMenuItem" [ngTemplateOutletContext]="{ item: child, parentItem: item }"></ng-container>
+				</ng-container>
+			</ul>
+		</div>
+	</li>
+</ng-template>
+
+<ng-template #mMenuItemText let-item="item" let-parentItem="parentItem">
+
+	<!-- if menu item has icon -->
+	<i *ngIf="item.icon" class="m-menu__link-icon" [ngClass]="item.icon"></i>
+	<i *ngIf="item.iconImage" class="m-menu__link-icon"><svg class="no-recipe-svg" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+		width="90" height="90"
+		viewBox="0 0 226 226"
+		style=" fill:#FFFFFF;">
+			<g transform="translate(5.763,5.763) scale(0.949,0.949)">
+				<g fill="none" fill-rule="nonzero" stroke="none" stroke-width="none" stroke-linecap="butt" stroke-linejoin="none" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+					<g fill="none" stroke="currentColor" stroke-width="23" stroke-linejoin="round">
+						<path d="M110.78889,24.69764c1.44138,1.4386 2.23899,3.39943 2.21111,5.43569c0,16.11872 3.10038,22.70936 6.7388,29.9862c3.63842,7.27684 8.32787,15.89994 8.32787,30.28047c0.03842,2.71679 -1.38896,5.24381 -3.73558,6.61342c-2.34661,1.36961 -5.2489,1.36961 -7.59552,0c-2.34661,-1.36961 -3.774,-3.89663 -3.73558,-6.61342c0,-11.45127 -2.84389,-15.75184 -6.7388,-23.54167c-3.89491,-7.78983 -8.32787,-18.40885 -8.32787,-36.725c-0.0569,-4.15487 3.26087,-7.57138 7.41562,-7.63633c2.0362,-0.0318 3.99856,0.76204 5.43994,2.20064zM76.43685,43.86107c1.59102,8.849 4.45527,13.67566 7.62162,20.12812c3.16635,6.45247 6.34154,14.55018 6.34154,26.41081c0.03842,2.71679 -1.38896,5.24381 -3.73558,6.61342c-2.34661,1.36961 -5.2489,1.36961 -7.59552,0c-2.34661,-1.36961 -3.774,-3.89663 -3.73558,-6.61342c0,-9.44364 -1.9529,-13.95002 -4.81133,-19.775c-2.85843,-5.82498 -6.91402,-12.94913 -8.91641,-24.08607c-0.43226,-2.21774 0.15364,-4.5124 1.59619,-6.25144c1.44255,-1.73904 3.58944,-2.73885 5.84886,-2.72382c3.66639,0.02225 6.78443,2.68066 7.3862,6.2974zM151.77018,43.86107c1.59102,8.849 4.45527,13.67566 7.62162,20.12812c3.16635,6.45247 6.34154,14.55018 6.34154,26.41081c0.03842,2.71679 -1.38896,5.24381 -3.73558,6.61342c-2.34661,1.36961 -5.2489,1.36961 -7.59552,0c-2.34661,-1.36961 -3.774,-3.89663 -3.73558,-6.61342c0,-9.44364 -1.9529,-13.95002 -4.81133,-19.775c-2.85843,-5.82498 -6.91403,-12.94913 -8.91641,-24.08607c-0.43226,-2.21774 0.15364,-4.5124 1.59619,-6.25144c1.44255,-1.73904 3.58944,-2.73885 5.84887,-2.72382c3.66639,0.02225 6.78443,2.68066 7.38619,6.2974zM195.86667,113c2.71679,-0.03842 5.24381,1.38896 6.61342,3.73558c1.36961,2.34661 1.36961,5.2489 0,7.59552c-1.36961,2.34661 -3.89663,3.774 -6.61342,3.73558h-0.05885c0,25.66987 -16.082,47.53456 -38.69662,56.22045c1.48541,2.3333 1.57282,5.29294 0.22771,7.70984c-1.34511,2.4169 -3.90644,3.9024 -6.67224,3.86971h-75.33333c-2.76149,0.03662 -5.32169,-1.44059 -6.67201,-3.84969c-1.35033,-2.4091 -1.27433,-5.36393 0.19806,-7.70043c-22.65892,-8.66307 -38.7849,-30.54717 -38.7849,-56.24987c-2.71595,0.02631 -5.23582,-1.41128 -6.59533,-3.76262c-1.3595,-2.35134 -1.34817,-5.25242 0.02966,-7.59307c1.37783,-2.34065 3.90886,-3.7585 6.62452,-3.71098z"></path>
+					</g>
+					<path d="M0,226v-226h226v226z" fill="none" stroke="none" stroke-width="1" stroke-linejoin="miter"></path>
+					<g fill="#121419" stroke="none" stroke-width="1" stroke-linejoin="miter">
+						<path d="M105.34896,22.49701c-4.15476,0.06495 -7.47252,3.48146 -7.41562,7.63633c0,18.31615 4.43295,28.93517 8.32787,36.725c3.89491,7.78983 6.7388,12.0904 6.7388,23.54167c-0.03842,2.71679 1.38896,5.24381 3.73558,6.61342c2.34661,1.36961 5.2489,1.36961 7.59552,0c2.34661,-1.36961 3.774,-3.89663 3.73558,-6.61342c0,-14.38053 -4.68945,-23.00363 -8.32787,-30.28047c-3.63842,-7.27684 -6.7388,-13.86748 -6.7388,-29.9862c0.02788,-2.03626 -0.76973,-3.99709 -2.21111,-5.43569c-1.44138,-1.4386 -3.40373,-2.23244 -5.43994,-2.20064zM69.05065,37.56367c-2.25942,-0.01503 -4.40631,0.98478 -5.84886,2.72382c-1.44255,1.73904 -2.02845,4.0337 -1.59619,6.25144c2.00238,11.13694 6.05797,18.26108 8.91641,24.08607c2.85843,5.82498 4.81133,10.33136 4.81133,19.775c-0.03842,2.71679 1.38896,5.24381 3.73558,6.61342c2.34661,1.36961 5.2489,1.36961 7.59552,0c2.34661,-1.36961 3.774,-3.89663 3.73558,-6.61342c0,-11.86063 -3.17519,-19.95834 -6.34154,-26.41081c-3.16635,-6.45247 -6.0306,-11.27913 -7.62162,-20.12812c-0.60177,-3.61674 -3.7198,-6.27515 -7.3862,-6.2974zM144.38399,37.56367c-2.25942,-0.01503 -4.40631,0.98477 -5.84887,2.72382c-1.44255,1.73904 -2.02845,4.0337 -1.59619,6.25144c2.00238,11.13694 6.05798,18.26108 8.91641,24.08607c2.85843,5.82498 4.81133,10.33136 4.81133,19.775c-0.03842,2.71679 1.38896,5.24381 3.73558,6.61342c2.34661,1.36961 5.2489,1.36961 7.59552,0c2.34661,-1.36961 3.774,-3.89663 3.73558,-6.61342c0,-11.86063 -3.17519,-19.95834 -6.34154,-26.41081c-3.16635,-6.45247 -6.0306,-11.27913 -7.62162,-20.12812c-0.60177,-3.61674 -3.7198,-6.27514 -7.38619,-6.2974zM30.13333,113c-2.71566,-0.04752 -5.24669,1.37033 -6.62452,3.71098c-1.37783,2.34065 -1.38917,5.24173 -0.02966,7.59307c1.3595,2.35134 3.87938,3.78892 6.59533,3.76262c0,25.7027 16.12598,47.5868 38.7849,56.24987c-1.47238,2.3365 -1.54838,5.29133 -0.19806,7.70043c1.35033,2.4091 3.91052,3.88632 6.67201,3.84969h75.33333c2.7658,0.03269 5.32713,-1.45281 6.67224,-3.86971c1.34511,-2.4169 1.2577,-5.37654 -0.22771,-7.70984c22.61461,-8.68588 38.69662,-30.55057 38.69662,-56.22045h0.05885c2.71679,0.03842 5.24381,-1.38896 6.61342,-3.73558c1.36961,-2.34661 1.36961,-5.2489 0,-7.59552c-1.36961,-2.34661 -3.89663,-3.774 -6.61342,-3.73558z"></path>
+					</g>
+					<path d="" fill="none" stroke="none" stroke-width="1" stroke-linejoin="miter"></path>
+					<path d="" fill="none" stroke="none" stroke-width="1" stroke-linejoin="miter"></path>
+				</g>
+			</g>
+		</svg></i>
+
+	<!-- if menu item using bullet -->
+	<i *ngIf="parentItem && parentItem.bullet === 'dot'" class="m-menu__link-bullet m-menu__link-bullet--dot">
+		<span></span>
+	</i>
+	<i *ngIf="parentItem && parentItem.bullet === 'line'" class="m-menu__link-bullet m-menu__link-bullet--line">
+		<span></span>
+	</i>
+
+	<ng-container *ngIf="!item.badge; else mMenuLinkBadge">
+		<span class="m-menu__link-text" [translate]="item.translate">
+			<span *ngIf="item.title == 'Ingredientes'">{{ 'MENU.INGREDIENTS' | translate }}</span>
+			<span *ngIf="item.title == 'Receitas'">{{ 'MENU.RECIPE' | translate }}</span>
+			<span *ngIf="item.title == 'Cardápios'">{{ 'MENU.MENU' | translate }}</span>
+			<span *ngIf="item.title == 'Lista de Compras'">{{ 'MENU.PURCHASELIST' | translate }}</span>
+			<!-- <span *ngIf="item.title == 'Planos'">{{ 'MENU.PLANS' | translate }}</span> -->
+			<span *ngIf="item.title == 'Suporte'">{{ 'MENU.SUPPORT' | translate }}</span>
+			<span *ngIf="item.title == 'Admin'">Admin</span>
+		</span>
+	</ng-container>
+
+	<ng-template #mMenuLinkBadge>
+		<!-- menu item with badge -->
+		<span class="m-menu__link-title">
+			<span class="m-menu__link-wrap">
+				<span class="m-menu__link-text" [translate]="item.translate">{{item.title}}</span>
+				<span class="m-menu__link-badge">
+					<span class="m-badge" [ngClass]="item.badge.type">{{item.badge.value}}</span>
+				</span>
+			</span>
+		</span>
+	</ng-template>
+
+	<!-- if menu item has submenu child then put arrow icon -->
+	<i *ngIf="item.submenu" class="m-menu__ver-arrow la la-angle-right"></i>
+</ng-template>
+<!-- END: Left Aside -->

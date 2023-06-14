@@ -1,0 +1,451 @@
+
+@media (min-width: 425px) {
+    .col-plan {
+        padding: 0 8px;
+    }
+}
+
+.selected {
+	border: 1px solid #F24159 !important;
+}
+
+.current-plan-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-top: 8px;
+	span {
+		font-weight: bold;
+    color: #F24159;
+	}
+	.expiration {
+		font-weight: 400;
+	}
+}
+
+.annual-price {
+	font-weight: 500;
+	margin-top: 13px;
+	text-align: center;
+	color: #34bfa3;
+	white-space: nowrap;
+}
+
+.smaller {
+	font-size: 8px;
+	margin-right: -35px;
+	margin-left: -33px;
+}
+
+.price-weight {
+	font-weight: 700;
+}
+
+.card {
+		border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(69,65,78,.08);
+    height: 100%;
+    min-width: 200px;
+    margin: 0 auto;
+    max-width: 264px;
+
+    .card-body {
+        padding: 16px 20px;
+
+        .col {
+            flex-direction: column;
+
+            &.cp-options {
+                min-height: 280px;
+            }
+
+        }
+    }
+
+	.card-header {
+		padding: 16px 8px 10px;
+		border: 0;
+		border-radius: 12px;
+	}
+}
+
+.card-pagamentos {
+    padding: 1px 2px 2px 2px;
+    background-color: #FFFFFF;
+    display: inline-block;
+
+    &.paypal {
+        padding: 0px 22px 10px 22px;
+    }
+}
+
+.titulo {
+    background-image: linear-gradient(to right, #FB8B5B, #F24159);
+    color: #FFFFFF;
+
+    @media (max-width: 425px) {
+        h1 {
+            font-size: 1.2rem;
+        }
+    }
+
+}
+
+.negritoTexto {
+    font-weight: bold;
+}
+
+#txt1 {
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#txt2 {
+    font-size: 15px;
+    text-align: center;
+}
+
+.corBranco {
+    background-color: #FFFFFF !important;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+}
+
+.corHeaderNutri {
+    background-image: linear-gradient(to right, #FB8B5B, #F24159);
+    color: #FFFFFF;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    height: 64px;
+}
+
+.img1 {
+    width: auto;
+    margin: 4px auto 16px;
+    height: 100px;
+}
+
+.bigger-image {
+	margin-top: -30px;
+	height: 150px;
+	margin-bottom: 1px;
+}
+
+.txtPagamento {
+    margin-left: 9%;
+}
+
+.txtValor {
+    font-size: 13px;
+}
+
+.txtInfoValor {
+    font-size: 9px;
+}
+
+.txtParcela {
+    padding-top: 1%;
+    margin-left: 18%;
+}
+
+.conteudoLista {
+    // margin-top: 10%;
+    // margin-left: 3%;
+    font-size: 10px;
+}
+
+.titulo1 {
+    font-size: 21px;
+    font-weight: bold;
+	font-family: "Poppins", "Roboto", Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+}
+
+.titulo2 {
+    font-size: 21px;
+    font-weight: bold;
+    height: 42px;
+}
+
+.spanValor {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.spanValorProf {
+    font-size: 23px;
+    font-weight: bold;
+    margin-left: -25%;
+}
+
+.spanTxt {
+    font-weight: 500;
+}
+
+.dadosTitulo {
+    margin-left: 1%;
+}
+
+.circulo {
+    background-image: linear-gradient(to bottom, #FB8B5B, #F24159);
+    border-radius: 50px;
+    color: white;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: 50px;
+    right: 15px;
+    box-shadow: 0px 0px 18px -7px #444;
+    font-size: 10px;
+    text-align: center;
+
+    .r1 {
+        margin-top: 14px;
+    }
+
+    .r2 {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+}
+
+.espaceTop {
+    margin-top: 3%;
+}
+
+.conteudoLista p {
+    margin-top: -3%;
+}
+
+.formas-pagamento-img {
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+}
+
+.bar {
+    background-image: linear-gradient(to bottom, #FB8B5B, #F24159);
+    width: 2px;
+    height: 24px;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    border-radius: 12px;
+    top: 10px;
+
+    &.bar-light {
+        background-image: none;
+        background-color: #FFFFFF;
+    }
+}
+
+.plan-content {
+    font-size: 10px;
+}
+
+.pag-anual {
+    font-size: 1rem;
+    // font-weight: 500;
+    margin: 0 auto;
+    width: 100%;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.pag-parcelado {
+    font-size: 7px;
+    padding: 2px;
+    display: inline-block;
+    // margin: 0 auto;
+}
+
+.boxInfoMes {
+    color: #22CC1E;
+    text-align: center;
+    font-size: 8px;
+    border: 1px solid #22CC1E;
+    border-radius: 12px;
+    padding: 0px 4px;
+    height: 13px;
+    display: inline-block;
+}
+
+.plan-option {
+    padding: 6px 0;
+    width: 100%;
+}
+
+.check-img {
+    height: 10px;
+    padding-right: 4px;
+    position: relative;
+    bottom: 1px;
+
+    &.cross {
+        padding-right: 8px;
+    }
+}
+
+.call2act {
+	margin-bottom: 8px;
+}
+
+.mat-spinner {
+    display: block;
+    margin: 0 auto;
+}
+
+.font16px {
+    font-size: 16px;
+}
+
+.ios-anual-price {
+	font-size: 10px;
+	margin-top: 13px;
+	font-family: "Poppins", "Roboto", Arial, sans-serif;
+}
+
+.card-description-without-price {
+	font-family: "Poppins", "Roboto", Arial, sans-serif;
+	font-size: 9px;
+	margin-bottom: 28px;
+	margin-left: 15px;
+}
+
+.card-description-price {
+	font-family: "Poppins", "Roboto", Arial, sans-serif;
+	font-size: 9px;
+    display: flex;
+	align-items: flex-end;
+    margin-left: 15px;
+		margin-top: -13px;
+
+	.text-left {
+		width: 100%;
+		margin-right: 4px;
+	}
+
+	span.has-discount, small.has-discount, div.has-discount {
+		opacity: 0.2;
+	}
+}
+
+.card-description-price .right-img {
+    width: 50%;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+    min-height: 80vh;
+
+    &.no-border {
+        border: none;
+    }
+}
+
+.card-price-discount {
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	margin-top: 16px;
+
+	.discount {
+		margin-right: 6px;
+
+		font-family: "Poppins", "Roboto", Arial, sans-serif;
+		font-weight: bold;
+		font-size: 16px;
+		line-height: 24px;
+		text-align: center;
+		color: #FD305C;
+	}
+
+	.price .value {
+		font-family: "Poppins", "Roboto", Arial, sans-serif;
+		font-weight: bold;
+		font-size: 21px;
+
+		small {
+			font-weight: bold;
+			font-size: 12px;
+			margin-left: 2px;
+			position: relative;
+			top: -6px;
+		}
+	}
+
+	.price .desc {
+		font-family: "Poppins", "Roboto", Arial, sans-serif;
+		font-weight: 300;
+		font-size: 7px;
+		line-height: 6px;
+		text-align: right;
+		margin-top: -2px;
+	}
+
+	.price .figure {
+		position: relative;
+		top: -8px;
+		margin-right: 2px;
+
+		font-family: "Poppins", "Roboto", Arial, sans-serif;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 9px;
+		line-height: 13px;
+		color: rgba(0, 0, 0, 0.35);
+	}
+}
+
+.payment-pix {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	margin-top: 16px;
+
+	p {
+		font-family: "Poppins", "Roboto", Arial, sans-serif;
+		font-weight: 300;
+		font-size: 10px;
+		margin-bottom: 5px;
+	}
+
+	.cta-promo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 20px;
+		width: 131px;
+
+		font-family: "Poppins", "Roboto", Arial, sans-serif;
+		font-weight: 300;
+		font-size: 7px;
+		line-height: 10px;
+		color: #1C7866;
+
+		background: rgba(234, 255, 251, 0.69);
+		border: 1px solid #34BFA3;
+		box-sizing: border-box;
+		border-radius: 10px;
+	}
+
+	img {
+		margin-top: 20px;
+	}
+
+	.instructions {
+		font-family: "Poppins", "Roboto", Arial, sans-serif;
+		font-weight: 300;
+		font-size: 8px;
+		line-height: 12px;
+		margin-top: 4px;
+	}
+}

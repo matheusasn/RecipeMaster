@@ -1,0 +1,29 @@
+<div class="cp-dialog">
+	<div class="cp-dialog__header">
+		<h4 class="text-center">{{ 'INGREDIENT.INGREDIENT_TXT12' | translate }}</h4>
+		<button (click)="cancel()">
+			<mat-icon>close</mat-icon>
+		</button>
+	</div> <!-- ./cp-dialog__header -->
+
+	<div class="cp-dialog__body">
+
+		<p class="text-center" *ngIf="!data.historyIngredient || data.historyIngredient.length==0">{{'INGREDIENT.INGREDIENT_TXT18' | translate}}</p>
+
+		<div class="m-section" *ngIf="data && data.historyIngredient?.length">
+			<m-cp-ingredient-hostory-item *ngFor="let history of data.historyIngredient; let i = index"
+				[isFirst]="i === data.historyIngredient.length - 1"
+				[id]="history.id"
+				[price]="history.price | currency: cifrao"
+				[amount]="history.unityQuantity"
+				[unitAbbreviation]="ingredient?.unit?.abbreviation"
+				[date]="history.inclusion | date:'dd/MMM'"
+				(onDelete)="delete($event)"
+			></m-cp-ingredient-hostory-item>
+		</div>
+	</div> <!-- ./cp-dialog__body -->
+
+	<div class="cp-dialog__footer text-center">
+		<button type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1" name="btnBack" (click)="cancel()" translate>{{ 'INPUTS.BACK' }}</button>
+	</div> <!-- ./cp-dialog__footer -->
+</div> <!-- ./cp-dialog -->

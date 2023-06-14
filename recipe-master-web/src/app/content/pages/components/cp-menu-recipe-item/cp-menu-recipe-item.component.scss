@@ -1,0 +1,150 @@
+:host {
+	display: block;
+	box-shadow: 0 1px 5px 1px #eeeeee;
+	margin-bottom: 12px;
+	border-radius: 5px;
+	overflow: hidden;
+	border: 1px solid #EBEDF2;
+
+	cursor: pointer;
+	text-align: center;
+
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+
+	-webkit-user-drag: none;
+	-webkit-tap-highlight-color: transparent;
+
+	.content-item {
+		display: flex;
+		height: 82px;
+		width: 100%;
+		background: #FDFDFD;
+	}
+
+	.picture {
+		width: 100px;
+		min-width: 100px;
+		height: 100%;
+		margin-right: 24px;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.description {
+		width: 170px;
+		height: 100%;
+		margin-right: 24px;
+		padding: 12px 0;
+		text-align: left;
+
+		h6 {
+			height: 37px;
+			margin: 0;
+			padding: 0 !important;
+			line-height: 18px;
+			color: #000000;
+			overflow: hidden;
+		}
+
+		span.label-category {
+			border: 1px solid #DEDEDE;
+			border-radius: 8px;
+			font-size: 8px;
+			padding: 2px 6px;
+			display: inline-block;
+		}
+	}
+
+	.amount-recipe {
+		flex: 1;
+		width: 129px;
+		height: 100%;
+		margin-right: 24px;
+		padding: 12px 0;
+
+		p {
+			font-size: 11px;
+			line-height: 12px;
+			margin: 0 0 4px 0;
+		}
+
+		input {
+			margin: 0 auto;
+			max-width: 120px;
+		}
+	}
+
+	.costs-recipe {
+		display: flex;
+		flex-direction: column;
+		width: 119px;
+		height: 100%;
+		margin-right: 24px;
+		padding: 12px 0;
+
+
+		.costs-recipe_item {
+			font-size: 10px;
+
+			label {
+				font-size: inherit;
+				margin-right: 8px;
+				width: 32px;
+
+				&.red { color: #FD305C }
+				&.green { color: #34BFA3 }
+				&.orange { color: #FF7D53 }
+				&black { color: #4B5262 }
+			}
+
+			span {
+				font-size: inherit;
+			}
+		}
+
+		&.mobile {
+			display: none;
+			height: 40px;
+			width: 100%;
+			align-items: center;
+			flex-direction: row;
+			justify-content: space-between;
+			padding: 0 16px;
+			background: #FDFDFD;
+			border-top: 1px solid #EBEDF2;
+
+			.costs-recipe_item label {
+				margin: 0;
+				display: block;
+			}
+		}
+	}
+
+	@media only screen and (max-width: 768px) {
+		.costs-recipe {
+			display: none;
+		}
+
+		.costs-recipe.mobile {
+			display: flex;
+		}
+
+		.picture, .description, .amount-recipe {
+			margin-right: 8px;
+		}
+	}
+
+	.no-recipe-img {
+		position: relative;
+		display: block;
+		padding: 16px;
+		width: 100%;
+	}
+}

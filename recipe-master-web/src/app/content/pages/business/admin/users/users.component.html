@@ -1,0 +1,95 @@
+<cp-loading></cp-loading>
+
+<m-admin-stats (onGraphLoad)="onGraphLoad($event)"></m-admin-stats>
+
+<div class="container-fluid" id="users">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-white">
+										<div class="float-right">
+											<button class="btn btn-primary btn-sm mr-1" *ngIf="haveOneUserSelected" (click)="createPassword()">Criar nova senha</button>
+											<button class="btn btn-primary btn-sm mr-1" *ngIf="haveOneUserSelected" (click)="resetPassword()">Enviar link recuperação de senha</button>
+                    	<button class="btn btn-primary btn-sm" (click)="doCreateMessage()">Criar mensagem</button>
+										</div>
+
+                    <h3>Usuários</h3>
+                </div>
+                <div class="card-body p-4">
+
+                    <div class="table-responsive">
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered hover">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <button style="border: none; background: transparent; font-size: 14px;" (click)="toogleSelectAllBtn()">
+                                        <i class="far" [ngClass]="allSelected?'fa-check-square':'fa-square'"></i>
+                                    </button>
+                                </th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>E-mail</th>
+                                <th>Plan</th>
+																<th>Device</th>
+																<th>Country</th>
+                                <th>NPS</th>
+                                <th>Inclusion</th>
+                                <th>Last Access</th>
+                                <th>Access</th>
+                                <th>Recipes</th>
+                                <th>PDFs</th>
+                                <th>Ing.</th>
+																<th>Comp.</th>
+																<th>Menus</th>
+                                <th>Subscr.</th>
+                                <th>Exp.</th>
+                                <th>Expired</th>
+																<th>N. Subsc.</th>
+																<th>Discount</th>
+																<th>City</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <ng-container *ngIf="users?.length != 0">
+                                <tr *ngFor="let user of users; let i = index">
+                                    <td class="text-center">
+																			<input type="checkbox" [(ngModel)]="user.selected">
+																		</td>
+                                    <td>{{user.id}}</td>
+                                    <td>{{user.name}}</td>
+                                    <td>{{user.user.email}}</td>
+                                    <td><a href="javascript:void()" (click)="doDetail(user)">
+																			{{[user.user.perfis] | profileInfo:'ALL'}}
+																			{{ user.user.waitingMigration && user.user.firebaseUid ? '- Firebase' : '' }}
+																			{{ !user.user.waitingMigration && user.user.firebaseUid ? '- Firebase (M)' : '' }}
+																		</a></td>
+																		<td>{{ user.user.devices }}</td>
+																		<td>{{user.user.country}}</td>
+                                    <td>{{user.user.nps}}</td>
+																		<td><span class="data-ordering-correction-fix">{{ user.user?.inclusion | date:'yyyy-MM-dd HH:mm'}}</span>{{user.user?.inclusion | date:'dd/MM/yyyy HH:mm'}}</td>
+																		<td><span class="data-ordering-correction-fix">{{ (getLastAccess(user) || '1970-01-01') | date:'yyyy-MM-dd HH:mm'}}</span>{{getLastAccess(user) | date:'dd/MM/yyyy HH:mm'}}</td>
+																		<td>{{user.stats&&user.stats[5]?user.stats[5]:0}}</td> <!-- Acessos -->
+																		<td>{{user.stats&&user.stats[3]?user.stats[3]:0}}</td> <!-- Receitas-->
+																		<td>{{user.stats&&user.stats[7]?user.stats[7]:0}}</td> <!-- PDFs -->
+																		<td>{{user.stats&&user.stats[1]?user.stats[1]:0}}</td> <!-- Ingredientes-->
+																		<td>{{user.stats&&user.stats[2]?user.stats[2]:0}}</td> <!-- Compostos-->
+																		<td>{{user.stats&&user.stats[4]?user.stats[4]:0}}</td> <!-- Cardápios -->
+																		<td>{{user.user?.plan?.inclusion | date:'dd/MM/yyyy'}}</td> <!-- Assinatura -->
+																		<td><a href="javascript:void()" (click)="doEditDate(user.user, 'Vencimento')" [ngClass]="{'danger': lessThanOneMonthToExpires(user.user)}">{{user.user?.plan?.expiration | date:'dd/MM/yyyy'}}</a></td> <!-- Expiration -->
+																		<td>{{user.user?.lastPlanExpiredAt | date:'dd/MM/yyyy HH:mm:ss'}}</td> <!-- Expiração do plano atual-->
+                                    <td>{{ user.user.planHistory.length }}</td>
+																		<td><a href="javascript:void()" (click)="removeDiscountTimer(user)">{{user.user?.discountTimerStartedAt | date:'dd/MM/yyyy HH:mm:ss'}}</a></td> <!-- Desconto -->
+																		<td>{{user.user.city}}</td>
+                                </tr>
+                            </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

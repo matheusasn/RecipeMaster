@@ -1,0 +1,12 @@
+<div class="canvas-container">
+	<canvas #canvas baseChart
+			[data]="lineChartData"
+			[labels]="lineChartLabels"
+			[colors]="lineChartColors"
+			[legend]="false"
+			[chartType]="lineChartType"
+			[options]="lineChartOptions"
+	></canvas>
+
+	<div class="no-data-legend" style="opacity: 0.3;" *ngIf="!priceHistory || priceHistory.length == 0"><span>{{'INGREDIENT.INGREDIENT_TXT19' | translate}}<br />{{'INGREDIENT.INGREDIENT_TXT20' | translate}}</span></div>
+</div>

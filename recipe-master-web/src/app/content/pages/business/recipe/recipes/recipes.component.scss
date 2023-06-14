@@ -1,0 +1,558 @@
+.custom-padding {
+	@media only screen and (max-width: 768px) {
+		padding: 0 5px;
+	}
+}
+
+.page-title-wrapper {
+	display: flex;
+	align-items: center;
+
+	.title-infor {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+.report-icon {
+	font-size: 17px;
+	margin-top: 5px;
+	padding: 0 11px;
+}
+
+.recipe-card {
+	border-radius: 10px;
+	// padding: 12px;
+	height: 120px;
+
+	.mat-card {
+		padding: 16px !important;
+	}
+
+	.mat-card-title-group {
+		margin: 0 0 0 138px;
+	}
+
+	.oContent {
+		width: 100%;
+
+		h6 {
+			font-size: 0.8rem;
+		}
+
+		h4 {
+			padding-bottom: 8px !important;
+		}
+	}
+
+	img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		margin: 0;
+		width: 160px;
+		height: calc(160px * (3/4));
+		max-width: 160px;
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+	}
+
+	.list-icon-right {
+		position: absolute;
+		right: 0;
+		top: 48px;
+	}
+
+}
+
+.selectCategoria {
+	height: 31px;
+	padding-left: 6px;
+}
+
+.loading-style {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+select {
+	width: 100%;
+	height: 140%;
+	padding-left: 16px;
+}
+
+.nameTela {
+	margin-top: 3%;
+	margin-bottom: 3%;
+	display: flex;
+	align-items: center;
+}
+
+#msgAjuda {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	padding-top: 0%;
+}
+
+#link {
+	cursor: pointer;
+}
+
+#textApresentation {
+	@media only screen and (max-width: 1025px) {
+		left: 367px;
+	}
+
+	text-align: right;
+	position: relative;
+	left: 365px;
+	bottom: 343px;
+	width: 50%;
+	color: #4B5262;
+	font-family: Poppins;
+	font-size: 30px;
+}
+
+#textApresentation>p {
+	margin-bottom: -3px;
+}
+
+#divImgApresentation {
+
+	// position: fixed;
+	// top: 459px;
+	// left: 500px;
+	@media only screen and (min-width: 768px) {
+		margin-top: -200px;
+	}
+
+}
+
+#imgApresentation {
+	display: block;
+	// margin: 5px auto;
+	max-width: 68%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: auto;
+	margin-right: 14px;
+}
+
+.btn-color {
+	background: linear-gradient(125.5deg, #FB8A65 7.9%, #FA4E6D 71%), #FA345F !important;
+	box-shadow: 0px 4px 4px #E4E5E7 !important;
+	border-radius: 6px !important;
+}
+
+.btn-color:hover {
+	background: #FB8A65 !important;
+}
+
+.btn-add-recipe {
+	width: 220px;
+	padding: 5px 26px;
+}
+
+h2.title-recipe {
+	height: 48px;
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+	font-size: 30px;
+	font-family: Poppins, sans-serif;
+	margin-right: 0;
+}
+
+.mat-list,
+.mat-nav-list,
+.mat-selection-list {
+	padding-top: 0px;
+}
+
+.ordenation-container {
+	// display: flex;
+	// flex-direction: row;
+	// position: relative;
+	padding: 5px 30px 5px 40px;
+	//margin-bottom: 10px;
+
+	.ordenation-container-title {
+		width: fit-content;
+	}
+
+	.ordenation-container-data {
+		width: 120px;
+	}
+
+	@media (max-width: 768px) {
+		// padding: 0 16px;
+		flex-direction: row !important;
+		margin-top: 20px;
+		margin-bottom: 3px;
+
+		.ordenation-container-title {
+			width: fit-content;
+		}
+
+		.ordenation-container-data {
+			width: 100px;
+		}
+	}
+
+	a {
+		@media (max-width: 768px) {
+			font-size: 10px;
+		}
+
+		color: #828282;
+		font-size: 12px;
+		font-weight: 600;
+		display: flex;
+		align-items: center;
+		justify-content: start;
+		cursor: pointer;
+
+		mat-icon {
+			height: unset;
+			width: unset;
+		}
+	}
+
+	a+a {
+		display: flex;
+		align-items: center;
+		justify-content: end;
+	}
+
+	// .qtd-order {
+	// 	right: 66%;
+	// }
+
+	// .value-order {
+	// 	right: 47%;
+	// }
+
+	// .profit_order {
+	// 	right: 28%;
+	// }
+
+	// .margin-order {
+	// 	right: 5%;
+	// }
+
+	// .variation-order {
+	// 	right: 5px;
+	// }
+
+}
+
+::ng-deep {
+
+	.mat-list-item-content {
+		display: flex;
+		flex-direction: row;
+		align-items: center !important;
+		box-sizing: border-box;
+		padding: 22px 15px 22px 20px !important;
+		position: relative;
+		height: inherit;
+	}
+
+	.mat-list-icon {
+		flex-shrink: 0;
+		width: 24px;
+		height: 24px;
+		font-size: 24px;
+		box-sizing: content-box;
+		border-radius: 50%;
+		padding: 4px;
+		//margin-bottom: 15px;
+	}
+
+	@media (max-width: 768px) {
+		.mat-list-icon {
+			display: none !important;
+		}
+	}
+
+}
+
+.used-ingredients-list-item {
+
+	.list-item-name {
+		width: fit-content;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+
+		&-container {
+			width: 100%;
+		}
+	}
+
+	.list-item-data {
+		width: 120px;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+	}
+
+	@media only screen and (max-width: 768px) {
+		&:first-child {
+			margin-top: 13px;
+		}
+
+		.list-item-name {
+			width: fit-content;
+		}
+
+		.list-item-data {
+			width: 100px;
+		}
+	}
+}
+
+.list-icon-right {
+	position: absolute;
+	right: 0;
+}
+
+.list-item {
+	background: #fff;
+	margin: 4px;
+	border-radius: 10px;
+	font-weight: bold;
+
+	@media only screen and (max-width: 768px) {
+		font-size: 12px;
+	}
+
+	mat-chip {
+		background-color: #EBEBEB;
+		padding: 2px 10px;
+	}
+}
+
+.item-title {
+	font-weight: 500;
+
+	@media only screen and (max-width: 390px) {
+		width: 80px;
+	}
+
+	@media (min-width: 390px) and (max-width: 500px) {
+		width: 100px;
+	}
+}
+
+.item-title-elipsed {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: block;
+	width: 100%;
+	max-width: 200px;
+}
+
+.porcent-item {
+	color: #34BFA3 !important;
+}
+
+.value-sale {
+	font-size: 10px;
+
+	// right: 68%;
+	// position: absolute;
+	// top: 42px;
+	.chip-list {
+		background-color: rgba(52, 191, 163, 0.2) !important;
+	}
+
+	span {
+		color: #34BFA3 !important;
+	}
+}
+
+// .cost-position {
+// 	right: 39%;
+// 	position: absolute;
+// }
+
+// .profit-position {
+// 	width: 10%;
+// 	right: 26%;
+// 	position: absolute;
+// }
+
+// .value-recipe {
+// 	width: 13%;
+// 	color: #000000;
+//     position: absolute;
+//     right: 3%;
+// }
+
+.chip-list {
+	border-radius: 4px;
+	min-height: 26px;
+
+	span {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 500;
+		font-size: 10px;
+		line-height: 10px;
+		color: #959595;
+	}
+}
+
+.radio-group-option {
+	flex-direction: row;
+
+	span {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 500;
+		font-size: 12px;
+		line-height: 14px;
+		text-align: center;
+		color: #000000;
+	}
+}
+
+.mat-radio-outer-circle {
+	border-color: #fa4e6d !important;
+}
+
+.mat-radio-inner-circle {
+	background-color: #fb8166 !important;
+}
+
+.col-3 {
+	min-width: 100px;
+	/* define o tamanho mínimo da coluna para que o flex-wrap possa funcionar */
+	align-items: center;
+}
+
+@media only screen and (max-width: 1024px) {
+	#imgApresentation {
+		display: block;
+		max-width: 98%;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		/* margin-left: auto; */
+		margin-right: 14px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+
+	.selectCategoria,
+	.wrapper-search {
+		padding: 0;
+		margin-top: 10px;
+		margin-bottom: -3px;
+	}
+
+	.btn-add-recipe {
+		width: 100%;
+		padding: 5px 26px;
+		margin-top: 6px;
+	}
+
+	h2.title-recipe {
+		font-size: 20px;
+		margin: 0;
+		padding: 0;
+		font-family: Poppins, sans-serif;
+	}
+
+	#textApresentation {
+		display: none;
+	}
+
+	#imgApresentation {
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+		margin-top: 156px;
+		max-width: 88%;
+	}
+
+	#divImgApresentation {
+		position: static;
+	}
+
+	.page-title-wrapper {
+		justify-content: space-between;
+	}
+
+	.report-icon {
+		padding: 0 5px;
+	}
+
+	.row {
+		flex-direction: column;
+		flex-wrap: wrap;
+	}
+
+	.col-9 {
+		max-width: 100%;
+
+		.container-col-9 {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+
+	.col-12 {
+		max-width: 100%;
+
+		.container-col-9 {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	}
+
+	.col-3 {
+		width: 100%;
+		margin-top: 1rem;
+    padding-left: 1.5rem;
+	}
+
+	.container-table-recipes {
+		display: block;
+		overflow-x: auto;
+		white-space: nowrap;
+	}
+}
+
+@media only screen and (max-width: 650px) {
+	.text-right {
+		padding-right: 0;
+	}
+
+	#imgApresentation {
+		display: block;
+		margin: 5px auto;
+		max-width: 100%;
+		margin: 5px auto;
+	}
+
+	.m-section {
+		width: 650px;
+	}
+}
+
+.mat-spinner {
+	::ng-deep circle {
+		stroke: #fff;
+	}
+}

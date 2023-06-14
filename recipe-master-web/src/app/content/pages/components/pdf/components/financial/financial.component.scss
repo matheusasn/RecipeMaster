@@ -1,0 +1,65 @@
+.container-financial-recipe {
+	background-color: #fff;
+	border-radius: 9px;
+	height: 244px;
+
+	font-family: "Poppins", "Roboto", Arial, sans-serif;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 9px;
+	line-height: 13px;
+
+	.title {
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 27px !important;
+	}
+
+	.color-secondary {
+			color: #4B5262;
+	}
+
+	table > tbody > tr > td > tbody > tr {
+		line-height: 15px;
+	}
+
+
+}
+
+.graph-container {
+	font-family: "Poppins", "Roboto", Arial, sans-serif;
+	font-style: normal;
+	font-weight: 500;
+	// display: grid;
+	// grid-template-columns: 1fr 1fr;
+	// margin-top: 20px;
+	padding-left: 40px;
+	display: flex;
+	// justify-content: space-between;
+	gap: 15px;
+	margin-bottom: 25px;
+
+}
+
+.container-financial-menu {
+
+	margin-top: 10px;
+	background-color: #F8F8F8;
+	border-radius: 9px;
+
+	font-family: "Poppins", "Roboto", Arial, sans-serif;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 9px;
+	line-height: 13px;
+
+	.title {
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 21px;
+	}
+
+	.color-secondary {
+			color: #4B5262;
+	}
+}

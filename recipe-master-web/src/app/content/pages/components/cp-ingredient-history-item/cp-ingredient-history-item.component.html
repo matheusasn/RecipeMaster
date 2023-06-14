@@ -1,0 +1,16 @@
+<div class="history-item">
+	<span class="history-item__date" translate>{{ date }}</span>
+	<span class="history-item__amount" translate>{{ amount }} {{ unitAbbreviation }}</span>
+	<span class="history-item__value" translate>{{ price }}</span>
+	<div>
+		<button [disabled]="isFirst" (click)="$event.stopPropagation()" mat-icon-button [matMenuTriggerFor]="menu">
+			<i class="fas fa-ellipsis-v"></i>
+		</button>
+		<mat-menu #menu="matMenu">
+			<button mat-menu-item (click)="deleteHistory()">
+				<mat-icon>delete</mat-icon>
+				<span>{{ 'INPUTS.DELETE' | translate }}</span>
+			</button>
+		</mat-menu>
+	</div>
+</div>

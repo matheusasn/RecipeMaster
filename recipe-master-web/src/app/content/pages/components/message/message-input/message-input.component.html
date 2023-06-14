@@ -1,0 +1,27 @@
+<div class="container pb-3 text-center"> 
+    <div class="row">
+        <div class="col-12 p-1 col-md-2">
+            <img *ngIf="message?.photoUrl" [src]="message.photoUrl" onerror="if (this.src != './assets/message/carinha.png') this.src = './assets/message/carinha.png';" class="message-img" />
+        </div>
+        <div class="col-12 col-md-8">
+            <h2 class="message-title">{{message.title}}</h2>
+            <p class="message-subtitle p-3" *ngIf="message.text" [innerHtml]="message.text"></p>
+            <p *ngIf="!message.text">&nbsp;</p>
+
+            <form [formGroup]="form" class="m-form m-form--fit m-form--label-align-right" (ngSubmit)="doSubmit()">
+                <div class="row">
+                    <div class="col-12 col-lg-8 offset-lg-2">
+                        <div class="form-group m-form__group">
+                            <textarea class="form-control cp-input" formControlName="text" placeholder="Digite sua resposta aqui..."></textarea>
+                        </div>
+                    </div>
+                    <div class="col-8 offset-2">
+                        <button type="submit" class="btn btn-accent m-btn m-btn--air m-btn--custom mt-3">
+                            {{'RECIPE.MODAL_USER_NOTA.MODAL_GERAL_BTN_PROXIMO' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="container text-center"> 
+    <div class="row">
+        <div *ngIf="!viewTutorial" class="col-12 p-1" [ngClass]="!viewTutorial?'col-md-2':''">
+            <img [src]="message.photoUrl?message.photoUrl:'./assets/message/carinha.png'" onerror="if (this.src != './assets/message/carinha.png') this.src = './assets/message/carinha.png';" class="message-img" />
+        </div>
+        <div class="col-12" [ngClass]="!viewTutorial?'col-md-10':''">
+
+            <h2 class="message-title">{{message.title}}</h2>
+            <p class="message-subtitle p-3" *ngIf="message.text" [innerHtml]="message.text"></p>
+            <p *ngIf="!message.text">&nbsp;</p>
+
+            <div class="row" *ngIf="!viewTutorial">
+                <div [ngClass]="config && config.label2?'col-6 col-lg-3 offset-lg-3':'col-12 col-lg-4 offset-lg-4'">
+                    <button class="btn btn-outline-dark btn-block" (click)="doConfirm(label1)">
+                        {{label1}}
+                    </button>
+                </div>
+                <div class="col-6 col-lg-3" *ngIf="label2">
+                    <button *ngIf="!url2" class="btn btn-outline-dark btn-block" (click)="doCancel(label2)">
+                        {{label2}}
+                    </button>
+                    <a *ngIf="url2" class="btn btn-outline-dark btn-block" [href]="url2" target="_blank" (click)="doCancel(label2)">
+                        {{label2}}
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row" *ngIf="viewTutorial">
+        <div class="col-1 d-none d-sm-block" *ngIf="viewTutorial">
+            <div class="swiper-button-prev"></div>
+        </div>
+
+        <div class="col-xs-12 col-sm-10">
+
+            <swiper #usefulSwiper [config]="swiperConfig" *ngIf="viewTutorial">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide text-center" *ngFor="let item of tutorialItens">
+                        <m-tutorial-card [item]="item" mode="iframe"></m-tutorial-card>
+                    </div>
+
+                </div>
+            </swiper>
+        </div>
+
+        <div class="col-1 d-none d-sm-block" *ngIf="viewTutorial">
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+
+</div>

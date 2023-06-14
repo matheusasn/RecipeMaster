@@ -1,0 +1,23 @@
+.custom-box {
+	box-shadow: 1px 1px 4px 2px rgba(217, 207, 207, 0.25);
+	border-radius: 7px;
+	padding-top: 10px;
+	padding-left: 32px;
+	padding-bottom: 10px;
+
+	label {
+		display: flex;
+    flex-direction: column;
+		color: #000000;
+    font-weight: 500;
+	}
+
+	span {
+		font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #ABABAB;
+		margin-top: 4px;
+	}
+}

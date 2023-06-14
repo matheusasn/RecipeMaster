@@ -1,0 +1,106 @@
+<div class="cp-content cp-content-costs">
+	<div class="row">
+		<div class="m-portlet__body w-full">
+			 <div class="cp-content-costs__header">
+					<div style="width: 50px;">&nbsp;</div>
+					<h3 class="cp-content-costs__header-title" translate>
+						{{ type !== 'FIXED_COSTS' ? 'CUSTO VARIÁVEL' : 'CUSTO FIXO' }}
+					</h3>
+					<button (click)="close()">
+						<mat-icon>close</mat-icon>
+					</button>
+			 </div>
+			 <div [formGroup]="formGroup" class="cp-content-costs__body">
+					<div class="row">
+						 <div class="col-sm-12 custom-form-group">
+							 <label for="name">Nome</label>
+							 <input [ngClass]="requiredName && 'required'" id="name" type="text" formControlName="name">
+						 </div>
+						 <div class="col-sm-12 custom-form-group">
+							<div class="label-group">
+								<label [ngClass]="selectedCalculationType === 'PRICE' ? 'active' : 'inactive'" (click)="selectCalculationType('PRICE')">Preço</label>
+								<label *ngIf="type !== 'FIXED_COSTS'" [ngClass]="selectedCalculationType === 'PERCENT' ? 'active' : 'inactive'" (click)="selectCalculationType('PERCENT')">Porcentagem</label>
+							</div>
+							<div class="input-group" [ngClass]="(requiredPercent) && 'required'">
+								<input
+									*ngIf="selectedCalculationType === 'PRICE'"
+									style="padding-left: 36px;"
+									type="text"
+									currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left' }"
+									name="price"
+									formControlName="price"
+									inputmode="numeric"
+									pattern="[0-9]*"
+								>
+								<input
+									*ngIf="selectedCalculationType === 'PERCENT'"
+									style="padding-left: 20px;"
+									type="text"
+									currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left' }"
+									name="priceUnitQuantity"
+									formControlName="priceUnitQuantity"
+									inputmode="numeric"
+									pattern="[0-9]*"
+							>
+								<div *ngIf="selectedCalculationType === 'PRICE'" class="input-group-preppend">
+									<span>{{ cifrao }}</span>
+								</div>
+								<div *ngIf="selectedCalculationType === 'PERCENT'" class="input-group-append">
+									<span>%</span>
+								</div>
+								<div class="input-group-append" *ngIf="selectedCalculationType === 'PRICE' && type !== 'FIXED_COSTS'" (click)="openDialogUnit()">
+									<span class="label-info">
+										{{formGroup?.value?.priceUnitQuantity}} {{ formGroup?.value?.priceUnit?.abbreviation }}
+									</span>
+								</div>
+							</div>
+						</div>
+						<div *ngIf="selectedCalculationType === 'PERCENT'" class="row m-0 col-12">
+							<div class="percent-cost-type-wrapper">
+								<label [ngClass]="formGroup.value.percentCostType === 'SALE_PRICE' ? 'active' : 'inactive'" (click)="selectPercentCostType('SALE_PRICE')">Preço de venda</label>
+								<label [ngClass]="formGroup.value.percentCostType === 'COST_OF_INGREDIENTS' ? 'active' : 'inactive'" (click)="selectPercentCostType('COST_OF_INGREDIENTS')">Custo dos ingredientes</label>
+							</div>
+							<div class="percent-box col-12">
+									<div>
+										<span *ngIf="formGroup.value.percentCostType === 'SALE_PRICE'" [innerHTML]="'RECIPE.PERCENT_ALERT' | translate">
+										</span>
+										<span *ngIf="formGroup.value.percentCostType === 'COST_OF_INGREDIENTS'" [innerHTML]="'RECIPE.PERCENT_ALERT_2' | translate">
+										</span>
+									</div>
+							</div>
+						</div>
+						<ng-container *ngIf="typeOfCostSelected === 'TOTAL'">
+							<div *ngIf="selectedCalculationType === 'PRICE' && type !== 'FIXED_COSTS'" class="col-sm-6 custom-form-group">
+								<label for="name">Quantidade</label>
+								<input [ngClass]="requiredName && 'required'" id="name" type="text" formControlName="unityQuantityUsed" placeholder="1">
+							</div>
+							<div *ngIf="selectedCalculationType === 'PRICE' && type !== 'FIXED_COSTS'" class="col-sm-6 custom-form-group">
+								<label for="name">Unidade</label>
+								<select name="unitUsed" [ngClass]="formGroup.errors?.uncompatibleUnit?'text-danger':''" [compareWith]="compareSelect" formControlName="unitUsed">
+									<option value="null" [disabled]="true" translate>{{'INPUTS.OPTION_DEFAULT'}}</option>
+									<option *ngFor="let unit of units" [ngValue]="unit">{{ unit.name | translate }}</option>
+								</select>
+							</div>
+						</ng-container>
+						<ng-container *ngIf="typeOfCostSelected === 'UNIT'">
+							<div *ngIf="selectedCalculationType === 'PRICE' && type !== 'FIXED_COSTS'" class="col-sm-6 custom-form-group">
+								<label for="name">Quantidade</label>
+								<input [ngClass]="requiredName && 'required'" id="name" type="text" formControlName="unitCostUnityQuantityUsed" placeholder="1">
+							</div>
+							<div *ngIf="selectedCalculationType === 'PRICE' && type !== 'FIXED_COSTS'" class="col-sm-6 custom-form-group">
+								<label for="name">Unidade</label>
+								<select name="unitUsed" [ngClass]="formGroup.errors?.uncompatibleUnit?'text-danger':''" [compareWith]="compareSelect" formControlName="unitCostUnitUsed">
+									<option value="null" [disabled]="true" translate>{{'INPUTS.OPTION_DEFAULT'}}</option>
+									<option *ngFor="let unit of units" [ngValue]="unit">{{ unit.name | translate }}</option>
+								</select>
+							</div>
+						</ng-container>
+						<div class="col-sm-12 d-flex justify-content-center mt-5">
+							<button id="saveButton" (click)="save()">Salvar</button>
+						</div>
+					</div>
+			 </div>
+		</div>
+	</div>
+</div>
+

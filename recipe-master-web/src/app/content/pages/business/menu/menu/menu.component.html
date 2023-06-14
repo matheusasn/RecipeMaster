@@ -1,0 +1,275 @@
+<cp-loading></cp-loading>
+<div class="cp-content">
+    <div class="row override-margin">
+        <div class="col">
+            <form *ngIf="formMenu" class="m-form m-form--label-align-right" name="form" [formGroup]="formMenu" novalidate>
+                <div class="m-portlet pb-3">
+                    <div class="m-portlet__body">
+                        <div class="d-flex">
+													<h3 class="m-form__section" translate>{{'MENUS.MENU_TITLE'}}</h3>
+												</div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group m-form__group">
+															<div class="wrapper-bordered">
+																									<m-photo-upload
+																	[icon]="'assets/app/no-menu-image.png'"
+																	[cropOtions]="cropOtions"
+																	[customClass]="'square-picture'"
+																	(photoChange)="onPhotoChange($event)"
+																	[photoUrl]="formMenu?.value?.photoUrl"
+																></m-photo-upload>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group m-form__group">
+                                            <label class="col-form-label" translate>{{ 'RECIPE.INPUT.NAME' }}</label>
+                                            <input class="form-control m-input cp-input" autocomplete="off" name="name" (keyup)="saveFormSubject.next()" formControlName="name"  placeholder="{{'RECIPE.INPUT.NAME_DESC' | translate }}" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group m-form__group">
+                                            <label class="col-form-label" translate>{{ 'RECIPE.INPUT.UNITQUANTITY' }}</label>
+                                            <input inputmode="numeric" pattern="[0-9]*" class="form-control m-input cp-input" name="unityQuantity" type="number" (keyup)="saveFormSubject.next()" formControlName="unityQuantity"
+                                                placeholder="{{'RECIPE.INPUT.UNITQUANTITY_PLACEHOLDER' | translate }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+										<m-unit-select *ngIf="units"
+											[options]="{basic: true, canUpdate: false, canCreate: false}"
+											[form]="formMenu" [units]="units"></m-unit-select>
+                                    </div>
+                                </div>
+								<div class="row">
+									<div class="col-12">
+										<div class="form-group m-form__group">
+											<label class="col-form-label" translate>{{ 'RECIPE.INPUT.DESCRIPTION' }}</label>
+											<textarea class="form-control cp-input" rows="3" formControlName="description" (keyup)="saveFormSubject.next()" placeholder="{{'RECIPE.INPUT.NAME_DESC' | translate }}"></textarea>
+										</div>
+									</div>
+								</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- GENERAL END-->
+
+                <!-- INGREDIENTS -->
+                <div class="m-portlet">
+                    <div class="m-portlet__body">
+
+						<div class="cp-content__header">
+							<div>
+								<div class="div-center d-flex">
+									<h3 class="m-form__section" translate>{{'MENUS.TABS.INGREDIENTS.TITLE' }}</h3>
+								</div>
+							</div>
+
+							<div>
+								<button (click)="$event.stopPropagation()" mat-icon-button [matMenuTriggerFor]="menu">
+									<i class="fas fa-ellipsis-v"></i>
+								</button>
+								<mat-menu #menu="matMenu">
+									<button mat-menu-item (click)="toggleIngredientDraggable()">
+										<mat-icon>low_priority</mat-icon>
+										<span>{{ (ingredientDraggable ? 'Desabilitar ordenação' : 'Habilitar ordenação') | translate }}</span>
+									</button>
+								</mat-menu>
+							</div>
+						</div> <!-- ./cp-content__header -->
+
+
+                        <!-- BUSCADOR de ingredientes (tipo AUTOCOMPLETE) -->
+						<m-cp-ingredient-search
+							[(ingredients)]="ingredients"
+							(onChange)="onChangeIngredients()"
+							(selected)="onSelected($event)"
+							responseType="recipe-ingredient"
+							behavior="autocomplete"
+							emptySearchBehavior="hide"
+							[units]="units"
+							placeholder="{{ 'RECIPE.RECIPE_PESQUISA' | translate}}"
+						></m-cp-ingredient-search>
+
+						<div class="mb-4" *ngIf="ingredients?.length" dragula="INGREDIENTS_DRAGGABLE"
+							 [dragulaModel]="ingredients" (dragulaModelChange)="ingredients = $event">
+
+							 <ng-container *ngFor="let recipeIngredient of ingredients; let i = index">
+
+								<m-cp-menu-recipe-item
+									(unityQuantityChange)="onSelected()"
+									[recipeIngredient]="recipeIngredient"
+									(click)="setIngredientInfo(i)"
+								></m-cp-menu-recipe-item>
+
+							 </ng-container>
+
+						</div>
+
+                        <div class="form-group m-form__group text-right mt-4">
+                            <span class="ingredientsTotal">
+                                Custo total: {{getTotalIngredients() | currency:cifrao}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- INGREDIENTS END -->
+
+                <!-- OTHER COSTS -->
+                <div class="m-portlet">
+                    <div class="m-portlet__body">
+                        <div class="d-flex">
+													<h3 class="m-form__section" translate>{{'MENUS.TABS.OTHER_COSTS.TITLE' }}</h3>
+												</div>
+
+                        <m-menuitem [(itens)]="itens" (itensChange)="onChangeItens($event)" [units]="units" placeholder="{{ 'MENUS.OUTROSCUSTOS' | translate}}"></m-menuitem>
+
+                        <div class="form-group m-form__group text-right mt-4">
+                            <span class="ingredientsTotal">
+                                Total: {{getItensTotalCost() | currency:cifrao}}
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- OTHER COSTS END -->
+
+                <!-- FINANCIAL -->
+                <div class="m-portlet">
+                    <div class="m-portlet__body">
+												<div class="d-flex">
+													<h3 class="m-form__section" translate>{{'RECIPE.TABS.FINANCIAL.TITLE' }}</h3>
+												</div>
+                        <div formGroupName="financial">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="wrapper-bordered p-4 mt-3">
+										<h5 class="mt-2">
+											<span translate>{{'RECIPE.TABS.FINANCIAL.TOTAL_COAST'}}</span> -
+											<span>{{getTotalCost() | currency:cifrao}}</span>
+										</h5>
+										<div class="row">
+											<div class="col-6">
+												<div class="form-group m-form__group">
+													<label class="col-form-label" translate>{{ 'MENUS.INPUT.SELL_VALUE' }}</label>
+													<input inputmode="numeric" pattern="[0-9]*" currencyMask [options]="{ prefix: cifrao}" maxlength="10" class="form-control m-input cp-input" name="totalCostValue"
+														   formControlName="totalCostValue" placeholder="0,00" type="text" (keyup)="onChangeCostValue();saveFormSubject.next()" (blur)="onBlurCostValue()">
+												</div>
+											</div>
+											<div class="col-6 financial-inputs">
+												<div class="form-group m-form__group">
+													<label class="col-form-label w-100 text-left" translate [ngClass]="formMenu.value.financial.totalCostPerc<0?'text-danger':''">
+														{{ 'RECIPE.INPUT.PROFIT_PERC' }}
+														<i class="far fa-question-circle" matTooltip="{{'RECIPE.TOOLTIP_TXT1' | translate}}"></i>
+													</label>
+													<input inputmode="numeric" pattern="[0-9]*" currencyMask maxlength="5" [options]="{ prefix: '', suffix: '%', precision: 0, allowNegative: true }" [ngClass]="formMenu.value.financial.totalCostPerc<0?'text-danger':''"  class="form-control m-input cp-input"
+														   name="totalCostPerc" formControlName="totalCostPerc" placeholder="0,00" type="text" (keyup)="onChangeCostPerc();saveFormSubject.next()" (blur)="onBlurCostValue()">
+												</div>
+											</div>
+											<div class="col-12 cost-resume">
+												<span>
+													{{'RECIPE.LUCRO' | translate}} {{calcProfit() | currency:cifrao}}
+												</span>
+												<span>
+													{{'RECIPE.MARGEM_LUCRO' | translate}} {{calcMargemDeLucro() | number:'1.0-0'}}% <br>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="wrapper-bordered p-4 mt-3">
+										<h5 class="mt-2">
+											<span translate>{{'RECIPE.TABS.FINANCIAL.UNIT_COAST'}}</span> -
+											<span>{{getUnitCost() | currency:cifrao}}</span>
+										</h5>
+										<div class="row">
+											<div class="col-6">
+												<div class="form-group m-form__group">
+													<label class="col-form-label" translate>{{ 'MENUS.INPUT.SELL_VALUE' }}</label>
+													<input inputmode="numeric" pattern="[0-9]*" currencyMask [options]="{ prefix: cifrao}" maxlength="10" class="form-control m-input cp-input" name="costUnitValue"
+														   formControlName="costUnitValue" placeholder="0,00" type="text" (keyup)="onChangeCostUnitValue();saveFormSubject.next()">
+												</div>
+											</div>
+											<div class="col-6 financial-inputs">
+												<div class="form-group m-form__group">
+													<label class="col-form-label w-100 text-left" translate [ngClass]="formMenu.value.financial.costUnitPerc<0?'text-danger':''">
+														{{ 'RECIPE.INPUT.PROFIT_PERC' }}
+														<i class="far fa-question-circle" matTooltip="{{'RECIPE.TOOLTIP_TXT1' | translate}}"></i>
+													</label>
+													<input inputmode="numeric" pattern="[0-9]*" currencyMask maxlength="5" [options]="{ prefix: '', suffix: '%', precision: 0, allowNegative: true }" [ngClass]="formMenu.value.financial.costUnitPerc<0?'text-danger':''" class="form-control m-input cp-input"
+														   name="costUnitPerc" formControlName="costUnitPerc" placeholder="0,00" type="text" (keyup)="onChangeCostUnitPerc();saveFormSubject.next()">
+												</div>
+											</div>
+											<div class="col-12 cost-resume">
+												<span>
+													{{'RECIPE.LUCRO' | translate}} {{calcUnitProfit() | currency:cifrao}}
+												</span>
+												<span>
+													{{'RECIPE.MARGEM_LUCRO' | translate}} {{calcMargemDeLucro('unitario') | number:'1.0-0'}}% <br>
+												</span>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12 text-center">
+															<div class="wrapper-bordered">
+																<m-doughnut-chart [titleGrafs]="'RECIPE.CHAR_TXT7'" [identifier]="'financial'" *ngIf="chartData && chartData.labels" [data]="financialAnalysisChartData.data" [labels]="financialAnalysisChartData.labels"></m-doughnut-chart>
+															</div>
+															<div class="box-bordered">
+																<m-doughnut-chart *ngIf="chartData && chartData.labels"
+																	[data]="chartData.data"
+																	[labels]="chartData.labels"
+																	[titleGrafs]="'RECIPE.CHAR_TXT4'" [identifier]="'ingredients'"
+																></m-doughnut-chart>
+															</div>
+
+                            </div>
+                        </div>
+
+												<div class="row mt-4" *ngIf="screenWidth > 768">
+													<div class="col-12 text-center">
+														<div class="box-bordered">
+															<m-bar-stacked-chart
+																*ngIf="costPerItemChartData && costPerItemChartData.labels"
+																[title]="'Custo por item + Curva ABC'"
+																[data]="costPerItemChartData.data"
+																[labels]="costPerItemChartData.labels">
+															</m-bar-stacked-chart>
+														</div>
+													</div>
+												</div>
+
+                    </div>
+                </div>
+                <!-- FINANCIAL END-->
+
+                <div class="container mb-2 text-center">
+
+                    <button *ngIf="menu?.user?.id == user?.id"  type="button" class="btn m-btn m-btn--air m-btn--custom mr-1 alterStyle"
+                            [swal]="{ type: 'question', title: titleModal, showCancelButton: true, confirmButtonColor: '#f4516c', cancelButtonColor: '#d2d2d2' }"
+                            (confirm)="delete()"
+                            (cancel)="doDismiss($event)" mat-button translate>
+                        {{ 'INPUTS.DELETE' }}
+                    </button>
+
+                    <button type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1" name="btnBack" (mouseover)="checkiOSCancel()" (click)="cancel()" translate>{{ 'INPUTS.BACK' }}</button>
+                    <button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom" name="btnSave" (mouseover)="checkiOSSave()" (click)="save()" translate>{{ 'INPUTS.SAVE' }}</button>&nbsp;&nbsp;
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

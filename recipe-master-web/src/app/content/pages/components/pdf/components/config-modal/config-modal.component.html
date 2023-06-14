@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col d-flex justify-content-between">
+		<div class="d-flex align-items-center">
+			<h4 *ngIf="options.type == CARD_TYPE.RECEITA" class="m-0">{{'GENERATE_PDF.TITLE_TXT1' | translate}}</h4>
+			<h4 *ngIf="options.type == CARD_TYPE.CARDAPIO" class="m-0">{{'GENERATE_PDF.TITLE_TXT2' | translate}}</h4>
+		</div>
+		<button mat-button class="btn btn-sm bg-transparent float-right" [mat-dialog-close]="true">
+			<i class="la la-close"></i>
+		</button>
+  </div>
+</div>
+
+<hr />
+
+<div class="p-2">
+
+  <!-- CARD_TYPE = RECEITA -->
+  <form *ngIf="form && options.type == CARD_TYPE.RECEITA" class="form" [formGroup]="form">
+		<div class="custom-control custom-checkbox mb-3 custom-box">
+      <input type="checkbox" class="custom-control-input" id="customCheck1" formControlName="isComplete">
+			<label class="custom-control-label" for="customCheck1">
+				{{'GENERATE_PDF.TXT1' | translate}}
+				<span>{{'GENERATE_PDF.TXT7' | translate}}</span>
+			</label>
+    </div>
+    <div class="custom-control custom-checkbox mb-3 custom-box">
+      <input type="checkbox" class="custom-control-input" id="customCheck2" formControlName="isProduction">
+      <label class="custom-control-label" for="customCheck2">
+				{{'GENERATE_PDF.TXT2' | translate}}
+				<span>{{'GENERATE_PDF.TXT8' | translate}}</span>
+			</label>
+    </div>
+    <div class="custom-control custom-checkbox mb-3 custom-box">
+      <input type="checkbox" class="custom-control-input" id="customCheck3" formControlName="isManagerial">
+      <label class="custom-control-label" for="customCheck3">
+				{{'GENERATE_PDF.TXT3' | translate}}
+				<span>{{'GENERATE_PDF.TXT9' | translate}}</span>
+			</label>
+    </div>
+    <div class="custom-control custom-checkbox mb-3" *ngIf="!form.value.isProduction">
+      <input type="checkbox" class="custom-control-input" id="showFixedCosts" formControlName="showFixedCosts">
+      <label class="custom-control-label" for="showFixedCosts">{{'GENERATE_PDF.TXT10' | translate}}</label>
+    </div>
+		<div class="custom-control custom-checkbox mb-3" *ngIf="!form.value.isProduction">
+      <input type="checkbox" class="custom-control-input" id="showVariableCosts" formControlName="showVariableCosts">
+      <label class="custom-control-label" for="showVariableCosts">{{'GENERATE_PDF.TXT11' | translate}}</label>
+    </div>
+    <div class="custom-control custom-checkbox mb-3">
+      <input type="checkbox" class="custom-control-input" id="customCheck4" formControlName="showNutritionalInfo">
+      <label class="custom-control-label" for="customCheck4">{{'GENERATE_PDF.TXT4' | translate}} <a *ngIf="!nutritionalInfoPermission" class="cp-ver-planos" [routerLink]="['/plans']">{{ 'PLANO_PAGE.SEE_PLANS' | translate }}</a></label>
+    </div>
+    <div class="custom-control custom-checkbox mb-3">
+      <input type="checkbox" class="custom-control-input" id="customCheck5" formControlName="showLogo">
+      <label class="custom-control-label" for="customCheck5">{{'GENERATE_PDF.TXT5' | translate}}</label>
+    </div>
+
+    <div *ngIf="form && form.value.showLogo === true">
+        <m-photo-upload (photoChange)="onPhotoChange($event)" [cropOtions]="cropOtions" [photoUrl]="logo" [customClass]="'pdf-logo'" [dropContainer]="'drop-container-pdf'"></m-photo-upload>
+    </div>
+
+    <button type="button" class="btn btn-accent w-100 m-btn m-btn--air m-btn--custom mt-5" (click)="doGerarPdf()">{{'GENERATE_PDF.TXT_BTN' | translate}}</button>
+
+  </form>
+  <!-- CARD_TYPE = RECEITA END -->
+
+  <!-- CARD_TYPE = CARDAPIO -->
+  <form *ngIf="form && options.type == CARD_TYPE.CARDAPIO" class="form" [formGroup]="form">
+    <!-- <div class="custom-control custom-checkbox mb-3">
+      <input type="checkbox" class="custom-control-input" id="customCheck1" formControlName="showGeneral">
+      <label class="custom-control-label" for="customCheck1">Geral</label>
+    </div> -->
+    <div class="custom-control custom-checkbox mb-3">
+      <input type="checkbox" class="custom-control-input" id="customCheck2" formControlName="showIngredients">
+      <label class="custom-control-label" for="customCheck2">Itens do cardápio</label>
+    </div>
+    <div class="custom-control custom-checkbox mb-3">
+      <input type="checkbox" class="custom-control-input" id="customCheck3" formControlName="showOtherCosts">
+      <label class="custom-control-label" for="customCheck3">Outros Custos</label>
+    </div>
+    <div class="custom-control custom-checkbox mb-3">
+      <input type="checkbox" class="custom-control-input" id="customCheck4" formControlName="showFinancial">
+      <label class="custom-control-label" for="customCheck4">Financeiro</label>
+    </div>
+    <div class="custom-control custom-checkbox mb-3">
+      <input type="checkbox" class="custom-control-input" id="customCheck6" formControlName="showLogo">
+      <label class="custom-control-label" for="customCheck6">Logo</label>
+    </div>
+
+    <div *ngIf="form && form.value.showLogo === true">
+        <m-photo-upload (photoChange)="onPhotoChange($event)" [cropOtions]="cropOtions" [photoUrl]="logo" [customClass]="'pdf-logo'" [dropContainer]="'drop-container-pdf'"></m-photo-upload>
+    </div>
+
+    <button type="button" class="btn btn-accent w-100 m-btn m-btn--air m-btn--custom mt-5" (click)="doGerarPdf()">Gerar PDF</button>
+
+  </form>
+  <!-- CARD_TYPE = CARDAPIO END -->
+
+</div>

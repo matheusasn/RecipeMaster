@@ -1,0 +1,33 @@
+<div class="container-hidden">
+  <kendo-pdf-export #pdf paperSize="A4" portrait="true" forcePageBreak=".page-break" margin="0pt">
+    <div class="bg-white container-pdf" >
+      <!-- <div class="a4container"></div> -->
+
+			<div #coverContainer class="mb-2">
+				<m-cover *ngIf="options.showLogo" [logoUrl]="options.logoUrl"></m-cover>
+			</div>
+
+      <div class="w-100" #allInfoContainer>
+				<div #menuInfoContainer>
+					<m-menu-info *ngIf="menu" [menu]="menu"></m-menu-info>
+				</div>
+				<div #ingredientsContainer>
+					<m-ingredients *ngIf="menu" title="Itens do Cardápio" [menuRecipes]="menuRecipes" [menu]="menu" [units]="units" [showFinancial]="options.showFinancial"></m-ingredients>
+				</div>
+				<div #otherCostsContainer>
+					<m-other-costs *ngIf="menu && options.showOtherCosts" [menu]="menu" [showFinancial]="options.showFinancial"></m-other-costs>
+				</div>
+      </div>
+
+      <!-- <div class="page-break" *ngIf="allInfoBreak"></div> -->
+
+      <!-- FINANCIAL -->
+      <div #financialContainer>
+        <!-- <m-financial *ngIf="menu && options.showFinancial" [menu]="menu"></m-financial> -->
+				<m-financial *ngIf="menu" [showFinancial]="options.showFinancial" [menu]="menu"></m-financial>
+      </div>
+      <!-- FINANCIAL END -->
+
+    </div>
+  </kendo-pdf-export>
+</div>

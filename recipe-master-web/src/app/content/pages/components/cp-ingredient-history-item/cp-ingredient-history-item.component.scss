@@ -1,0 +1,24 @@
+.history-item {
+	display: flex;
+	text-align: center;
+	justify-content: space-between;
+	padding: 18px;
+	margin: 10px 0;
+
+	background: #F8F8F8;
+	border: 1px solid #E4E5E7;
+	border-radius: 5px;
+
+	> div {
+		> button {
+			border: 0;
+			background: transparent;
+			cursor: pointer;
+			align-self: baseline;
+
+			i { font-size: 16px; }
+		}
+	}
+
+}
+

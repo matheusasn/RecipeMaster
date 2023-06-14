@@ -1,0 +1,93 @@
+	<div class="row" title="{{item.name}}">
+		<div [ngClass]="(recipe && screenWidth >= 768) ? 'col-12' : 'col-4'">
+			<div class="area-foto" (click)="clickToSee()">
+				<div *ngIf="!first">
+					<button *ngIf="!isTemplateRecipesScreenActive" (click)="$event.stopPropagation()" class="btn m-btn m-btn--air button-custom mat-button-display"
+						[ngClass]="{'white': item.photoUrl, 'lightgrey': item.photoUrl, 'tiny-margin': (recipe && screenWidth >= 768), 'big-margin': !recipe, 'strong-margin custom-buttom-recipes-mobile': (recipe && screenWidth < 768)}"
+						mat-icon-button [matMenuTriggerFor]="menu" aria-label="Recibe options" style="display: flex; justify-content: center; align-items: center;">
+						<mat-icon style="font-size: 22px !important;
+							width: 26px;
+							line-height: 1.1;"
+							[style.color]="recipe && screenWidth < 768 ? '#9999a5' : 'white'">
+							more_vert</mat-icon>
+					</button>
+					<mat-checkbox class="top-right-checkbox" *ngIf="isTemplateRecipesScreenActive" (click)="$event.stopPropagation()" [(ngModel)]="item.checked"> </mat-checkbox>
+					<mat-menu #menu="matMenu">
+						<button *ngIf="options?.pdfVisible" mat-menu-item (click)="gerarPdf()">
+							<mat-icon>picture_as_pdf</mat-icon>
+							<span>{{ 'RECIPE.MENU_CARD_TXT1' | translate }}</span>
+						</button>
+						<button *ngIf="options?.shareVisible" mat-menu-item (click)="shareRecipe()">
+							<mat-icon>share</mat-icon>
+							<span>{{ 'RECIPE.MENU_CARD_TXT2' | translate }}</span>
+						</button>
+						<button *ngIf="options?.cloneVisible" mat-menu-item (click)="doCopy()">
+							<mat-icon>content_copy</mat-icon>
+							<span>{{ (options.type == CARD_TYPE.RECEITA?'RECIPE.MENU_CARD_TXT3':'RECIPE.MENU_CARD_TXT5') | translate }}</span>
+						</button>
+						<button *ngIf="options?.removeVisible" mat-menu-item
+							[swal]="getSwalOptions()"
+							(confirm)="deleteRecipe()"
+							(cancel)="doDismiss($event)">
+							<mat-icon>delete</mat-icon>
+							<span>{{ 'RECIPE.MENU_CARD_TXT4' | translate }}</span>
+						</button>
+					</mat-menu>
+				</div>
+				<img *ngIf="item.photoUrl" [src]="item.photoUrl" (error)="handleImgError($event, item)"
+				[ngClass]="{'cropped-image-recipe img-recipe': (recipe && screenWidth >= 768), 'cropped-image-menu': !recipe, 'cropped-image-recipe-mobile': (recipe && screenWidth < 768)}"/><br/><br/>
+				<div *ngIf="first || !item.photoUrl" class="h-138px" [ngClass]="(recipe && screenWidth >= 768) ? 'cropped-image-recipe img-recipe' : 'cropped-image-menu'">
+					<img class="icon-default" [src]="recipe ? defaultBackgroundImageRecipe : defaultBackgroundImageMenu">
+					<div *ngIf="recipe && screenWidth < 768" style="position: absolute;border-left: 1px solid #F0F0F0;width: 1px;height: 130px;top: -8px;left: 110%;"></div>
+				</div>
+			</div>
+		</div>
+		<div [ngClass]="(recipe && screenWidth >= 768) ? 'col-12' : 'col-7 offset-1 mt-2 menu-info'" (click)="clickToSee()">
+			<div class="row">
+				<div class="col-12 text-left" [ngClass]="(recipe && screenWidth >= 768) ? 'title-recipe text-center' : 'title'">
+					<h5>{{item?.name && item.name.length < 40 ? item.name : this.item.name.slice(0, 40) + '..'}}</h5>
+				</div>
+				<div class="col-12 mt-3 mb-2 tag-container" *ngIf="recipe">
+					<div class="tag">
+						<span *ngIf="item.recipeCategory">{{ item.recipeCategory.name < 33 ? item.recipeCategory.name : item.recipeCategory.name.slice(0,33) + '..' }} </span>
+						<span *ngIf="!item.recipeCategory">{{ 'INGREDIENT.CATEGORIA.TXT21' | translate }}</span>
+					</div>
+				</div>
+				<div class="col-12 align align-bottom" [ngClass]="{'mb-2 mt-2': !!recipe, 'text-center': (recipe && screenWidth >= 768), 'text-left': (!recipe || (recipe && screenWidth < 768)), 'align-to-bottom': (recipe && screenWidth < 768), 'mb-3 mt-3': !recipe, 'opacity-25': first}">
+					<i class="fa fa-users mr-2 lightgrey" [ngClass]="{'menu-icon': !recipe || (recipe && screenWidth < 768)}" aria-hidden="true"></i>
+					<span class="lightgrey">{{item && item.unityQuantity ? item.unityQuantity : 0}} {{item.unitAbbreviation ? item.unitAbbreviation : ''}}</span>
+				</div>
+				<div class="col-12 text-left align align-bottom" *ngIf="!recipe" [ngClass]="{'opacity-25': first}">
+					<i class="fa fa-list mr-2 lightgrey" [ngClass]="{'menu-icon': !recipe}" aria-hidden="true"></i>
+					<span class="lightgrey">{{item.ingredients ? item.ingredients.length : 0}}{{' itens'}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ng-container *ngIf="!recipe">
+		<hr class="custom-hr" *ngIf="!recipe">
+		<div class="row footer text-center" [ngClass]="{'footer-menu': !recipe}" (click)="clickToSee()">
+			<div class="label-footer lightgrey" [ngClass]="recipe ? 'col-6' : 'col-4'">{{(recipe ? 'MENUS.INPUT.COST_PRICE' : 'MENUS.INPUT.CMV') | translate }}</div>
+			<div class="label-footer lightgrey" [ngClass]="recipe ? 'col-6' : 'col-4'">{{(recipe ? 'MENUS.INPUT.SELL_VALUE' : 'MENUS.INPUT.OTHER_COSTS') | translate }}</div>
+			<div class="col-4 label-footer right lightgrey" *ngIf="!recipe">{{'MENUS.INPUT.SELL' | translate }}</div>
+		</div>
+
+		<!--RECEITA-->
+		<div class="row text-center" [ngClass]="{'footer-recipe': recipe, 'footer': !recipe, 'opacity-25': first}" (click)="clickToSee()">
+			<div class="info-footer" [ngClass]="recipe ? 'col-6' : 'col-4 info-menu-footer'">{{(recipe ? getTotalCost() : getTotalIngredients()) | currency:cifrao}}</div>
+			<div class="info-footer" [ngClass]="recipe ? 'col-6' : 'col-4 info-menu-footer'">{{middleInfo  | currency:cifrao}}</div>
+			<div class="info-footer"
+				[ngClass]=" (recipe ? (percent(item) > 0 ? 'colorPorcentGreen' : 'colorPorcentRed') + ' col-6 offset-6 text-center percent-recipe' : ' col-4 info-menu-footer')">{{recipe ? percent(item) + ' %' : (item?.financial?.totalCostValue  | currency:cifrao)}}
+			</div>
+		</div>
+
+		<!--MENU-->
+		<div class="row text-center footer" [ngClass]="{'opacity-25': first}" *ngIf="!recipe" (click)="clickToSee()">
+			<div class="info-footer percent-menu-footer col-4" [ngClass]="totalCost >= 0 ? 'colorPorcentGreen' : 'colorPorcentRed'">{{customPercent(totalIngredients, getTotalCost()) + '%'}}</div>
+			<div class="info-footer percent-menu-footer col-4" [ngClass]="middleInfo >= 0 ? 'colorPorcentGreen' : 'colorPorcentRed'">{{customPercent(middleInfo, getTotalCost()) + '%'}}</div>
+			<div class="info-footer percent-menu-footer col-4"
+				[ngClass]="percent(item) > 0 ? 'colorPorcentGreen' : 'colorPorcentRed'">{{percent(item, 'menu') + ' %'}}
+			</div>
+		</div>
+	</ng-container>
+

@@ -1,0 +1,38 @@
+.btn-color {
+	background: linear-gradient(125.5deg, #FB8A65 7.9%, #FA4E6D 71%), #FA345F !important;
+	box-shadow: 0px 4px 4px #E4E5E7 !important;
+	border-radius: 6px !important;
+}
+
+.btn-color:hover {
+	background: #FB8A65 !important;
+}
+
+.btn-add-recipe {
+	width: 100%;
+	padding: 22px 26px;
+	margin-top: 6px;
+}
+
+.title {
+	margin-top: 15vh !important;
+	font-size: 26px !important;
+	font-weight: bold;
+	line-height: normal;
+}
+
+.subtitle {
+	color: gray;
+	font-weight: 500;
+
+	margin-top: 7vh;
+	font-size: 1.2rem !important;
+}
+
+#bottonButton {
+	position: fixed;
+	bottom: 34px;
+	left: 15px;
+	width: 92%;
+	font-size: 15px;
+}

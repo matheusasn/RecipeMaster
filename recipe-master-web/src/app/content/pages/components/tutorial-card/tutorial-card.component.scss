@@ -1,0 +1,27 @@
+.card {
+    cursor: pointer;
+    border-radius: 0.75rem;
+    box-shadow: 0 5px 10px 2px #DEDEDE !important;
+    border:none;
+    max-width: 208px;
+    margin: auto;
+}
+
+.cp-card-img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 132px;
+    width: 100%;
+    background-position-y: center;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+}
+
+.card:hover {
+    background-color: rgba(237, 237, 237, 0.56);
+    
+    .cp-card-img {
+        opacity: 0.9;
+    }
+
+}

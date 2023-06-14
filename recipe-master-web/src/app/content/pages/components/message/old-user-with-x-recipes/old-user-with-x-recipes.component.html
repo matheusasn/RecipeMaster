@@ -1,0 +1,64 @@
+<div class="pb-3 text-center">
+	<div class="row">
+			<div class="p-1 col-12" style="width: 500vw; display: flex; justify-content: center;">
+				<div class="old-user-modal-container">
+
+					<ng-container *ngIf="step === 1">
+							<h2 class="message-title">Aviso de mudança no Plano Gratuito!</h2>
+							<p>
+								Olá! Fizemos uma atualização na plataforma com algumas melhorias e novas funcionalidades.
+							</p>
+							<p>
+								Nessa nova versão os novos usuários do <b>plano grátis</b> poderão criar até <b>6 receitas</b>.
+							</p>
+							<p>
+								Você que já é nosso usuário <b>continuará normalmente com o acesso a todas as suas receitas!</b>
+							</p>
+							<p>
+								Mas, se você gostaria de ter acesso a <b>receitas ilimitadas de forma permanente</b>, iremos liberar para alguns usuários que nos enviarem uma mensangem contando <b>como o recipemaster ajuda você</b> (e porque deveríamos manter essa função gratuita de forma permanente para você).
+							</p>
+							<p>
+								E para as três melhores respostas nós iremos liberar o <b>Plano PRO+NUTRI permanente!</b>
+							</p>
+							<p>
+								Mas, se você acha justo fazer a assinatura do plano e contribuir com nosso trabalho, estamos liberando um <b>desconto de 40%</b> no final da página dos planos! Vai lá e aproveita! 😉
+							</p>
+
+							<div class="row buttons mt-5">
+								<button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom" name="btnSave" (click)="nextStep()" translate>Enviar mensagem</button>
+								<button type="button" class="cancel-button" name="btnBack" (click)="showPlansPage()" translate>Ver página de planos</button>
+							</div>
+
+					</ng-container>
+
+					<ng-container *ngIf="step === 2" [formGroup]="form">
+							<h2 class="message-title">Deixe a sua mensagem</h2>
+							<p>
+								Queremos saber como o recipemaster ajuda ou pode ajudar você?
+							</p>
+
+							<textarea class="form-control cp-input" rows="6" formControlName="feedback" placeholder="Digite sua resposta aqui..."></textarea>
+
+							<div class="row buttons mt-5">
+								<button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom" (click)="sendFeedback()">Enviar mensagem</button>
+							</div>
+					</ng-container>
+
+					<ng-container *ngIf="step === 3">
+						<h2 class="message-title">Obrigado!</h2>
+						<p>
+							Em breve iremos entrar em contato com os selecionados para ganhar o plano inicial e pro+nutri!
+						</p>
+						<p>
+							Você pode nos enviar outras mensagens a qualquer momento através do suporte.
+						</p>
+
+						<div class="row buttons mt-5">
+							<button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom" (click)="doCancel()" translate>Ok</button>
+						</div>
+				</ng-container>
+				</div>
+
+			</div>
+	</div>
+</div>

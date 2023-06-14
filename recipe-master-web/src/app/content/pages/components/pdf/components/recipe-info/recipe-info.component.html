@@ -1,0 +1,48 @@
+<div class="my-3 geral" #mainContainer>
+
+  <table class="w-100">
+    <tr>
+      <td class="w-50 pr-3">
+        <!-- <div class="container-img" [style.background-image]="backgroundImage"></div> -->
+        <img *ngIf="showPhoto && backgroundImage" [src]="backgroundImage" class="container-img" >
+
+        <div *ngIf="!showPhoto || !backgroundImage" class="container-img">
+          <img [src]="defaultBackgroundImage" >
+          <!-- <i class="la la-cutlery"></i> -->
+        </div>
+
+      </td>
+      <td class="w-50">
+        <table class="w-100">
+          <tr>
+            <td colspan="12">
+              <div class="static-input block-with-text title"><span class="">{{recipe?.name}}</span></div>
+            </td>
+          </tr>
+					<tr>
+						<td colspan="12"><div class="static-input" style="margin-top: -7px"><span class="subtitle">{{'INGREDIENT.INPUT.CATEGORY' | translate}}</span><br />
+							{{ recipe?.recipeCategory?.name.length > 60 ? recipe?.recipeCategory?.name.substring(0, 60) + '...' : recipe?.recipeCategory?.name }}
+						</div></td>
+					</tr>
+          <tr>
+            <td colspan="3"><div class="static-input" style="margin-top: -7px"><span class="subtitle">{{'RECIPE.INPUT.UNITQUANTITY' | translate}}</span><br />
+              {{(recipe?.ingredientsYield || recipe?.unityQuantity) || '&nbsp;'}} {{ recipe?.unityQuantity && recipe?.unit?.abbreviation }}
+							{{ getRecipeWeight() }}
+						</div></td>
+						<td colspan="3"><div class="static-input" style="margin-top: -7px"><span class="subtitle">{{ 'RECIPE.INPUT.TOTAL_WEIGHT' | translate }}</span><br />
+              {{recipe?.label?.weight || '&nbsp;'}} {{ recipe?.label?.weight && 'g' }}</div></td>
+							<td colspan="3"><div class="static-input" style="margin-top: -7px"><span class="subtitle">{{'INGREDIENT.INPUT.TIME' | translate}}</span><br />
+								{{recipe?.preparationTime || '&nbsp;'}}</div></td>
+          </tr>
+          <tr>
+            <td colspan="12">
+              <div class="static-input" style="margin-top: -7px;padding-bottom: 40px;"><span class="subtitle">{{'INGREDIENT.INPUT.DESCRIPTION' | translate}}</span><br />
+              {{recipe.description ? (recipe?.description.length < 191 ? recipe?.description : recipe?.description.slice(0,191) + '...') : '&nbsp;' }}</div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</div>

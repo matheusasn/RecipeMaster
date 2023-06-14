@@ -1,0 +1,56 @@
+<div class="content-item">
+	<div class="picture">
+		<img *ngIf="recipe && recipe.photoUrl" [src]="recipe.photoUrl">
+		<img class="no-recipe-img" *ngIf="!recipe || !recipe.photoUrl" [src]="'assets/app/no-recipe.png'">
+	</div>
+
+	<div class="description">
+		<h6 title="{{recipeIngredient.ingredient.name}}">{{ recipeIngredient.ingredient.name.length > 40 ? recipeIngredient.ingredient.name.substring(0, 40) + '...' : recipeIngredient.ingredient.name }}</h6>
+		<span *ngIf="recipeIngredient.ingredient.recipeCopiedId" class="label-category">{{recipeIngredient.ingredient.recipeCategory?.name || 'Sem categoria'}}</span>
+		<span *ngIf="!recipeIngredient.ingredient.recipeCopiedId" class="label-category">{{recipeIngredient.ingredient.ingredientCategory?.name || 'Sem categoria'}}</span>
+	</div>
+
+	<div class="amount-recipe text-center">
+		<p>{{ 'INGREDIENT.INPUT.UNITQUANTITY' | translate }}</p>
+		<input currencyMask class="form-control m-input cp-input text-center" autocomplete="off"
+		   (click)="$event.stopPropagation()"
+			 inputmode="numeric" pattern="[0-9]*"
+		   [(ngModel)]="recipeIngredient.amount"
+			 (blur)="onUnityQuantityBlur()"
+		   [options]="{ prefix: '', suffix: ' ' + recipeIngredient.unit.abbreviation, precision: 0, allowNegative: true }">
+	</div>
+
+	<div class="costs-recipe">
+		<div class="costs-recipe_item">
+			<label class="black">{{ 'MENUS.INPUT.SELL' | translate }}</label>
+			<span>{{calcSalePrice() | currency:cifrao}}</span>
+		</div>
+
+		<div class="costs-recipe_item">
+			<label class="red">{{ 'MENUS.INPUT.COST' | translate }}</label>
+			<span>{{calcCostPrice() | currency:cifrao}}</span>
+		</div>
+
+		<div class="costs-recipe_item">
+			<label class="green">{{ 'MENUS.INPUT.PROFIT' | translate }}</label>
+			<span>{{calcProfit() | currency:cifrao}}</span>
+		</div>
+	</div>
+</div>
+
+<div class="costs-recipe mobile" >
+	<div class="costs-recipe_item">
+		<label class="black">{{ 'MENUS.INPUT.SELL' | translate }}</label>
+		<span>{{calcSalePrice() | currency:cifrao}}</span>
+	</div>
+
+	<div class="costs-recipe_item">
+		<label class="red">{{ 'MENUS.INPUT.COST' | translate }}</label>
+		<span>{{calcCostPrice() | currency:cifrao}}</span>
+	</div>
+
+	<div class="costs-recipe_item">
+		<label class="green">{{ 'MENUS.INPUT.PROFIT' | translate }}</label>
+		<span>{{calcProfit() | currency:cifrao}}</span>
+	</div>
+</div>

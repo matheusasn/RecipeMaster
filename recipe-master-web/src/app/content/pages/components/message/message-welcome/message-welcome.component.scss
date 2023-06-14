@@ -1,0 +1,33 @@
+swiper {
+    // height: 212px;
+    width: 100%;
+}
+
+.swiper-wrapper {
+    box-sizing: border-box;
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+.swiper-slide {
+    padding: 12px 0 0 0 !important;
+    margin: 0;
+    // height: 182px;
+    max-width: 248px;
+    height: 234px;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    color: #F55A57;
+    // top: 65%;
+}
+
+// .swiper-button-prev {
+//     position: absolute;
+//     left: 0;
+// }
+
+// .swiper-button-next {
+//     position: absolute;
+//     right: 0;
+// }

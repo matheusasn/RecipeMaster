@@ -1,0 +1,28 @@
+<div class="card">
+
+    <div class="card-header p-0" [ngClass]="type">
+        <img src="assets/payment/{{type}}.png" />
+    </div>
+
+    <div class="card-body p-0">
+
+        <swiper [config]="config" *ngIf="payments">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide text-center" *ngFor="let p of payments">
+                    <h4>{{p.title}}</h4>
+                    <small>{{p.price | currency:plans?.basic?.currency}}</small>
+                    <img [src]="p.qrcode" />
+                    <p class="cp-swiper-bottom">
+                        Aponte a câmera do seu celular para o código e continue seu pagamento pelo {{label}}
+                    </p>
+                </div>
+
+            </div>
+            <!-- <div class="swiper-pagination"></div> -->
+            <div class="swiper-button-next"><img src="assets/payment/btnnext.svg" /></div>
+            <div class="swiper-button-prev"><img src="assets/payment/btnprev.svg" /></div>
+        </swiper>
+
+    </div>
+</div>

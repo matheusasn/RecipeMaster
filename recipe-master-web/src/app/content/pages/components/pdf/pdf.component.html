@@ -1,0 +1,76 @@
+<div class="container-hidden">
+  <kendo-pdf-export #pdf paperSize="A4" portrait="true" keepTogether=".prevent-split" forcePageBreak=".page-break" margin="0pt">
+		<div class="header" *ngIf="recipe" #coverContainer>
+			<m-cover [type]="'recipe'" *ngIf="options.showLogo" [logoUrl]="options.logoUrl"></m-cover>
+		</div>
+    <div class="bg-white container-pdf" >
+      <!-- <div class="a4container"></div> -->
+
+
+      <div #coverContainer *ngIf="!recipe">
+        <m-cover *ngIf="options.showLogo" [logoUrl]="options.logoUrl"></m-cover>
+      </div>
+
+      <div #recipeInfoContainer [ngStyle]="!options.showLogo && {'margin-top': '40px'}">
+        <m-recipe-info [showPhoto]="options.showPhoto" *ngIf="recipe" [recipe]="recipe"></m-recipe-info>
+      </div>
+
+			<div class="ingredients" *ngIf="options.isProduction">
+				<div>
+					<m-ingredients *ngIf="recipe" [recipe]="recipe" [units]="units" [isProduction]="options.isProduction" [isComplete]="options.isComplete" [showFinancial]="options.showFinancial"></m-ingredients>
+				</div>
+				<div>
+					<m-steps *ngIf="recipe && options.showPreparationSteps" [recipe]="recipe"></m-steps>
+					<cp-nutritional-info-label *ngIf="recipe && options.showNutritionalInfo"
+							layout="horizontal"
+							[showIngredients]="false"
+							[recipe]="recipe"
+							[portion]="recipe.label?.portion"
+							[weight]="recipe.label?.weight"
+							[measure]="recipe.label?.measure"
+							[lactose]="recipe.label?.lactose"
+							[gluten]="recipe.label?.gluten"
+							[previewClass]="'pdf-nutritionalinfo-preview'">
+					</cp-nutritional-info-label>
+				</div>
+			</div>
+
+			<div *ngIf="!options.isProduction">
+				<div #ingredientsContainer>
+					<m-ingredients  *ngIf="recipe" [recipe]="recipe" [isComplete]="options.isComplete" [units]="units" [showFinancial]="options.showFinancial"></m-ingredients>
+				</div>
+				<div #stepsContainer *ngIf="recipe && !options.isManagerial" style="margin-top: 10px;">
+					<m-steps [recipe]="recipe"></m-steps>
+				</div>
+				<div #otherCostsContainer>
+					<m-other-costs *ngIf="recipe && options.showVariableCosts" [recipe]="recipe" [isProduction]="options.isProduction" [showFinancial]="options.showFinancial" [otherCostType]="'VARIABLE'"></m-other-costs>
+					<m-other-costs *ngIf="recipe && options.showFixedCosts" [recipe]="recipe" [isProduction]="options.isProduction" [showFinancial]="options.showFinancial" [otherCostType]="'FIXED'"></m-other-costs>
+				</div>
+			</div>
+
+      <!-- <div class="page-break" *ngIf="otherCostsBreak"></div> -->
+      <div #financialContainer *ngIf="!recipe">
+        <m-financial
+					*ngIf="recipe && options.showFinancial"
+					[showFinancial]="options.showFinancial"
+					[recipe]="recipe">
+				</m-financial>
+      </div>
+
+      <!-- <m-footer></m-footer> -->
+
+    </div>
+
+		<div #financialContainer>
+			<m-financial *ngIf="recipe && !options.isProduction"
+			[showFinancial]="options.showFinancial" [recipe]="recipe"></m-financial>
+		</div>
+
+		<div *ngIf="recipe" class="logo-container">
+			<img src="assets/Logo.png">
+		</div>
+
+
+  </kendo-pdf-export>
+
+</div>

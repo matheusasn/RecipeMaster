@@ -1,0 +1,88 @@
+<ng-container>
+
+	<form id="componentSearch" class="m-form" name="searchForm" autocomplete='off' [formGroup]="searchForm" novalidate>
+
+		<div class="form-group">
+
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<div class="input-group-text"><i class="fa fa-search" [ngClass]="{'icon-search-custom': internalRecipe}"></i>
+					</div>
+				</div>
+
+				<input #searchInput autocomplete="off" type="text" class="form-control" name="searchTerm"
+					formControlName="searchTerm" [placeholder]="placeholder">
+
+				<div class="input-group-prepend" *ngIf="responseType === 'recipe' && !internalRecipe">
+					<div (click)="changeViewType('LIST')" style="cursor: pointer;" class="input-group-text input-group-icon pr-0"
+						[ngClass]="{'active': activeViewType === 'LIST'}">
+						<mat-icon>list</mat-icon>
+					</div>
+				</div>
+
+				<div class="input-group-prepend" *ngIf="responseType === 'recipe' && !internalRecipe">
+					<div (click)="changeViewType('CARDS')" style="cursor: pointer;" class="input-group-text input-group-icon"
+						[ngClass]="{'active': activeViewType === 'CARDS'}">
+						<mat-icon>web_asset</mat-icon>
+					</div>
+				</div>
+
+				<!-- <div class="input-group-prepend"
+					*ngIf="(responseType === 'recipe' || responseType === 'copied-ingredient') && !internalRecipe">
+					<div (click)="searchIconClicked()" style="cursor: pointer;" class="input-group-text">
+						<mat-icon *ngIf="responseType === 'recipe'">move_to_inbox</mat-icon>
+						<mat-icon *ngIf="responseType === 'copied-ingredient'">picture_as_pdf</mat-icon>
+					</div>
+				</div> -->
+
+			</div>
+
+		</div>
+
+	</form>
+
+	<div *ngIf="behavior=='autocomplete'">
+		<mat-nav-list>
+			<a class="list-item" mat-list-item (click)="selectItem(ingredient)" *ngFor="let ingredient of searchResult">
+				{{ingredient.name}} <small class="ingredient-type-label"
+					*ngIf="ingredient.type == 'recipe' || ingredient.recipeCopiedId != null"><b> (receita)</b></small>
+				<mat-icon matListIcon class="list-icon-right" [inline]="true">
+					add
+				</mat-icon>
+			</a>
+
+			<a *ngIf="searchForm.get('searchTerm').value && searchForm.get('searchTerm').value.length > 0 && showCreate"
+				class="list-item insert-item" mat-list-item (click)="createItem()">
+				{{ 'INGREDIENT.CRIAR_INGREDIENTE' | translate }} "{{searchForm.get('searchTerm').value}}"
+				<mat-icon matListIcon class="list-icon-right" [inline]="true">add</mat-icon>
+			</a>
+
+		</mat-nav-list>
+	</div>
+
+	<!--Lista de compra-->
+	<div *ngIf="behavior=='listCompra'">
+		<mat-nav-list>
+
+			<!--Ingredient-->
+			<a class="list-item" mat-list-item (click)="selectItemListCompra(ingredient)"
+				*ngFor="let ingredient of searchResult">
+
+				{{ingredient.name}} <small class="ingredient-type-label"
+					*ngIf="ingredient.type == 'recipe' || ingredient.recipeCopiedId != null"><b> (receita)</b></small>
+				<mat-icon matListIcon class="list-icon-right" [inline]="true">
+					add
+				</mat-icon>
+			</a>
+
+			<!--Create new ingredient-->
+			<a *ngIf="searchForm.get('searchTerm').value && searchForm.get('searchTerm').value.length > 0"
+				class="list-item insert-item" mat-list-item (click)="createItemListCompra()">
+				{{ 'INGREDIENT.CRIAR_INGREDIENTE' | translate }} "{{searchForm.get('searchTerm').value}}"
+				<mat-icon matListIcon class="list-icon-right" [inline]="true">add</mat-icon>
+			</a>
+
+		</mat-nav-list>
+	</div>
+
+</ng-container>

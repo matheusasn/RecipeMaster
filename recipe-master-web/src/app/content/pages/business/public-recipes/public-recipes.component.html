@@ -1,0 +1,45 @@
+<cp-loading></cp-loading>
+<div class="cp-content" *ngIf="isScreenReady">
+	<div class="row nameTela custom-padding mr-0">
+		<div class="col-12">
+			<h4 class="title-recipe">
+				Para começar, selecione algumas receitas prontas para você baixar para a sua conta
+			</h4>
+		</div>
+	</div>
+	<div style="margin: 15px 0" *ngIf="showInfo">
+	</div>
+
+	<div class="row my-3 custom-padding mr-0" style="margin-left: 0;">
+		<div class="col-sm-12 col-md-12 wrapper-search">
+			<!-- BUSCADOR de ingredientes (tipo AUTOCOMPLETE) -->
+			<m-cp-ingredient-search id="searchRecipe" (onSearchIconClicked)="goToPublicRecipes()" [isTemplateRecipesScreenActive]="true" (onChange)="onChangeSearch($event)" [responseType]="'recipe'" [behavior]="'search'" (onSearch)="onSearch($event)" placeholder="{{ 'RECIPE.RECIPE_PESQUISA' | translate }}"></m-cp-ingredient-search>
+		</div>
+	</div>
+
+	<div class="col-12 mb-4">
+		<m-recipes-categories-tags
+			[user]="user"
+			[categories]="categories"
+			[recipeListSize]="showInfo ? 0 : totalRecipes"
+			(choosedCategory)="handleCatEscolhida($event)"
+			(getCategoria)="handleGetCategoria()"
+			(listUpdated)="categoriesUpdated($event)"
+			[canCreate]="false"
+		></m-recipes-categories-tags>
+	</div>
+
+	<m-public-recipes-carousel
+		*ngFor="let carousel of grouppedRecipes; let carouselIndex=index"
+		[carousel]="carousel"
+		[carouselIndex]="carouselIndex"
+	>
+	</m-public-recipes-carousel>
+
+	<div class="col-12">
+		<button (click)="onClickButtonTemplateScreen()" class="template-recipes-button" [ngClass]="{'active': isSomeRecipeSelectedOnTemplateScreen}">
+			{{ isSomeRecipeSelectedOnTemplateScreen ? 'Migrar receitas' : 'Pular passo' }}
+		</button>
+	</div>
+</div>
+

@@ -1,0 +1,30 @@
+<!-- BEGIN: Horizontal Menu -->
+<!-- <div mMenuHorOffcanvas id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark "> -->
+<ul class="m-menu__nav" [ngClass]="classInitService.onClassesUpdated$ | async | mGetObject:'header_menu_nav' | mJoin">
+	<ng-container *ngFor="let item of menuHorService.menuList$ | async">
+		<ng-container *ngIf="item.title" [ngTemplateOutlet]="m_menu" [ngTemplateOutletContext]="{ item: item }">
+		</ng-container>
+	</ng-container>
+</ul>
+<!-- </div> -->
+<!-- item column -->
+<ng-template #m_menu_column let-item="item">
+	<li class="m-menu__item">
+		<!-- <li class="m-menu__item"> -->
+		<h3 class="m-menu__heading m-menu__toggle">
+			<span class="m-menu__link-text" [translate]="item.heading.translate">
+				{{item.heading.title}}
+			</span>
+			<i class="m-menu__ver-arrow la la-angle-right"></i>
+		</h3>
+		<ng-container *ngIf="item.items">
+			<ul class="m-menu__inner">
+				<ng-container *ngFor="let child of item.items">
+					<ng-container [ngTemplateOutlet]="m_menu" [ngTemplateOutletContext]="{ item: child, parentItem: item }">
+					</ng-container>
+				</ng-container>
+			</ul>
+		</ng-container>
+		<!-- </li> -->
+	</li>
+</ng-template>

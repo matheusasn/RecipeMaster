@@ -1,0 +1,60 @@
+// Container
+.flex-container {
+	display: flex;
+	flex-direction: row;
+}
+
+@media (max-width: 768px) {
+	.flex-container {
+		flex-direction: column;
+	}
+}
+
+// Legend
+.chart-legend {
+	overflow:auto;
+	display: flex;
+	justify-content: center;
+	text-align: left;
+	margin-right: 56px;
+
+	@media only screen and (max-width: 768px) {
+		margin: 16px 0 0 0;
+	}
+}
+
+::ng-deep.chart-legend ul {
+	list-style: none;
+	padding: 0;
+
+	li {
+		line-height: 20px;
+	}
+
+	li span {
+		display: inline-block;
+		width: 32px;
+		height: 10px;
+		margin-right: 5px;
+	}
+}
+
+// Title
+h5 {
+	text-align: left;
+	margin: 8px 0 32px 0;
+}
+
+// Container Chart
+.canvas-container {
+    position: relative;
+    height: 180px;
+	margin: 0 auto 16px 16px;
+
+	@media only screen and (max-width: 768px) {
+		height: auto;
+		min-height: 200px;
+		max-width: 300px;
+		margin: 0 auto 16px;
+	}
+}

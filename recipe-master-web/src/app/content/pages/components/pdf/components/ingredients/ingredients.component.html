@@ -1,0 +1,39 @@
+<div *ngIf="recipe" class="container-ingredients" [ngStyle]="isProduction && {'width': '232px'}">
+
+  <h4 class="mb-3 title" [ngClass]="menu?'menu':''" style="margin-left: 3px">{{title | translate}}</h4>
+
+	<div class="recipe-ingredient-item" [class.odd]="even" *ngFor="let i of recipe?.ingredients; let even = even" [ngClass]="isProduction ? 'fix-grid' : ''">
+		<span class="pl-2 subtitle" style="width: 100%">{{i.ingredient.name}}</span>
+		<div class="text-nowrap d-block text-left color-secondary" [ngClass]="isProduction ? 'text-right' : ''">
+			{{ getUnitLabelBasedOnRecipeYield(getUnitLabel(i)) }}
+			<span *ngIf="isComplete || isProduction">{{ getMedidaCaseira(i) }}</span>
+		</div>
+		<div *ngIf="!isProduction" class="text-nowrap text-right color-secondary"><span class="pr-2">{{ getAmountBasedOnRecipeYield(calcIngredientPrice(i)) | currency:cifrao}}</span></div>
+	</div>
+
+</div>
+
+<div *ngIf="menu" class="container-ingredients">
+	<div class="grid"
+		[ngStyle]="showFinancial ? {'grid-template-columns': '2fr 1fr 1fr 1fr 1fr'} : {'grid-template-columns': '2fr 1fr 1fr'}"
+	>
+		<h4 class="title" [ngClass]="menu?'menu':''" style="margin-left: 3px; font-weight: bold;">{{'MENUS.PDF.ITEMS' | translate}}</h4>
+		<span class="d-flex align-items-center">{{ 'MENUS.PDF.QUANTITY' | translate }}</span>
+		<span class="d-flex align-items-center">{{ (showFinancial ? 'MENUS.PDF.COST' : 'MENUS.PDF.PRICE') | translate }}</span>
+		<span class="d-flex align-items-center" *ngIf="showFinancial">{{ 'MENUS.PDF.SELL' | translate }}</span>
+		<span class="d-flex align-items-center" *ngIf="showFinancial">{{ 'MENUS.PDF.PROFIT' | translate }}</span>
+	</div>
+
+	<div class="menu-ingredient-item"
+		[ngStyle]="showFinancial ? {'grid-template-columns': '2fr 1fr 1fr 1fr 1fr'} : {'grid-template-columns': '2fr 1fr 1fr'}"
+		[class.odd]="even"
+		*ngFor="let i of menu?.ingredients; let even = even"
+	>
+		<div><span class="pl-2 subtitle-menu">{{i.ingredient.name}}</span></div>
+		<span class="table-text">{{getUnitLabel(i)}}</span>
+		<span class="table-text">{{calcIngredientPrice(i) | currency:cifrao}}</span>
+		<span *ngIf="showFinancial" class="table-text">{{(i.saleValue * i.amount) | currency:cifrao}}</span>
+		<span *ngIf="showFinancial" class="table-text">{{calcProfit(i) | currency:cifrao}}</span>
+	</div>
+</div>
+

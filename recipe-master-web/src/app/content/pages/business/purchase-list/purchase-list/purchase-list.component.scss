@@ -1,0 +1,277 @@
+.row .itens {
+    margin-top: 2%;
+}
+
+#positionPrice {
+    margin-left: -4%;
+}
+
+.itens {
+    text-align: center;
+}
+
+#inputName {
+    margin-top: 2%;
+}
+
+.calc {
+    font-weight: bold;
+}
+
+.itemLista {
+    background: #fff;
+    margin: 4px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.alterStyle {
+    margin-top: 6px;
+    left: 44px;
+    position: absolute;
+    width: 31px;
+    height: 31.79px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 5px 1px rgba(219, 218, 242, 0.45) !important;
+    border-radius: 5px;
+
+    color: #f4516c;
+}
+
+.alterStyle:hover {
+    background-color: #f4516c !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+.textLeft {
+    text-align: left;
+}
+
+#filtroCategoriaSelect {
+    height: 37px;
+    float: right;
+    margin-right: 1%;
+}
+
+.box {
+    width: 1%;
+    float: left;
+    height: 46px;
+    position: absolute;
+    margin-left: -16px;
+    margin-top: -0.3%;
+    /*Altura da linha*/
+}
+
+.linha-vertical {
+    /* Adiciona borda esquerda na div como ser fosse uma linha.*/
+    opacity: 0.5;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.fontText {
+    font-weight: bold;
+}
+
+#valores {
+    background-color: #F8F8F8;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 5px;
+    border: 1px solid #E4E5E7;
+}
+
+#btnPos {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.txtPosLeft {
+    text-align: left;
+}
+
+#totalEstimado {
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 50px;
+}
+
+#totalMarcado {
+    padding-top: 12px;
+    padding-bottom: 11px;
+    padding-left: 26px;
+}
+
+.vl {
+    position: absolute;
+    height: 43px;
+    border: 1px solid #E4E5E7;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(0deg);
+    left: 49%;
+    margin-top: 1.9%;
+}
+
+#btnSave {
+    height: 40px;
+    width: 98.09091186523438px;
+    left: 815px;
+    top: 381px;
+    border-radius: 5px;
+    background: linear-gradient(125.5deg, #FB8A65 7.9%, #FA4E6D 71%),
+    linear-gradient(0deg, #FA345F, #FA345F);
+}
+
+#btnBack {
+    height: 40px;
+    width: 95.7272720336914px;
+    left: 719px;
+    top: 381px;
+    border-radius: 5px;
+    background: #FFFFFF;
+}
+
+#iconTrash {
+    margin-left: -9px !important;
+    margin-top: -9px;
+}
+
+#iconMenu {
+    color: black;
+}
+
+.positionGroup {
+    float: right;
+}
+
+.valoresSemFundo {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#idMargemCampoPesquisa {
+    margin-left: -9px;
+    margin-right: 6px;
+}
+
+#titlePage {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    color: #4B5262;
+    text-align: left;
+}
+
+#btnData {
+    width: 45px;
+    height: 40px;
+    background: #FDFDFD;
+    border: 1px solid #EBEDF2;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 5px 1px #EEEEEE;
+    border-radius: 5px;
+    color: #FA345F;
+    font-size: 22px !important;
+}
+
+#dataList {
+    text-align: right;
+    pointer-events: none;
+    border-color: #FFFFFF;
+    border-style: dashed;
+
+    color: #AEB1B8;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+@media only screen and (max-width: 768px) {
+	#totalEstimado {
+        padding-top: 11px;
+        padding-bottom: 11px;
+        padding-left: 25px;
+    }
+
+    #totalMarcado {
+        padding-top: 12px;
+        padding-bottom: 11px;
+        padding-left: 15px;
+    }
+
+    .vl {
+        position: absolute;
+        height: 49px;
+        border: 1px solid #E4E5E7;
+        -webkit-transform: rotate(90deg);
+        transform: rotate(0deg);
+        left: 49%;
+        margin-top: 3.9%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+	#dataList {
+        position: relative;
+        width: 80px;
+        left: -104%;
+        margin-top: 29%;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+	#dataList {
+        position: relative;
+        width: 80px;
+        left: -175%;
+        margin-top: 29%;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+	#dataList {
+        position: relative;
+        width: 80px;
+        left: -149%;
+        margin-top: 29%;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+	#dataList {
+        position: relative;
+        width: 80px;
+        left: -135%;
+        margin-top: 29%;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+	#dataList {
+        position: relative;
+        width: 80px;
+        left: -104%;
+        margin-top: 29%;
+    }
+}
+
+//::ng-deep {
+//	.mat-list-item-content {
+//		width: 100%;
+//		display: flex;
+//		height: 46px;
+//		align-items: center;
+//		.box {
+//			margin-left: 0;
+//		}
+//
+//		.checkbox {
+//			padding: 0 24px;
+//		}
+//	}
+//}

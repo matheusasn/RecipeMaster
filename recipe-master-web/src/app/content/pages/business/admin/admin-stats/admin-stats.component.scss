@@ -1,0 +1,92 @@
+.title {
+    color: gray;
+    margin: 5rem 0;
+}
+
+.clickable-card {
+	cursor: pointer;
+}
+
+.header-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 18px;
+	h3 {
+		margin: 0;
+	}
+	button {
+		width: 300px;
+	}
+}
+
+.stats-card {
+	cursor: pointer;
+	width: 100%;
+	height: 124px;
+	border-radius: 11px;
+	background-color: #fff;
+	box-shadow: 0px 10px 10px rgba(190, 199, 213, 0.25);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	>:first-child {
+		font-size: 15px;
+		color: #BDBDBD;
+		font-weight: 500;
+	}
+
+	>:nth-child(2) {
+		font-size: 25px;
+		font-weight: 600;
+		color: #4B5262;
+	}
+
+	.groupped-statistics {
+    display: flex;
+    border-radius: 20px;
+    border: 2px solid #E6E6E6;
+    padding: 2px 13px;
+    color: #AEB1B8;
+    font-weight: 500;
+		span {
+			font-size: 10px;
+		}
+		>:nth-child(2) {
+			margin-left: 5px;
+		}
+	}
+
+}
+
+.f-w-500 {
+	font-weight: 500;
+}
+
+.right-featured {
+	font-size: 12px;
+	margin-left: 10px;
+	bottom: 10px;
+	position: absolute;
+}
+
+.green {
+	color: #34BFA3;
+}
+
+.products {
+	>:first-child {
+		font-size: 13px;
+	}
+
+	>:nth-child(2) {
+		font-size: 20px;
+		color: #000000;
+	}
+}
+
+.selected {
+	background-color: #f0f0f0;
+}

@@ -1,0 +1,211 @@
+<cp-loading></cp-loading>
+<div class="cp-content" [ngClass]="screenWidth < 768 ? 'noselect' : ''" style="overflow-x: hidden">
+	<div class="row override-margin">
+		<div class="col">
+			<form *ngIf="formReceita" class="m-form m-form--label-align-right" name="form" [formGroup]="formReceita"
+				novalidate>
+				<!-- GENERAL -->
+				<div class="m-portlet">
+					<div class="m-portlet__body">
+						<div class="row align-items-start">
+							<div class=" col-auto">
+								<div class="div-center d-flex">
+									<h3 class="m-form__section" translate>
+										{{ "RECIPE.TABS.GENERAL.TITLE" | translate }}
+									</h3>
+									<button mat-icon-button (click)="openDialog('recipeTutorial')">
+										<mat-icon style="margin-top: -5px;">info</mat-icon>
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<!-- GENERAL V1 -->
+						<recipemaster-recipe-info-v1 *ngIf="formReceita" [recipe]="recipe" [form]="formReceita" [categories]="categories"
+							[units]="units" [incomeUnits]="incomeUnits" [recipeWeightUnits]="recipeWeightUnits"
+							(onPhotoChange)="onPhotoChange($event)" (onChange)="onChangeGeralInfo($event)">
+						</recipemaster-recipe-info-v1>
+						<!-- GENERAL V1 END -->
+					</div>
+				</div>
+				<!-- GENERAL END-->
+
+				<!-- INGREDIENTS -->
+				<div class="m-portlet">
+					<div class="m-portlet__body">
+						<div class="cp-content__header">
+							<div>
+								<div class="div-center d-flex align-items-center">
+									<h3 class="m-form__section" translate class="responsive-h3">
+										{{ "RECIPE.TABS.INGREDIENTS.TITLE" | translate }}
+									</h3>
+									<button mat-icon-button (click)="openDialog('recipeIngredient')">
+										<mat-icon>info</mat-icon>
+									</button>
+								</div>
+							</div>
+
+							<div class="d-flex">
+								<div class="form-group" *ngIf="formReceita.value.geral?.unit">
+									<div class="input-group potions">
+										<input inputmode="numeric" pattern="[0-9]*" type="texnumber" (keyup)="saveFormSubject.next()"
+											class="form-control text-center" name="ingredientsYield" formControlName="ingredientsYield" />
+										<div class="input-group-append">
+											<div class="input-group-text">
+												{{ getUnit | translate }}
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="btn-menu" (click)="$event.stopPropagation()" mat-icon-button [matMenuTriggerFor]="menu">
+									<i class="fas fa-ellipsis-v"></i>
+								</div>
+								<mat-menu #menu="matMenu">
+									<button mat-menu-item (click)="toggleIngredientDraggable()">
+										<mat-icon>low_priority</mat-icon>
+										<span>{{
+											(ingredientDraggable
+											? "RECIPE.DISABLE_SORTING"
+											: "RECIPE.ENABLE_SORTING"
+											) | translate
+											}}</span>
+									</button>
+									<button mat-menu-item (click)="toggleHomeMeasureUnit()" *ngIf="screenWidth < 768">
+										<mat-icon>track_changes</mat-icon>
+										<span>{{
+											showHomeMeasureUnit
+											? "Visualizar medidas padrão"
+											: "Visualizar medidas caseiras"
+											}}</span>
+									</button>
+								</mat-menu>
+							</div>
+						</div>
+						<!-- ./cp-content__header -->
+
+						<!-- BUSCADOR de ingredientes (tipo AUTOCOMPLETE) -->
+						<m-cp-ingredient-search [internalRecipe]="true" [(ingredients)]="ingredients"
+							(onChange)="onChangeIngredients()" responseType="recipe-ingredient" behavior="autocomplete"
+							emptySearchBehavior="hide" [units]="units"
+							placeholder="{{ 'RECIPE.INGREDIENT_PESQUISA' | translate }}"></m-cp-ingredient-search>
+
+						<div dragula="INGREDIENTS_DRAGGABLE" *ngIf="ingredients?.length" [dragulaModel]="ingredients"
+							(dragulaModelChange)="handleReorderIngredients($event)">
+							<m-cp-recipe-ingredients-item *ngFor="let ingredient of ingredients; let i = index"
+								[isDraggingEnabled]="ingredientDraggable" (click)="setIngredientInfo(i)" [ingredient]="ingredient"
+								[showHomeMeasureUnit]="showHomeMeasureUnit"
+								[recipeUnityQuantity]="formReceita.value.geral?.unityQuantity"
+								[ingredientsYield]="formReceita.value.ingredientsYield" [units]="units">
+							</m-cp-recipe-ingredients-item>
+						</div>
+
+						<div class="form-group m-form__group text-right noselect">
+							<span class="ingredientsTotal">
+								Total:
+								{{
+								getAmountBasedOnRecipeYield(getTotalIngredients())
+								| currency: cifrao
+								}}
+							</span>
+						</div>
+					</div>
+				</div>
+				<!-- INGREDIENTS END -->
+
+				<!-- PREPARATION -->
+				<div class="m-portlet">
+					<div class="m-portlet__body">
+						<div class="div-center d-flex align-items-center m-form__section">
+							<h3 translate>
+								{{ "RECIPE.TABS.PREPARATION.METHOD_OF_PREPARATION" | translate }}
+							</h3>
+							<button mat-icon-button (click)="openDialog('recipeIngredientMultiplier')">
+								<mat-icon style="margin-top: -2px; color: #575962;">info</mat-icon>
+							</button>
+						</div>
+						<div formArrayName="steps" *ngFor="
+								let item of formReceita.controls['steps']['controls'];
+								let i = index;
+								let last = last
+							">
+							<div [formGroupName]="i" class="prepare-item">
+								<div class="item-number">{{ i + 1 }}.</div>
+								<textarea #textItem *ngIf="i != 0" rows="1" (keydown.enter)="$event.preventDefault(); addItem()"
+									oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+									[class.no-border]="!last" autocomplete="off" #inputToFocus formControlName="description"
+									placeholder="{{ 'INGREDIENT.INPUT.PREPARE' | translate }}"></textarea>
+								<textarea #textItem *ngIf="i == 0" rows="1" (keydown.enter)="$event.preventDefault(); addItem()"
+									oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+									[class.no-border]="!last" autocomplete="off" formControlName="description"
+									placeholder="{{ 'INGREDIENT.INPUT.PREPARE' | translate }}"></textarea>
+								<input type="hidden" formControlName="order" />
+								<div class="item-btn" (click)="removeStep(i)">X</div>
+							</div>
+						</div>
+
+						<div class="text-center">
+							<button class="btn-new-step" mat-button (click)="addItem()" translate>
+								{{ "INPUTS.NEW_STEP" | translate }}
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div id="btns" class="container mb-2 text-center mobile-container" *ngIf="screenWidth < 768">
+					<button type="button" (mouseover)="save()" class="btn btn-accent m-btn m-btn--air m-btn--custom uppercase"
+						name="btnSave" (click)="save()">
+						<span *ngIf="!spinner.active">{{ "INPUTS.SAVE" | translate }}</span>
+						<mat-spinner class="spinner" style="margin: 0 auto" [diameter]="spinner.spinnerSize"
+							[color]="spinner.spinnerColor" [mode]="spinner.mode" [value]="spinner.value"
+							*ngIf="spinner.active"></mat-spinner>
+					</button>
+					<!-- <button id="btnPdf" type="button" class="btn alterStyle mr-3 w-o-margin-r btn-outline"
+						(mouseover)="gerarPdf()" (click)="gerarPdf()" *ngIf="recipe && recipe.id">
+						{{
+						screenWidth > 768 ? "PDF" : ("GENERATE_PDF.TXT_BTN" | translate)
+						}}
+					</button> -->
+					<button id="deleteRecipeMobile" *ngIf="recipe?.user?.id == user?.id" type="button"
+						class="btn alterStyle ml-3 w-o-margin-l" [swal]="{
+							type: 'question',
+							title: titleModal,
+							showCancelButton: true,
+							confirmButtonColor: '#f4516c',
+							cancelButtonColor: '#d2d2d2'
+						}" (confirm)="delete()" (mouseover)="checkDeleteRecipeiOS()" (cancel)="doDismiss($event)" mat-button>
+						<i *ngIf="screenWidth > 768" class="la la-trash"></i>
+						{{ screenWidth < 768 ? ("RECIPE.DELETE_RECIPE" | translate) : "" }}
+					</button>
+							<button type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1 w-o-margin-r"
+								name="btnBack" (mouseover)="cancel()" (click)="cancel()" translate>
+								{{ "INPUTS.BACK" | translate }}
+							</button>
+				</div>
+
+				<div id="btns" class="container mb-2 text-center mobile-container" *ngIf="screenWidth >= 768">
+					<button type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1" name="btnBack"
+						(click)="cancel()" translate>
+						{{ "INPUTS.BACK" | translate }}
+					</button>
+					<button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom" style="min-width: 94.56px"
+						name="btnSave" (click)="save()" translate>
+						<span *ngIf="!spinner.active">{{ "INPUTS.SAVE" | translate }}</span>
+						<mat-spinner class="spinner" style="margin: 0 auto" [diameter]="spinner.spinnerSize"
+							[color]="spinner.spinnerColor" [mode]="spinner.mode" [value]="spinner.value"
+							*ngIf="spinner.active"></mat-spinner>
+					</button>
+					<button *ngIf="recipe?.user?.id == user?.id" type="button" class="btn alterStyle ml-3 w-o-margin-l" [swal]="{
+							type: 'question',
+							title: titleModal,
+							showCancelButton: true,
+							confirmButtonColor: '#f4516c',
+							cancelButtonColor: '#d2d2d2'
+						}" (confirm)="delete()" (cancel)="doDismiss($event)" mat-button>
+						<i class="la la-trash"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</div>

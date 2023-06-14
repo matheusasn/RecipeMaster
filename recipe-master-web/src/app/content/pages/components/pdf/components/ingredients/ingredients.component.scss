@@ -1,0 +1,98 @@
+.container-ingredients {
+
+    * {
+        font-family: "Poppins", "Roboto", Arial, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 15px;
+    }
+
+		.recipe-ingredient-item {
+			display: grid;
+			// align-items: center;
+			// justify-content: space-between;
+			grid-template-columns:  2fr 1fr 1fr;
+			padding: 4px;
+			padding-top: 8.6px;
+			padding-bottom: 8.6px;
+		}
+
+		.menu-ingredient-item {
+			margin-top: 5px;
+			display: grid;
+			// grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+			padding: 4px;
+			padding-top: 8.6px;
+			padding-bottom: 8.6px;
+		}
+
+		.fix-grid {
+			grid-template-columns: 2fr 1fr;
+		}
+
+		.recipe-ingredient-item.odd {
+			background-color: #F8F8F8;
+		}
+
+		.menu-ingredient-item.odd {
+			background-color: #F8F8F8;
+		}
+
+    .title {
+        font-family: "Poppins", "Roboto", Arial, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+
+        &.menu {
+            font-size: 14px;
+            line-height: 21px;
+        }
+
+    }
+
+		.grid {
+			display: grid;
+			margin-top: 15px;
+		}
+
+		.subtitle-menu {
+			font-family: "Poppins", "Roboto", Arial, sans-serif;
+			font-style: normal;
+			font-weight: 500;
+			font-size: 10px;
+			line-height: 15px;
+			display: block;
+			width: 95%;
+		}
+
+    .subtitle {
+        font-family: "Poppins", "Roboto", Arial, sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 15px;
+        display: block;
+				width: 76px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .color-secondary {
+        color: #4B5262;
+    }
+
+    td {
+        padding: 8px !important;
+        border:none !important;
+    }
+
+    .recipe-table tbody tr:nth-of-type(odd) {
+        background-color:  #F8F8F8 !important;
+    }
+
+}

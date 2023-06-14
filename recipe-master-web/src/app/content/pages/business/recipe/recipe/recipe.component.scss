@@ -1,0 +1,725 @@
+.mobile-container {
+	@media only screen and (max-width: 768px) {
+		margin-top: -10px;
+	}
+}
+
+.potions {
+	width: 167px;
+	margin-right: 13px
+}
+
+.input-group {
+
+	&:focus-within {
+		border: 1px solid #F24159 !important;
+	}
+
+	border: 1px solid #EBEDF2;
+	border-radius: 7px;
+
+	.form-control:focus {
+		border: 0 !important;
+	}
+
+	.input-group-append, input {
+		background-color: inherit;
+		border: none;
+		border-radius: inherit;
+	}
+
+	.input-group-text {
+		border: none;
+		background-color: inherit;
+	}
+}
+
+.recipe-title {
+	@media only screen and (max-width: 768px) {
+		display: none;
+	}
+	display: block;
+}
+
+.override-margin {
+	margin-right: -18px;
+	margin-left: -18px;
+}
+
+.list-item {
+	box-shadow: 0 1px 5px 1px #eeeeee!important;
+	background: #ffffff;
+	margin: 4px;
+	border-radius: 10px;
+	font-weight: bold;
+
+	&:hover {
+		background: #e6e6e6;
+	}
+}
+
+.list-icon-right {
+	position: absolute;
+	right: 0;
+}
+
+.financial-inputs {
+	margin-bottom: 50px
+}
+
+.cost-resume {
+	padding: 12px 18px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background-color: #34BFA3;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	span {
+		font-size: 12px;
+		color: #fff;
+		font-weight: 500;
+	}
+}
+
+.ingredient-amount-info {
+	margin: 0 auto;
+}
+
+.ingredient-price-info {
+	margin-right:10px;
+}
+
+.ingredients-footer {
+	background: #000;
+}
+
+.form-group {
+	padding: 0 !important;
+}
+
+.target-dom-node {
+	width: 100%;
+	height: 560px;
+	border: 1px solid #eee;
+}
+
+.ingredientsTotal {
+	font-size: 20px;
+	font-weight: 500;
+	color: #121419;
+	padding-right: 21px;
+}
+
+.button-custom {
+	z-index: 1000;
+	position: absolute;
+	border-radius: 50px;
+	width: 30px;
+	height: 30px;
+	margin-left: 10px;
+	margin-top: 3px;
+}
+
+.icon-custom {
+	margin-top: -9px;
+	margin-left: -5px;
+}
+
+.btn-custom:hover {
+	background-color: transparent !important;
+	border: transparent !important;
+}
+
+h3 {
+	color: #121419 !important;
+}
+
+.m-portlet {
+	border-radius: 9px;
+}
+
+.form-control{
+	background-color: #fdfdfd !important;
+}
+
+.list-item.row {
+	background-color: #fdfdfd;
+}
+
+button {
+    border-radius: 0.25rem;
+}
+
+.alterStyle {
+	background: #FFFFFF;
+	box-shadow: 0px 1px 5px 1px rgba(219, 218, 242, 0.45) !important;
+	border-radius: 5px !important;
+	border: 0;
+	color: #f4516c;
+	cursor: pointer;
+}
+
+.alterStyle:hover {
+    background-color: #f4516c !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+	border: 0 !important;
+}
+
+.list-item.row:hover {
+	background-color: #f1f1f1 !important;
+}
+
+button {
+	border-radius: 9px;
+}
+
+.gerarStyle {
+	border: 1px solid #f4516c !important;
+}
+
+.gerarStyle:hover {
+	background-color: #de374e !important;
+}
+
+.gerarStyle:focus {
+	background-color: #f4516c !important;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+.labelStyle {
+	font-weight: bold;
+}
+
+.centerStyle {
+	text-align: center;
+}
+
+.pStyle {
+	margin-left: 5%;
+	font-weight: bold;
+}
+
+.cp-ver-planos {
+	position: relative;
+    top: 2px;
+	text-decoration: underline;
+	margin-left: 1rem;
+}
+
+#btnPdf {
+	background-color: #ffffff;
+    border-color: #f4516c;
+    color: #f4516c;
+    margin-right: 2%;
+}
+
+#btnPdf:hover {
+    background-color: #f4516c !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+@media only screen and (max-width: 768px) {
+
+	.potions {
+		margin-right: 0px
+	}
+
+	.ingredientsTotal {
+		padding-right: 15px;
+	}
+	#btns {
+		margin-bottom: 7% !important;
+
+		button {
+			width: 97%;
+		}
+
+		button:not(:first-child) {
+			margin-top: 5px;
+		}
+
+		.w-o-margin-l {
+			margin-left: 0 !important;
+		}
+
+		.w-o-margin-r {
+			margin-right: 0 !important;
+		}
+	}
+	#iconArrow {
+		display: none;
+	}
+	#valorCompra1 {
+		margin-top: 0%;
+	}
+	#valorCompra2 {
+		margin-top: 0%;
+	}
+}
+
+// acima de 576px
+@media only screen and (min-width: 576px) {
+	.custom-padding-r {
+		padding-right: 0.6rem;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	#btnPdf {
+		width: 10%;
+	}
+}
+
+@media only screen and (max-width: 485px) {
+	#btnPdf {
+		width: 11%;
+	}
+}
+
+@media only screen and (max-width: 450px) {
+	#btnPdf {
+		width: 13%;
+	}
+}
+
+@media only screen and (max-width: 380px) {
+	#iconArrow {
+		display: none;
+	}
+
+	#btnPdf {
+		width: 17%;
+	}
+}
+
+@media only screen and (max-width: 334px) {
+	#btns {
+		padding-right: 0px !important;
+    	padding-left: 0px !important;
+	}
+}
+
+// New-financial
+
+.editable-financial-input {
+	border: none;
+	outline: none;
+	font-size: 18px;
+	font-weight: 600;
+	width: 90%;
+	text-align: center !important;
+	&.font-xl {
+		font-size: 36px;
+	}
+}
+
+.financial-costs-wrapper {
+	display: flex;
+	gap: 10px;
+
+	> div {
+		padding: 8px 12px;
+		border-radius: 7px;
+		span {
+			&:first-child {
+				font-size: 12px;
+			}
+		}
+		&.featured-border {
+			background: /* gradient can be an image */
+			linear-gradient(
+				125.5deg, #FB8A65 7.9%, #FA4E6D 71%
+			)
+			left
+			bottom
+			transparent
+			no-repeat;
+			background-size:100% 7px ;/* if linear-gradient, we need to resize it */
+		}
+	}
+}
+
+.item-costs-wrapper::-webkit-scrollbar {
+	display: none !important;
+}
+
+.item-costs-wrapper {
+	@media only screen and (max-width: 768px) {
+		flex-direction: row;
+		flex: 0 0 350px;
+    overflow-x: scroll;
+    white-space: nowrap;
+		-ms-overflow-style: none;  /* Internet Explorer 10+ */
+		scrollbar-width: none;  /* Firefox */
+	}
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-top: 17px;
+	.item-cost-wrapper {
+		@media only screen and (max-width: 768px) {
+			min-width: 160px;
+			height: 76px;
+		}
+		display: flex;
+		flex-direction: column;
+		height: 105px;
+		justify-content: center;
+		line-height: 19px;
+	}
+}
+
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.financial-info-title {
+	display: block;
+	color: #AEB1B8;
+	font-weight: 600;
+	font-size: 14px;
+	&.unselected {
+		color: #AEB1B880;
+	}
+	&.uppercase {
+		text-transform: uppercase;
+	}
+}
+
+.money-big {
+	color: black;
+	font-size: 24px;
+	font-weight: 600;
+	cursor: pointer;
+	&.unselected {
+		color: rgba(0, 0, 0, 0.3);
+	}
+	&.font-xl {
+		font-size: 36px !important;
+	}
+}
+
+.money-md {
+	color: black;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.w-full {
+	width: 100%;
+}
+
+.financial-sales-price-wrapper {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	height: 80px;
+	margin-top: 2px;
+}
+
+.financial-sales-percents-wrapper {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	.sales-price-item-wrapper {
+		display: flex;
+		margin-top: 10px;
+		.legend-color {
+			width: 4px;
+			height: 32px;
+			background-color: red;
+			border-radius: 19%;
+			margin-right: 6px;
+			margin-top: 2px;
+		}
+		.sales-price-item {
+			display: flex;
+			flex-direction: column;
+			border-left: 5px solid;
+			border-radius: 5px;
+			padding-left: 10px;
+			span {
+				font-weight: 600;
+				&:first-child {
+					text-transform: uppercase;
+					font-size: 12px;
+					color: #96999F;
+				}
+				&:nth-child(2) {
+					font-size: 13px;
+					color: #000000;
+				}
+			}
+			&.profit {
+				border-color: #34BFA3;
+			}
+			&.cmv {
+				border-color: #FD6485;
+			}
+			&.variable-cost {
+				border-color: #FF9E7E;
+			}
+			&.fixed-cost {
+				border-color: #4B5262;
+			}
+			.positive {
+				color: #34BFA3;
+				font-size: 13px;
+			}
+			.negative {
+				color: #FD305C;
+				font-size: 13px;
+			}
+		}
+	}
+
+	.markup-wrapper {
+    position: absolute;
+    right: 24.5%;
+		bottom: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+		line-height: 18px;
+		span {
+			&:first-child {
+				color: #C0C0C0;
+				font-weight: 700;
+				text-transform: uppercase;
+				font-size: 11px;
+			}
+			&:not(:first-child) {
+				color: #000000;
+				font-weight: 700;
+				font-size: 18px;
+			}
+		}
+	}
+}
+
+::ng-deep .mat-tooltip {
+	background: rgba(75, 82, 98, 0.59) !important;
+	border-radius: 9px !important;
+	color: #ffff !important;
+	font-size: 1rem !important;
+	font-weight: bold !important;
+	line-height: 25px !important;
+	white-space: pre-line;
+	padding: 15px !important;
+}
+
+@media only screen and (max-width: 768px) {
+
+	.responsive-h3 {
+		font-size: 16px;
+		padding: 0px;
+		margin: 0px;
+	}
+	.mobile-mt-10px {
+		margin-top: 10px;
+	}
+	.financial-sales-percents-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		border-top: none !important;
+		min-height: unset;
+		margin-top: -10px;
+		.markup-wrapper {
+			right: 23.9%;
+			bottom: 34%;
+		}
+	}
+}
+
+
+// End new financial
+
+.wrapper-bordered {
+	border: 1px solid rgba(174, 177, 184, 0.26);
+	border-radius: 7px;
+	padding: 8px 12px;
+
+	h5 {
+		padding: 0 !important;
+		margin: 0;
+	}
+}
+
+.cp-content__header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 16px;
+
+	.cp-content-ingredient__header-title {
+		margin-bottom: 10px;
+		font-size: 28px;
+	}
+
+	button {
+		border: 0;
+		background: #ffffff;
+		cursor: pointer;
+		width: 32px;
+		height: 40px;
+		align-self: baseline;
+
+		i { font-size: 16px; }
+	}
+}
+
+.prepare-item {
+	display: flex;
+	margin-bottom: 8px;
+
+	.item-number {
+		width: 32px;
+		font-family: Poppins, sans-serif;
+		font-size: 14px;
+		font-weight: 600;
+		display: flex;
+		align-items: end;
+		justify-content: center;
+		padding-top: 8px;
+	}
+
+	.item-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		border: 1px solid #fff;
+		background: #ffffff;
+		cursor: pointer;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	textarea {
+		flex: 1;
+		border: 1px solid #EBEDF2;
+		border-radius: 7px;
+		padding: 8px 12px;
+		outline: 0;
+		resize: none;
+		overflow: hidden;
+
+		&.no-border {
+			border: 1px solid #fff;
+		}
+
+		&:focus {
+			border: 1px solid #F24159 !important;
+		}
+
+		&::placeholder {
+			font-size: 11px;
+			color: #AEB1B8;
+		}
+
+		&:not(.no-border), &:focus {
+			border: 1px solid #EBEDF2;
+		}
+	}
+}
+
+button.btn-new-step {
+	border: 0;
+	background: #ffffff;
+	cursor: pointer;
+	font-family: Poppins, sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	margin: 8px 0;
+}
+
+.btn-menu {
+	width: 32px;
+	height: 40px;
+	padding: 0 4px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	i {
+		font-size: 16px;
+	}
+}
+
+.btn-outline {
+	border: 1px solid #E75B6F;
+}
+
+#btns {
+	.uppercase {
+		text-transform: uppercase;
+	}
+	button {
+		height: 37px;
+		@media only screen and (max-width: 768px) {
+			border-radius: 6px !important;
+			height: 49px;
+		}
+
+		i {
+			line-height: 16px !important;
+			vertical-align: baseline !important;
+		}
+	}
+
+	@media only screen and (max-width: 768px) {
+		padding: 0 !important;
+
+		button {
+			padding: 10px 10px !important;
+			font-weight: 500;
+		}
+	}
+}
+
+::ng-deep {
+  .custom-slider .ngx-slider .ngx-slider-bar {
+    background: #D9D9D940;
+    height: 12px;
+  }
+
+	.custom-slider .ngx-slider .ngx-slider-bar::after {
+    content: "MARGEM DE LUCRO";
+    position: absolute;
+    left: 36%;
+    bottom: -4px;
+    color: #AEB1B8;
+    font-weight: 600;
+	}
+
+	.custom-slider .ngx-slider .ngx-slider-bubble {
+		bottom: -39px;
+		color: #000000;
+		font-weight: 500;
+		margin-left: 3px;
+	}
+
+  .custom-slider .ngx-slider .ngx-slider-pointer {
+    width: 25px;
+    height: 25px;
+		top: -7px;
+    background-color: #34BFA3;
+		outline: none;
+  }
+
+  .custom-slider .ngx-slider .ngx-slider-pointer:after {
+    display: none;
+  }
+}

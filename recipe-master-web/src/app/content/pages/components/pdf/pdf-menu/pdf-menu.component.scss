@@ -1,0 +1,28 @@
+
+.container-pdf {
+    font-family: "Poppins", "Roboto", Arial, sans-serif;
+	width: 595px;
+	padding: 40px;
+
+	* {
+		font-family: "Poppins", "Roboto", Arial, sans-serif;
+    }
+
+    .vertical-align-top {
+        vertical-align: top;
+    }
+}
+
+.container-hidden {
+	position: absolute;
+	top: 0;
+	left: -5000px;
+}
+
+.a4container {
+	position: absolute;
+	background-color: grey;
+	opacity: 0.25;
+	width: 595px;
+	height: 842px;
+}

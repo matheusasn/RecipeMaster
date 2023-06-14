@@ -1,0 +1,14 @@
+h5 {
+	text-align: left;
+	margin: 8px 0 32px 0;
+}
+
+.canvas-container {
+	position: relative;
+	margin: 0 48px 8px 48px;
+	height: 238px;
+
+	@media only screen and (max-width: 768px) {
+		margin: 24px 0;
+	}
+}

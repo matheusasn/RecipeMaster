@@ -1,0 +1,21 @@
+<div class="wrapper-info">
+	<div class="column">
+		<button (click)="openDialogHistoryIngredient()">
+			<i class="fa fa-align-left"></i>
+			<label translate>{{ 'INGREDIENT.INGREDIENT_TXT12' | translate }}</label>
+		</button>
+	</div>
+
+	<div class="column">
+		<label class="price-label" translate>{{ 'INGREDIENT.INGREDIENT_TXT11' | translate }}</label>
+		<span class="price-text"> {{ price }}</span>
+		<div class="unity-label text-nowrap"> {{ unitLabel }} </div>
+	</div>
+
+	<div class="column">
+		<button (click)="openDialogSaveIngredient()">
+			<i class="far fa-plus-square"></i>
+			<label  translate>{{ 'INGREDIENT.INGREDIENT_TXT13' | translate }}</label>
+		</button>
+	</div>
+</div>

@@ -1,0 +1,49 @@
+.table td {
+    border: 1px solid #333;
+}
+
+.table-nps {
+
+    .col {
+        border: 1px solid #333;
+        cursor: pointer;
+        display: inline-block;
+        width: 8vw !important;
+        height: 8vw !important;
+        position: relative;
+        padding: 8px;
+        font-size: 1.2rem;
+        margin-right: 1px;
+        font-weight: 500;
+        max-width: 38px;
+        max-height: 38px;
+
+        &:hover {
+            background-color: #eee;
+        }
+    }
+
+}
+
+textarea {
+    resize: none;
+}
+
+swiper {
+    // height: 340px;
+    width: 100%;
+}
+
+.swiper-pagination {
+    bottom: 0;
+}
+
+.swiper-wrapper {
+    box-sizing: border-box;
+    padding-bottom: 12px;
+}
+
+.swiper-slide {
+    padding: 12px 0 0 0 !important;
+    margin: 0;
+}

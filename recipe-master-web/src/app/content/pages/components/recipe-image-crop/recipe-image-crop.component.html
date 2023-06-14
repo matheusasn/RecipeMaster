@@ -1,0 +1,13 @@
+<div class="container">
+
+
+  <div class="img-container">
+    <angular-cropper #angularCropper [cropperOptions]="config" [imageUrl]="photo"></angular-cropper>
+  </div>
+
+
+  <div class="mt-2 text-center">
+    <button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom" (click)="doOk()">OK</button>
+  </div>
+
+</div>

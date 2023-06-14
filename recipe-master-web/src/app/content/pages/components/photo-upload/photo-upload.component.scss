@@ -1,0 +1,54 @@
+.img-resized {
+    width: 320px;
+    height: calc(320px * (2/3));
+    margin: 0;
+    padding: 0;
+    padding: 2px;
+    border-radius: 9px;
+
+}
+
+.user-profile {
+    height: calc(320px * (0.41));
+}
+
+.square-picture {
+    width: 212px;
+	height: 212px;
+}
+
+.pdf-logo {
+	margin-top: 20px;
+	width: 120px;
+	height: 120px;
+}
+
+.img-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    div {
+        padding: 8px;
+        color: #666;
+        text-align: center;
+    }
+}
+
+.container {
+    margin: 20px auto;
+    max-width: 640px;
+    }
+
+img {
+    max-width: 100%;
+}
+
+.cropper-container {
+    width: 640px !important;
+    height: 480px !important;
+}
+
+

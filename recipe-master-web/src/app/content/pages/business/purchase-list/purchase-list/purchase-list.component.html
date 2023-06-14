@@ -1,0 +1,171 @@
+<cp-loading></cp-loading>
+
+<div class="cp-content">
+  <div class="row">
+    <div class="col">
+
+      <!--Formulário-->
+      <form *ngIf="formListaCompra" class="m-form m-form--label-align-right" name="form" [formGroup]="formListaCompra" novalidate><!---->
+
+        <div class="m-portlet ">
+          <div class="m-portlet__body">
+
+            <!--Titulo e data-->
+            <div class="row itens" id="lineInicial">
+              <div class="col-12">
+                <div class="valoresSemFundo">
+                  <div class="row">
+                    <div class="col-9 col-sm-6">
+                      <div id="titlePage">
+                        {{'LISTA_COMPRAS.TITLE'| translate}}
+                      </div>
+                    </div>
+                    <div class="col-3 col-sm-6">
+                      <div class="btn-group positionGroup" role="group" aria-label="Basic example">
+                        <input id="dataList" formControlName="dataCadastro" matInput [matDatepicker]="dp">
+                        <mat-datepicker-toggle id="btnData" matSuffix [for]="dp"></mat-datepicker-toggle>
+                        <mat-datepicker #dp></mat-datepicker>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BUSCADOR de ingredientes (tipo AUTOCOMPLETE) -->
+            <div class="row itens">
+              <div class="col-12">
+                <div class="col-12">
+                  <div id="idMargemCampoPesquisa" class="row">
+                    <!--Barra de pesquisa-->
+                    <div id="inputPesquisa" class="col-10 col-sm-11">
+                      <m-cp-ingredient-search
+                                          [(ingredients)]="ingredients"
+                                          (onChange)="onChangeIngredients()"
+                                          responseType="listaCompra"
+                                          behavior="listCompra"
+                                          emptySearchBehavior="hide"
+                                          [units]="units"
+                                          placeholder="{{ 'RECIPE.INGREDIENT_PESQUISA' | translate }}"
+                                          (click)="limparFiltro()">
+                      </m-cp-ingredient-search>
+                    </div>
+                    <!--Filtros de ordenação-->
+                    <div class="col-2 col-sm-1">
+                      <button [disabled]="ingredients.length == 0 && ingredientsBackup == 0" type="button" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Filtro de ingredientes">
+                        <mat-icon id="iconMenu">list</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="setAlphabeticalOrderList()">
+                          <mat-icon>sort_by_alpha</mat-icon>
+                          <span>A - Z</span>
+                        </button>
+                        <button mat-menu-item (click)="setCategoryOrderList()">
+                          <mat-icon>filter</mat-icon>
+                          <span>Por categoria</span>
+                        </button>
+                        <button mat-menu-item (click)="getCategoryIngredient()">
+                          <mat-icon>filter_list</mat-icon>
+                          <span>Escolher categoria</span>
+                        </button>
+                      </mat-menu>
+                    </div>
+                  </div>
+                </div>
+
+                <!--Filtro para mostrar por categoria-->
+                <div class="col-12" [hidden]="!showFilterGetCategoryIngredient">
+                  <div class="row">
+                    <div class="col-12">
+                      <select id="filtroCategoriaSelect" class="cp-input" [(ngModel)]="catEscolhido" (ngModelChange)="getCategoria()" [ngModelOptions]="{standalone: true}">
+                        <option value="-1" selected>{{ 'RECIPE.MSGLIMPARFILTRO' | translate }}</option>
+                        <option *ngFor="let category of categories" [value]="category.id">{{ category.name | translate }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!--Ingredientes selecionado-->
+                <div class="col-12">
+                  <div class="valoresSemFundo">
+                    <div class="m-section mh-2" *ngIf="ingredients?.length">
+                      <mat-nav-list disableRipple dragula="INGREDIENTS_DRAGGABLE" [dragulaModel]="ingredients" (dragulaModelChange)="ingredients = $event">
+							<a class="list-item row" mat-list-item *ngFor="let recipeIngredient of ingredients; let i = index">
+
+								<div [ngStyle]="getColorIngredientCategory(i, ingredients)" class="box linha-vertical"></div>
+								<div class="col-1 col-sm-1 col-md-1 checkbox">
+									<mat-checkbox (change)="calcTotalMarcadoUser(i)"
+												  [(ngModel)]="recipeIngredient.marked"
+												  [ngModelOptions]="{standalone: true}"
+												  name="marked"></mat-checkbox>
+								</div>
+								<div [ngStyle]="{'text-decoration': recipeIngredient.marked ? 'line-through' : 'none' }" class="col-5 col-sm-6 col-md-7 text-wrap textLeft fontText" (click)="setIngredientInfo(i);">
+									{{recipeIngredient.ingredient.name}}
+								</div>
+								<div [ngStyle]="{'text-decoration': recipeIngredient.marked ? 'line-through' : 'none' }" class="col-3 col-sm-3 col-md-2 text-left" (click)="setIngredientInfo(i);">
+									<small class="text-muted">
+										{{getUnitLabel(recipeIngredient)}}
+									</small>
+								</div>
+								<div [ngStyle]="{'text-decoration': recipeIngredient.marked ? 'line-through' : 'none' }" class="col-3 col-sm-2 col-md-2 text-right" id="positionPrice" (click)="setIngredientInfo(i);">
+									<small class="text-muted">
+										{{calcIngredientPrice(recipeIngredient) | currency:cifrao}}
+									</small>
+								</div>
+							</a>
+                      </mat-nav-list>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Valores-->
+            <div class="row itens">
+              <div class="col-12">
+                <div id="valores">
+                  <div class="row">
+                    <div class="col-6" id="totalEstimado">
+                      <div class="txtPosLeft totalValores">
+                        <label>{{'LISTA_COMPRAS.INPUT_LABEL3' | translate}}</label>
+                        <br>
+                        <label class="calc">{{resulTotalEstimado | currency:cifrao}}</label>
+                      </div>
+                    </div>
+                    <div class="vl"></div>
+                    <div class="col-6" id="totalMarcado">
+                      <div class="txtPosLeft totalValores">
+                        <label>{{'LISTA_COMPRAS.INPUT_LABEL4' | translate}}</label>
+                        <br>
+                        <label class="calc">{{resulTotalMarcado | currency:cifrao}}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Botoes-->
+            <div class="row itens">
+              <div class="container mb-2 text-center">
+
+                <button *ngIf="purchaseList != undefined"
+                          type="button"
+                          class="btn pull-left alterStyle"
+                          [swal]="{ type: 'question', title: titleModal, showCancelButton: true, confirmButtonColor: '#f4516c', cancelButtonColor: '#d2d2d2' }"
+                          (confirm)="delete()"
+                          (cancel)="doDismiss($event)">
+                    <i id="iconTrash" class="la la-trash"></i>
+                  </button>
+
+                  <button id="btnBack" type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1 btn-new-css-white" name="btnBack" (click)="cancel()" translate>{{ 'INPUTS.BACK' }}</button>
+                  <button id="btnSave" type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom btn-new-css-color" name="btnSave" (click)="save()" translate>{{ 'INPUTS.SAVE' }}</button>&nbsp;&nbsp;
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

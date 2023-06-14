@@ -1,0 +1,19 @@
+$border-radius: 15px;
+
+.card {
+    box-shadow: 0 5px 10px rgba(69,65,78,.08);
+    width: 100%;
+    border: none;
+    border-radius: $border-radius;
+    font-size: 1.4rem;
+    background-color: #F7F7F7;
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+.info {
+    .info-number {
+        font-size: 2rem;
+        font-weight: 900;
+    }
+}

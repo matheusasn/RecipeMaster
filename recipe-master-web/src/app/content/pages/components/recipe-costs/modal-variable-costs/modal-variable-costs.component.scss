@@ -1,0 +1,125 @@
+.select-all-checkbox {
+	margin-left: 9px;
+}
+
+.costs-container {
+	.alterned-row-colors {
+		&:nth-of-type(even) {
+			background:#EAEBED80;
+		}
+	}
+	.fixed-costs-row {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 3px;
+		padding-left: 10px;
+		span {
+			font-weight: 500;
+			font-family: Poppins;
+			color: #000000;
+		}
+	}
+	.costs-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		margin-bottom: 3px;
+		padding-left: 10px;
+		span {
+			font-weight: 500;
+			font-family: Poppins;
+			color: #000000;
+		}
+	}
+	.total {
+		float: right;
+    font-size: 24px;
+    font-weight: 500;
+    color: #000000;
+    margin-top: 9px;
+	}
+	.checkbox-w-text-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 17px;
+	}
+	.fixed-cost-input {
+    width: 122px;
+    padding: 7px;
+    border-radius: 5px;
+    height: 42px;
+    border: 1px solid #D0D0D1;
+		background: transparent;
+		&::placeholder {
+			color: #AEB1B8;
+			font-weight: 500;
+		}
+	}
+	.custom-padding {
+		padding: 12px 18px;
+	}
+}
+
+button {
+	border-radius: 0.75rem;
+}
+
+.alterStyle {
+	background-color: #ffffff;
+	border-color: #f4516c;
+	color: #f4516c;
+	box-shadow: none !important;
+}
+
+.alterStyle:hover {
+	background-color: #f4516c !important;
+	color: #ffffff !important;
+	box-shadow: none !important;
+}
+
+.w-full {
+	width: 100%;
+}
+
+.div-center{
+	text-align: center;
+}
+
+.cp-content-costs {
+	@media (min-width: 768px) {
+		width: 400px;
+	}
+	padding: 8px;
+}
+
+.cp-content-costs .cp-content-costs__header {
+	@media (max-width: 768px) {
+		margin-top: 5px;
+	}
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 7px;
+	margin-bottom: 16px;
+
+	.cp-content-costs__header-title {
+		font-size: 22px;
+		color: #000000;
+}
+
+	button {
+		border: 0;
+		background: #ffffff;
+		cursor: pointer;
+		width: 56px;
+		height: 32px;
+		align-self: baseline;
+
+		i { font-size: 16px; }
+	}
+}
+
+.cp-content-costs .cp-content-costs__body {
+	padding: 0 21px;
+}
+

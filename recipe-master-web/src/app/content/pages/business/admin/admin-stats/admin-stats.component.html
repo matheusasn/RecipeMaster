@@ -1,0 +1,236 @@
+<cp-loading></cp-loading>
+
+<div class="container-fluid p-5" *ngIf="stats">
+
+    <div class="header-container">
+			<h3>Admin</h3>
+			<button class="btn btn-primary btn-md" (click)="toggleGraph()">Abrir gráfico</button>
+		</div>
+
+    <div class="row p-4">
+        <div class="col-12 col-md-2 mb-1" (click)="loadGraph('Total Users','users')">
+						<div class="stats-card" [ngClass]="{'selected': lastPath === 'users'}">
+								<span>Total Users</span>
+								<span>{{ stats?.users || 'N/I'  }}</span>
+								<div class="groupped-statistics">
+									<span>Today: <strong>{{ todayUsers }}</strong></span>
+									<span class="green">+{{ getPercent(todayUsers, stats?.users) }}%</span>
+								</div>
+								<div class="groupped-statistics my-2" (click)="changePath('firebase-users');$event.stopPropagation()">
+									<span>Firebase: <strong>{{ firebaseMigratedUsers }} / {{ firebaseUsers }}</strong></span>
+								</div>
+						</div>
+        </div>
+        <div class="col-12 col-md-2 mb-1">
+					<div class="stats-card" (click)="loadGraph('Total Accesses','access')" [ngClass]="{'selected': lastPath === 'access'}">
+						<span>Total Accesses</span>
+						<span>{{ stats?.access || 'N/I'  }}</span>
+						<div class="groupped-statistics" (click)="changePath('access-today');$event.stopPropagation()">
+							<span>Today: <strong>{{ todayAccesses }}</strong></span>
+							<span class="green">+{{ getPercent(todayAccesses, stats?.access) }}%</span>
+						</div>
+					</div>
+        </div>
+        <div class="col-12 col-md-2 mb-1">
+					<div class="stats-card" (click)="loadGraph('Total Subscribers','plans')" [ngClass]="{'selected': lastPath === 'plans' && lastPerfil === null}">
+						<span>Total Subscribers</span>
+						<span style="position:relative">
+							{{ totalSubscribers || 'N/I' }}
+							<span class="green right-featured">+{{ getPercent(totalSubscribers, stats?.users) }}%</span>
+						</span>
+						<div class="groupped-statistics">
+							<span>Today: <strong>{{ todaySubscribers }}</strong></span>
+							<span class="green">+{{ getPercent(todaySubscribers, totalSubscribers) }}%</span>
+						</div>
+					</div>
+        </div>
+        <div class="col-12 col-md-2 mb-1">
+					<div class="stats-card" (click)="loadGraph('Basic','plans', 3)" [ngClass]="{'selected': lastPath === 'plans' && lastPerfil === 3}">
+						<span>Basic</span>
+						<span>{{ stats?.signatures.basic || 'N/I' }}</span>
+						<span class="green f-w-500">{{getPercent(stats?.signatures.basic, totalSubscribers)}}%</span>
+					</div>
+        </div>
+        <div class="col-12 col-md-2 mb-1">
+					<div class="stats-card" (click)="loadGraph('Pro','plans', 4)" [ngClass]="{'selected': lastPath === 'plans' && lastPerfil === 4}">
+						<span>Pro</span>
+						<span>{{ stats?.signatures.pro || 'N/I' }}</span>
+						<span class="green f-w-500">{{getPercent(stats?.signatures.pro, totalSubscribers)}}%</span>
+					</div>
+        </div>
+        <div class="col-12 col-md-2 mb-1">
+					<div class="stats-card" (click)="loadGraph('Nutri','plans', 5)" [ngClass]="{'selected': lastPath === 'plans' && lastPerfil === 5}">
+						<span>Nutri</span>
+						<span>{{ stats?.signatures.proNutri || 'N/I' }}</span>
+						<span class="green f-w-500">{{getPercent(stats?.signatures.proNutri, totalSubscribers)}}%</span>
+					</div>
+        </div>
+    </div>
+
+		<div class="row p-4">
+			<div class="col-12 col col-sm-2 mb-1">
+				<div class="stats-card" (click)="lastPath = 'WEB'; changePath('device-WEB')" [ngClass]="{'selected': lastPath === 'WEB'}">
+					<span>Web</span>
+					<span>{{ webCount }}</span>
+					<span class="green f-w-500">{{ getPercent(webCount, webCount+androidCount+iOSCount) }}%</span>
+				</div>
+			</div>
+			<div class="col-12 col col-sm-2 mb-1">
+				<div class="stats-card" (click)="lastPath = 'Android'; changePath('device-Android')" [ngClass]="{'selected': lastPath === 'Android'}">
+					<span>Android</span>
+					<span>{{ androidCount }}</span>
+					<span class="green f-w-500">{{ getPercent(androidCount, webCount+androidCount+iOSCount) }}%</span>
+				</div>
+			</div>
+			<div class="col-12 col col-sm-2 mb-1">
+				<div class="stats-card" (click)="lastPath = 'iOS'; changePath('device-iOS')" [ngClass]="{'selected': lastPath === 'iOS'}">
+					<span>iOs</span>
+					<span>{{ iOSCount }}</span>
+					<span class="green f-w-500">{{ getPercent(iOSCount, webCount+androidCount+iOSCount) }}%</span>
+				</div>
+			</div>
+			<div class="col-12 col col-sm-2 mb-1">
+				<div class="stats-card" (click)="loadGraph('Total Expired','total-expired')" [ngClass]="{'selected': lastPath === 'total-expired'}">
+					<span>Total Expired</span>
+					<span>{{ totalExpired }}</span>
+					<div class="groupped-statistics">
+						<span>Renew: <strong>{{ todayRenewed }}</strong></span>
+						<span class="green">+{{ getPercent(todayRenewed, totalExpired) }}%</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col col-sm-2 mb-1">
+				<div class="stats-card" (click)="loadGraph('Current Expired','current-expired')" [ngClass]="{'selected': lastPath === 'current-expired'}">
+					<span>Current Expired</span>
+					<span>{{ currentExpired }}</span>
+					<span>&nbsp;</span>
+				</div>
+			</div>
+			<div class="col-12 col col-sm-2 mb-1">
+				<div class="stats-card" (click)="loadGraph('1mo. to expire','plans-expiration')" [ngClass]="{'selected': lastPath === 'plans-expiration'}">
+					<span>< 1mo. to expire</span>
+					<span>{{ lessThanOneMonthToExpire }}</span>
+					<span>&nbsp;</span>
+				</div>
+			</div>
+		</div>
+
+    <div class="row p-4">
+        <div class="col-12 col col-sm-2 mb-1">
+					<div class="stats-card products" (click)="loadGraph('Total Recipes','recipes')" [ngClass]="{'selected': lastPath === 'recipes'}">
+						<span>Total Recipes</span>
+						<span>{{ stats?.recipes || 'N/I' }}</span>
+						<div class="groupped-statistics justify-content-center" (click)="changePath('recipes-today');$event.stopPropagation()">
+							<span>Today: <strong>{{ todayRecipes }}</strong></span>
+						</div>
+					</div>
+        </div>
+        <div class="col-12 col col-sm-2 mb-1">
+					<div class="stats-card products" (click)="loadGraph('PDFS','pdf')" [ngClass]="{'selected': lastPath === 'pdf'}">
+						<span>PDF's</span>
+						<span>{{ stats?.pdfs || 'N/I' }}</span>
+						<div class="groupped-statistics justify-content-center" (click)="changePath('pdf-today');$event.stopPropagation()">
+							<span>Today: <strong>{{ todayPdfs }}</strong></span>
+						</div>
+					</div>
+				</div>
+        <div class="col-12 col col-sm-2 mb-1">
+					<div class="stats-card products" (click)="loadGraph('Used Ingredients','ingredients')" [ngClass]="{'selected': lastPath === 'ingredients'}">
+						<span>Used Ingredients</span>
+						<span>{{ stats?.usedIngredients || 'N/I' }}</span>
+						<div class="groupped-statistics justify-content-center" (click)="changePath('ingredients-today');$event.stopPropagation()">
+							<span>Today: <strong>{{ todayIngredients }}</strong></span>
+						</div>
+					</div>
+				</div>
+        <div class="col-12 col col-sm-2 mb-1">
+					<div class="stats-card products" (click)="loadGraph('Compound Ing','compound-ingredients')" [ngClass]="{'selected': lastPath === 'compound-ingredients'}">
+						<span>Compound Ing</span>
+						<span>{{ stats?.compoundIngredients || 'N/I' }}</span>
+						<div class="groupped-statistics justify-content-center" (click)="changePath('compound-ingredients-today');$event.stopPropagation()">
+							<span>Today: <strong>{{ todayCompoundIngredients }}</strong></span>
+						</div>
+					</div>
+				</div>
+        <div class="col-12 col col-sm-2 mb-1">
+					<div class="stats-card products" (click)="loadGraph('Saved Prices','prices')" [ngClass]="{'selected': lastPath === 'prices'}">
+						<span>Saved Prices</span>
+						<span>{{ stats?.prices || 'N/I' }}</span>
+						<div class="groupped-statistics justify-content-center">
+							<span>Today: <strong>{{ todayPrices }}</strong></span>
+						</div>
+					</div>
+				</div>
+        <div class="col-12 col col-sm-2 mb-1">
+					<div class="stats-card products" (click)="loadGraph('Total Menus','menus')" [ngClass]="{'selected': lastPath === 'menus'}">
+						<span>Total Menus</span>
+						<span>{{ stats?.menus || 'N/I' }}</span>
+						<div class="groupped-statistics justify-content-center" (click)="changePath('menus-today');$event.stopPropagation()">
+							<span>Today: <strong>{{ todayMenus }}</strong></span>
+						</div>
+					</div>
+        </div>
+    </div>
+
+		<div class="row p4" *ngIf="chartData && chartData.labels && showGraph">
+			<div class="col col-sm-12">
+
+				<div class="row mx-2">
+					<div class="col-sm-3">
+						<div class="form-group m-form__group">
+							<label class="col-form-label">Data Inicial</label>
+							<input type="date" class="form-control m-input cp-input full-width" name="price" [(ngModel)]="startDate">
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group m-form__group">
+							<label class="col-form-label">Data Final</label>
+							<input type="date" class="form-control m-input cp-input full-width" name="price" [(ngModel)]="endDate">
+						</div>
+					</div>
+					<div class="col-sm-3">
+							<button type="button" class="btn btn-primary" style="margin-top: 35px;" (click)="applyFilter()">Aplicar</button>
+					</div>
+				</div>
+
+				<mat-card>
+					<mat-card-content>
+						<m-bar-chart
+							[title]="chartData.title"
+							[barChartLabels]="chartData.labels"
+							[barChartData]="chartData.data"
+						></m-bar-chart>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</div>
+
+</div>
+<!-- <div class="container m-4 text-center"> -->
+
+  <!-- <hr>
+  <h4>Contratar Plano:</h4>
+  <button  type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom m-4 cp-btn"
+      (click)="checkoutBasic()">Basic
+  </button>
+  <button  type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom m-4 cp-btn"
+      (click)="checkoutPro()">Pro
+  </button>
+  <button  type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom m-4 cp-btn"
+      (click)="checkoutProNutri()">Pro Nutri
+  </button>
+ -->
+
+  <!-- <hr>
+
+  <h4>Detalhes do Usuário:</h4>
+  <address>Usuário: Roberto<br>
+    Perfis: PRO_NUTRI <br>
+    Plano de assinatura: PRO Nutri (válido até: 99/99/9999)<br>
+  </address> -->
+
+  <!-- <button  type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom m-4 cp-btn"
+      (click)="validarPlano()">Verificar Plano
+  </button> -->
+
+<!-- </div> -->

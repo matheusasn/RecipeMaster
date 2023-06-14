@@ -1,0 +1,30 @@
+<div class="container pb-3 text-center"> 
+  <div class="row">
+      <div class="col-12 p-1 col-md-2">
+        <img [src]="message.photoUrl?message.photoUrl:'./assets/message/carinha.png'" onerror="if (this.src != './assets/message/carinha.png') this.src = './assets/message/carinha.png';" class="message-img" />
+      </div>
+      <div class="col-12 col-md-8">
+          <h2 *ngIf="!accepted" class="message-title">{{message.title}}</h2>
+          <p *ngIf="!accepted && message.text" class="message-subtitle p-3" [innerHtml]="message.text"></p>
+          <p *ngIf="!accepted && !message.text">&nbsp;</p>
+
+          <h2 *ngIf="accepted" class="message-title">Confirmação por e-mail.</h2>
+          <p *ngIf="accepted" class="message-subtitle p-3">Em breve chegará um link de confirmação no seu e-mail de cadastro! <br />
+            Por favor, acesse este email e clique no link de confirmação para efetuar a transferência. Obrigado!</p>
+
+          <div class="row" *ngIf="!accepted">
+              <div class="col-6 col-lg-3 offset-lg-3">
+                  <button class="btn btn-outline-dark btn-block" (click)="doSubmit(label1)">
+                      {{label1}}
+                  </button>
+              </div>
+              <div class="col-6 col-lg-3">
+                  <button class="btn btn-outline-dark btn-block" (click)="doSubmit(label2)">
+                      {{label2}}
+                  </button>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>

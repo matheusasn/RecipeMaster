@@ -1,0 +1,25 @@
+
+.cp-form-row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    margin-left: 12px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.cp-input {
+    
+    input {
+        background: #fafafa !important;
+        border: none;
+    }
+
+    input:focus {
+        border: none !important;
+    }
+
+    .input-group-text {
+        background: #fafafa !important;
+        border: none;
+    }
+
+}

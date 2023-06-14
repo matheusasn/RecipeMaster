@@ -1,0 +1,50 @@
+<cp-dialog-default (close)="cancel()">
+	<div class="label-ingredient-form-container row" [formGroup]="form">
+		<div class="col-12">
+			<div class="form-group m-form__group">
+				<label
+					class="col-form-label"
+					translate
+				>
+				{{ 'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.INGREDIENT_NAME' | translate }}
+			</label>
+				<input
+					class="form-control m-input cp-input"
+					name="name"
+					type="text"
+					formControlName="name"
+				>
+			</div>
+			<div [formArrayName]="'ingredients'">
+
+					<ng-container *ngFor="let item of form.controls.ingredients['controls']; let i = index">
+						<div class="row mt-4 mb-4">
+							<div class="col-8 pl-5" [formGroupName]="i">
+								<ng-container *ngIf="!editingIngredients[i]">{{ item.value.name }}</ng-container>
+								<ng-container *ngIf="editingIngredients[i]">
+									<input
+										class="form-control m-input cp-input"
+										type="text"
+										formControlName="name"
+									>
+								</ng-container>
+							</div>
+							<div class="col-4 text-right" *ngIf="!editingIngredients[i]">
+								<a class="pr-2 cp-pointer" (click)="toggleEdit(i)"><i class="la la-edit"></i></a>
+								<a class="cp-pointer" (click)="remove(i)"><i class="la la-trash text-danger"></i></a>
+							</div>
+							<div class="col-3 d-flex align-items-center" *ngIf="editingIngredients[i]">
+								<a class="link pr-4 cp-pointer" (click)="toggleEdit(i)">Salvar</a>
+							</div>
+						</div>
+
+						<hr class="ml-2">
+
+					</ng-container>
+			</div>
+		</div>
+		<div class="col-12 text-center">
+			<button type="button" class="btn btn-accent m-btn m-btn--air m-btn--custom" name="btnSave" (click)="save()" translate>{{ 'INPUTS.SAVE' | translate }}</button>
+		</div>
+	</div>
+</cp-dialog-default>

@@ -1,0 +1,118 @@
+<div class="container-hidde">
+  <kendo-pdf-export #pdf paperSize="A4" portrait="true" forcePageBreak=".page-break" margin="0pt">
+    <div class="bg-white container-pdf" >
+
+      <!-- <div class="a4container"></div> -->
+      
+      <!-- RECIPE CONTAINER -->
+      <ng-container *ngIf="recipe">
+        
+        <!-- COVER (foto/logo) -->
+      <div #coverContainer>
+        <m-cover *ngIf="options.showLogo" [logoUrl]="options.logoUrl"></m-cover>
+      </div>
+      <!-- COVER (foto/logo) END -->
+
+      <!-- RECIPE INFO -->
+      <div #recipeInfoContainer>
+        <m-recipe-info [showPhoto]="options.showPhoto" *ngIf="recipe" [recipe]="recipe"></m-recipe-info>
+      </div>
+      <!-- RECIPE INFO END -->
+
+      <!-- INGREDIENTS -->
+      <table #ingredientsContainer class="w-100 container-ingredients-steps">
+        <tr>
+          <td class="w-50">
+            <m-ingredients *ngIf="recipe" [recipe]="recipe" [units]="units" [showFinancial]="options.showFinancial"></m-ingredients>
+          </td>
+          <td class="w-50">
+            <m-steps *ngIf="recipe && options.showPreparationSteps" [recipe]="recipe"></m-steps>
+          </td>
+        </tr>
+      </table>
+      <!-- INGREDIENTS END -->
+
+      <div class="page-break" *ngIf="ingredientsBreak"></div>
+
+      <!-- OTHER COSTS + LABEL (rótulo) -->
+      <table #otherCostsContainer class="w-100 container-ingredients-steps" *ngIf="options.showOtherCosts || options.showNutritionalInfo">
+        <tr>
+          <td class="w-50" *ngIf="options.showOtherCosts">
+            <!-- OTHER COSTS -->
+            <m-other-costs *ngIf="recipe && options.showOtherCosts" [recipe]="recipe" [showFinancial]="options.showFinancial"></m-other-costs>
+            <!-- OTHER COSTS END -->
+          </td>
+          <td class="w-50">
+            <!-- LABEL (rótulo) -->
+            <cp-nutritional-info-label *ngIf="recipe && options.showNutritionalInfo" 
+                layout="horizontal" 
+                [showIngredients]="false" 
+                [recipe]="recipe" 
+                [portion]="recipe.label?.portion" 
+                [weight]="recipe.label?.weight" 
+                [measure]="recipe.label?.measure" 
+                [lactose]="recipe.label?.lactose" 
+                [gluten]="recipe.label?.gluten" 
+                [previewClass]="'pdf-nutritionalinfo-preview'">
+            </cp-nutritional-info-label>
+            <!-- LABEL (rótulo) END -->
+          </td>
+          <td class="w-50" *ngIf="!options.showOtherCosts"></td>
+        </tr>
+      </table>
+      <!-- OTHER COSTS + LABEL (rótulo) END -->
+
+      <div class="page-break" *ngIf="!ingredientsBreak && otherCostsBreak"></div>
+      
+      <!-- FINANCIAL -->
+      <div #financialContainer>
+        <m-financial *ngIf="recipe && options.showFinancial" [recipe]="recipe"></m-financial>
+      </div>
+      <!-- FINANCIAL END -->
+
+      <!-- <m-footer></m-footer> -->
+
+      </ng-container>
+      <!-- RECIPE CONTAINER END -->
+
+      <!-- MENU CONTAINER -->
+      <ng-container *ngIf="menu">
+        
+        <!-- MENU INFO -->
+      <div #menuInfoContainer>
+        <m-menu-info [showPhoto]="options.showPhoto" *ngIf="menu" [menu]="menu"></m-menu-info>
+      </div>
+      <!-- MENU INFO END -->
+
+      <!-- INGREDIENTS -->
+      <table #ingredientsContainer class="w-100 container-ingredients-steps">
+        <tr>
+          <td class="w-50">
+            <m-ingredients *ngIf="menu" [menu]="menu" [units]="units" [showFinancial]="options.showFinancial"></m-ingredients>
+          </td>
+          <td class="w-50">
+            <!-- OTHER COSTS -->
+            <m-other-costs *ngIf="menu && options.showOtherCosts" [menu]="menu" [showFinancial]="options.showFinancial"></m-other-costs>
+            <!-- OTHER COSTS END -->
+          </td>
+        </tr>
+      </table>
+      <!-- INGREDIENTS END -->
+
+      <!-- <div class="page-break" *ngIf="ingredientsBreak"></div> -->
+
+      <!-- <div class="page-break" *ngIf="!ingredientsBreak && otherCostsBreak"></div> -->
+      
+      <!-- FINANCIAL -->
+      <div #financialContainer>
+        <m-financial *ngIf="menu && options.showFinancial" [menu]="menu"></m-financial>
+      </div>
+      <!-- FINANCIAL END -->
+
+      </ng-container>
+      <!-- MENU CONTAINER END -->
+
+    </div>
+  </kendo-pdf-export>
+
+</div>

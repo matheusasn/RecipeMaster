@@ -1,0 +1,15 @@
+.mc-container {
+    width: 480px;
+    position: relative;
+    display: block;
+
+		@media only screen and (max-width: 500px) {
+			width: 300px;
+		}
+}
+.cp-pointer {
+    cursor: pointer;
+		@media only screen and (max-width: 500px) {
+			padding-right: 0px !important;
+		}
+}

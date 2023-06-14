@@ -1,0 +1,38 @@
+
+<div *ngIf="recipe" class="container-other-costs mt-3 mb-3" [ngStyle]="isProduction ? {'width': '232px'} : {}">
+	<ng-container *ngIf="otherCostType === 'VARIABLE'">
+		<h4 class="mb-3 title" style="margin-left: 3px">Custos Variáveis</h4>
+		<div class="recipe-variable-costs-item all-gray" *ngFor="let i of recipe?.variableCosts" [ngClass]="isProduction ? 'fix-grid' : ''">
+			<span class="pl-2 subtitle">{{i.variableCost.name}}</span>
+			<div class="text-nowrap d-block text-left color-secondary" [ngClass]="isProduction ? 'text-right' : ''">{{i.unityQuantityUsed}} {{i.unitUsed?.abbreviation}}</div>
+			<div *ngIf="!isProduction" class="text-nowrap text-right color-secondary"><span class="pr-2">{{calcVariableCostPrice(i) | currency:cifrao}}</span></div>
+		</div>
+	</ng-container>
+	<ng-container *ngIf="otherCostType === 'FIXED'">
+		<h4 class="mb-3 title" style="margin-left: 3px">Custos Fixos</h4>
+		<div class="recipe-fixed-costs-item all-gray" *ngFor="let i of recipe?.fixedCosts" [ngClass]="isProduction ? 'fix-grid' : ''">
+			<span class="pl-2 subtitle">{{i.fixedCost.name}}</span>
+			<div *ngIf="!isProduction" class="text-nowrap text-right color-secondary"><span class="pr-2">{{i.fixedCost.price | currency:cifrao}}</span></div>
+		</div>
+	</ng-container>
+
+</div>
+
+<div *ngIf="menu && menu?.itens.length > 0" class="container-other-costs">
+
+  <table class="table table-striped menu-other-costs-table">
+		<thead>
+			<th>{{ 'MENUS.PDF.OTHER_ITEMS' | translate }}</th>
+			<th></th>
+			<th></th>
+		</thead>
+    <tbody>
+			<tr *ngFor="let i of menu?.itens">
+				<td><span class="pl-2 subtitle-menu">{{i.name}}</span></td>
+				<td class="table-text">{{i.unityQuantityUsed}} {{i.unitUsed?.abbreviation}}</td>
+				<td class="table-text">{{ showFinancial ? (calcItemPrice(i) | currency:cifrao) : '' }}</td>
+			</tr>
+    </tbody>
+  </table>
+
+</div>

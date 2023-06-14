@@ -1,0 +1,63 @@
+<div class="container-list">
+	<div class="content-list open">
+		<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT1' | translate}}" [value]="nutritionalInfo?.kcal" unitLabel="Kcal"></m-cp-nutritional-info-item>
+		<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT2' | translate}}" [value]="nutritionalInfo?.carbohydrates"></m-cp-nutritional-info-item>
+		<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT3' | translate}}" [value]="nutritionalInfo?.protein"></m-cp-nutritional-info-item>
+		<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT4' | translate}}" [value]="nutritionalInfo?.totalFat"></m-cp-nutritional-info-item>
+		<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT8' | translate}}" [value]="nutritionalInfo?.saturatedFat"></m-cp-nutritional-info-item>
+		<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT5' | translate}}" [value]="nutritionalInfo?.transFat"></m-cp-nutritional-info-item>
+		<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT6' | translate}}" [value]="nutritionalInfo?.fibers"></m-cp-nutritional-info-item>
+		<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT7' | translate}}" [value]="nutritionalInfo?.sodium" unitLabel="mg"></m-cp-nutritional-info-item>
+	</div>
+
+	<div class="m--margin-top-20">
+		<h6 class="cp-h6-padding">{{ 'INGREDIENT.GRAPH.LABELS.TXT1' | translate }}</h6>
+		<div class="content-list">
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT9' | translate}}" [value]="nutritionalInfo?.monounsatured"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT10' | translate}}" [value]="nutritionalInfo?.polyunsatured"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT11' | translate}}" [value]="nutritionalInfo?.cholesterol"></m-cp-nutritional-info-item>
+		</div>
+	</div>
+
+	<div class="m--margin-top-20">
+		<h6 class="cp-h6-padding">{{ 'INGREDIENT.GRAPH.LABELS.TXT2' | translate }}</h6>
+
+		<div class="content-list open">
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT12' | translate}}" [value]="nutritionalInfo?.calcium" unitLabel="mg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT13' | translate}}" [value]="nutritionalInfo?.magnesium" unitLabel="mg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT14' | translate}}" [value]="nutritionalInfo?.manganese" unitLabel="mg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT15' | translate}}" [value]="nutritionalInfo?.phosphorus" unitLabel="mg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT16' | translate}}" [value]="nutritionalInfo?.iron" unitLabel="mg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT17' | translate}}" [value]="nutritionalInfo?.potassium" unitLabel="mg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT18' | translate}}" [value]="nutritionalInfo?.copper" unitLabel="mg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT19' | translate}}" [value]="nutritionalInfo?.zinc" unitLabel="mg"></m-cp-nutritional-info-item>
+		</div>
+	</div>
+
+	<div class="m--margin-top-20">
+		<h6 class="cp-h6-padding m--margin-top-20">{{ 'INGREDIENT.GRAPH.LABELS.TXT3' | translate }}</h6>
+
+		<div class="content-list open">
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT20' | translate}}" [value]="nutritionalInfo?.retinol" unitLabel="mcg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT21' | translate}}" [value]="nutritionalInfo?.vitaminARAE" unitLabel="mcg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT22' | translate}}" [value]="nutritionalInfo?.vitaminD" unitLabel="mcg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT23' | translate}}" [value]="nutritionalInfo?.thiamine" unitLabel="mg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT24' | translate}}" [value]="nutritionalInfo?.riboflavin" unitLabel="mg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT25' | translate}}" [value]="nutritionalInfo?.pyridoxine" unitLabel="mg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT26' | translate}}" [value]="nutritionalInfo?.niacin" unitLabel="mg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT27' | translate}}" [value]="nutritionalInfo?.vitaminB6" unitLabel="mg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT28' | translate}}" [value]="nutritionalInfo?.vitaminB12" unitLabel="mcg"></m-cp-nutritional-info-item>
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT29' | translate}}" [value]="nutritionalInfo?.vitaminC" unitLabel="mg"></m-cp-nutritional-info-item>
+		</div>
+	</div>
+
+	<div class="m--margin-top-20">
+		<h6 class="cp-h6-padding m--margin-top-20">{{ 'INGREDIENT.GRAPH.LABELS.TXT4' | translate }}</h6>
+
+		<div class="content-list open">
+			<m-cp-nutritional-info-item label="{{'INGREDIENT.GRAPH.TXT30' | translate}}" [value]="nutritionalInfo?.lipids"></m-cp-nutritional-info-item>
+		</div>
+	</div>
+
+
+</div>

@@ -1,0 +1,543 @@
+<form *ngIf="formGroup" name="form" [formGroup]="formGroup" novalidate class="m-form m-form--fit m-form--label-align-right form-container">
+
+  <div class="row cp-form-row p-2">
+    <div class="col-3">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.DESCRIPTION' | translate}}<span class="text-danger">*</span> </label>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="input-group cp-input">
+        <input type="text" class="form-control" name="description" formControlName="description">
+      </div>
+    </div>
+  </div>
+
+  <div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.QUANTITY' | translate}}<span class="text-danger">*</span></label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="grams" formControlName="grams">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.VALUE_ENERGY' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="kcal" formControlName="kcal" style="padding-right: 0">
+        <div class="input-group-append">
+          <span class="input-group-text">kcal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.CARBOHYDRATES' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="carbohydrates" formControlName="carbohydrates">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.PROTEINS' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="protein" formControlName="protein">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TOTAL_FAT' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="totalFat" formControlName="totalFat">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.SATURATED_FAT' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="saturatedFat" formControlName="saturatedFat">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.TRANS_FAT' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="transFat" formControlName="transFat">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.FOOD_FIBERS' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="fibers" formControlName="fibers">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'RECIPE.TABS.INFORMACOES_NUTRICIONAIS.SODIUM' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="sodium" formControlName="sodium" style="padding-right: 0">
+        <div class="input-group-append">
+          <span class="input-group-text">mg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<!-- Novos -->
+
+  <div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT11' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="cholesterol" formControlName="cholesterol">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT9' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="monounsatured" formControlName="monounsatured">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT10' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="polyunsatured" formControlName="polyunsatured">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT12' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="calcium" formControlName="calcium">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT13' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="magnesium" formControlName="magnesium">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT14' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="manganese" formControlName="manganese">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT15' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="phosphorus" formControlName="phosphorus">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT16' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="iron" formControlName="iron">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT17' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="potassium" formControlName="potassium">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT18' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="copper" formControlName="copper">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT19' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="zinc" formControlName="zinc">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT20' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="retinol" formControlName="retinol" style="padding-right: 0">
+        <div class="input-group-append">
+          <span class="input-group-text">mcg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT21' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="vitaminARAE" formControlName="vitaminARAE" style="padding-right: 0">
+        <div class="input-group-append">
+          <span class="input-group-text">mcg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT22' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="vitaminD" formControlName="vitaminD" style="padding-right: 0">
+        <div class="input-group-append">
+          <span class="input-group-text">mcg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT23' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="thiamine" formControlName="thiamine">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT24' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="riboflavin" formControlName="riboflavin">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT25' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="pyridoxine" formControlName="pyridoxine">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT26' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="niacin" formControlName="niacin">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT27' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="vitaminB6" formControlName="vitaminB6">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT28' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="vitaminB12" formControlName="vitaminB12" style="padding-right: 0">
+        <div class="input-group-append">
+          <span class="input-group-text">mcg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT29' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="vitaminC" formControlName="vitaminC">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">{{'INGREDIENT.GRAPH.TXT30' | translate}}</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="lipids" formControlName="lipids">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<div *ngIf="lang === 'en'" class="row cp-form-row p-2">
+    <div class="col-7">
+      <div class="form-group m-form__group">
+        <label class="col-form-label">Total Sugars</label>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="input-group cp-input">
+        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="totalSugars" formControlName="totalSugars">
+        <div class="input-group-append">
+          <span class="input-group-text">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-portlet__foot m-portlet__foot--fit fixed-footer">
+    <div class="m-form__actions">
+      <div class="row">
+        <div class="col-12 text-center">
+          <button type="button" class="btn btn-link m-btn mr-1" name="btnCancel" (click)="doCancel()"
+          translate>{{'INPUTS.BACK' | translate}}</button>
+          <button type="button" [disabled]="loading" class="btn btn-accent m-btn m-btn--air m-btn--custom" name="btnCreate" (click)="doCreate()"
+          translate>{{'INPUTS.SAVE' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

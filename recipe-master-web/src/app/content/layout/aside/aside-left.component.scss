@@ -1,0 +1,60 @@
+.user-info-container {
+	display: none;
+	@media only screen and (max-width: 1024px) {
+		cursor: pointer;
+		display: flex;
+		padding: 20px 17px;
+		border-bottom: 1px solid rgba(232, 232, 232, 0.1);
+		align-items: center;
+		.right {
+			width: 150px;
+			span {
+				color: #a6a6a9;
+				font-weight: 400;
+				&.name {
+					display: block;
+					font-size: 14px;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+				&.email {
+					font-size: 10px;
+				}
+			}
+		}
+		img {
+			width: 50px;
+			height: 50px;
+			border-radius: 25px;
+			margin-right: 13px;
+		}
+	}
+}
+
+.share {
+	height: 42px;
+	cursor: pointer;
+	bottom: 5%;
+	position: fixed;
+	display: flex;
+	align-items: center;
+
+	@media only screen and (min-width: 768px) {
+		width: 31.15%;
+	}
+
+	i {
+		margin-left: 31px;
+		width: 35px;
+	}
+	a {
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+		color: #a6a6a9 !important;
+	}
+	a:hover {
+		color: #F24159 !important;
+	}
+}

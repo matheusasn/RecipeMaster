@@ -1,0 +1,15 @@
+<ng-container *ngIf="form">
+    <form role="form" *ngIf="form && categories" [formGroup]="form">
+        <div class="form-group m-form__group">
+            <div class="d-flex align-items-center">
+							<label *ngIf="showLabel" class="col-form-label" [ngClass]="form.errors?.uncompatibleCategory?'text-danger':''" translate>{{ 'RECIPE.INPUT.CATEGORY' }} </label>
+						</div>
+            <select [attr.disabled]="disabled" (change)="onChange($event)" [ngClass]="form.errors?.uncompatibleCategory?'text-danger':''" [compareWith]="compareSelect" class="form-control cp-input input-new-css" name="recipe-category" [formControlName]="inputName">
+                <option value="null" [disabled]="true" translate>{{'INPUTS.OPTION_DEFAULT'}}</option>
+                <option *ngFor="let category of categories" [ngValue]="category">{{ category.name | translate }}</option>
+                <option *ngIf="canCreate" value="-1">{{'INPUTS.NEW_CATEGORY' | translate}}</option>
+                <option *ngIf="canUpdate" value="-2">{{'INPUTS.EDIT_CATEGORY' | translate}}</option>
+            </select>
+        </div>
+    </form>
+</ng-container>

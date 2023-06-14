@@ -1,0 +1,35 @@
+.m-form__section {
+    padding: 0 !important;
+}
+
+h4 {
+	padding: 0px !important;
+}
+
+a {
+    cursor: pointer;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.girar {
+    transform: rotate(90deg);
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+
+.mat-elevation-z4 {
+    box-shadow: none;
+}
+
+.card {
+    border-radius: 9px;
+}

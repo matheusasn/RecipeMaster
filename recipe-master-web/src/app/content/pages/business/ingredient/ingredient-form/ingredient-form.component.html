@@ -1,0 +1,97 @@
+<cp-loading></cp-loading>
+<div class="cp-content">
+	<div class="m-portlet m-portlet--full-height m-portlet--tabs">
+		<div class="m-portlet__body">
+			<div class="form-group m-form__group row">
+				<h3 class="m-form__section" translate>{{'INGREDIENT.TITLE' | translate}}</h3>
+			</div>
+			<form class="m-form m-form--fit m-form--label-align-right" name="form" [formGroup]="formGroup" novalidate>
+				<div class="m-portlet__body">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group m-form__group">
+								<label class="col-form-label" translate>{{ 'INGREDIENT.INPUT.NAME' | translate }}</label>
+								<input class="form-control m-input cp-input" name="name" formControlName="name" placeholder="{{'INGREDIENT.INPUT.NAME' | translate }}"
+									type="text">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group m-form__group">
+								<label class="col-form-label" translate>{{ 'INGREDIENT.INPUT.CATEGORY' | translate }}</label>
+								<select [compareWith]="compareSelect" class="form-control cp-input" name="category" formControlName="ingredientCategory">
+									<option value="null" [disabled]="true" translate>{{'INPUTS.OPTION_DEFAULT' | translate}}</option>
+									<option *ngFor="let category of categories" [ngValue]="category">{{ category.name | translate }}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-group m-form__group">
+								<label class="col-form-label" translate>{{ 'INGREDIENT.INPUT.UNIT' | translate }}</label>
+								<select [compareWith]="compareSelect" class="form-control cp-input" name="unit" formControlName="unit">
+									<option value="null" [disabled]="true" translate>{{'INPUTS.OPTION_DEFAULT' | translate}}</option>
+									<option *ngFor="let unit of units" [ngValue]="unit">{{ unit.name | translate}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div formGroupName="purchasePrice">
+						<div class="row m--margin-top-40">
+							<div class="col-sm-12">
+								<h5 class="text-center" translate>{{ 'INGREDIENT.TITLE_PURCHASE_PRICE' | translate}}</h5>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group m-form__group">
+									<label class="col-form-label" translate>{{ 'INGREDIENT.INPUT.PRICE' | translate }}</label>
+									<input inputmode="numeric" pattern="[0-9]*" currencyMask [options]="{prefix: currency}" class="form-control m-input cp-input full-width text-center" name="price" type="text" formControlName="price">
+								</div>
+							</div>
+						</div>
+						<div class="row m--margin-top-10">
+							<div class="col-sm-6">
+								<div class="form-group m-form__group">
+									<label class="col-form-label" translate>{{ 'INGREDIENT.INPUT.UNITQUANTITY' | translate }}</label>
+									<input inputmode="numeric" pattern="[0-9]*" class="form-control m-input cp-input" name="priceUnityQuantity" type="number" formControlName="unityQuantity">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group m-form__group">
+									<label class="col-form-label" translate>{{ 'INGREDIENT.INPUT.UNIT' | translate }}</label>
+									<select [compareWith]="compareSelect" class="form-control cp-input" formControlName="unit" name="priceUnit">
+										<option value="null" [disabled]="true" translate>{{'INPUTS.OPTION_DEFAULT' | translate}}</option>
+										<option *ngFor="let unit of purchaseUnits" [ngValue]="unit">{{ unit.name | translate}}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group m-form__group">
+								<label class="col-form-label" translate>{{ 'INGREDIENT.INPUT.DESCRIPTION' | translate }}</label>
+								<textarea class="form-control cp-input" rows="3" formControlName="description" placeholder="{{'INGREDIENT.INPUT.DESCRIPTION' | translate }}"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="m-portlet__foot m-portlet__foot--fit">
+					<div class="m-form__actions">
+						<div class="row">
+							<div class="col-12 text-center">
+								<!--TODO: Tradução-->
+								<button type="button" (mouseover)="checkiOSCancel()" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1" name="btnBack" (click)="cancel()" translate>{{ 'INPUTS.BACK' | translate }}</button>
+								<button type="button" (mouseover)="checkiOSSave()" class="btn btn-accent m-btn m-btn--air m-btn--custom" name="btnSave" (click)="save()" translate>{{ 'INPUTS.SAVE' | translate }}</button>&nbsp;&nbsp;
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,190 @@
+<cp-loading></cp-loading>
+<div class="cp-content">
+    <div class="row">
+        <div class="col-xl-4 col-lg-4">
+            <div class="m-portlet m-portlet--full-height">
+                <div class="m-portlet__body">
+                    <div class="m-card-profile">
+                        <div class="m-card-profile__title m--hide">
+                            {{ 'PROFILE.TITLE' }}
+                        </div>
+                        <div class="m-card-profile__pic">
+                            <m-photo-upload *ngIf="_currentUser" (photoChange)="onPhotoChange($event)" [cropOtions]="cropOtions" [photoUrl]="_currentUser?.photoUrl || avatar" [customClass]="'user-profile'"></m-photo-upload>
+                        </div>
+                        <div class="m-card-profile__details">
+                            <span class="m-card-profile__name">{{ user?.name }}</span>
+                            <a href="" class="m-card-profile__email m-link">{{ user?.email }}</a>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body-separator"></div>
+                    <div class="m-widget1 m-widget1--paddingless">
+                        <div class="m-widget1__item">
+                            <div class="row m-row--no-padding align-items-center">
+                                <div class="col">
+                                    <h3 class="m-widget1__title" translate>{{ 'PROFILE.AMOUNT.INGREDIENT' }}</h3>
+                                </div>
+                                <div class="col m--align-right">
+                                    <span class="m-widget1__number m--font-brand">{{ user?.amountOfIngredients }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-widget1__item">
+                            <div class="row m-row--no-padding align-items-center">
+                                <div class="col">
+                                    <h3 class="m-widget1__title" translate>{{ 'PROFILE.AMOUNT.RECIPE' }}</h3>
+                                </div>
+                                <div class="col m--align-right">
+                                    <span class="m-widget1__number m--font-danger">{{ user?.amountOfRecipes }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-widget1__item">
+                            <div class="row m-row--no-padding align-items-center">
+                                <div class="col">
+                                    <h3 class="m-widget1__title" translate>{{ 'PROFILE.AMOUNT.MENU' }}</h3>
+                                </div>
+                                <div class="col m--align-right">
+                                    <span class="m-widget1__number m--font-success"> {{ user?.amountOfMenus}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8 col-lg-8">
+            <div class="m-portlet m-portlet--full-height m-portlet--tabs  ">
+
+                <div class="m-portlet__body">
+
+                    <form class="m-form m-form--fit m-form--label-align-right" name="form" [formGroup]="formGroup" novalidate>
+                        <div class="m-portlet__body">
+                            <div class="form-group m-form__group">
+                                <div class="col-10 ml-auto">
+                                    <div class="d-flex align-items-center">
+																			<h3 translate>{{ 'PROFILE.USER.DETAIL' }}</h3>
+																		</div>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group">
+                                <label class="col-form-label" translate>{{ 'PROFILE.USER.NAME' }}</label>
+                                <input class="form-control m-input cp-input" name="name" formControlName="name"
+                                        placeholder="{{'PROFILE.USER.NAME' | translate }}" type="text">
+                            </div>
+                            <div class="form-group m-form__group">
+                                <label class="col-form-label" translate>{{ 'PROFILE.USER.EMAIL' }}</label>
+                                <input class="form-control m-input cp-input" name="email" formControlName="email"
+                                        placeholder="{{'PROFILE.USER.EMAIL' | translate }}" type="text">
+                            </div>
+                            <div class="form-group m-form__group">
+                                <label class="col-form-label" translate>{{ 'PROFILE.USER.PASSWORD_PLACE' }}</label>
+                                <input autocomplete="new-password" class="form-control m-input cp-input" name="password" formControlName="password"
+                                        placeholder="{{'PROFILE.USER.PASSWORD' | translate }}" type="password">
+                                    </div>
+                            <div class="form-group m-form__group">
+                                <label class="col-form-label" translate>{{ 'PROFILE.USER.PASSWORD_CONFIRM' }}</label>
+                                <input class="form-control m-input cp-input" name="password_confirm" formControlName="password_confirm"
+                                        placeholder="{{'PROFILE.USER.PASSWORD_CONFIRM' | translate }}" type="password">
+                            </div>
+
+                            <!-- <div class="form-group m-form__group">
+                                <mat-checkbox class="full-width" formControlName="filterByState"> {{ 'INPUTS.FILTERBYSTATE' | translate }} </mat-checkbox>
+                            </div> -->
+
+                        </div>
+                        <!--TODO: Outros campos(Endereço, ocupação, etc) - Rever depois-->
+                        <div class="m-portlet__foot m-portlet__foot--fit" *ngIf="screenWidth > 768">
+                            <div class="m-form__actions">
+                                <div class="row">
+                                    <!--<div class="col-sm-12" style="background-color: red; height: 50px;"></div>-->
+                                    <div class="col-sm-12 col-md-6">
+                                        <button 	class=" btn btn-secondary w-100 m-btn m-btn--air m-btn--custom"
+                                                    [disabled]="formGroup.pristine"
+                                                    (click)="cancelModifications()"
+                                                    translate>
+                                            {{ 'PROFILE.BTN_CANCEL' }}
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <button 	*ngIf="!formGroup.controls.password.value"
+                                                    class="btn btn-accent w-100 m-btn m-btn--air m-btn--custom margin-t"
+                                                    [disabled]="!formGroup.valid"
+                                                    (click)="saveModifications()"
+                                                    translate>
+                                            {{ 'PROFILE.BTN_SAVE_CHANGES' }}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-sm-12 col-md-6">
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 margin-t">
+                                        <button class="btn btn-secondary w-100 m-btn m-btn--air m-btn--custom" *ngIf="migrationAvailable" (click)="doMigration()">Migrar Receitas</button>
+                                    </div>
+                                </div>
+																<div class="row mt-2">
+															</div>
+                            </div>
+                        </div>
+
+                        <div class="btns" *ngIf="screenWidth <= 768">
+														<div style="margin-bottom:17px;margin-top:-13px;height:1px; width: 100%; border-top:1px solid #ebedf2"></div>
+														<div class="row">
+															<!--<div class="col-sm-12" style="background-color: red; height: 50px;"></div>-->
+															<div class="col-sm-12 col-lg-6">
+																<button 	*ngIf="formGroup.controls.password.value"
+																						type="button"
+																						class="btn btn-accent w-100 m-btn m-btn--air m-btn--custom"
+																						(click)="confirmChangePass()"
+																						(mouseover)="confirmChangePass()"
+																						[disabled]="formGroup.controls.password.value !== formGroup.controls.password_confirm.value"
+																						mat-button
+																						translate>
+																		{{ 'PROFILE.BTN_SAVE_CHANGES' }}
+																</button>
+																<button 	*ngIf="!formGroup.controls.password.value"
+																						class="btn btn-accent w-100 m-btn m-btn--air m-btn--custom"
+																						[disabled]="!formGroup.valid"
+																						(click)="saveModifications()"
+																						(mouseover)="saveModifications()"
+																						translate>
+																		{{ 'PROFILE.BTN_SAVE_CHANGES' }}
+																</button>
+														</div>
+													</div>
+													<div class="row mt-2">
+															<div class="col-sm-12 col-lg-6">
+																	<button  *ngIf="validatePlan" class="btn btn-secondary w-100 m-btn m-btn--air m-btn--custom "
+																							(click)="acessarPlanosAssinatura()"
+																							(mouseover)="acessarPlanosAssinatura()"
+																							translate>
+																			{{'PROFILE.BTN_PLANOASSINATURA'}}
+																	</button>
+															</div>
+															<div class="col-sm-12 col-lg-6 margin-t" *ngIf="migrationAvailable">
+																	<button class="btn btn-secondary w-100 m-btn m-btn--air m-btn--custom" (click)="doMigration()">Migrar Receitas</button>
+															</div>
+															<div class="col-sm-12 col-lg-6">
+																<button 	class=" btn btn-secondary w-100 m-btn m-btn--air m-btn--custom margin-t"
+																						[disabled]="formGroup.pristine"
+																						(click)="cancelModifications()"
+																						(mouseover)="cancelModifications()"
+																						translate>
+																		{{ 'PROFILE.BTN_CANCEL' }}
+																</button>
+														</div>
+													</div>
+													<div class="row mt-2">
+														<div class="col-sm-12 col-lg-6 mobile-logout">
+																<button  (mouseover)="logout()" class="btn btn-secondary w-100 m-btn m-btn--air m-btn--custom" (click)="logout()">
+																		{{ 'PROFILE.PROFILE_INPUT.PROFILE_BUTTON' | translate }}
+																</button>
+														</div>
+												</div>
+											</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="container pb-3 text-center"> 
+  <div class="row">
+      <div class="col-12 p-1 col-md-2">
+          <img *ngIf="message?.photoUrl" [src]="message.photoUrl" onerror="if (this.src != './assets/message/carinha.png') this.src = './assets/message/carinha.png';" class="message-img" />
+      </div>
+      <div class="col-12 col-md-8">
+          <h2 class="message-title">{{message.title}}</h2>
+          <p class="message-subtitle p-3" *ngIf="message.text" [innerHtml]="message.text"></p>
+          <p *ngIf="!message.text">&nbsp;</p>
+
+          <div class="row mt-5">
+            <div class="col-12 col-lg-8 offset-lg-2 text-center p-0">
+
+                <div class="table-nps">
+                    <div class="col" (click)="doRecomendar(0)"><span>0</span></div>
+                    <div class="col" (click)="doRecomendar(1)"><span>1</span></div>
+                    <div class="col" (click)="doRecomendar(2)"><span>2</span></div>
+                    <div class="col" (click)="doRecomendar(3)"><span>3</span></div>
+                    <div class="col" (click)="doRecomendar(4)"><span>4</span></div>
+                    <div class="col" (click)="doRecomendar(5)"><span>5</span></div>
+                    <div class="col" (click)="doRecomendar(6)"><span>6</span></div>
+                    <div class="col" (click)="doRecomendar(7)"><span>7</span></div>
+                    <div class="col" (click)="doRecomendar(8)"><span>8</span></div>
+                    <div class="col" (click)="doRecomendar(9)"><span>9</span></div>
+                    <div class="col" (click)="doRecomendar(10)"><span>10</span></div>
+                </div>
+
+            </div>
+        </div>
+        
+      </div>
+  </div>
+</div>

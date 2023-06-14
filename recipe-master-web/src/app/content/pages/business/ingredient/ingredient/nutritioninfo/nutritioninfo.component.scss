@@ -1,0 +1,29 @@
+#mat-tab-container {
+	.mat-tab-header {
+		border-bottom: none;
+	}
+
+	.mat-tab-label, .mat-tab-label-active {
+		font-family: Poppins, sans-serif;
+		font-size: 11px;
+		font-weight: 500;
+		min-width: 0 !important;
+		padding: 0 2px !important;
+		margin: 0 8px !important;
+		height: 32px;
+	}
+
+	.mat-tab-label-active {
+		opacity: 1;
+	}
+
+	.mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+		height: 3px;
+		border-radius: 3px;
+		background: #FD305C !important;
+	}
+
+	.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+		background-image: none !important;
+	}
+}

@@ -1,0 +1,15 @@
+<h5>{{ title | translate }}</h5>
+
+<div class="flex-container bar-chart">
+	<div class="canvas-container">
+		<canvas baseChart id="barChart"
+			[datasets]="data"
+			[labels]="labels"
+			[options]="options"
+			[colors]="colors"
+			[chartType]="chartType">
+		</canvas>
+	</div>
+
+	<div id="bar-legend" class="chart-legend"></div>
+</div>

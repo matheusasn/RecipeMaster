@@ -1,0 +1,250 @@
+<div class="modal-cost-component">
+	<!-- HEADER -->
+	<div class="header">
+		<div class="row-title">
+			<i (click)="gotoBack()" style="width: 20px" class="row-title__icon fas fa-chevron-left"></i>
+			<span class="title"> CUSTOS FIXOS </span>
+			<i
+				*ngIf="tabSelected !== modalCostsTab.PERCENTAGE"
+				(click)="tabSelected == modalCostsTab.GENERAL ? openEditModalToFixedCost() : openModalFixedCostsForm()"
+				class="row-title__icon fas fa-plus">
+			</i>
+		</div>
+		<div class="row-tabs">
+			<div
+				(click)="tabChange(modalCostsTab.GENERAL)"
+				class="tab"
+				[class.selected]="tabSelected == modalCostsTab.GENERAL"
+			>
+				{{ modalCostsTab.GENERAL }}
+				<div class="row-selected"></div>
+			</div>
+			<div
+				(click)="tabChange(modalCostsTab.PERCENTAGE)"
+				class="tab"
+				[class.selected]="tabSelected == modalCostsTab.PERCENTAGE"
+			>
+				{{ modalCostsTab.PERCENTAGE }}
+				<div class="row-selected"></div>
+			</div>
+			<div
+				(click)="tabChange(modalCostsTab.SPECIFIC)"
+				class="tab"
+				[class.selected]="tabSelected == modalCostsTab.SPECIFIC"
+			>
+				{{ modalCostsTab.SPECIFIC }}
+				<div class="row-selected"></div>
+			</div>
+		</div>
+	</div>
+
+		<!-- BODY -->
+	<ng-container *ngIf="tabSelected == modalCostsTab.GENERAL">
+		<div class="general-tab-body">
+			<!-- GENERAL -->
+			<div class="row">
+				<div
+					[formGroup]="formGroup"
+					class="col-sm-12 costs-container"
+				>
+					<input
+						type="checkbox"
+						#selectAllFixedCostsCheckbox
+						(change)="selectAllFixedCostsCheckBoxesChange()"
+						class="select-all-checkbox"
+					/>
+					<div
+						formArrayName="fixedCosts"
+						*ngFor="
+							let fixedCost of formGroup.controls['fixedCosts']['controls'];
+							let i = index
+						"
+						class="alterned-row-colors"
+					>
+						<div [formGroupName]="i" class="fixed-costs-row">
+							<div class="checkbox-w-text-wrapper">
+								<input type="checkbox" name="" formControlName="active" />
+								<span style="cursor: pointer" (click)="openModalFixedCosts(i)"
+									>{{ fixedCost.value.name }}
+								</span>
+							</div>
+
+							<input
+								currencyMask
+								tabindex="{{ i + 1 }}"
+								[options]="{
+									prefix: cifrao,
+									thousands: '.',
+									decimal: ',',
+									align: 'left'
+								}"
+								formControlName="price"
+								type="text"
+								inputmode="numeric"
+								pattern="[0-9]*"
+								(blur)="updatePrice(fixedCost.value, i)"
+								onfocus=" let value2 = this.value; this.value = null; this.value=value2"
+								class="fixed-cost-input"
+								placeholder="R$"
+							/>
+						</div>
+						<button
+							id="fixedcost{{ i }}"
+							mat-button
+							style="
+								visibility: hidden;
+								width: 1px;
+								position: absolute;
+								pointer-events: none;
+							"
+							[matMenuTriggerFor]="fixedcostmenu"
+						></button>
+						<mat-menu #fixedcostmenu="matMenu">
+							<button
+								mat-menu-item
+								(click)="openEditModalToFixedCost(fixedCost.value)"
+							>
+								<mat-icon>edit</mat-icon>
+								<span>{{ "RECIPE.EDIT_CATEGORY" | translate }}</span>
+							</button>
+							<button
+								mat-menu-item
+								(click)="delete(fixedCost.value.id, 'FIXED_COSTS')"
+							>
+								<mat-icon>delete</mat-icon>
+								<span>{{ "RECIPE.DELETE_CATEGORY" | translate }}</span>
+							</button>
+						</mat-menu>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- FOOTER -->
+		<div class="general-tab-footer">
+			<div class="box-info">
+				<div class="box-monthly-billing">
+					<div class="box-label">
+						<span class="box-label__label"> Faturamento médio mensal </span>
+						<div class="box-label__icon" matTooltip="texto de ajuda">?</div>
+					</div>
+					<input
+						type="text"
+						name="totalMonthlyBilling"
+						[(ngModel)]="totalMonthlyBilling"
+						class="box-monthly-billing__input"
+						currencyMask [options]="{ prefix: cifrao + ' ', thousands: '.', decimal: ',', align: 'left' }"
+						(focusout)="onTotalMonthlyBillingFocusOut()"
+						inputmode="numeric"
+						pattern="[0-9]*"
+					>
+				</div>
+
+				<div class="box-fixed-coast-and-percentage">
+					<div class="box-total-fixed-cost">
+						<span class="box-total-fixed-cost__label"> CUSTO FIXO TOTAL </span>
+						<span class="box-total-fixed-cost__price">
+							{{
+								getTotalFixedCosts() | currency: cifrao
+							}}
+						</span>
+					</div>
+					<div class="box-percentage">
+						<span class="box-percentage__label"> PORCENTAGEM </span>
+						<span class="box-percentage__price">
+							{{ getFixedCostsPercentage() | number: "1.0-0" }}%
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="button-confirm" (click)="gotoBack()">Ok</div>
+		</div>
+	</ng-container>
+
+	<!-- PORCENTAGEM -->
+	<ng-container *ngIf="tabSelected == modalCostsTab.PERCENTAGE">
+		<div class="percentage-tab-body">
+			<div class="percentage-box-info">
+				<span>
+					Insira uma porcentagem padrão para calcular os
+					custos fixos em relação ao custo de produção
+				</span>
+				<input
+					type="text"
+					name="fixedCostPercentage"
+					[(ngModel)]="fixedCostPercentage"
+					class="percentage-box-info__input"
+					currencyMask [options]="{ prefix: '', suffix: ' %', thousands: '.', decimal: ',', align: 'center' }"
+					inputmode="numeric"
+					pattern="[0-9]*"
+				>
+			</div>
+		</div>
+		<div class="comum-footer">
+			<div class="box">
+				<span class="box__text">TOTAL</span>
+				<span class="box__text">{{ getTotalBasedOnPercentage() | currency: cifrao }}</span>
+			</div>
+			<div class="button-confirm" (click)="gotoBack()">Ok</div>
+		</div>
+	</ng-container>
+
+	<!-- ESPECIFICO -->
+	<ng-container *ngIf="tabSelected == modalCostsTab.SPECIFIC">
+		<div class="specific-tab-body row">
+			<div [formGroup]="formGroup" class="col-sm-12 costs-container">
+				<input type="checkbox" #selectAllVariableCostsCheckbox (change)="selectAllVariableCostsCheckBoxesChange()" style="margin-left: 17px;">
+				<div
+					formArrayName="fixedSpecificCosts" *ngFor="let item of formGroup.controls['fixedSpecificCosts']['controls']; let i = index"
+					class="alterned-row-colors custom-padding"
+				>
+					<div [formGroupName]="i">
+						<div class="costs-row">
+							<div class="checkbox-w-text-wrapper" style="margin-left: -10px">
+								<input type="checkbox" name="" formControlName="active">
+								<span style="cursor: pointer; width:102px" (click)="openModalFixedSpecificCosts(i)">{{ item.value.name }}</span>
+							</div>
+							<span class="text-center">{{ getUnitLabel(item.value) }}</span>
+							<span class="text-right">{{ calcFixedSpecificCostPrice(item.value) | currency: cifrao }}</span>
+						</div>
+						<button
+							id="fixedspecificcost{{ i }}"
+							mat-button
+							style="
+								visibility: hidden;
+								width: 1px;
+								position: absolute;
+								pointer-events: none;
+							"
+							[matMenuTriggerFor]="fixedspecificcostmenu"
+						></button>
+						<mat-menu #fixedspecificcostmenu="matMenu">
+							<button
+								mat-menu-item
+								(click)="openModalFixedCostsForm(item)"
+							>
+								<mat-icon>edit</mat-icon>
+								<span>{{ "RECIPE.EDIT_CATEGORY" | translate }}</span>
+							</button>
+							<button
+								mat-menu-item
+								(click)="deleteFixedSpecificCost(item.value.id, 'FIXED_COSTS')"
+							>
+								<mat-icon>delete</mat-icon>
+								<span>{{ "RECIPE.DELETE_CATEGORY" | translate }}</span>
+							</button>
+						</mat-menu>
+					</div>
+				</div>
+			</div>
+	 </div>
+	 <div class="comum-footer">
+		<div class="box">
+			<span class="box__text">TOTAL</span>
+			<span class="box__text">{{ getTotalSpecific() | currency: cifrao }}</span>
+		</div>
+		<div class="button-confirm" (click)="gotoBack()">Ok</div>
+	</div>
+	</ng-container>
+</div>

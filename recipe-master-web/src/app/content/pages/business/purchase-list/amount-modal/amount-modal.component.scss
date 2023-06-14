@@ -1,0 +1,51 @@
+.excluirStyle {
+    color: #f4516c !important;
+    background-color: #ffffff !important;
+    border-color: #f4516c !important;
+    float: right;
+}
+
+.excluirStyle:hover {
+    background-color: #f4516c !important;
+    color: #ffffff !important;
+    float: right;
+}
+
+.save {
+    float: left;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+hr.solid {
+    border-top: 3px solid #E4E5E7;
+}
+
+hr {
+    width: 93%;
+}
+
+.marginCustomizada {
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.removePaddingLeft {
+    padding-left: 0px !important;
+}
+
+.removePaddingRight {
+    padding-right: 0px !important;
+}
+
+.removePaddingLeftBtn {
+    padding-left: 2px !important;
+}
+
+.removePaddingRightBtn {
+    padding-right: 2px !important;
+}

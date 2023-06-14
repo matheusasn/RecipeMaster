@@ -1,0 +1,42 @@
+.allergen-container {
+	width: 800px;
+}
+
+h3 {
+	color: #121419 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	cursor: pointer;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.popover-icon {
+	font-size: 10px;
+	color: gray;
+}
+
+.angle-down {
+	transform: rotate(180deg);
+	-webkit-transition-duration: 0.8s;
+	-moz-transition-duration: 0.8s;
+	-o-transition-duration: 0.8s;
+	transition-duration: 0.8s;
+}
+
+.angle-up {
+	transform: rotate(0deg);
+	-webkit-transition-duration: 0.8s;
+	-moz-transition-duration: 0.8s;
+	-o-transition-duration: 0.8s;
+	transition-duration: 0.8s;
+}
+
+@media only screen and (max-width: 768px) {
+	.grid {
+		grid-template-columns: 1fr;
+	}
+}

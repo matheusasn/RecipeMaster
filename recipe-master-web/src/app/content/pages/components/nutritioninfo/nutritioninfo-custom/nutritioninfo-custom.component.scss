@@ -1,0 +1,12 @@
+.ni-container {
+		@media (max-width: 575px) {
+			width: 328px;
+		}
+    width: 480px;
+    position: relative;
+    display: block;
+}
+
+.cp-m-3 {
+    margin: 2rem !important;
+}

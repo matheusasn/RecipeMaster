@@ -1,0 +1,18 @@
+<h5>{{ titleGrafs | translate }}</h5>
+
+
+<div class="flex-container">
+	<div class="canvas-container">
+		<canvas baseChart
+			[options]="options"
+			[data]="data"
+			[labels]="labels"
+			[chartType]="doughnutChartType"
+			[colors]="colors"
+			(chartHover)="chartHovered($event)"
+			(chartClick)="chartClicked($event)"
+		></canvas>
+	</div>
+
+	<div id="{{identifier}}" class="chart-legend"></div>
+</div>

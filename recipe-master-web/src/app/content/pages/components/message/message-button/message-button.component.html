@@ -1,0 +1,45 @@
+<div class="message-button-container">
+    <div class="col-md-9 row container-content">
+        <div class="col-12 p-1 col-md-2 container-img">
+            <img [src]="message.photoUrl" onerror="if (this.src != './assets/message/carinha.png') this.src = './assets/message/carinha.png';" class="message-img" />
+        </div>
+        <div class="col-12 col-md-8 alignBox">
+            <div class="container-text">
+                <h2 class="message-title">{{message.title}}</h2>
+                <p class="message-subtitle p-3 message" *ngIf="message.text" [innerHTML]="message.text"></p>
+
+            </div>
+            <div class="row container-btn">
+							<div *ngIf="!label2">
+                <div class="col-12 d-flex justify-content-center" *ngIf="label1">
+									<button *ngIf="!url1" class="btn btn-outline-dark" (click)="doSubmit(label1,cancel1)">
+											{{label1}}
+									</button>
+									<a *ngIf="url1" class="btn btn-outline-dark" [href]="url1" target="_blank" (click)="doSubmit(label1,cancel1)">
+											{{label1}}
+									</a>
+								</div>
+							</div>
+							<ng-container *ngIf="label1 && label2">
+									<div class="col-6 align-btn-right" *ngIf="label1">
+											<button *ngIf="!url1" class="btn btn-outline-dark" (click)="doSubmit(label1,cancel1)">
+													{{label1}}
+											</button>
+											<a *ngIf="url1" class="btn btn-outline-dark" [href]="url1" target="_blank" (click)="doSubmit(label1,cancel1)">
+													{{label1}}
+											</a>
+									</div>
+									<span class="space"></span>
+									<div class="col-6 align-btn-left" *ngIf="label2">
+											<button *ngIf="!url2" class="btn btn-outline-dark" (click)="doSubmit(label2,cancel2)">
+													{{label2}}
+											</button>
+											<a *ngIf="url2" class="btn btn-outline-dark" [href]="url2" target="_blank" (click)="doSubmit(label2,cancel2)">
+													{{label2}}
+											</a>
+									</div>
+							</ng-container>
+            </div>
+        </div>
+    </div>
+</div>

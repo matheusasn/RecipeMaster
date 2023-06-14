@@ -1,0 +1,135 @@
+.excluirStyle {
+    color: #f4516c !important;
+    background-color: #ffffff !important;
+    border-color: #f4516c !important;
+    float: right;
+}
+
+.excluirStyle:hover {
+    background-color: #f4516c !important;
+    color: #ffffff !important;
+    float: right;
+}
+
+.save {
+    float: left;
+}
+
+hr.solid {
+    border-top: 3px solid #E4E5E7;
+}
+
+hr {
+    width: 93%;
+}
+
+.linhaCategoria {
+    text-align: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+#estiloCat {
+    width: 121px;
+    height: 24px;
+    border-radius: 15px;
+    padding-top: 0.5%;
+}
+
+.labelCenterInput {
+    text-align: center;
+}
+
+label {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    color: #000000;
+}
+
+.marginCustomizada {
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.removePaddingLeft {
+    padding-left: 0px !important;
+}
+
+.removePaddingRight {
+    padding-right: 0px !important;
+}
+
+.marginTop {
+    margin-top: 5%;
+}
+
+.alterStyle {
+    margin-top: 6px;
+    left: 8%;
+    position: absolute;
+    width: 31px;
+    height: 31.79px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 5px 1px rgba(219, 218, 242, 0.45) !important;
+    border-radius: 5px;
+
+    color: #f4516c;
+}
+
+.alterStyle:hover {
+    background-color: #f4516c !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+#iconTrash {
+    margin-left: -9px !important;
+    margin-top: -9px;
+}
+
+#localGrafico {
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+#chartContainer {
+    height: 150px;
+    min-width: 360px;
+    width:auto;
+}
+
+@media only screen and (max-width: 768px) {
+	#chartContainer {
+        min-width: 350px;
+        width:auto;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+	#chartContainer {
+        min-width: 320px;
+        width:auto;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+	#chartContainer {
+        min-width: 280px;
+        width:auto;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+	#chartContainer {
+        min-width: 80px;
+        width:auto;
+    }
+
+    #localGrafico {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+}

@@ -1,0 +1,19 @@
+<div class="container-fluid pb-4 message-modal">
+    <div class="row">
+        <div class="col text-right">
+            <button class="btn bg-transparent" (click)="doClose()">
+                <i class="la la-close py-3"></i>
+            </button>
+        </div>
+    </div>
+
+    <m-message-welcome *ngIf="message && message.type == MessageType.WELCOME" [message]="message" (onSubmit)="doSubmit($event)"></m-message-welcome>
+    <m-message-button *ngIf="message && message.type == MessageType.BUTTONS" [message]="message" (onSubmit)="doSubmit($event)"></m-message-button>
+    <m-message-input *ngIf="message && message.type == MessageType.INPUT" [message]="message" (onSubmit)="doSubmit($event)"></m-message-input>
+    <m-message-nps *ngIf="message && message.type == MessageType.NPS" [message]="message" (onSubmit)="doSubmit($event)"></m-message-nps>
+    <m-message-nps-ranking *ngIf="message && message.type == MessageType.NPS_RANKING" [message]="message" (onSubmit)="doSubmit($event)"></m-message-nps-ranking>
+    <m-message-wizard *ngIf="message && message.type == MessageType.WIZARD" [message]="message" (onSubmit)="doSubmit($event)"></m-message-wizard>
+    <m-message-welcome-firebase *ngIf="message && message.type == MessageType.WELCOME_FIREBASE" [message]="message" (onSubmit)="doSubmit($event)"></m-message-welcome-firebase>
+		<m-old-user-with-x-recipes *ngIf="message && message.type == MessageType.OLD_USER_WITH_X_RECIPES" [message]="message" (onSubmit)="doSubmit($event)"></m-old-user-with-x-recipes>
+
+</div>

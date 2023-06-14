@@ -1,0 +1,19 @@
+<header>
+	<h4 class="text-center">
+		<ng-content select="[title]"></ng-content>
+		<div class="label-content">
+			<ng-content select="[label]"></ng-content>
+		</div>
+	</h4>
+	<button (click)="closeEmitter()">
+		<mat-icon>close</mat-icon>
+	</button>
+</header>
+
+<div class="dialog-content">
+	<ng-content select="[body]"></ng-content>
+</div>
+
+<footer>
+	<ng-content select="[footer]"></ng-content>
+</footer>

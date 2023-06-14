@@ -1,0 +1,69 @@
+<div class="share-modal">
+    <ngx-loading ></ngx-loading>
+  <ng-container *ngIf="recipe">
+
+    <h3 class="text-center p-3">{{ 'RECIPE.SHARED_TXT1' | translate}}</h3>
+    <hr>
+
+    <ng-container *ngIf="recipe && submited">
+
+      <div class="p-5 text-center" *ngIf="!error">
+        <!-- <h4>{{ 'RECIPE.SHARED_TXT2' | translate}}</h4> -->
+        <p class="p-1">{{ 'RECIPE.SHARED_TXT3' | translate}} <u>{{lastSharedMail}}</u>.</p>
+      </div>
+
+      <div class="p-5 text-center text-danger" *ngIf="error">
+          <h4>{{ 'RECIPE.SHARED_TXT4' | translate}}</h4>
+          <p class="p-1">{{error}}</p>
+      </div>
+
+      <div class="m-portlet__foot m-portlet__foot--fit">
+        <div class="m-form__actions">
+          <div class="row">
+            <div class="col-12 text-center">
+              <button type="button" class="btn btn-secondary m-btn m-btn--air mr-1" name="btnBack" (click)="cancel()">{{ 'RECIPE.SHARED_TXT5' | translate}}</button>
+              <button type="button" [disabled]="loading" class="btn btn-accent m-btn m-btn--air" name="btnShare" (click)="doReset()">{{ 'RECIPE.SHARED_TXT6' | translate}}</button>&nbsp;&nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </ng-container>
+
+    <ng-container *ngIf="recipe && !submited">
+
+      <p>{{ 'RECIPE.SHARED_TXT7' | translate }} <b>{{recipe.name}}</b> {{ 'RECIPE.SHARED_TXT8' | translate }}</p>
+
+      <p>{{ 'RECIPE.SHARED_TXT9' | translate }}</p>
+
+      <form *ngIf="formGroup" class="m-form m-form--fit" name="form" [formGroup]="formGroup" novalidate>
+
+        <div class="row">
+          <div class="col col-md-8 offset-md-2 col-12">
+            <div class="form-group m-form__group">
+              <label class="col-form-label" translate>{{ 'RECIPE.SHARED_TXT10' | translate }}</label>
+              <input class="form-control m-input cp-input" name="email" formControlName="email" placeholder="{{ 'RECIPE.SHARED_TXT11' | translate }}" type="text">
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+      <div class="m-portlet__foot m-portlet__foot--fit pt-2">
+        <div class="m-form__actions">
+          <div class="row">
+            <div class="col-12 text-center">
+              <p class="p-2"><i><small>{{ 'INGREDIENT.INGREDIENT_TXT5' | translate }} {{ 'RECIPE.SHARED_TXT12' | translate }} {{recipe.name}} {{ 'RECIPE.SHARED_TXT13' | translate }}</small></i></p>
+              <hr>
+              <button type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom mr-1" name="btnBack" (click)="cancel()"
+              translate>{{ 'RECIPE.SHARED_TXT14' }}</button>
+              <button type="button" [disabled]="loading" class="btn btn-accent m-btn m-btn--air m-btn--custom" name="btnShare" (click)="doShare()"
+              translate>{{ 'RECIPE.SHARED_TXT15' }}</button>&nbsp;&nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+  </ng-container>
+</div>

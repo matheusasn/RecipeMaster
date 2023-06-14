@@ -1,0 +1,35 @@
+<form class="m-form" name="itemForm" autocomplete='off' [formGroup]="itemForm" novalidate>
+  <div class="form-group">
+    <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-plus"></i> </div>
+        </div>
+        <input #searchInput autocomplete="off" type="text" class="form-control" name="searchTerm" formControlName="searchTerm" placeholder="{{'MENUS.PESQUISA_ITEM' | translate}}">
+      </div>
+  </div>
+</form>
+
+<mat-nav-list>
+
+  <a class="list-item" mat-list-item *ngFor="let o of othersResult" (click)="copyItem(o)">
+    {{o.name}}
+    <mat-icon matListIcon class="list-icon-right" [inline]="true">
+      add
+    </mat-icon>
+  </a>
+
+  <a *ngIf="itemForm.get('searchTerm').value && itemForm.get('searchTerm').value.length > 0" class="list-item insert-item" mat-list-item (click)="createItem()">
+    {{'MENUS.CRIAR_ITEM' | translate}} "{{itemForm.get('searchTerm').value}}"
+    <mat-icon matListIcon class="list-icon-right" [inline]="true">add</mat-icon>
+  </a>
+</mat-nav-list>
+
+<div class="m-section mh-2" dragula="ITENS_DRAGGABLE" *ngIf="itens?.length"
+	[dragulaModel]="itens" (dragulaModelChange)="handleReorderItens($event)"
+>
+	<m-cp-recipe-ingredients-item *ngFor="let item of itens; let i = index"
+									[isDraggingEnabled]="isDraggingEnabled"
+								  (click)="doMenuItemInfo(i)"
+								  [ingredient]="item">
+	</m-cp-recipe-ingredients-item>
+</div>

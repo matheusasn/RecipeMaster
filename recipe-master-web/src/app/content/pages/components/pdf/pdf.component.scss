@@ -1,0 +1,59 @@
+
+.container-pdf {
+    font-family: "Poppins", "Roboto", Arial, sans-serif;
+	width: 595px;
+	padding: 0px 40px 15px 40px;
+
+	* {
+		font-family: "Poppins", "Roboto", Arial, sans-serif;
+	}
+}
+
+.container-ingredients-steps {
+
+    td {
+        vertical-align: initial;
+    }
+
+}
+
+.container-hidden {
+	position: absolute;
+	top: 120vh;
+	right: 420vw;
+}
+
+.ingredients {
+	display: flex;
+	justify-content: space-between;
+	div {
+		width: 50%;
+	}
+}
+
+.a4container {
+	position: absolute;
+	background-color: grey;
+	opacity: 0.25;
+	width: 595px;
+	height: 842px;
+}
+
+.header {
+	margin-bottom: -5px;
+	padding: 10px 40px 0px 40px;
+	display: flex;
+}
+
+.logo-container {
+	text-align: right;
+	margin-right: 40px;
+	img {
+		width: 60px;
+		height: 15px
+	}
+}
+
+.col-form-label {
+	font-size: 10px;
+}

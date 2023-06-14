@@ -1,0 +1,136 @@
+<div class="container pb-4 message-modal">
+    <div class="row">
+        <div class="col-12 text-center">
+            <button class="btn bg-transparent float-right" (click)="doClose()">
+                <i class="la la-close py-3"></i>
+            </button>
+            <h3>Nova Mensagem</h3>
+            <small>Usuários selecionados: {{users?.length}}</small>
+        </div>
+    </div>
+
+    <form [formGroup]="form" class="m-form m-form--fit m-form--label-align-right" (ngSubmit)="doSubmit($event)">
+        <div class="row">
+            <div class="col-12 col-lg-8 offset-lg-2">
+                <div class="form-group m-form__group">
+                    <label class="col-form-label">Título <span class="text-danger">*</span></label>
+                    <input class="form-control m-input cp-input" formControlName="title" type="text">
+                </div>
+            </div>
+            <div class="col-12 col-lg-8 offset-lg-2">
+                <div class="form-group m-form__group">
+                    <label class="col-form-label">Texto</label>
+                    <textarea class="form-control cp-input" formControlName="text"></textarea>
+                </div>
+            </div>
+            <div class="col-12 col-lg-8 offset-lg-2">
+                <div class="form-group m-form__group">
+                    <label class="col-form-label">Ação: <span class="text-danger">*</span></label>
+                    <select class="form-control cp-input" formControlName="type">
+                        <option value="null" [disabled]="true" translate>{{'INPUTS.OPTION_DEFAULT'}}</option>
+                        <option *ngFor="let t of types" [ngValue]="t">{{ 'MESSAGE.TYPE.' + t | translate }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row" formGroupName="config" *ngIf="form.value.type == 'BUTTONS'">
+            <div class="col-6 col-lg-4 offset-lg-2">
+                <div class="form-group m-form__group">
+                    <label class="col-form-label">Botão esquerdo</label>
+                    <input class="form-control m-input cp-input" formControlName="label1" type="text">
+                </div>
+            </div>
+            <div class="col-6 col-lg-4">
+                <div class="form-group m-form__group">
+                    <label class="col-form-label">Botão direito</label>
+                    <input class="form-control m-input cp-input" formControlName="label2" type="text">
+                </div>
+            </div>
+            <div class="col-6 col-lg-4 offset-lg-2">
+                <div class="form-group m-form__group">
+                    <label class="col-form-label">URL:</label>
+                    <input class="form-control m-input cp-input" formControlName="url1" placeholder="http://..." type="text">
+                </div>
+            </div>
+            <div class="col-6 col-lg-4">
+                <div class="form-group m-form__group">
+                    <label class="col-form-label">URL:</label>
+                    <input class="form-control m-input cp-input" formControlName="url2" placeholder="http://..." type="text">
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-4 offset-lg-2">
+                <div class="form-group m-form__group">
+                    <label class="col-form-label d-block text-left">Botão de saída?</label>
+                    <span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
+                        <label>
+                            <input type="checkbox" formControlName="cancel1" checked="checked" name="">
+                            <span>Saída?</span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="col-6 col-lg-4">
+                <div class="form-group m-form__group">
+                    <label class="col-form-label d-block text-left">Botão de saída?</label>
+                    <span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
+                        <label>
+                            <input type="checkbox" formControlName="cancel2" checked="checked" name="">
+                            <span></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" *ngIf="!wizard">
+            <div class="col-12 col-lg-8 offset-lg-2">
+                <div class="form-group m-form__group">
+                    <label class="col-form-label d-block text-left">Enviar email com resposta?</label>
+                    <span class="m-switch m-switch--outline m-switch--icon-check m-switch--brand">
+                        <label>
+                            <input type="checkbox" formControlName="sendmail" checked="checked" name="">
+                            <span></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-8 offset-lg-2">
+                <div class="form-group m-form__group">
+                    <m-photo-upload (photoChange)="onPhotoChange($event)" [cropOtions]="cropOtions" [customClass]="'square-picture'"></m-photo-upload>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 offset-2 text-center">
+                <button [disabled]="users?.length == 0 || loading" type="submit" class="btn btn-accent m-btn m-btn--air m-btn--custom mt-3">
+                    Enviar
+                </button>
+
+                <button (click)="doWizardNext()" [disabled]="users?.length == 0 || loading" type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom ml-1 mt-3 float-right">
+                    Mensagem +
+                </button>
+
+                <span class="text-danger d-block p-3" *ngIf="users?.length == 0">* é necessário selecrionar ao menos um usuário</span>
+            </div>
+        </div>
+    </form>
+
+    <ng-container *ngIf="wizard && wizard.length > 0">
+        <hr />
+        <h5 class="my-3">Mensagens do wizard:</h5>
+        <div class="container" >
+            <div class="alert alert-dark m-1 p-2" *ngFor="let m of wizard; let i = index">
+                <strong style="font-size: 1.5rem;">{{i+1}}.</strong> <strong>{{m.title}}</strong> <br />
+                <ng-container *ngIf="m.text">
+                    <small>Texto: {{m.text}}</small> <br />
+                </ng-container>
+                <small>Ação: {{m.type}}</small>
+            </div>
+        </div>
+    </ng-container>
+
+</div>

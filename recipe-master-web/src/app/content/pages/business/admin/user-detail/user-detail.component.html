@@ -1,0 +1,27 @@
+<div class="container">
+
+  <h4>{{user?.name}}</h4>
+  
+
+  <div class="row">
+    <div class="col-12 p-4">
+      
+      <p>Alteração de perfil:</p>
+
+      <form *ngIf="form" class="form" [formGroup]="form">
+        <div class="form-check" *ngFor="let p of form.value.perfis; let i = index">
+          <input class="form-check-input" [disabled]="p.perfil == 'USER'" (change)="doChange(p)" type="checkbox" [checked]="p.checked" [id]="i + 'defaultCheck'">
+          <label class="form-check-label" [for]="i + 'defaultCheck'">
+            {{p.perfil}}
+          </label>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button class="btn btn-light mr-1" (click)="doCancel($event)">Cancelar</button>
+    <button class="btn btn-primary" (click)="doSubmit()">Salvar</button>
+  </div>
+
+</div>
